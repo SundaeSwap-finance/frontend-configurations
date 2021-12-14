@@ -1,8 +1,8 @@
-import type { Asset } from "./asset";
-import type { AssetAmount } from "./asset-amount";
-import { LPAsset } from "./asset/LPAsset";
-import type { Pool } from "./pool";
-import type { Price } from "./price";
+import type { Asset } from './asset';
+import type { AssetAmount } from './asset-amount';
+import { LPAsset } from './asset/LPAsset';
+import type { Pool } from './pool';
+import type { Price } from './price';
 
 export type TBalanceMap = {
   [assetId: string]: AssetAmount;

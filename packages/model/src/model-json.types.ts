@@ -1,5 +1,3 @@
-import type { SupportedWallets } from "../cardano";
-
 export type IntString = string;
 
 /**

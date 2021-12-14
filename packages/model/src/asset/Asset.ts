@@ -1,5 +1,5 @@
-import { TJsonAsset } from "../model-json.types";
-import { TCardanoTokenMetadata } from "./cardano-metadata-registry.types";
+import { TJsonAsset } from '../../model-json.types';
+import { TCardanoTokenMetadata } from './cardano-metadata-registry.types';
 
 export class Asset implements TJsonAsset {
   readonly id: string;
@@ -31,13 +31,13 @@ export class Asset implements TJsonAsset {
   }
 
   static getPolicyIdNameFromId(assetId: string): [string, string] {
-    assetId = assetId.replace(/\./, "");
+    assetId = assetId.replace(/\./, '');
     return [assetId.slice(0, 56), assetId.substring(56)];
   }
 
   static getPolicyIdNameFromNativeAssetId(assetId: string): [string, string] {
     const [policyId, assetName] = Asset.getPolicyIdNameFromId(assetId);
-    return [policyId, Buffer.from(assetName, "hex").toString()];
+    return [policyId, Buffer.from(assetName, 'hex').toString()];
   }
 
   static fromTokenMetadata(metadata: TCardanoTokenMetadata): Asset {
@@ -104,7 +104,7 @@ export class Asset implements TJsonAsset {
   }
 
   equals(other?: Asset | string): boolean {
-    return this.id === (typeof other === "string" ? other : other?.id);
+    return this.id === (typeof other === 'string' ? other : other?.id);
   }
 
   toJSON(): TJsonAsset {

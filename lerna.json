@@ -1,16 +1,13 @@
 {
-  "packages": [
-    "packages/*",
-    "apps/*"
-  ],
+  "packages": ["packages/*", "apps/*"],
   "useWorkspaces": true,
   "npmClient": "yarn",
   "ignoreChanges": ["**/__tests__/**", "**/*.md", "**/.storybook/**"],
   "command": {
     "publish": {
-      "conventionalCommits": true,
       "message": "chore(release): publish",
       "registry": "https://sundaeswap-113073460856.d.codeartifact.us-east-2.amazonaws.com/npm/sundae-shared/"
     }
-  }
+  },
+  "version": "0.0.1-alpha.38"
 }
