@@ -1,12 +1,13 @@
-import { Pool } from "./Pool";
-import { ADA, Asset, LPAsset, SUNDAE } from "../../model/asset";
-import { AssetAmount } from "../../model/asset-amount";
-import { Fraction, Percent } from "../../model/fraction";
+import { AssetAmount } from '../asset-amount/AssetAmount';
+import { Asset } from '../asset/Asset';
+import { LPAsset } from '../asset/LPAsset';
+import { Fraction } from '../fraction/Fraction';
+import { Pool } from './Pool';
 
-describe("Pool", () => {
-  const assetA = new Asset({ id: "TestAssetA", name: "TestAssetA" });
-  const assetB = new Asset({ id: "TestAssetB", name: "TestAssetB" });
-  const lpAsset = new LPAsset({ id: "TestPoolAsset", name: "TestPoolAsset", assetA, assetB });
+describe('Pool', () => {
+  const assetA = new Asset({ id: 'TestAssetA', name: 'TestAssetA' });
+  const assetB = new Asset({ id: 'TestAssetB', name: 'TestAssetB' });
+  const lpAsset = new LPAsset({ id: 'TestPoolAsset', name: 'TestPoolAsset', assetA, assetB });
   const threePct = new Fraction(3, 100);
 
   const threePctFeePool = new Pool(
@@ -23,43 +24,39 @@ describe("Pool", () => {
     Fraction.ZERO
   );
 
-  test("#swap() A -> B without fees", () => {
+  test('#swap() A -> B without fees', () => {
     const { output } = zeroFeePool.swap(new AssetAmount(assetB, 1));
     expect(output.asset.equals(assetA)).toBe(true);
     expect(output.amount).toBe(new Fraction(1000, 1001).quotient);
   });
 
-  test("#swap() B -> A without fees", () => {
+  test('#swap() B -> A without fees', () => {
     const { output } = zeroFeePool.swap(new AssetAmount(assetA, 1));
     expect(output.asset.equals(assetB)).toBe(true);
     expect(output.amount).toBe(new Fraction(1000, 1001).quotient);
   });
 
-  test("#swap() A -> B with 3% fee", () => {
-    const expectedOutputA = Fraction.ONE.subtract(threePct).multiply(
-      new Fraction(1000, 1001)
-    ).quotient;
+  test('#swap() A -> B with 3% fee', () => {
+    const expectedOutputA = Fraction.ONE.subtract(threePct).multiply(new Fraction(1000, 1001)).quotient;
     const { output } = threePctFeePool.swap(new AssetAmount(assetB, 1));
     expect(output.asset.equals(assetA)).toBe(true);
     expect(output.amount).toBe(expectedOutputA);
   });
 
-  test("#swap() B -> A with 3% fee", () => {
-    const expectedOutputB = Fraction.ONE.subtract(threePct).multiply(
-      new Fraction(1000, 1001)
-    ).quotient;
+  test('#swap() B -> A with 3% fee', () => {
+    const expectedOutputB = Fraction.ONE.subtract(threePct).multiply(new Fraction(1000, 1001)).quotient;
     const { output } = threePctFeePool.swap(new AssetAmount(assetA, 1));
     expect(output.asset.equals(assetB)).toBe(true);
     expect(output.amount).toBe(expectedOutputB);
   });
 
-  test("#swap() throws if asset is not part of the pool", () => {
+  test('#swap() throws if asset is not part of the pool', () => {
     expect(() => {
       threePctFeePool.swap(
         new AssetAmount(
           new Asset({
-            id: "definitely not part of this pool",
-            name: "definitely not part of this pool",
+            id: 'definitely not part of this pool',
+            name: 'definitely not part of this pool',
           }),
           111
         )
@@ -96,7 +93,7 @@ describe("Pool", () => {
   //   }
   // });
 
-  test("#getSwapInput() A -> B without fees", () => {
+  test('#getSwapInput() A -> B without fees', () => {
     const { input } = zeroFeePool.getSwapInput(new AssetAmount(assetB, 1n));
     expect(input.asset.equals(assetA)).toBe(true);
     expect(input.amount).toBe(1n);

@@ -1,9 +1,9 @@
-import { Locale } from "date-fns";
-import { getDateFnsLocale } from "i18n/date-fns";
-import { useCallback, useEffect, useState } from "react";
-import * as dateFormat from "utils/helpers/formatting/date-format";
+import { Locale } from 'date-fns';
+import { useCallback, useEffect, useState } from 'react';
+import * as dateFormat from '../utils/formatting/date-format';
+import { getDateFnsLocale } from '@sundaeswap-toolkit/i18n';
 
-export const useDateFormat = (localeCode = "en") => {
+export const useDateFormat = (localeCode = 'en') => {
   const [locale, setLocale] = useState<Locale | undefined>();
 
   useEffect(() => void getDateFnsLocale(localeCode)?.then(setLocale), [localeCode]);
@@ -14,8 +14,7 @@ export const useDateFormat = (localeCode = "en") => {
   );
 
   const formatDateDistance = useCallback(
-    (date: dateFormat.TDateish, dateTo: dateFormat.TDateish) =>
-      dateFormat.formatDateDistance(date, dateTo, locale),
+    (date: dateFormat.TDateish, dateTo: dateFormat.TDateish) => dateFormat.formatDateDistance(date, dateTo, locale),
     [locale]
   );
 

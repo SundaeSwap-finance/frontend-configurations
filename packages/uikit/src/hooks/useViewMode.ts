@@ -1,6 +1,6 @@
-import { ViewMode, ViewModeArea } from "model/user";
-import { useCallback } from "react";
-import { useUser } from "./useUser";
+import { ViewMode, ViewModeArea } from '@sundaeswap-toolkit/model';
+import { useCallback } from 'react';
+import { useUser } from './useUser';
 
 export const useViewMode = (
   area: ViewModeArea

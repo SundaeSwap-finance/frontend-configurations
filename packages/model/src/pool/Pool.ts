@@ -1,18 +1,18 @@
-import { BigIntMath } from "utils/helpers";
-import { ADA, Asset, LPAsset } from "../asset";
-import { AssetAmount } from "../asset-amount";
-import { Fraction } from "../fraction";
+import { ADA, Asset, LPAsset } from '../asset';
+import { AssetAmount } from '../asset-amount';
+import { BigIntMath } from '../bigint-math/BigIntMath';
+import { Fraction } from '../fraction';
 
 export enum PoolError {
-  ASSET_NOT_FOUND = "ASSET_NOT_FOUND",
-  INSUFFICIENT_RESERVES = "INSUFFICIENT_RESERVES",
-  NON_POSITIVE_AMOUNT = "NON_POSITIVE_INPUT",
+  ASSET_NOT_FOUND = 'ASSET_NOT_FOUND',
+  INSUFFICIENT_RESERVES = 'INSUFFICIENT_RESERVES',
+  NON_POSITIVE_AMOUNT = 'NON_POSITIVE_INPUT',
 }
 
 export class Pool {
   static getCreatePoolMintedLp(a: AssetAmount, b: AssetAmount): AssetAmount<LPAsset> {
     return new AssetAmount(
-      new LPAsset({ id: "new_lp", assetA: a.asset, assetB: b.asset, decimals: 0 }),
+      new LPAsset({ id: 'new_lp', assetA: a.asset, assetB: b.asset, decimals: 0 }),
       BigIntMath.sqrt(a.amount * b.amount)
     );
   }
@@ -52,12 +52,8 @@ export class Pool {
       return [this.lpReserveA.withAmount(0n), this.lpReserveB.withAmount(0n)];
     }
     return [
-      this.lpReserveA.withAmount(
-        new Fraction(lpAsset.amount * this.lpReserveA.amount, this.lpAsset.amount)
-      ),
-      this.lpReserveB.withAmount(
-        new Fraction(lpAsset.amount * this.lpReserveB.amount, this.lpAsset.amount)
-      ),
+      this.lpReserveA.withAmount(new Fraction(lpAsset.amount * this.lpReserveA.amount, this.lpAsset.amount)),
+      this.lpReserveB.withAmount(new Fraction(lpAsset.amount * this.lpReserveB.amount, this.lpAsset.amount)),
     ];
   }
 
@@ -68,26 +64,18 @@ export class Pool {
     share: Fraction;
   } {
     const [reserveA, reserveB] = this.getABReservePairForA(amountA.asset);
-    const nextLpAmount = new Fraction(
-      this.lpAsset.amount * (amountA.amount + reserveA.amount),
-      reserveA.amount
-    ).quotient;
+    const nextLpAmount = new Fraction(this.lpAsset.amount * (amountA.amount + reserveA.amount), reserveA.amount)
+      .quotient;
     const amountLp = this.lpAsset.withAmount(nextLpAmount - this.lpAsset.amount);
-    const amountB = reserveB.withAmount(
-      new Fraction(reserveB.amount * amountA.amount, reserveA.amount)
-    );
+    const amountB = reserveB.withAmount(new Fraction(reserveB.amount * amountA.amount, reserveA.amount));
     const share = new Fraction(amountLp.amount, nextLpAmount);
     return { amountLp, amountA, amountB, share };
   }
 
   withdrawLiquidity(amountLp: AssetAmount): { amountA: AssetAmount; amountB: AssetAmount } {
     return {
-      amountA: this.lpReserveA.withAmount(
-        (this.lpReserveA.amount * amountLp.amount) / this.lpAsset.amount
-      ),
-      amountB: this.lpReserveB.withAmount(
-        (this.lpReserveB.amount * amountLp.amount) / this.lpAsset.amount
-      ),
+      amountA: this.lpReserveA.withAmount((this.lpReserveA.amount * amountLp.amount) / this.lpAsset.amount),
+      amountB: this.lpReserveB.withAmount((this.lpReserveB.amount * amountLp.amount) / this.lpAsset.amount),
     };
   }
 
@@ -142,9 +130,7 @@ export class Pool {
       new Fraction(outputReserve.amount).subtract(nextOutputReserve)
     );
     const currentPrice = new Fraction(outputReserve.amount, inputReserve.amount);
-    const idealOutput = new Fraction(input.amount)
-      .multiply(currentPrice)
-      .multiply(Fraction.ONE.subtract(this.fee));
+    const idealOutput = new Fraction(input.amount).multiply(currentPrice).multiply(Fraction.ONE.subtract(this.fee));
     const slippage = Fraction.ONE.subtract(output.divide(idealOutput));
     const nextPrice = new Fraction(nextOutputReserve.quotient, nextInputReserve);
     const priceImpact = Fraction.ONE.subtract(currentPrice.divide(nextPrice));

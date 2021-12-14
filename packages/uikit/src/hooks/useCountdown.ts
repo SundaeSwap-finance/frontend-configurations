@@ -1,6 +1,5 @@
-import { Time } from "model/time";
-import { TimeFormat } from "model/time/Time.types";
-import { useRemainingTime } from "./useRemainingTime";
+import { Time, TimeFormat } from '@sundaeswap-toolkit/model';
+import { useRemainingTime } from './useRemainingTime';
 
 type TUseCountDown = TimeFormat & {
   hideCountdown?: boolean;
@@ -21,10 +20,10 @@ export const useCountdown = (endDate: Date): TUseCountDown => {
 
   if (remaining === undefined || remaining === 0) {
     const undefinedRemaining: TUseCountDown = {
-      days: "0",
-      hours: "0",
-      minutes: "0",
-      seconds: "0",
+      days: '0',
+      hours: '0',
+      minutes: '0',
+      seconds: '0',
     };
 
     return {
