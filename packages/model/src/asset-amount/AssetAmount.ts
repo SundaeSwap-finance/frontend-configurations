@@ -1,8 +1,7 @@
-import { TJsonAsset } from "index";
-import { Asset } from "../asset";
-import { Fraction } from "../fraction";
-import type { TJsonAssetAmount } from "../model-json.types";
-import type { BigIntish } from "../shared";
+import { Asset } from '../asset';
+import { Fraction } from '../fraction';
+import type { TJsonAsset, TJsonAssetAmount } from '../model-json.types';
+import type { BigIntish } from '../shared';
 
 export class AssetAmount<A extends Asset = Asset> {
   static readonly MAX_AMOUNT = 18446744073709551615n;
@@ -65,23 +64,14 @@ export class AssetAmount<A extends Asset = Asset> {
   }
 
   withValue(amount: BigIntish | Fraction): AssetAmount<A> {
-    return new AssetAmount(
-      this.asset,
-      Fraction.asFraction(amount).multiply(10 ** (this.decimals ?? 0))
-    );
+    return new AssetAmount(this.asset, Fraction.asFraction(amount).multiply(10 ** (this.decimals ?? 0)));
   }
 
   withFormattedValue(amount: string): AssetAmount<A> {
-    return new AssetAmount(
-      this.asset,
-      Fraction.fromString(amount).multiply(10 ** (this.decimals ?? 0))
-    );
+    return new AssetAmount(this.asset, Fraction.fromString(amount).multiply(10 ** (this.decimals ?? 0)));
   }
 
   withLocaleFormattedValue(amount: string, locale?: string): AssetAmount<A> {
-    return new AssetAmount(
-      this.asset,
-      Fraction.fromLocaleString(amount, locale).multiply(10 ** (this.decimals ?? 0))
-    );
+    return new AssetAmount(this.asset, Fraction.fromLocaleString(amount, locale).multiply(10 ** (this.decimals ?? 0)));
   }
 }

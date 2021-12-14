@@ -1,6 +1,6 @@
-import { AssetAmount } from "model/asset-amount";
-import { Fraction } from "model/fraction";
-import { TransactionType } from "./Transaction";
+import { AssetAmount } from '../asset-amount';
+import { Fraction } from '../fraction';
+import { TransactionType } from './Transaction';
 
 export type TTransactionRequestInput =
   | { type: TransactionType.AdaFaucet; data: TAdaFaucetTransactionInput }

@@ -1,4 +1,4 @@
-import { TJsonAsset } from '../../model-json.types';
+import { TJsonAsset } from '../model-json.types';
 import { TCardanoTokenMetadata } from './cardano-metadata-registry.types';
 
 export class Asset implements TJsonAsset {
