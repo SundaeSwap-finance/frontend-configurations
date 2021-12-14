@@ -1,0 +1,24 @@
+version: 0.2
+
+env:
+  git-credential-helper: yes
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - aws codeartifact login --tool npm --repository sundae-shared --domain sundaeswap --domain-owner 113073460856
+      - yarn install --frozen-lockfile
+
+  build:
+    commands:
+      echo "build"
+      # - yarn build
+      # - yarn release
+
+
+cache:
+  paths:
+    - './node_modules/**/*'
+

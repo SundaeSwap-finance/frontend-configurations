@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "noEmit": false
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
