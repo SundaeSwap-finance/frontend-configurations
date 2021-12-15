@@ -1,5 +1,5 @@
 import { path } from 'ramda';
-import { ThemeType } from '../theme';
+import { ThemeType } from './theme';
 import { css, styled, ThemedCssFunction } from 'styled-components';
 
 type THEME_INDEXES = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
