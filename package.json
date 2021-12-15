@@ -13,8 +13,11 @@
   "workspaces": [
     "packages/*"
   ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "yarn lint --fix"
+  },
   "scripts": {
-    "lint": "eslint . --ext .ts,.tsx,.js",
+    "lint": "eslint --ext js,jsx,ts,tsx .",
     "lint:fix": "yarn lint --fix",
     "clean": "lerna run clean",
     "build": "lerna run build --scope '@sundaeswap-toolkit/*'",
@@ -36,6 +39,7 @@
     "eslint": "^8.4.1",
     "husky": "^7.0.4",
     "lerna": "^4.0.0",
+    "lint-staged": "^12.1.2",
     "npm-check-updates": "^12.0.3",
     "prettier": "^2.5.1",
     "typescript": "^4.5.2"
