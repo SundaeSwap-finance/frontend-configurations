@@ -4,7 +4,7 @@ import { css, styled, ThemedCssFunction } from 'styled-components';
 
 type THEME_INDEXES = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
-const getVariant = (x: number): string => `-${x}`;
+const getVariant = (x: THEME_INDEXES): string => `-${x}`;
 
 export const getTheme =
   (keys: [keyof ThemeType, string]) =>
