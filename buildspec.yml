@@ -13,9 +13,8 @@ phases:
 
   build:
     commands:
-      echo "build"
-      # - yarn build
-      # - yarn release
+      - yarn build
+      - yarn release
 
 
 cache:
