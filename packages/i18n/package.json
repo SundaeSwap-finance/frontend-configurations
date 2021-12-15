@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap-toolkit/i18n",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.2",
   "module": "dist/index",
   "types": "dist/index",
   "files": [
@@ -12,7 +12,5 @@
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "yarn run build",
     "test": "yarn run build"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+  }
 }
