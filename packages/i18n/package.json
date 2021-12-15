@@ -12,6 +12,5 @@
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "yarn run build",
     "test": "yarn run build"
-  },
-  "gitHead": "548a82e3940b162abcc6505c53262c9cf6f32b8e"
+  }
 }
