@@ -33,7 +33,7 @@ export const animation = (animationName: keyof ThemeType['animations']) => getTh
  * @param index
  * @returns `--<color>-<index>
  */
-export const color = (color: ThemeType['colors'], index: THEME_INDEXES) =>
+export const color = (color: keyof ThemeType['colors'], index: THEME_INDEXES) =>
   getTheme(['colors', `--${color}${getVariant(index)}`]);
 
 /**
