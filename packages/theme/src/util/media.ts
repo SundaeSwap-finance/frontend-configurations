@@ -1,0 +1,46 @@
+export const breakpoints = {
+  maxScreen320: '374px',
+  mobileM: '375px',
+  mobileL: '425px',
+  mobileXL: '720px',
+  maxTablet: '767px',
+  tablet: '768px',
+  laptop: '1024px',
+  laptopL: '1440px',
+  laptopXL: '1680px',
+  desktop: '1880px',
+  desktopL: '2560px',
+};
+
+export const mediaQueries = {
+  // dimensions
+  maxScreen320: `(max-width: ${breakpoints.maxScreen320})`,
+  mobileM: `(min-width: ${breakpoints.mobileM})`,
+  mobileL: `(min-width: ${breakpoints.mobileL})`,
+  mobileXL: `(min-width: ${breakpoints.mobileXL})`,
+  tablet: `(min-width: ${breakpoints.tablet})`,
+  laptop: `(min-width: ${breakpoints.laptop})`,
+  laptopL: `(min-width: ${breakpoints.laptopL})`,
+  laptopXL: `(min-width: ${breakpoints.laptopXL})`,
+  desktop: `(min-width: ${breakpoints.desktop})`,
+  desktopL: `(min-width: ${breakpoints.desktopL})`,
+
+  // specifics
+  motionOK: '(prefers-reduced-motion: no-preference)',
+  motionNotOK: '(prefers-reduced-motion: reduce)',
+  opacityOK: '(prefers-reduced-transparency: no-preference)',
+  opacityNotOK: '(prefers-reduced-transparency: reduce)',
+  useDataOK: '(prefers-reduced-data: no-preference)',
+  useDataNotOK: '(prefers-reduced-data: reduce)',
+  OSdark: '(prefers-color-scheme: dark)',
+  OSlight: '(prefers-color-scheme: light)',
+  highContrast: '(prefers-contrast: high)',
+  lowContrast: '(prefers-contrast: low)',
+  portrait: '(orientation: portrait)',
+  landscape: '(orientation: landscape)',
+  HDcolor: '(dynamic-range: high)',
+  touch: '(hover: none) and (pointer: coarse)',
+  stylus: '(hover: none) and (pointer: fine)',
+  pointer: '(hover) and (pointer: coarse)',
+  mouse: '(hover) and (pointer: fine)',
+};
