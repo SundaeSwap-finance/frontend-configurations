@@ -28,6 +28,7 @@
     "tsc": "tsc -b"
   },
   "devDependencies": {
+    "@sundaeswap-toolkit/sundae-eslint-config": "^0.0.1-alpha.2",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
