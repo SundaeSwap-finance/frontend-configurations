@@ -1,3 +1,4 @@
 module.exports = {
-  extends: '@sundaeswap-toolkit/sundae-eslint-config',
+  // This tells ESLint to load the config from the package `eslint-config-sundae`
+  extends: "sundae",
 };
