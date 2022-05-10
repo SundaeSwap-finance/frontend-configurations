@@ -8,21 +8,23 @@ This is a collection of generic and reusable _frontend_ configurations across th
 
   - Install with `yarn add -D @sundae/eslint-config`
   - Extend it in every `.eslintrc.js` using:
+    <br/><br/>
 
-  ```js
-  module.exports = {
-    extends: "sundae",
-  };
-  ```
+```js
+module.exports = {
+  extends: "sundae",
+};
+```
 
 - ### `packages/tailwind-config`
 
   - Install with `yarn add -D @sundae/tailwind-config-sundae`
   - Inside your `tailwind-config.js` root file, add:
+    <br/><br/>
 
-  ```js
-  {
-      //...config,
-      plugins: [require("tailwind-config-sundae")],
-  }
-  ```
+```js
+{
+    //...config,
+    plugins: [require("tailwind-config-sundae")],
+}
+```
