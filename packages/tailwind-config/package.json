@@ -1,5 +1,5 @@
 {
-  "name": "@sundae/tailwind-config-sundae",
+  "name": "@sundae/tailwind-config",
   "version": "0.0.1",
   "description": "A generic tailwind config all other tailwind-configs can use as plugin.",
   "module": "dist/index",
