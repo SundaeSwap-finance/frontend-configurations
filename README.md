@@ -4,27 +4,29 @@ This is a collection of generic and reusable _frontend_ configurations across th
 
 ## Published packages
 
-- ### `packages/eslint-config`
+- `packages/eslint-config` - _base_ eslint config without any react/ui-related ruleset
+- `packages/tailwind-config` - _base_ config for tailwind applications
 
-  - Install with `yarn add -D @sundae/eslint-config`
-  - Extend it in every `.eslintrc.js` using:
-    <br/><br/>
+## Development
 
-```js
-module.exports = {
-  extends: "sundae",
-};
+### Install
+
+In the project root, run
+
+```shell
+yarn
 ```
 
-- ### `packages/tailwind-config`
+### Build
 
-  - Install with `yarn add -D @sundae/tailwind-config-sundae`
-  - Inside your `tailwind-config.js` root file, add:
-    <br/><br/>
+In order to build the packages, run `yarn build` inside the `root` directory.
 
-```js
-{
-    //...config,
-    plugins: [require("tailwind-config-sundae")],
-}
+## Release
+
+The current pipeline will release every unpublished package based on the version field in the ./package.json file. The packages are published in the sundae-shared AWS CodeArtifact repository. To bump the package versions in the project root:
+
+```shell
+yarn bump
 ```
+
+After that commit & push the changes and the pipeline should release the packages soon.
