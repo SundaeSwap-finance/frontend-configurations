@@ -1,47 +1,28 @@
-# sundaeswap-toolkit
+# frontend-configurations
 
----
+This is a collection of generic and reusable _frontend_ configurations across the SundaeSwap cosmos. The idea is to create configuration files as independent packages that can be extended from/installed separately.
 
-TypeScript Monorepo with yarn workspaces and lerna
+## Published packages
 
-### Published packages
+- ### `packages/eslint-config`
 
-- `packages/`
+  - Install with `yarn add -D @sundae/eslint-config`
+  - Extend it in every `.eslintrc.js` using:
 
-### Apps
+  ```js
+  module.exports = {
+    extends: "sundae",
+  };
+  ```
 
-- `apps/`
+- ### `packages/tailwind-config`
 
-### Services
+  - Install with `yarn add -D @sundae/tailwind-config-sundae`
+  - Inside your `tailwind-config.js` root file, add:
 
-- `services/`
-
-## development
-
-### install
-
-In the project root
-
-```
-yarn install
-```
-
-### local development
-
-in `apps/example.com-app`
-
-```sh
-yarn dev
-```
-
-<!-- ### Release -->
-
-<!-- The current pipeline will release every unpublished package based on the `version` field in the [`./package.json`](./package.json) file.
-The packages are published in the `sundae-shared` AWS CodeArtifact repository.
-To bump the package versions in the project root:
-
-```
-yarn bump
-```
-
-After that commit & push the changes and the pipeline should release the packages soon. -->
+  ```js
+  {
+      //...config,
+      plugins: [require("tailwind-config-sundae")],
+  }
+  ```

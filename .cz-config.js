@@ -38,7 +38,11 @@ module.exports = {
     },
   ],
 
-  scopes: [{ name: "application" }, { name: "eslint-config" }],
+  scopes: [
+    { name: "application" },
+    { name: "eslint-config" },
+    { name: "tailwind-config" },
+  ],
 
   scopeOverrides: {
     fix: [

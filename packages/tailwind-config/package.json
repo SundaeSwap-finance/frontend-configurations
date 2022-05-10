@@ -1,0 +1,30 @@
+{
+  "name": "@sundae/tailwind-config-sundae",
+  "version": "0.0.1",
+  "description": "A generic tailwind config all other tailwind-configs can use as plugin.",
+  "module": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/tailwind-config",
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn run build",
+    "test": "yarn run build"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "eslint": "^8.14.0",
+    "prettier": "^2.6.2",
+    "prettier-plugin-tailwindcss": "^0.1.10",
+    "tailwindcss": "^3.0.24",
+    "typescript": "^4.6.4"
+  },
+  "peerDependencies": {
+    "eslint": "^8.4.1",
+    "prettier": "^2.1.2"
+  }
+}
