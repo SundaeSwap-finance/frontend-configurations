@@ -33,5 +33,5 @@ jobs:
       - name: CodeArtifact login
         run: aws codeartifact login --tool npm --repository ui --domain sundae --domain-owner 320450105600
 
-      - name: Publish package
-        run: yarn publish
+      - name: Publish packages
+        run: yarn release
