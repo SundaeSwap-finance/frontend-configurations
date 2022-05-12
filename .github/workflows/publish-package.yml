@@ -1,0 +1,37 @@
+name: GitHub Actions OIDC Test
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write # required to use OIDC authentication
+  contents: read # required to checkout the code from the repo
+
+jobs:
+  PublishPackage-OIDC:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::320450105600:role/GitHubActionRole
+          role-duration-seconds: 900 # the ttl of the session, in seconds.
+          aws-region: us-east-2 # use your region here.
+
+      - name: CodeArtifact login
+        run: aws codeartifact login --tool npm --repository ui --domain sundae --domain-owner 320450105600
+
+      - name: Publish package
+        run: yarn publish
