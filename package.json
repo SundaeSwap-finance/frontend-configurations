@@ -16,13 +16,7 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "yarn lint --fix"
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-customizable"
-    }
-  },
   "scripts": {
-    "cm": "git add . && cz",
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "lint:fix": "yarn lint --fix",
     "clean": "lerna run clean",
@@ -42,7 +36,6 @@
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "autoprefixer": "^10.4.7",
-    "commitizen": "^4.2.4",
     "eslint": "^8.4.1",
     "husky": "^8.0.1",
     "lerna": "^4.0.0",
