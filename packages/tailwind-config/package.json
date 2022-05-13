@@ -9,6 +9,8 @@
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/tailwind-config",
   "scripts": {
     "build": "yarn run clean && yarn run compile",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "preview": "tailwind-config-viewer -o",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "yarn run build",
@@ -26,5 +28,9 @@
   "peerDependencies": {
     "eslint": "^8.4.1",
     "prettier": "^2.1.2"
+  },
+  "devDependencies": {
+    "@types/tailwindcss": "^3.0.10",
+    "tailwind-config-viewer": "^1.7.0"
   }
 }
