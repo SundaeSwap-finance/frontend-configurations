@@ -1,14 +1,4 @@
-module.exports = {
-  parser: "@typescript-eslint/parser",
-  plugins: ["jest", "import", "@typescript-eslint", "prettier"],
-  extends: ["next", "prettier"],
-  env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
-    node: true,
-  },
-  rules: {
+export default {
     "array-callback-return": "warn",
     "default-case": ["warn", { commentPattern: "^no default$" }],
     "dot-location": ["warn", "property"],
@@ -126,5 +116,4 @@ module.exports = {
     "getter-return": "warn",
     "prettier/prettier": "error",
     "@typescript-eslint/no-explicit-any": "error",
-  },
 };
