@@ -16,36 +16,34 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "yarn lint --fix"
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-customizable"
-    }
-  },
   "scripts": {
-    "cm": "git add . && cz",
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "lint:fix": "yarn lint --fix",
     "clean": "lerna run clean",
     "build": "lerna run build --scope '@sundae/*'",
     "bump": "lerna version prerelease --no-git-tag-version --yes",
-    "preinstall": "node tools/preinstall.ts",
+    "preinstall": "node tools/preinstall.ts && aws codeartifact login --tool npm --repository ui --domain sundae --domain-owner 320450105600 --namespace @sundae",
     "prepare": "husky install",
     "release": "lerna publish from-package -y",
     "test": "lerna run test",
     "tsc": "tsc -b"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.4",
+    "@commitlint/cli": "^17.0.0",
+    "@sundae/eslint-config": "^1.0.0",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "autoprefixer": "^10.4.7",
-    "commitizen": "^4.2.4",
-    "commitlint-config-gitmoji": "^2.2.5",
-    "cz-customizable": "^6.3.0",
     "eslint": "^8.4.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.2.2",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0",
     "husky": "^8.0.1",
     "lerna": "^4.0.0",
     "lint-staged": "^12.1.2",
