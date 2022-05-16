@@ -13,7 +13,7 @@ Within your `.eslintrc.js` file, extend this config via:
 
 ```
 module.exports = {
-  extends: "@sundae/eslint-config/dist"
+  extends: "@sundae/eslint-config"
 };
 ```
 
