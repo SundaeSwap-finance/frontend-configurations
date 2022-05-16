@@ -1,5 +1,5 @@
 {
-  "name": "@sundae/frontend-configurations",
+  "name": "frontend-configurations",
   "description": "SundaeSwap Frontend Configurations for all of our Frontend Packages",
   "author": {
     "name": "SundaeSwap Labs, Inc.",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
-    "@sundae/eslint-config": "^1.0.0",
+    "@sundae/eslint-config": "^1.0.0-koedmill.1",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
