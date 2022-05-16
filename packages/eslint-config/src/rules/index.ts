@@ -1,4 +1,4 @@
-export default {
+export const rules = {
   "array-callback-return": "warn",
   "default-case": ["warn", { commentPattern: "^no default$" }],
   "dot-location": ["warn", "property"],

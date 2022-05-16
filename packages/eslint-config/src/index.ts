@@ -1,4 +1,4 @@
-import rules from "./rules";
+import { rules } from "./rules";
 
 export = {
   parser: "@typescript-eslint/parser",
