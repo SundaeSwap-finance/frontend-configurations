@@ -1,10 +1,11 @@
 {
-  "name": "@sundae/eslint-plugin-sundae",
+  "name": "@sundae/eslint-plugin",
   "version": "0.0.2",
   "description": "eslint config from which all other eslint-configs inherit from.",
   "module": "dist/index",
   "files": [
-    "dist"
+    "dist",
+    "package.json"
   ],
   "keywords": [
     "eslint",
