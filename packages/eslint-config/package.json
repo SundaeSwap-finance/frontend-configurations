@@ -1,6 +1,6 @@
 {
-  "name": "@sundae/eslint-config-sundae",
-  "version": "0.0.2",
+  "name": "@sundae/eslint-config",
+  "version": "0.0.3",
   "description": "eslint config from which all other eslint-configs inherit from.",
   "files": [
     "dist",
@@ -22,17 +22,17 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.24.0",
     "@typescript-eslint/parser": "^5.24.0",
-    "eslint": "^8.4.1",
     "eslint-config-next": "^12.1.6",
     "eslint-config-prettier": "^8.5.0",
+    "eslint": "^8.4.1"
+  },
+  "peerDependencies": {
+    "eslint": "^8.4.1",
+    "prettier": "^2.1.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.2.2",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0"
-  },
-  "peerDependencies": {
-    "eslint": "^8.4.1",
-    "prettier": "^2.1.2"
   }
 }
