@@ -1,6 +1,6 @@
 {
-  "name": "@sundae/eslint-plugin",
-  "version": "0.0.4",
+  "name": "@sundae/eslint-config",
+  "version": "0.0.2",
   "description": "eslint config from which all other eslint-configs inherit from.",
   "module": "dist/index",
   "files": [
@@ -12,7 +12,7 @@
     "eslintplugin",
     "eslint-plugin"
   ],
-  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/eslint-plugin",
+  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/eslint-config",
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "clean": "rm -rf ./dist",
