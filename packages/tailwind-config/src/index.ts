@@ -1,4 +1,4 @@
-import * as defaultTheme from "tailwindcss/defaultTheme"
+import * as defaultTheme from "tailwindcss/defaultTheme";
 import * as tailwindConfig from "tailwindcss/tailwind-config";
 
 const theme: tailwindConfig.TailwindTheme = {
@@ -18,7 +18,7 @@ const theme: tailwindConfig.TailwindTheme = {
     transparent: "transparent",
     white: {
       100: "#FFFFFF",
-      200: "#F5F5F5"
+      200: "#F5F5F5",
     },
     black: {
       100: "#0D0415",
@@ -43,12 +43,15 @@ const theme: tailwindConfig.TailwindTheme = {
   },
   fontFamily: {
     ...defaultTheme.fontFamily,
-    sans: ['"DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'],
+    sans: [
+      '"DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+    ],
   },
   // @ts-ignore
   configViewer: {
-    fonts: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&display=swap"
-  }
+    fonts:
+      "https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&display=swap",
+  },
 };
 
-module.exports = { theme }
+module.exports = { theme };

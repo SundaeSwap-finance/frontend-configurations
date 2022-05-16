@@ -1,10 +1,10 @@
 const { theme } = require("./dist");
 
 module.exports = {
-    theme: {
-        ...theme,
-        extend: {
-            // Overrides
-        }
-    }
+  theme: {
+    ...theme,
+    extend: {
+      // Overrides
+    },
+  },
 };
