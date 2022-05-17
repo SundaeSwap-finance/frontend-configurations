@@ -14,7 +14,7 @@ if (hasJest) {
 if (hasNext) {
   extendList.push("next");
 } else if (hasReact) {
-  extendList.push("react");
+  pluginList.push("react");
 }
 
 export = {
