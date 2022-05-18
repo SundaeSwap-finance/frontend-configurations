@@ -1,6 +1,6 @@
 {
   "name": "@sundae/webpack-config",
-  "version": "0.0.1--alpha.webpack",
+  "version": "1.0.0--alpha.webpack",
   "description": "Common webpack configurations for SundaeSwap projects.",
   "main": "dist/index.js",
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/eslint-config-sundae",
@@ -10,10 +10,6 @@
     "dist",
     "package.json"
   ],
-  "keywords": [
-    "webpack"
-  ],
-  "private": true,
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "compile": "tsc -p ./tsconfig.json",
