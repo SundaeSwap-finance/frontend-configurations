@@ -12,9 +12,17 @@ yarn add @sundae/webpack-config webpack webpack-cli -D
 And then from your root project's `webpack.config.js` file, utilize standard base rulesets:
 
 ```js
-const { getPlugins } = require("@sundae/webpack-config");
+const { getPlugins, getScssRules } = require("@sundae/webpack-config");
 
 module.exports = {
+  module: {
+    rules: [
+      test: /\.scss$/,
+      use: [
+        ...getScssRules()
+      ]
+    ]
+  },
   plugins: [
     ...getPlugins()
   ]
