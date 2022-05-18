@@ -17,7 +17,7 @@ if (hasNext) {
   pluginList.push("react");
 }
 
-export = {
+export default {
   parser: "@typescript-eslint/parser",
   plugins: pluginList,
   extends: extendList,
