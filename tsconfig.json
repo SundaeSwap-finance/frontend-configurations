@@ -1,17 +1,18 @@
 {
-  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "allowJs": true,
-    "baseUrl": ".",
-    "paths": {
-      "@sundaeswap-toolkit/*": ["packages/*/src"]
-    },
-    "noEmit": true
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "noEmit": false,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "allowJs": false
   },
-  "ts-node": {
-    "require": ["tsconfig-paths/register"],
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
 }
