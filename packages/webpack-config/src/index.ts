@@ -11,15 +11,17 @@ export * from "./rulesets/loaders";
 interface IBaseConfigArgs {
   useCSSModules: boolean;
   stringReplaceRules: Record<string, unknown> | undefined;
+  verbose: boolean;
 }
 
 // Export base config.
 export const getBaseConfig = ({
   useCSSModules,
   stringReplaceRules = undefined,
+  verbose = false
 }: IBaseConfigArgs): Record<string, unknown> => {
   const production = process.env.NODE_ENV === "production";
-  return {
+  const config = {
     entry: "./src/index.tsx",
     mode: production ? "production" : "development",
     devtool: "source-map",
@@ -82,4 +84,10 @@ export const getBaseConfig = ({
           },
         },
   };
+
+  if (verbose) {
+    console.log(`Using webpack config by @sundae:`, config);
+  }
+
+  return config;
 };
