@@ -1,11 +1,21 @@
-# `@sundae/postcss-config`
+# `postcss-config`
 
-> TODO: description
+These are base shared `postcss.config.js` configs to use in your downstream project.
 
-## Usage
+## Installation
+To install, run the following in your project root:
 
 ```
-const postcssConfig = require('@sundae/postcss-config');
-
-// TODO: DEMONSTRATE API
+yarn add @sundae/postcss-config -D
 ```
+
+Within your `postcss.config.js` file, extend this config via:
+
+```ts
+const { getConfig } = require("@sundae/postcss-config");
+
+module.exports = {
+  ...getConfig()
+};
+```
+
