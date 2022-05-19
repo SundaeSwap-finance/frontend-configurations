@@ -44,6 +44,7 @@ export const getBaseConfig = ({
         {
           test: /\.scss$/i,
           use: [...getScssRules(true, false)],
+          exclude: /\.module\.scss$/,
         },
         useCSSModules
           ? {
