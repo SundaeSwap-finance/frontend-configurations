@@ -10,8 +10,8 @@ export const getScssRules = (
     options: {
       importLoaders: 2,
       sourceMap: sourcemap,
-      modules: allowModules
-    }
+      modules: allowModules,
+    },
   },
   "postcss-loader",
   "sass-loader",
