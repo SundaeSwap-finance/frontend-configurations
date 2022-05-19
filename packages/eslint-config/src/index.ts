@@ -17,7 +17,7 @@ if (hasNext) {
   pluginList.push("react");
 }
 
-const config = {
+module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: pluginList,
   extends: extendList,
@@ -32,5 +32,3 @@ const config = {
   },
   rules,
 };
-
-export default config;
