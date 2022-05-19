@@ -2,7 +2,7 @@ import path from "path";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
 import { getPlugins } from "./rulesets/plugins";
-import { getScssRules, getCSSModulesRules } from "./rulesets/loaders";
+import { getScssRules } from "./rulesets/loaders";
 
 // Export rulesets.
 export { getPlugins } from "./rulesets/plugins";
@@ -43,13 +43,13 @@ export const getBaseConfig = ({
         },
         {
           test: /\.scss$/i,
-          use: [...getScssRules()],
+          use: [...getScssRules(true, false)],
         },
         useCSSModules
           ? {
               test: /\.module\.scss$/,
               exclude: /node_modules/,
-              use: [...getCSSModulesRules()],
+              use: [...getScssRules()],
             }
           : {},
         stringReplaceRules
