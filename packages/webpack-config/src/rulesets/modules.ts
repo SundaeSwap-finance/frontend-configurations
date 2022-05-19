@@ -1,7 +1,7 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import getCSSModuleLocalIdent from "react-dev-utils/getCSSModuleLocalIdent";
 
-export const getScssRules = (sourcemap: boolean = true) => ([
+export const getScssRules = (sourcemap: boolean = true) => [
   MiniCssExtractPlugin.loader,
   {
     loader: "css-loader",
@@ -12,9 +12,9 @@ export const getScssRules = (sourcemap: boolean = true) => ([
   },
   "postcss-loader",
   "sass-loader",
-]);
+];
 
-export const getCSSModulesRules = (sourcemap: boolean = true) => ([
+export const getCSSModulesRules = (sourcemap: boolean = true) => [
   MiniCssExtractPlugin.loader,
   {
     loader: "css-loader",
@@ -30,4 +30,4 @@ export const getCSSModulesRules = (sourcemap: boolean = true) => ([
   },
   "postcss-loader",
   "sass-loader",
-]);
+];

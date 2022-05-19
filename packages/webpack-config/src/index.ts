@@ -16,7 +16,7 @@ interface IBaseConfigArgs {
 // Export base config.
 export const getBaseConfig = ({
   useCSSModules,
-  stringReplaceRules = undefined
+  stringReplaceRules = undefined,
 }: IBaseConfigArgs): Record<string, unknown> => {
   const production = process.env.NODE_ENV === "production";
   return {
@@ -43,24 +43,24 @@ export const getBaseConfig = ({
         },
         {
           test: /\.scss$/i,
-          use: [
-            ...getScssRules()
-          ],
+          use: [...getScssRules()],
         },
-        useCSSModules ? {
-          test: /\.module\.scss$/,
-          use: [
-            ...getCSSModulesRules()
-          ],
-        } : {},
-        stringReplaceRules ? {
-          test: /\.tsx|.ts?$/,
-          exclude: /node_modules/,
-          loader: "string-replace-loader",
-          options: {
-            ...stringReplaceRules
-          },
-        } : {},
+        useCSSModules
+          ? {
+              test: /\.module\.scss$/,
+              use: [...getCSSModulesRules()],
+            }
+          : {},
+        stringReplaceRules
+          ? {
+              test: /\.tsx|.ts?$/,
+              exclude: /node_modules/,
+              loader: "string-replace-loader",
+              options: {
+                ...stringReplaceRules,
+              },
+            }
+          : {},
       ],
     },
     stats: {
