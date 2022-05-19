@@ -1,6 +1,6 @@
 {
   "name": "@sundae/webpack-config",
-  "version": "1.0.3--alpha.webpack",
+  "version": "1.0.4--alpha.webpack",
   "description": "Common webpack configurations for SundaeSwap projects.",
   "main": "dist/index.js",
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/eslint-config-sundae",
@@ -15,7 +15,8 @@
     "compile": "tsc -p ./tsconfig.json",
     "lint": "eslint . --ext js,jsx,ts,tsx --max-warnings=0",
     "lint:fix": "yarn lint -- --fix",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "test": "webpack-cli configtest ./webpack.test.ts"
   },
   "dependencies": {
     "clean-webpack-plugin": "^4.0.0",
@@ -34,7 +35,9 @@
     "typings-for-css-modules-loader": "^1.7.0"
   },
   "devDependencies": {
-    "@types/react-dev-utils": "^9.0.10"
+    "@types/react-dev-utils": "^9.0.10",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
   },
   "peerDependencies": {
     "webpack": "^5.72.1",
