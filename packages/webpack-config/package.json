@@ -1,6 +1,6 @@
 {
   "name": "@sundae/webpack-config",
-  "version": "1.0.6--alpha.webpack",
+  "version": "1.0.7--alpha.webpack",
   "description": "Common webpack configurations for SundaeSwap projects.",
   "main": "dist/index.js",
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/eslint-config-sundae",
@@ -19,7 +19,6 @@
     "test": "webpack-cli configtest ./webpack.test.ts"
   },
   "dependencies": {
-    "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",

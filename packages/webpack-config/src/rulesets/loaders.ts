@@ -16,7 +16,6 @@ export const getScssRules = (sourcemap: boolean = true) => [
 
 export const getCSSModulesRules = (sourcemap: boolean = true) => [
   MiniCssExtractPlugin.loader,
-  "@teamsupercell/typings-for-css-modules-loader",
   {
     loader: "css-loader",
     options: {

@@ -2,11 +2,11 @@ import path from "path";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
 import { getPlugins } from "./rulesets/plugins";
-import { getScssRules, getCSSModulesRules } from "./rulesets/modules";
+import { getScssRules, getCSSModulesRules } from "./rulesets/loaders";
 
 // Export rulesets.
 export { getPlugins } from "./rulesets/plugins";
-export * from "./rulesets/modules";
+export * from "./rulesets/loaders";
 
 interface IBaseConfigArgs {
   useCSSModules: boolean;
