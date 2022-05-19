@@ -30,4 +30,11 @@ export const getCSSModulesRules = (sourcemap: boolean = true) => [
   },
   "postcss-loader",
   "sass-loader",
+  {
+    loader: "typings-for-css-modules",
+    options: {
+      modules: true,
+      namedExport: true,
+    },
+  },
 ];
