@@ -12,20 +12,19 @@ yarn add @sundae/webpack-config webpack webpack-cli -D
 And then from your root project's `webpack.config.js` file, utilize standard base rulesets:
 
 ```js
-const { getPlugins, getScssRules } = require("@sundae/webpack-config");
+const { merge } = require("webpack-merge");
+const { getBaseConfig } = require("@sundae/webpack-config");
 
-module.exports = {
-  module: {
-    rules: [
-      test: /\.scss$/,
-      use: [
-        ...getScssRules()
-      ]
-    ]
-  },
-  plugins: [
-    ...getPlugins()
-  ]
-};
-
+module.exports = merge(
+  getBaseConfig({
+    verbose: true,
+    useCSSModules: true,
+    stringReplace: {
+      API_URL: "http://localhost:3000/graphql",
+    },
+  }),
+  {
+    // Overrides
+  }
+);
 ```
