@@ -7,16 +7,11 @@ export const getScssRules = (
   MiniCssExtractPlugin.loader,
   {
     loader: "css-loader",
-    options: allowModules
-      ? {
-          importLoaders: 2,
-          sourceMap: sourcemap,
-          modules: true,
-        }
-      : {
-          importLoaders: 2,
-          sourceMap: sourcemap,
-        },
+    options: {
+      importLoaders: 2,
+      sourceMap: sourcemap,
+      modules: allowModules
+    }
   },
   "postcss-loader",
   "sass-loader",
