@@ -18,7 +18,7 @@ interface IBaseConfigArgs {
 export const getBaseConfig = ({
   useCSSModules,
   stringReplaceRules = undefined,
-  verbose = false
+  verbose = false,
 }: IBaseConfigArgs): Record<string, unknown> => {
   const production = process.env.NODE_ENV === "production";
   const config = {
