@@ -12,7 +12,7 @@
     "eslintplugin",
     "eslint-plugin"
   ],
-  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/eslint-config-sundae",
+  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/eslint-config",
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "dev": "yarn run clean && tsc -p tsconfig.json --watch",
