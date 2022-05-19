@@ -1,16 +1,33 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import getCSSModuleLocalIdent from "react-dev-utils/getCSSModuleLocalIdent";
 
-export const getScssRules = (sourcemap: boolean = true) => {
-  return [
-    MiniCssExtractPlugin.loader,
-    {
-      loader: "css-loader",
-      options: {
-        importLoaders: 2,
-        sourceMap: sourcemap,
+export const getScssRules = (sourcemap: boolean = true) => ([
+  MiniCssExtractPlugin.loader,
+  {
+    loader: "css-loader",
+    options: {
+      importLoaders: 2,
+      sourceMap: sourcemap,
+    },
+  },
+  "postcss-loader",
+  "sass-loader",
+]);
+
+export const getCSSModulesRules = (sourcemap: boolean = true) => ([
+  MiniCssExtractPlugin.loader,
+  {
+    loader: "css-loader",
+    options: {
+      importLoaders: 2,
+      sourceMap: sourcemap,
+      modules: {
+        mode: "local",
+        namedExport: true,
+        getLocalIdent: getCSSModuleLocalIdent,
       },
     },
-    "postcss-loader",
-    "sass-loader",
-  ];
-};
+  },
+  "postcss-loader",
+  "sass-loader",
+]);

@@ -1,100 +1,83 @@
-// import path from "path";
-// import MiniCssExtractPlugin from "mini-css-extract-plugin";
-// import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
-// import getCSSModuleLocalIdent from "react-dev-utils/getCSSModuleLocalIdent";
+import path from "path";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
+import { getPlugins } from "./rulesets/plugins";
+import { getScssRules, getCSSModulesRules } from "./rulesets/modules";
+
+// Export rulesets.
 export { getPlugins } from "./rulesets/plugins";
 export * from "./rulesets/modules";
 
-// const config = ({ production }: ConfigProps) => {
-//   const config: Record<string, unknown> = {
-//     entry: "./src/index.tsx",
-//     mode: production ? "production" : "development",
-//     devtool: "source-map",
-//     optimization: {
-//       usedExports: true,
-//       minimizer: [`...`, new CssMinimizerPlugin()],
-//     },
-//     output: {
-//       filename: "[name].[contenthash].js",
-//       path: path.resolve(__dirname, "dist"),
-//     },
-//     module: {
-//       rules: [
-//         {
-//           test: /global\.scss$/i,
-//           use: [
-//             MiniCssExtractPlugin.loader,
-//             {
-//               loader: "css-loader",
-//               options: {
-//                 importLoaders: 2,
-//                 sourceMap: production,
-//               },
-//             },
-//             "postcss-loader",
-//             "sass-loader",
-//           ],
-//         },
-//         {
-//           test: /\.module\.(scss|sass)$/,
-//           use: [
-//             MiniCssExtractPlugin.loader,
-//             {
-//               loader: "css-loader",
-//               options: {
-//                 importLoaders: 2,
-//                 sourceMap: production,
-//                 modules: {
-//                   mode: "local",
-//                   namedExport: true,
-//                   getLocalIdent: getCSSModuleLocalIdent,
-//                 },
-//               },
-//             },
-//             "postcss-loader",
-//             "sass-loader",
-//           ],
-//         },
-//         {
-//           test: /\.tsx?$/,
-//           loader: "ts-loader",
-//         },
-//         {
-//           test: /\.tsx|.ts?$/,
-//           exclude: /node_modules/,
-//           loader: "string-replace-loader",
-//           options: {
-//             search: "API_URL",
-//             replace: production ? "/graphql" : "http://localhost:3000/graphql",
-//           },
-//         },
-//         {
-//           test: /\.(png|svg|jpg|jpeg|gif)$/i,
-//           type: "asset/resource",
-//         },
-//       ],
-//     },
-//     stats: {
-//       errorDetails: true,
-//     },
-//     resolve: {
-//       extensions: [".tsx", ".ts", ".js", ".scss"],
-//     },
-//     plugins,
-//   };
+interface IBaseConfigArgs {
+  useCSSModules: boolean;
+  stringReplaceRules: Record<string, unknown> | undefined;
+}
 
-//   if (!production) {
-//     config.devServer = {
-//       static: path.resolve(__dirname, "dist"),
-//       devMiddleware: {
-//         publicPath: path.resolve(__dirname, "dist"),
-//         writeToDisk: true,
-//       },
-//     };
-//   }
-
-//   return config;
-// };
-
-// export default config;
+// Export base config.
+export const getBaseConfig = ({
+  useCSSModules,
+  stringReplaceRules = undefined
+}: IBaseConfigArgs): Record<string, unknown> => {
+  const production = process.env.NODE_ENV === "production";
+  return {
+    entry: "./src/index.tsx",
+    mode: production ? "production" : "development",
+    devtool: "source-map",
+    optimization: {
+      usedExports: true,
+      minimizer: [`...`, new CssMinimizerPlugin()],
+    },
+    output: {
+      filename: "[name].[contenthash].js",
+      path: path.resolve(process.cwd(), "dist"),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          loader: "ts-loader",
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: "asset/resource",
+        },
+        {
+          test: /\.scss$/i,
+          use: [
+            ...getScssRules()
+          ],
+        },
+        useCSSModules ? {
+          test: /\.module\.scss$/,
+          use: [
+            ...getCSSModulesRules()
+          ],
+        } : {},
+        stringReplaceRules ? {
+          test: /\.tsx|.ts?$/,
+          exclude: /node_modules/,
+          loader: "string-replace-loader",
+          options: {
+            ...stringReplaceRules
+          },
+        } : {},
+      ],
+    },
+    stats: {
+      errorDetails: true,
+    },
+    resolve: {
+      extensions: [".tsx", ".ts", ".js", ".scss"],
+    },
+    plugins: getPlugins(),
+    devServer: production
+      ? {}
+      : {
+          static: path.resolve(process.cwd(), "dist"),
+          devMiddleware: {
+            publicPath: path.resolve(process.cwd(), "dist"),
+            writeToDisk: true,
+          },
+        },
+  };
+};
