@@ -1,5 +1,7 @@
 import path from "path";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import webpack from "webpack";
+import webpackDevServer from "webpack-dev-server";
 
 import { getPlugins, TPluginOptions } from "./rulesets/plugins";
 import { getScssRules } from "./rulesets/loaders";
@@ -13,6 +15,7 @@ interface IBaseConfigArgs {
   stringReplaceRules: Record<string, unknown> | undefined;
   verbose: boolean;
   plugins?: TPluginOptions;
+  syncWasm?: boolean;
 }
 
 // Export base config.
@@ -21,9 +24,10 @@ export const getBaseConfig = ({
   stringReplaceRules = undefined,
   verbose = false,
   plugins,
-}: IBaseConfigArgs): Record<string, unknown> => {
+  syncWasm,
+}: IBaseConfigArgs): webpack.Configuration => {
   const production = process.env.NODE_ENV === "production";
-  const config = {
+  const config: webpack.Configuration = {
     entry: "./src/index.tsx",
     mode: production ? "production" : "development",
     devtool: "source-map",
@@ -77,15 +81,23 @@ export const getBaseConfig = ({
     },
     plugins: getPlugins(plugins),
     devServer: production
-      ? {}
-      : {
+      ? undefined
+      : ({
           static: path.resolve(process.cwd(), "dist"),
           devMiddleware: {
             publicPath: path.resolve(process.cwd(), "dist"),
             writeToDisk: true,
           },
-        },
+        } as webpackDevServer.Configuration),
   };
+
+  if (syncWasm) {
+    config.experiments = {
+      layers: true,
+      syncWebAssembly: true,
+    };
+    config.output.webassemblyModuleFilename = "static/wasm/[modulehash].wasm";
+  }
 
   if (verbose) {
     console.log(`Using webpack config by @sundae:`, config);
