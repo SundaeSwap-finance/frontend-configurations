@@ -1,15 +1,16 @@
-import fs from "fs";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import {
+  CleanWebpackPlugin,
+  Options as CleanWebpackPluginOptions,
+} from "clean-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+import ESLintWebpackPlugin, {
+  Options as ESLintWebpackPluginOptions,
+} from "eslint-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-import ESLintWebpackPlugin from "eslint-webpack-plugin";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-const hasHTMLTemplate = fs.existsSync("/src/index.html");
-const hasStaticFolder = fs.existsSync("/src/static");
-
-type TPluginOptions =
+type TPlugins =
   | CleanWebpackPlugin
   | HtmlWebpackPlugin
   | ForkTsCheckerWebpackPlugin
@@ -17,35 +18,42 @@ type TPluginOptions =
   | MiniCssExtractPlugin
   | CopyPlugin;
 
-export const getPlugins = (): TPluginOptions[] => {
+export type TPluginOptions = {
+  staticFolderName?: "string";
+  clean?: CleanWebpackPluginOptions;
+  copy?: CopyPlugin.PluginOptions;
+  html?: HtmlWebpackPlugin.Options;
+  css?: MiniCssExtractPlugin.PluginOptions;
+  eslint?: ESLintWebpackPluginOptions;
+};
+
+export const getPlugins = (opts?: TPluginOptions): TPlugins[] => {
   // Explicitly setting any since class constructors are not generic.
-  const plugins: TPluginOptions[] = [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-    }),
+  const plugins: TPlugins[] = [
+    new CleanWebpackPlugin(opts?.clean),
+    new HtmlWebpackPlugin(
+      opts?.html ?? {
+        template: "./src/index.html",
+      }
+    ),
     new ForkTsCheckerWebpackPlugin(),
-    new ESLintWebpackPlugin({
-      extensions: [".tsx", ".ts"],
-      exclude: "node_modules",
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-    }),
+    new ESLintWebpackPlugin(
+      opts?.eslint ?? {
+        extensions: [".tsx", ".ts"],
+        exclude: "node_modules",
+      }
+    ),
+    new MiniCssExtractPlugin(
+      opts?.css ?? {
+        filename: "[name].[contenthash].css",
+      }
+    ),
   ];
 
-  if (hasHTMLTemplate) {
-    plugins.push(
-      new HtmlWebpackPlugin({
-        template: "./src/index.html",
-      })
-    );
-  }
-
-  if (hasStaticFolder) {
+  if (typeof opts.staticFolderName === "string") {
     plugins.push(
       new CopyPlugin({
-        patterns: [{ from: "src/static", to: "static" }],
+        patterns: [{ from: opts.staticFolderName, to: "static" }],
       })
     );
   }
