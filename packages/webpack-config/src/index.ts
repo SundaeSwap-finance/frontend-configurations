@@ -1,7 +1,7 @@
 import path from "path";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
-import { getPlugins } from "./rulesets/plugins";
+import { getPlugins, TPluginOptions } from "./rulesets/plugins";
 import { getScssRules } from "./rulesets/loaders";
 
 // Export rulesets.
@@ -12,6 +12,7 @@ interface IBaseConfigArgs {
   useCSSModules: boolean;
   stringReplaceRules: Record<string, unknown> | undefined;
   verbose: boolean;
+  plugins?: TPluginOptions;
 }
 
 // Export base config.
@@ -19,6 +20,7 @@ export const getBaseConfig = ({
   useCSSModules,
   stringReplaceRules = undefined,
   verbose = false,
+  plugins,
 }: IBaseConfigArgs): Record<string, unknown> => {
   const production = process.env.NODE_ENV === "production";
   const config = {
@@ -73,7 +75,7 @@ export const getBaseConfig = ({
     resolve: {
       extensions: [".tsx", ".ts", ".js", ".scss"],
     },
-    plugins: getPlugins(),
+    plugins: getPlugins(plugins),
     devServer: production
       ? {}
       : {
