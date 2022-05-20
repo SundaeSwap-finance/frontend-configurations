@@ -4,8 +4,10 @@ This is a collection of generic and reusable _frontend_ configurations across th
 
 ## Published packages
 
-- [eslint-config](https://github.com/SundaeSwap-finance/frontend-configurations/tree/main/packages/eslint-config) - _base_ eslint config without any react/ui-related ruleset
-- [tailwind-config](https://github.com/SundaeSwap-finance/frontend-configurations/tree/main/packages/tailwind-config) - _base_ config for tailwind applications
+- [eslint-config](https://github.com/SundaeSwap-finance/frontend-configurations/tree/main/packages/eslint-config)
+- [postcss-config](https://github.com/SundaeSwap-finance/frontend-configurations/tree/main/packages/postcss-config)
+- [webpack-config](https://github.com/SundaeSwap-finance/frontend-configurations/tree/main/packages/webpack-config)
+- [tailwind-config](https://github.com/SundaeSwap-finance/frontend-configurations/tree/main/packages/tailwind-config)
 
 ## Development
 

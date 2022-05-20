@@ -1,0 +1,33 @@
+{
+  "name": "@sundae/postcss-config",
+  "version": "1.0.0",
+  "description": "basic postcss config options for SundeaSwap projects.",
+  "keywords": [
+    "postcss",
+    "webpack"
+  ],
+  "author": "Calvin Koepke <hello@calvinkoepke.com>",
+  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/postcss-config",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "dev": "yarn run clean && tsc -p tsconfig.json --watch",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.json",
+    "prepublishOnly": "yarn run build",
+    "test": "yarn run build"
+  },
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^4.1.3",
+    "postcss": "^8.4.14",
+    "postcss-normalize": "^10.0.1",
+    "postcss-preset-env": "^7.6.0",
+    "postcss-safe-parser": "^6.0.0",
+    "postcss-scss": "^4.0.4"
+  }
+}

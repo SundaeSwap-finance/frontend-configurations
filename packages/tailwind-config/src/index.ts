@@ -1,5 +1,5 @@
-import * as defaultTheme from "tailwindcss/defaultTheme";
-import * as tailwindConfig from "tailwindcss/tailwind-config";
+import defaultTheme from "tailwindcss/defaultTheme";
+import tailwindConfig from "tailwindcss/tailwind-config";
 
 const theme: tailwindConfig.TailwindTheme = {
   ...defaultTheme,

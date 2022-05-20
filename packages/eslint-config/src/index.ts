@@ -1,8 +1,8 @@
 import { rules } from "./rules";
 
-const hasNext = !!process.env["npm_package_dependencies_next"];
-const hasReact = !!process.env["npm_package_dependencies_react"];
-const hasJest = !!process.env["npm_package_devDependencies_jest"];
+const hasNext = !!process.env[`npm_package_devDependencies_next`];
+const hasReact = !!process.env[`npm_package_devDependencies_react`];
+const hasJest = !!process.env[`npm_package_devDependencies_jest`];
 
 const pluginList = ["import", "@typescript-eslint", "prettier"];
 const extendList = ["prettier"];
@@ -17,7 +17,7 @@ if (hasNext) {
   pluginList.push("react");
 }
 
-export = {
+module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: pluginList,
   extends: extendList,
