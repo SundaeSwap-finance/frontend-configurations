@@ -48,6 +48,10 @@ const theme: tailwindConfig.TailwindTheme = {
       300: "#B400EB",
     },
   },
+  fontSize: {
+    ...defaultTheme.fontSize,
+    xxs: ["0.625rem", { lineHeight: "0.75rem" }], // 10px/12px
+  },
   fontFamily: {
     ...defaultTheme.fontFamily,
     sans: [
