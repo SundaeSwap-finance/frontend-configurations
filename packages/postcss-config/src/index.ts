@@ -22,5 +22,6 @@ export const getConfig = (useScss: boolean = true) => ({
           ],
         })
       : null,
+    require("tailwindcss"),
   ],
 });

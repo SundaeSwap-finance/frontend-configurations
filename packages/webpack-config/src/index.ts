@@ -100,6 +100,7 @@ export const getBaseConfig = ({
   }
 
   if (verbose) {
+    // eslint-disable-next-line no-console
     console.log(`Using webpack config by @sundae:`, config);
   }
 
