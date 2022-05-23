@@ -15,10 +15,16 @@ And then from your root project's `tailwind.config.js` file, extend the base the
 const { theme } = require("@sundae/tailwind-config");
 
 module.exports = {
+  content: [
+    "./src/components/**/*.tsx",
+
+    // Make sure to include @sundae/ui-toolkit if using.
+    "./node_modules/@sundae/ui-toolkit/**/*",
+  ],
   theme: {
     ...theme,
-    
-    // Project overrides.
+
+    // Theme overrides
   },
 };
 
