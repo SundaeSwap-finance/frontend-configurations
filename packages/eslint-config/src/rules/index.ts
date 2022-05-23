@@ -84,7 +84,7 @@ export const rules = {
     },
   ],
   "no-unused-labels": "warn",
-  "no-unused-vars": "error",
+  "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
   "no-use-before-define": [
     "warn",
     {
