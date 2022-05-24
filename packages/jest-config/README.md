@@ -1,6 +1,6 @@
 # `jest-config`
 
-These are base shared `jest.config.js` configs to use in your downstream project.
+This is a base shared `jest.config.js` config file to use in your downstream project.
 
 ## Installation
 
