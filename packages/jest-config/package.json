@@ -25,9 +25,11 @@
     "ts-jest": "^28.0.3"
   },
   "devDependencies": {
-    "@types/jest": "^27.5.1"
+    "@types/jest": "^27.5.1",
+    "jest-environment-jsdom": "^28.1.0"
   },
   "peerDependencies": {
-    "jest": "^28.1.0"
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0"
   }
 }
