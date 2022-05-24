@@ -1,7 +1,7 @@
 {
   "name": "@sundae/jest-config",
   "version": "1.0.0",
-  "description": "basic jest config options for SundeaSwap projects.",
+  "description": "basic jest config options for SundaeSwap projects.",
   "keywords": [
     "jest"
   ],
