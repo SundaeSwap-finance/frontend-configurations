@@ -1,0 +1,31 @@
+{
+  "name": "@sundae/jest-config",
+  "version": "1.0.0",
+  "description": "basic jest config options for SundaeSwap projects.",
+  "keywords": [
+    "jest"
+  ],
+  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/jest-config",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "dev": "yarn run clean && tsc -p tsconfig.json --watch",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.json",
+    "prepublishOnly": "yarn run build",
+    "test": "yarn run build"
+  },
+  "dependencies": {
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
+    "ts-jest": "^28.0.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.5.1"
+  }
+}

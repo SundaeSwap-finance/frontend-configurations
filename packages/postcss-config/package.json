@@ -1,7 +1,7 @@
 {
   "name": "@sundae/postcss-config",
   "version": "1.2.0",
-  "description": "basic postcss config options for SundeaSwap projects.",
+  "description": "basic postcss config options for SundaeSwap projects.",
   "keywords": [
     "postcss",
     "webpack"
