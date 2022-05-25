@@ -1,8 +1,5 @@
 import { rules } from "./rules";
-
-const hasNext = !!process.env[`npm_package_devDependencies_next`];
-const hasReact = !!process.env[`npm_package_devDependencies_react`];
-const hasJest = !!process.env[`npm_package_devDependencies_jest`];
+import { hasNext, hasJest, hasReact } from "./utils";
 
 const pluginList = ["import", "@typescript-eslint", "prettier"];
 const extendList = ["prettier"];

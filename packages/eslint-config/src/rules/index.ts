@@ -1,3 +1,5 @@
+import { hasReact } from "../utils";
+
 export const rules = {
   "array-callback-return": "warn",
   "default-case": ["warn", { commentPattern: "^no default$" }],
@@ -125,4 +127,8 @@ export const rules = {
   "no-var": "error",
   "prefer-template": "error",
   "one-var-declaration-per-line": ["error", "always"],
+  ...(hasReact && {
+    "react/self-closing-comp": "error",
+  }),
 };
+
