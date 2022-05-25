@@ -125,4 +125,5 @@ export const rules = {
   "no-var": "error",
   "prefer-template": "error",
   "one-var-declaration-per-line": ["error", "always"],
+  "react/self-closing-comp": "error",
 };
