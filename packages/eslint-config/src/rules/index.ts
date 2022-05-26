@@ -120,8 +120,16 @@ export const rules = {
   "@typescript-eslint/no-explicit-any": "error",
   "@typescript-eslint/naming-convention": [
     "error",
-    { selector: "interface", format: ["PascalCase"], custom: { regex: "^I[A-Z]", match: true } },
-    { selector: "typeAlias", format: ["PascalCase"], custom: { regex: "^T[A-Z]", match: true } },
+    {
+      selector: "interface",
+      format: ["PascalCase"],
+      custom: { regex: "^I[A-Z]", match: true },
+    },
+    {
+      selector: "typeAlias",
+      format: ["PascalCase"],
+      custom: { regex: "^T[A-Z]", match: true },
+    },
   ],
   "prefer-arrow-callback": "error",
   "no-var": "error",
@@ -131,4 +139,3 @@ export const rules = {
     "react/self-closing-comp": "error",
   }),
 };
-
