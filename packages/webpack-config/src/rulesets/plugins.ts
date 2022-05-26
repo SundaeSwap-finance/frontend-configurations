@@ -27,33 +27,40 @@ export type TPluginOptions = {
   eslint?: ESLintWebpackPluginOptions;
 };
 
-export const getPlugins = (opts?: TPluginOptions): TPlugins[] => {
-  // Explicitly setting any since class constructors are not generic.
+export const getPlugins = ({
+  staticFolderName,
+  clean,
+  copy,
+  html,
+  css,
+  eslint 
+}: TPluginOptions = {}): TPlugins[] => {
   const plugins: TPlugins[] = [
-    new CleanWebpackPlugin(opts?.clean),
+    new CleanWebpackPlugin(clean),
     new HtmlWebpackPlugin(
-      opts?.html ?? {
+      html ?? {
         template: "./src/index.html",
       }
     ),
     new ForkTsCheckerWebpackPlugin(),
     new ESLintWebpackPlugin(
-      opts?.eslint ?? {
+      eslint ?? {
         extensions: [".tsx", ".ts"],
         exclude: "node_modules",
       }
     ),
     new MiniCssExtractPlugin(
-      opts?.css ?? {
+      css ?? {
         filename: "[name].[contenthash].css",
       }
     ),
   ];
 
-  if (typeof opts.staticFolderName === "string") {
+  if (typeof staticFolderName === "string") {
     plugins.push(
       new CopyPlugin({
-        patterns: [{ from: opts.staticFolderName, to: "static" }],
+        ...copy,
+        patterns: [{ from: staticFolderName, to: "static" }],
       })
     );
   }
