@@ -33,7 +33,7 @@ export const getPlugins = ({
   copy,
   html,
   css,
-  eslint 
+  eslint,
 }: TPluginOptions = {}): TPlugins[] => {
   const plugins: TPlugins[] = [
     new CleanWebpackPlugin(clean),
