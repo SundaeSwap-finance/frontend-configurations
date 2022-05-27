@@ -1,35 +1,46 @@
-const path = require("path");
-const glob = require("glob");
-const purgecss = require("@fullhuman/postcss-purgecss");
-const normalize = require("postcss-normalize");
+import path from "path";
+import glob from "glob";
+import purgecss from "@fullhuman/postcss-purgecss";
+import normalize from "postcss-normalize";
+
+type TPurgecssOptions = Parameters<typeof purgecss>[0];
 
 export type TPostCSSConfigFactoryProps = {
   useScss?: boolean;
-  purgeCssContent?: string[];
+  purgeCssOpts?:
+    | TPurgecssOptions
+    | ((opts?: TPurgecssOptions) => TPurgecssOptions);
 };
 
 export const getConfig = ({
   useScss = true,
-  purgeCssContent = [],
-}: TPostCSSConfigFactoryProps = {}) => ({
-  ident: "postcss",
-  syntax: useScss ? "postcss-scss" : "postcss-safe-parser",
-  plugins: [
-    "postcss-preset-env",
-    normalize(),
-    require("tailwindcss"),
-    process.env.NODE_ENV === "production"
-      ? purgecss({
-          defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
-          content: [
-            ...purgeCssContent,
-            path.join(process.cwd(), "./dist/index.html"), //to match index.html
-            ...glob.sync(
-              `${path.join(process.cwd(), "src")}/**/*.tsx`, //to match React JSX files in src/components/*.jsx
-              { nodir: true }
-            ),
-          ],
-        })
-      : null,
-  ],
-});
+  purgeCssOpts,
+}: TPostCSSConfigFactoryProps = {}) => {
+  const purgeDefaults: TPurgecssOptions = {
+    defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+    content: [
+      path.join(process.cwd(), "./dist/index.html"), //to match index.html
+      ...glob.sync(
+        `${path.join(process.cwd(), "src")}/**/*.tsx`, //to match React JSX files in src/components/*.jsx
+        { nodir: true }
+      ),
+    ],
+  };
+
+  return {
+    ident: "postcss",
+    syntax: useScss ? "postcss-scss" : "postcss-safe-parser",
+    plugins: [
+      "postcss-preset-env",
+      normalize(),
+      require("tailwindcss"),
+      process.env.NODE_ENV === "production"
+        ? purgecss(
+            typeof purgeCssOpts === "function"
+              ? purgeCssOpts(purgeDefaults)
+              : { ...purgeDefaults, ...purgeCssOpts }
+          )
+        : null,
+    ],
+  };
+};
