@@ -9,6 +9,7 @@ export type TPostCSSConfigFactoryProps = {
   useScss?: boolean;
   purgeCssOpts?:
     | TPurgecssOptions
+    // eslint-disable-next-line
     | ((opts?: TPurgecssOptions) => TPurgecssOptions);
 };
 
