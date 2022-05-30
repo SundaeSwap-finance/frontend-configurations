@@ -86,7 +86,7 @@ export const rules = {
     },
   ],
   "no-unused-labels": "warn",
-  "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+  "no-unused-vars": "off",
   "no-use-before-define": [
     "warn",
     {
@@ -118,6 +118,7 @@ export const rules = {
   "getter-return": "warn",
   "prettier/prettier": "error",
   "@typescript-eslint/no-explicit-any": "error",
+  "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
   "@typescript-eslint/naming-convention": [
     "error",
     {
