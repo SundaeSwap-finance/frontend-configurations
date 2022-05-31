@@ -1,4 +1,4 @@
-const { theme } = require("./dist");
+const { plugins, theme } = require("./dist");
 
 module.exports = {
   theme: {
@@ -7,4 +7,5 @@ module.exports = {
       // Overrides
     },
   },
+  plugins: [...plugins],
 };
