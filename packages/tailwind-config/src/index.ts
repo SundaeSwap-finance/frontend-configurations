@@ -167,12 +167,12 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       300: "#B400EB",
     },
     peach: {
-      DEFAULT: "#ff7c62",
+      DEFAULT: "#FF7C62",
       100: "#FF9289",
-      200: "#ffb8aa",
-      300: "#ffcfc3",
-      400: "#fce8e7",
-      500: "#fdf8f4",
+      200: "#FFB8AA",
+      300: "#FFCFC3",
+      400: "#FCE8E7",
+      500: "#FDF8F4",
     },
     yellow: {
       DEFAULT: "#f8d500",
