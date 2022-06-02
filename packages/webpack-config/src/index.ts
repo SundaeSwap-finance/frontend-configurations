@@ -32,7 +32,6 @@ export const getBaseConfig = ({
     mode: production ? "production" : "development",
     devtool: "source-map",
     optimization: {
-      usedExports: true,
       minimizer: [`...`, new CssMinimizerPlugin()],
     },
     output: {
