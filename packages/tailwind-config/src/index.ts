@@ -44,6 +44,14 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       "0%": { opacity: "0", transform: "translateY(10px)" },
       "100%": { opacity: "1", transform: "translateY(0)" },
     },
+    "slide-left": {
+      "0%": { opacity: "0", transform: "translateX(10px)" },
+      "100%": { opacity: "1", transform: "translateX(0)" },
+    },
+    "slide-right": {
+      "0%": { opacity: "0", transform: "translateX(-10px)" },
+      "100%": { opacity: "1", transform: "translateX(0)" },
+    },
     // Dialog
     "dialog-overlay-show": {
       "0%": { opacity: "0" },
@@ -104,6 +112,8 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     "slide-left-fade": "slide-left-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
     "slide-down": "slide-down 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
     "slide-up": "slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+    "slide-left": "slide-left 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+    "slide-right": "slide-right 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
     // Dialog
     "dialog-overlay-show":
       "dialog-overlay-show 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards",
