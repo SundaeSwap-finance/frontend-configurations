@@ -72,34 +72,19 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     },
     // Loader
     "dot-flashing": {
-      "0%": { backgroundColor: "rgb(254 202 202)" },
-      "50%, 100%": { backgroundColor: "rgb(243 244 246)" },
-    },
-    "dot-flashing-dark": {
       "0%": { backgroundColor: "rgb(96 165 250)" },
-      "50%, 100%": { backgroundColor: "#202231" },
+      "50%, 100%": { backgroundColor: "rgb(243 244 246)" },
     },
     // Input
     "shadow-pulse": {
       "0%": {
-        boxShadow: "0 0 0 0 rgba(252, 165, 165, 0.4)",
+        boxShadow: "0 0 0 0 rgba(96, 165, 250, 0.4)",
       },
       "70%": {
         boxShadow: "0 0 0 20px rgba(252, 165, 165, 0)",
       },
       "100%": {
         boxShadow: "0 0 0 0 rgba(252, 165, 165, 0)",
-      },
-    },
-    "shadow-pulse-dark": {
-      "0%": {
-        boxShadow: "0 0 0 0 rgba(96, 165, 250, 0.4)",
-      },
-      "70%": {
-        boxShadow: "0 0 0 20px rgba(96, 165, 250, 0)",
-      },
-      "100%": {
-        boxShadow: "0 0 0 0 rgba(96, 165, 250, 0)",
       },
     },
   },
@@ -110,6 +95,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     "slide-right-fade": "slide-right-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
     "slide-down-fade": "slide-down-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
     "slide-left-fade": "slide-left-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+    // Popover
     "slide-down": "slide-down 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
     "slide-up": "slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
     "slide-left": "slide-left 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -124,10 +110,8 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     "collapsible-close": "collapsible-close 0.3s ease-out forwards",
     // Loader
     "dot-flashing": "dot-flashing 1s infinite alternate",
-    "dot-flashing-dark": "dot-flashing-dark 1s infinite alternate",
     // Input
     "shadow-pulse": "shadow-pulse 0.3s forwards",
-    "shadow-pulse-dark": "shadow-pulse-dark 0.3s forwards",
   },
   screens: {
     xxs: "240px",
