@@ -75,6 +75,10 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       "0%": { backgroundColor: "rgb(96 165 250)" },
       "50%, 100%": { backgroundColor: "rgb(243 244 246)" },
     },
+    "dot-flashing-dark": {
+      "0%": { backgroundColor: "rgb(96 165 250)" },
+      "50%, 100%": { backgroundColor: "#202231" },
+    },
     // Input
     "shadow-pulse": {
       "0%": {
@@ -110,6 +114,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     "collapsible-close": "collapsible-close 0.3s ease-out forwards",
     // Loader
     "dot-flashing": "dot-flashing 1s infinite alternate",
+    "dot-flashing-dark": "dot-flashing-dark 1s infinite alternate",
     // Input
     "shadow-pulse": "shadow-pulse 0.3s forwards",
   },
