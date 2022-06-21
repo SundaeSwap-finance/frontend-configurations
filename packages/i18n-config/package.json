@@ -10,7 +10,6 @@
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "dev": "tsc -p tsconfig.json --watch",
-    "preview": "tailwind-config-viewer -o",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.json",
     "prepublishOnly": "yarn run build",
