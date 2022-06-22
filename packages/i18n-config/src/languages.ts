@@ -4,7 +4,7 @@ export type TSupportedLocale = {
 };
 
 // default languages based on current dex v1
-export const DEFAULT_LANGUAGES: TSupportedLocale[] = [
+const DEFAULT_LANGUAGES: TSupportedLocale[] = [
   {
     locale: "ar",
     localeString: "عربي",
