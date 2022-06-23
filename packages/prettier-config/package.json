@@ -1,0 +1,26 @@
+{
+  "name": "@sundae/prettier-config",
+  "version": "1.0.0",
+  "description": "basic prettier config options for SundaeSwap projects.",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/prettier-config",
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "dev": "tsc -p tsconfig.json --watch",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.json",
+    "prepublishOnly": "yarn run build",
+    "test": "yarn run build"
+  },
+  "dependencies": {
+    "eslint": "^8.14.0",
+    "prettier": "^2.6.2"
+  },
+  "peerDependencies": {
+    "prettier": "^2.6.2"
+  },
+  "gitHead": "5e9c25ace88c289a1e61a9185d121cf6c0099029"
+}
