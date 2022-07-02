@@ -1,6 +1,6 @@
 {
   "name": "@sundae/i18n-config",
-  "version": "1.0.4",
+  "version": "1.6.0",
   "description": "A generic i18n config all other i18n-configs can use as plugin.",
   "main": "dist/index.js",
   "files": [
