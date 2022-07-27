@@ -64,7 +64,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     // Collapsible
     "collapsible-open": {
       "0%": { height: 0 },
-      "100%": { height: "var(--radix-collapsible-content-height)" },
+      "100%": { height: "auto" },
     },
     "collapsible-close": {
       "0%": { height: "var(--radix-collapsible-content-height)" },
