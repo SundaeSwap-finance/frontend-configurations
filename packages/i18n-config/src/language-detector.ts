@@ -1,6 +1,6 @@
 export const i18nLangDetectionConfig = {
   // order and from where user language should be detected
-  order: ["localStorage", "sessionStorage", "htmlTag", "navigator"],
+  order: ["localStorage", "sessionStorage", "htmlTag"],
 
   // keys or params to lookup language from
   lookupLocalStorage: "i18nextLng",
