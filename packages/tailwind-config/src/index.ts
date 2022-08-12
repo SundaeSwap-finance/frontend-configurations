@@ -155,6 +155,11 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       200: "#D62727",
       300: "#FC2D2D",
     },
+    amber: {
+      DEFAULT: "#FFD740",
+      200: "#FFC400",
+      300: "#FF8F00",
+    },
     blue: {
       DEFAULT: "#0A93EC",
       200: "#0882D4",
