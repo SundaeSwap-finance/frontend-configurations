@@ -1,6 +1,6 @@
 {
   "name": "@sundae/tailwind-config",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "A generic tailwind config all other tailwind-configs can use as plugin.",
   "main": "dist/index.js",
   "files": [
