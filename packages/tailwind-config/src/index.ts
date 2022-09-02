@@ -109,6 +109,83 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
         transform: "translate3d(4px, 0, 0)",
       },
     },
+    // Navigation Menu
+    enterFromRight: {
+      from: {
+        transform: "translateX(200px)",
+        opacity: 0,
+      },
+      to: {
+        transform: "translateX(0)",
+        opacity: 1,
+      },
+    },
+    enterFromLeft: {
+      from: {
+        transform: "translateX(-200px)",
+        opacity: 0,
+      },
+      to: {
+        transform: "translateX(0)",
+        opacity: 1,
+      },
+    },
+    exitToRight: {
+      from: {
+        transform: "translateX(0)",
+        opacity: 1,
+      },
+      to: {
+        transform: "translateX(200px)",
+        opacity: 0,
+      },
+    },
+    exitToLeft: {
+      from: {
+        transform: "translateX(0)",
+        opacity: 1,
+      },
+      to: {
+        transform: "translateX(-200px)",
+        opacity: 0,
+      },
+    },
+    scaleIn: {
+      from: {
+        transform: "rotateX(-30deg) scale(0.9)",
+        opacity: 0,
+      },
+      to: {
+        transform: "rotateX(0deg) scale(1)",
+        opacity: 1,
+      },
+    },
+    scaleOut: {
+      from: {
+        transform: "rotateX(0deg) scale(1)",
+        opacity: 1,
+      },
+      to: {
+        transform: "rotateX(-10deg) scale(0.95)",
+        opacity: 0,
+      },
+    },
+    fadeIn: {
+      from: {
+        opacity: 0,
+      },
+      to: {
+        opacity: 1,
+      },
+    },
+    fadeOut: {
+      from: {
+        opacity: 1,
+      },
+      to: {
+        opacity: 0,
+      },
+    },
   },
   animation: {
     ...defaultTheme.animation,
@@ -137,6 +214,15 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     "shadow-pulse": "shadow-pulse 0.3s forwards",
     // Shake
     shake: "shake 1s cubic-bezier(.36,.07,.19,.97) both",
+    // Navigation Menu
+    enterFromRight: "enterFromRight 250ms ease",
+    enterFromLeft: "enterFromLeft 250ms ease",
+    exitToRight: "exitToRight 250ms ease",
+    exitToLeft: "exitToLeft 250ms ease",
+    scaleIn: "scaleIn 200ms ease",
+    scaleOut: "scaleOut 200ms ease",
+    fadeIn: "fadeIn 200ms ease",
+    fadeOut: "fadeOut 200ms ease",
   },
   screens: {
     xxs: "240px",
