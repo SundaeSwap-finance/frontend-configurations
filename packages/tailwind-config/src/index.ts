@@ -189,11 +189,11 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     openOffCanvas: {
       from: {
         transform: "translateX(100%)",
-        opacity: 1,
+        opacity: 0,
       },
       to: {
         transform: "translateX(2rem)",
-        opacity: 0,
+        opacity: 1,
       },
     },
     closeOffCanvas: {
