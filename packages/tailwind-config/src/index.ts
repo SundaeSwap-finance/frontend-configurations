@@ -186,6 +186,26 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
         opacity: 0,
       },
     },
+    openOffCanvas: {
+      from: {
+        transform: "translateX(100%)",
+        opacity: 1,
+      },
+      to: {
+        transform: "translateX(2rem)",
+        opacity: 0,
+      },
+    },
+    closeOffCanvas: {
+      from: {
+        transform: "translateX(2rem)",
+        opacity: 1,
+      },
+      to: {
+        transform: "translateX(100%)",
+        opacity: 0,
+      },
+    },
   },
   animation: {
     ...defaultTheme.animation,
@@ -223,6 +243,8 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     scaleOut: "scaleOut 200ms ease",
     fadeIn: "fadeIn 200ms ease",
     fadeOut: "fadeOut 200ms ease",
+    openOffCanvas: "openOffCanvas 250ms ease forwards",
+    closeOffCanvas: "closeOffCanvas 250ms ease forwards",
   },
   screens: {
     xxs: "240px",
