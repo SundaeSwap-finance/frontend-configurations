@@ -243,6 +243,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     scaleOut: "scaleOut 200ms ease",
     fadeIn: "fadeIn 200ms ease",
     fadeOut: "fadeOut 200ms ease",
+    // Offcanvas
     openOffCanvas: "openOffCanvas 250ms ease forwards",
     closeOffCanvas: "closeOffCanvas 250ms ease forwards",
   },
