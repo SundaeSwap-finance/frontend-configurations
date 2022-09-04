@@ -206,6 +206,22 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
         opacity: 0,
       },
     },
+    openAccordion: {
+      from: {
+        height: 0,
+      },
+      to: {
+        height: "var(--radix-accordion-content-height)",
+      },
+    },
+    closeAccordion: {
+      from: {
+        height: "var(--radix-accordion-content-height)",
+      },
+      to: {
+        height: 0,
+      },
+    },
   },
   animation: {
     ...defaultTheme.animation,
@@ -246,6 +262,9 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     // Offcanvas
     openOffCanvas: "openOffCanvas 250ms ease forwards",
     closeOffCanvas: "closeOffCanvas 250ms ease forwards",
+    // Accordion
+    openAccordion: "openAccordion 250ms cubic-bezier(0.87, 0, 0.13, 1)",
+    closeAccordion: "closeAccordion 250ms cubic-bezier(0.87, 0, 0.13, 1)",
   },
   screens: {
     xxs: "240px",
