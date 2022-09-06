@@ -138,5 +138,7 @@ export const rules = {
   "one-var-declaration-per-line": ["error", "always"],
   ...(hasReact && {
     "react/self-closing-comp": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
   }),
 };
