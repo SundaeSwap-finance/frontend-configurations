@@ -11,7 +11,7 @@ if (hasJest) {
 if (hasNext) {
   extendList.push("next");
 } else if (hasReact) {
-  pluginList.push("react");
+  pluginList.push("react", "react-hooks");
 }
 
 module.exports = {
