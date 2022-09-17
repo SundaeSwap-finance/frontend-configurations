@@ -293,30 +293,30 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       900: "#0D0415",
       1000: "#202231",
     },
-    green: {
-      DEFAULT: "#00D018",
-      200: "#00B815",
-      300: "#00DE1A",
-    },
-    red: {
-      DEFAULT: "#EF2C2C",
-      200: "#D62727",
-      300: "#FC2D2D",
-    },
-    amber: {
-      DEFAULT: "#FFD740",
-      200: "#FFC400",
-      300: "#FF8F00",
-    },
-    blue: {
+    primary: {
       DEFAULT: "#0A93EC",
       200: "#0882D4",
       300: "#0A9AFA",
     },
-    purple: {
+    secondary: {
       DEFAULT: "#AA00DE",
       200: "#9700C4",
       300: "#B400EB",
+    },
+    success: {
+      DEFAULT: "#00D018",
+      200: "#00B815",
+      300: "#00DE1A",
+    },
+    error: {
+      DEFAULT: "#EF2C2C",
+      200: "#D62727",
+      300: "#FC2D2D",
+    },
+    warning: {
+      DEFAULT: "#FFD740",
+      200: "#FFC400",
+      300: "#FF8F00",
     },
   },
   fontSize: {
