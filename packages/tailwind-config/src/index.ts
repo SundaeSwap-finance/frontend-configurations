@@ -19,6 +19,11 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
   ...defaultTheme,
   keyframes: {
     ...defaultTheme.keyframes,
+    // Toast Progress Bar
+    "toast-progress-bar": {
+      "0%": { left: 0 },
+      "100%": { left: "-100%" },
+    },
     // Tooltip
     "slide-up-fade": {
       "0%": { opacity: "0", transform: "translateY(2px)" },
@@ -225,6 +230,8 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
   },
   animation: {
     ...defaultTheme.animation,
+    // Toast progress bar
+    "toast-progress-bar": "toast-progress-bar 6s linear forwards",
     // Tooltip
     "slide-up-fade": "slide-up-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
     "slide-right-fade": "slide-right-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
