@@ -255,6 +255,14 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     // Toast progress bar
     "toast-progress-bar": "toast-progress-bar 6s linear forwards",
     "toast-swipe-out": "toast-swipe-out 100ms ease-out forwards",
+    "toast-slide-in-from-bottom":
+      "toast-slide-in-from-bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+    "toast-slide-down-to-bottom":
+      "toast-slide-down-to-bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+    "toast-slide-in-from-right":
+      "toast-slide-in-from-right 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+    "toast-slide-out-to-right":
+      "toast-slide-out-to-right 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
     // Tooltip
     "slide-up-fade": "slide-up-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
     "slide-right-fade": "slide-right-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
