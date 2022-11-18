@@ -30,6 +30,22 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
         transform: `translateX(calc(100% + 1rem))`,
       },
     },
+    "toast-slide-in-from-bottom": {
+      "0%": { opacity: "0", transform: "translateY(10px)" },
+      "100%": { opacity: "1", transform: "translateY(0)" },
+    },
+    "toast-slide-down-to-bottom": {
+      "0%": { opacity: "1", transform: "translateY(0)" },
+      "100%": { opacity: "0", transform: "translateY(10px)" },
+    },
+    "toast-slide-in-from-right": {
+      "0%": { opacity: "0", transform: "translateX(10px)" },
+      "100%": { opacity: "1", transform: "translateX(0)" },
+    },
+    "toast-slide-out-to-right": {
+      "0%": { opacity: "1", transform: "translateX(0)" },
+      "100%": { opacity: "0", transform: "translateX(10px)" },
+    },
     // Tooltip
     "slide-up-fade": {
       "0%": { opacity: "0", transform: "translateY(2px)" },
