@@ -24,6 +24,12 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       "0%": { left: 0 },
       "100%": { left: "-100%" },
     },
+    "toast-swipe-out": {
+      "0%": { transform: "translateX(var(--radix-toast-swipe-end-x))" },
+      "100%": {
+        transform: `translateX(calc(100% + 1rem))`,
+      },
+    },
     // Tooltip
     "slide-up-fade": {
       "0%": { opacity: "0", transform: "translateY(2px)" },
@@ -232,6 +238,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     ...defaultTheme.animation,
     // Toast progress bar
     "toast-progress-bar": "toast-progress-bar 6s linear forwards",
+    "toast-swipe-out": "toast-swipe-out 100ms ease-out forwards",
     // Tooltip
     "slide-up-fade": "slide-up-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
     "slide-right-fade": "slide-right-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
