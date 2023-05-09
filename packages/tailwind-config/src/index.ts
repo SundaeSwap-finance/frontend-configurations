@@ -251,8 +251,8 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     },
     "bell-shake": {
       "0%": { transform: "rotate(0)" },
-      "15%": { transform: "rotate(4deg)" },
-      "30%": { transform: "rotate(-4deg)" },
+      "15%": { transform: "rotate(5deg)" },
+      "30%": { transform: "rotate(-5deg)" },
       "45%": { transform: "rotate(3deg)" },
       "60%": { transform: "rotate(-3deg)" },
       "75%": { transform: "rotate(2deg)" },
@@ -264,7 +264,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
   animation: {
     ...defaultTheme.animation,
     // bell shake
-    "bell-shake": "bell-shake 0.5s cubic-bezier(.36,.07,.19,.97) both",
+    "bell-shake": "bell-shake 1s cubic-bezier(.36,.07,.19,.97) both",
     // Toast progress bar
     "toast-progress-bar": "toast-progress-bar 6s linear forwards",
     "toast-swipe-out": "toast-swipe-out 100ms ease-out forwards",
