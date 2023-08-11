@@ -301,6 +301,8 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     "shadow-pulse": "shadow-pulse 0.3s forwards",
     // Shake
     shake: "shake 1s cubic-bezier(.36,.07,.19,.97) both",
+    // Spin (slow)
+    "spin-slow": "spin 5s linear infinite",
     // Navigation Menu
     enterFromRight: "enterFromRight 250ms ease",
     enterFromLeft: "enterFromLeft 250ms ease",
