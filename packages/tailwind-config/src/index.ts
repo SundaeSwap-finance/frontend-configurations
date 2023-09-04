@@ -346,6 +346,10 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       900: "#0D0415",
       1000: "#202231",
     },
+    candles: {
+      gain: "#24a69a",
+      loss: "#ee534f"
+    },
     primary: {
       DEFAULT: "#0A93EC",
       200: "#0882D4",
