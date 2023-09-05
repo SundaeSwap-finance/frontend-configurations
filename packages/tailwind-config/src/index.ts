@@ -346,10 +346,6 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       900: "#0D0415",
       1000: "#202231",
     },
-    candles: {
-      gain: "#24a69a",
-      loss: "#ee534f"
-    },
     primary: {
       DEFAULT: "#0A93EC",
       200: "#0882D4",
@@ -361,14 +357,14 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       300: "#B400EB",
     },
     success: {
-      DEFAULT: "#00D018",
-      200: "#00B815",
-      300: "#00DE1A",
+      DEFAULT: "#24a69a",
+      200: "#39aea4",
+      300: "#4fb7ae",
     },
     error: {
-      DEFAULT: "#EF2C2C",
-      200: "#D62727",
-      300: "#FC2D2D",
+      DEFAULT: "#ee534f",
+      200: "#ef6460",
+      300: "#f17572",
     },
     warning: {
       DEFAULT: "#FFD740",
