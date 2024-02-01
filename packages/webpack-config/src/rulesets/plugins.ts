@@ -73,7 +73,7 @@ export const getPlugins = (
     );
   }
 
-  if (withHMR) {
+  if (withHMR && !production) {
     plugins.push(new ReactRefreshWebpackPlugin(hmr));
   }
 
