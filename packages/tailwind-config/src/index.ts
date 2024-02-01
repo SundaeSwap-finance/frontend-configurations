@@ -344,7 +344,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       700: "#1F1928",
       800: "#110B1B",
       900: "#0D0415",
-      1000: "#202231",
+      1000: "#0F0518",
     },
     primary: {
       DEFAULT: "#0A93EC",
