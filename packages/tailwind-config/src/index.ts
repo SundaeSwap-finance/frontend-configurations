@@ -1,17 +1,19 @@
 import defaultTheme from "tailwindcss/defaultTheme";
-import type { TailwindPlugin } from "tailwindcss/plugin";
-import tailwindConfig from "tailwindcss/tailwind-config";
+import type {
+  CustomThemeConfig,
+  PluginsConfig,
+} from "tailwindcss/types/config";
 
-const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
+const theme: Partial<CustomThemeConfig> & {
   // For our specific keyframes, we have to overwrite the _keyframes_ property.
   // TailwindThemeAnimations officially only allows _opacity_ and _transform_ as keyframe values.
-  keyframes?: {
-    [key: string]: {
-      [key: string]: {
-        [key: string]: string | number;
-      };
-    };
-  };
+  // keyframes?: {
+  //   [key: string]: {
+  //     [key: string]: {
+  //       [key: string]: string | number;
+  //     };
+  //   };
+  // };
   configViewer?: {
     fonts?: string;
   };
@@ -21,7 +23,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     ...defaultTheme.keyframes,
     // Toast Progress Bar
     "toast-progress-bar": {
-      "0%": { left: 0 },
+      "0%": { left: "0" },
       "100%": { left: "-100%" },
     },
     "toast-swipe-out": {
@@ -90,12 +92,12 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     },
     // Collapsible
     "collapsible-open": {
-      "0%": { height: 0 },
+      "0%": { height: "0" },
       "100%": { height: "var(--radix-collapsible-content-height)" },
     },
     "collapsible-close": {
       "0%": { height: "var(--radix-collapsible-content-height)" },
-      "100%": { height: 0 },
+      "100%": { height: "0" },
     },
     // Loader
     "dot-flashing": {
@@ -140,102 +142,102 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
     enterFromRight: {
       from: {
         transform: "translateX(200px)",
-        opacity: 0,
+        opacity: "0",
       },
       to: {
         transform: "translateX(0)",
-        opacity: 1,
+        opacity: "1",
       },
     },
     enterFromLeft: {
       from: {
         transform: "translateX(-200px)",
-        opacity: 0,
+        opacity: "0",
       },
       to: {
         transform: "translateX(0)",
-        opacity: 1,
+        opacity: "1",
       },
     },
     exitToRight: {
       from: {
         transform: "translateX(0)",
-        opacity: 1,
+        opacity: "1",
       },
       to: {
         transform: "translateX(200px)",
-        opacity: 0,
+        opacity: "0",
       },
     },
     exitToLeft: {
       from: {
         transform: "translateX(0)",
-        opacity: 1,
+        opacity: "1",
       },
       to: {
         transform: "translateX(-200px)",
-        opacity: 0,
+        opacity: "0",
       },
     },
     scaleIn: {
       from: {
         transform: "rotateX(-30deg) scale(0.9)",
-        opacity: 0,
+        opacity: "0",
       },
       to: {
         transform: "rotateX(0deg) scale(1)",
-        opacity: 1,
+        opacity: "1",
       },
     },
     scaleOut: {
       from: {
         transform: "rotateX(0deg) scale(1)",
-        opacity: 1,
+        opacity: "1",
       },
       to: {
         transform: "rotateX(-10deg) scale(0.95)",
-        opacity: 0,
+        opacity: "0",
       },
     },
     fadeIn: {
       from: {
-        opacity: 0,
+        opacity: "0",
       },
       to: {
-        opacity: 1,
+        opacity: "1",
       },
     },
     fadeOut: {
       from: {
-        opacity: 1,
+        opacity: "1",
       },
       to: {
-        opacity: 0,
+        opacity: "0",
       },
     },
     openOffCanvas: {
       from: {
         transform: "translateX(100%)",
-        opacity: 0,
+        opacity: "0",
       },
       to: {
         transform: "translateX(-1.5rem)",
-        opacity: 1,
+        opacity: "1",
       },
     },
     closeOffCanvas: {
       from: {
         transform: "translateX(-1.5rem)",
-        opacity: 1,
+        opacity: "1",
       },
       to: {
         transform: "translateX(100%)",
-        opacity: 0,
+        opacity: "0",
       },
     },
     openAccordion: {
       from: {
-        height: 0,
+        height: "0",
       },
       to: {
         height: "var(--radix-accordion-content-height)",
@@ -246,7 +248,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
         height: "var(--radix-accordion-content-height)",
       },
       to: {
-        height: 0,
+        height: "0",
       },
     },
     "bell-shake": {
@@ -388,7 +390,7 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
   },
 };
 
-const plugins: TailwindPlugin[] = [
+const plugins: PluginsConfig[] = [
   require("tailwindcss-radix")(),
   require("tailwindcss-animation-delay"),
 ];
