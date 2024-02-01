@@ -9,6 +9,7 @@ import ESLintWebpackPlugin, {
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 
 type TPlugins =
   | CleanWebpackPlugin
@@ -16,7 +17,8 @@ type TPlugins =
   | ForkTsCheckerWebpackPlugin
   | ESLintWebpackPlugin
   | MiniCssExtractPlugin
-  | CopyPlugin;
+  | CopyPlugin
+  | ReactRefreshWebpackPlugin;
 
 export type TPluginOptions = {
   staticFolderName?: "string";
@@ -25,16 +27,22 @@ export type TPluginOptions = {
   html?: HtmlWebpackPlugin.Options;
   css?: MiniCssExtractPlugin.PluginOptions;
   eslint?: ESLintWebpackPluginOptions;
+  hmr?: ReactRefreshWebpackPlugin["options"];
 };
 
-export const getPlugins = ({
-  staticFolderName,
-  clean,
-  copy,
-  html,
-  css,
-  eslint,
-}: TPluginOptions = {}): TPlugins[] => {
+export const getPlugins = (
+  production: boolean,
+  {
+    staticFolderName,
+    clean,
+    copy,
+    html,
+    css,
+    eslint,
+    hmr,
+  }: TPluginOptions = {},
+  withHMR?: boolean
+): TPlugins[] => {
   const plugins: TPlugins[] = [
     new CleanWebpackPlugin(clean),
     new HtmlWebpackPlugin(
@@ -63,6 +71,10 @@ export const getPlugins = ({
         patterns: [{ from: staticFolderName, to: "static" }],
       })
     );
+  }
+
+  if (withHMR) {
+    plugins.push(new ReactRefreshWebpackPlugin(hmr));
   }
 
   return plugins;

@@ -4,7 +4,7 @@ import webpack from "webpack";
 import webpackDevServer from "webpack-dev-server";
 
 import { getPlugins, TPluginOptions } from "./rulesets/plugins";
-import { getScssRules } from "./rulesets/loaders";
+import { getScssRules, getTypescriptRules } from "./rulesets/loaders";
 
 // Export rulesets.
 export { getPlugins } from "./rulesets/plugins";
@@ -16,6 +16,7 @@ interface IBaseConfigArgs {
   verbose: boolean;
   plugins?: TPluginOptions;
   syncWasm?: boolean;
+  withHMR?: boolean;
 }
 
 // Export base config.
@@ -25,6 +26,7 @@ export const getBaseConfig = ({
   verbose = false,
   plugins,
   syncWasm,
+  withHMR = false,
 }: IBaseConfigArgs): webpack.Configuration => {
   const production = process.env.NODE_ENV === "production";
   const config: webpack.Configuration = {
@@ -40,10 +42,7 @@ export const getBaseConfig = ({
     },
     module: {
       rules: [
-        {
-          test: /\.tsx?$/,
-          loader: "ts-loader",
-        },
+        getTypescriptRules(production, withHMR),
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: "asset/resource",
@@ -78,7 +77,7 @@ export const getBaseConfig = ({
     resolve: {
       extensions: [".tsx", ".ts", ".js", ".scss"],
     },
-    plugins: getPlugins(plugins),
+    plugins: getPlugins(production, plugins, withHMR),
     devServer: production
       ? undefined
       : ({
