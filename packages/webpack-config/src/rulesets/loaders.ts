@@ -21,6 +21,7 @@ export const getScssRules = (
 export const getTypescriptRules = (production: boolean, withHMR?: boolean) => {
   const swcOptions: Options = {
     jsc: {
+      target: "es2020",
       transform: {
         react: {
           runtime: "automatic",
@@ -41,7 +42,7 @@ export const getTypescriptRules = (production: boolean, withHMR?: boolean) => {
 
   return {
     test: /\.(m?js|ts)x?$/,
-    exclude: /(node_modules)/,
+    exclude: /node_modules/,
     use: {
       loader: "swc-loader",
       options: swcOptions,

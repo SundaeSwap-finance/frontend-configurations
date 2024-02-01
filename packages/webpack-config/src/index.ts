@@ -81,6 +81,7 @@ export const getBaseConfig = ({
     devServer: production
       ? undefined
       : ({
+          hot: withHMR,
           static: path.resolve(process.cwd(), "dist"),
           devMiddleware: {
             publicPath: path.resolve(process.cwd(), "dist"),

@@ -1,6 +1,6 @@
 {
   "name": "@sundae/webpack-config",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "description": "Common webpack configurations for SundaeSwap projects.",
   "main": "dist/index.js",
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/eslint-config-sundae",
