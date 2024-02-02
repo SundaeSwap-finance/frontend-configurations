@@ -64,14 +64,21 @@ export const getPlugins = (
     ),
   ];
 
+  let copyPatterns: CopyPlugin.Pattern[];
   if (typeof staticFolderName === "string") {
-    plugins.push(
-      new CopyPlugin({
-        ...copy,
-        patterns: [{ from: staticFolderName, to: "static" }],
-      })
-    );
+    copy.patterns.push({ from: staticFolderName, to: "static" });
   }
+
+  if (copy.patterns) {
+    copyPatterns.concat(copy.patterns);
+  }
+
+  plugins.push(
+    new CopyPlugin({
+      ...copy,
+      patterns: copyPatterns,
+    })
+  );
 
   if (withHMR && !production) {
     plugins.push(new ReactRefreshWebpackPlugin(hmr));
