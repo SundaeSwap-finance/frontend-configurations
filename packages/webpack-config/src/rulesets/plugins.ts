@@ -64,7 +64,7 @@ export const getPlugins = (
     ),
   ];
 
-  let copyPatterns: CopyPlugin.Pattern[];
+  let copyPatterns: CopyPlugin.Pattern[] = [];
   if (typeof staticFolderName === "string") {
     copy.patterns.push({ from: staticFolderName, to: "static" });
   }
