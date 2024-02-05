@@ -66,19 +66,20 @@ export const getPlugins = (
 
   let copyPatterns: CopyPlugin.Pattern[] = [];
   if (typeof staticFolderName === "string") {
-    copy.patterns.push({ from: staticFolderName, to: "static" });
+    copyPatterns.push({ from: staticFolderName, to: "static" });
+  }
+  if (copy?.patterns?.length > 0) {
+    copyPatterns = copyPatterns.concat(copy.patterns);
   }
 
-  if (copy.patterns) {
-    copyPatterns.concat(copy.patterns);
+  if (copyPatterns.length) {
+    plugins.push(
+      new CopyPlugin({
+        ...copy,
+        patterns: copyPatterns,
+      })
+    );
   }
-
-  plugins.push(
-    new CopyPlugin({
-      ...copy,
-      patterns: copyPatterns,
-    })
-  );
 
   if (withHMR && !production) {
     plugins.push(new ReactRefreshWebpackPlugin(hmr));
