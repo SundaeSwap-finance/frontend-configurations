@@ -369,6 +369,11 @@ const theme: Omit<tailwindConfig.TailwindTheme, "keyframes"> & {
       200: "#FFC400",
       300: "#FF8F00",
     },
+    cta: {
+      DEFAULT: "#3A7D26",
+      200: "#346922",
+      300: "#2E5F1A",
+    },
   },
   fontSize: {
     ...defaultTheme.fontSize,
