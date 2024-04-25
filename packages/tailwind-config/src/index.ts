@@ -21,6 +21,14 @@ const theme: Partial<CustomThemeConfig> & {
   ...defaultTheme,
   keyframes: {
     ...defaultTheme.keyframes,
+    "marquee-left": {
+      from: { transform: "translateX(0)" },
+      to: { transform: "translateX(calc(-100% - var(--gap)))" },
+    },
+    "marquee-up": {
+      from: { transform: "translateY(0)" },
+      to: { transform: "translateY(calc(-100% - var(--gap)))" },
+    },
     // Toast Progress Bar
     "toast-progress-bar": {
       "0%": { left: "0" },
@@ -265,6 +273,8 @@ const theme: Partial<CustomThemeConfig> & {
   },
   animation: {
     ...defaultTheme.animation,
+    "marquee-left": "marquee-left var(--duration, 40s) linear infinite",
+    "marquee-up": "marquee-up var(--duration, 40s) linear infinite",
     // bell shake
     "bell-shake": "bell-shake 1s cubic-bezier(.36,.07,.19,.97) both",
     // Toast progress bar
