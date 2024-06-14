@@ -7,7 +7,7 @@ This is a base shared `i18n.ts` which all other `i18n.ts`'s can require as a plu
 To install, run:
 
 ```
-yarn add i18next react-i18next @sundaeswap/i18n-config -D
+bun run add i18next react-i18next @sundaeswap/i18n-config -D
 ```
 
 And then from your root project's `i18n.ts` file, _init_ the base config like this:

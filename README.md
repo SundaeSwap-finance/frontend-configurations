@@ -21,18 +21,18 @@ yarn
 
 ### Build
 
-In order to build the packages, run `yarn build` inside the `root` directory.
+In order to build the packages, run `bun run build` inside the `root` directory.
 
 ## Release
 
 The current pipeline will release every unpublished package based on the version field in the ./package.json file. The packages are published in the sundae-shared AWS CodeArtifact repository. To bump the package versions in the project root:
 
 ```shell
-yarn bump
+bun run bump
 ```
 
 After that commit & push the changes and the pipeline should release the packages soon. You can also manually publish a release by changing the version number in your preferred package, and then running from the root directory:
 
 ```shell
-yarn release
+bun run release
 ```

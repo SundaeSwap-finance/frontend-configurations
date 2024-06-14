@@ -7,7 +7,7 @@ These are base shared `prettier.config.js` configs to use in your downstream pro
 To install, run the following in your project root:
 
 ```
-yarn add prettier @sundaeswap/prettier-config -D
+bun run add prettier @sundaeswap/prettier-config -D
 ```
 
 Within your `prettier.config.js` file, extend this config via:

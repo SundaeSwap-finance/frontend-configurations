@@ -7,7 +7,7 @@ This is a base shared `tailwind-config.js` which all other `tailwind-config.js`'
 To install, run:
 
 ```
-yarn add tailwindcss tailwindcss-animation-delay tailwindcss-radix @sundaeswap/tailwind-config -D
+bun run add tailwindcss tailwindcss-animation-delay tailwindcss-radix @sundaeswap/tailwind-config -D
 ```
 
 And then from your root project's `tailwind.config.js` file, extend the base theme like this:

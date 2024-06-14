@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/tailwind-config",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A generic tailwind config all other tailwind-configs can use as plugin.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -24,12 +24,12 @@
     "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
     "types": "tsc --project ./tsconfig.json",
-    "build": "yarn clean && yarn types && yarn build:esm && yarn build:cjs",
-    "watch": "yarn clean && yarn build && yarn build:esm --watch",
+    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs",
+    "watch": "bun run clean && bun run build && bun run build:esm --watch",
     "preview": "tailwind-config-viewer -o",
     "clean": "rm -rf ./dist",
-    "prepublishOnly": "yarn run build",
-    "test": "yarn run build"
+    "prepublishOnly": "bun run run build",
+    "test": "bun run run build"
   },
   "dependencies": {
     "tailwindcss-animation-delay": "^1",
@@ -41,8 +41,8 @@
   },
   "devDependencies": {
     "@types/tailwindcss": "^3.0.10",
-    "tailwind-config-viewer": "^1.7.0",
-    "prettier-plugin-tailwindcss": "^0.1.10"
+    "prettier-plugin-tailwindcss": "^0.1.10",
+    "tailwind-config-viewer": "^1.7.0"
   },
   "gitHead": "5e9c25ace88c289a1e61a9185d121cf6c0099029"
 }

@@ -15,17 +15,17 @@
   ],
   "type": "module",
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "yarn lint --fix"
+    "*.{js,jsx,ts,tsx}": "bun run lint --fix"
   },
   "scripts": {
     "lint": "eslint --ignore-pattern '**/dist/**'",
-    "lint:fix": "yarn lint --fix",
+    "lint:fix": "bun run lint --fix",
     "clean": "lerna run clean",
     "build": "lerna run build --scope '@sundaeswap/*'",
     "bump": "lerna version patch --no-git-tag-version --yes",
     "lint-staged": "lint-staged",
     "prepare": "husky install",
-    "release": "yarn build && lerna publish from-package -y",
+    "release": "bun run build && lerna publish from-package -y",
     "canary": "lerna publish from-package -y --canary",
     "test": "lerna run test",
     "tsc": "tsc -b"

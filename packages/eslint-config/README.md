@@ -6,7 +6,7 @@ These are base shared `.eslintrc.json`s from which all other `.eslintrc.json`'s 
 To install, run the following in your project root:
 
 ```
-yarn add @sundaeswap/eslint-config -D
+bun run add @sundaeswap/eslint-config -D
 ```
 
 Within your `.eslintrc.js` file, extend this config via:
