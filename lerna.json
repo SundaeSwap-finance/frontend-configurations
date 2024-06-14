@@ -3,7 +3,7 @@
     "packages/*"
   ],
   "useWorkspaces": true,
-  "npmClient": "yarn",
+  "npmClient": "bun",
   "ignoreChanges": [
     "**/__tests__/**",
     "**/*.md",
