@@ -10,28 +10,14 @@ permissions:
   contents: read # required to checkout the code from the repo
 
 jobs:
-  PublishPackage-OIDC:
+  Publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      
+      # Install Dependencies
+      - run: bun install
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::320450105600:role/GitHubActionRole
-          role-duration-seconds: 900 # the ttl of the session, in seconds.
-          aws-region: us-east-2 # use your region here.
-
-      - name: CodeArtifact login
-        run: aws codeartifact login --tool npm --repository ui --domain sundae --domain-owner 320450105600
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Publish packages
-        run: yarn release
+      # Publish
+      - run: bun release
