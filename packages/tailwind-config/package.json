@@ -28,8 +28,8 @@
     "watch": "bun run clean && bun run build && bun run build:esm --watch",
     "preview": "tailwind-config-viewer -o",
     "clean": "rm -rf ./dist",
-    "prepublishOnly": "bun run run build",
-    "test": "bun run run build"
+    "prepublishOnly": "bun run build",
+    "test": "bun run build"
   },
   "dependencies": {
     "tailwindcss-animation-delay": "^1",
