@@ -28,7 +28,6 @@
     "watch": "bun run clean && bun run build && bun run build:esm --watch",
     "preview": "tailwind-config-viewer -o",
     "clean": "rm -rf ./dist",
-    "prepublishOnly": "bun run build",
     "test": "bun run build"
   },
   "dependencies": {
@@ -36,7 +35,7 @@
     "tailwindcss-radix": "^2"
   },
   "peerDependencies": {
-    "prettier": "^2",
+    "prettier": "^3",
     "tailwindcss": "^3"
   },
   "devDependencies": {

@@ -34,7 +34,6 @@
     "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs",
     "watch": "bun run clean && bun run build && bun run build:esm --watch",
     "clean": "rm -rf ./dist",
-    "prepublishOnly": "bun run build",
     "test": "bun run build"
   },
   "dependencies": {
