@@ -37,6 +37,6 @@ jobs:
 
       # Create Release
       - name: Publish
-        run: bun publish
+        run: bun run publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
