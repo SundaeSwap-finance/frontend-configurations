@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "target": "ES2015",
+    "target": "ES2020",
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
@@ -15,11 +15,5 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "allowJs": false
-  },
-  "ts-node": {
-    "require": ["tsconfig-paths/register"],
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
   }
 }

@@ -3,7 +3,7 @@ import type { Options } from "@swc/core";
 
 export const getScssRules = (
   sourcemap: boolean = true,
-  allowModules: boolean = true
+  allowModules: boolean = true,
 ) => [
   MiniCssExtractPlugin.loader,
   {

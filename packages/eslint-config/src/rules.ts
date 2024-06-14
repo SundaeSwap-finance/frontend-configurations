@@ -1,6 +1,7 @@
-import { hasReact } from "../utils.js";
+import { ESLint } from "eslint";
+import { hasReact } from "./utils.js";
 
-export const rules = {
+export const rules: ESLint.ConfigData["rules"] = {
   "array-callback-return": "warn",
   "default-case": ["warn", { commentPattern: "^no default$" }],
   "dot-location": ["warn", "property"],

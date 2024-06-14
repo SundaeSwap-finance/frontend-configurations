@@ -12,8 +12,8 @@ export * from "./rulesets/loaders.js";
 
 interface IBaseConfigArgs {
   useCSSModules: boolean;
-  stringReplaceRules: Record<string, unknown> | undefined;
-  verbose: boolean;
+  stringReplaceRules?: Record<string, unknown> | undefined;
+  verbose?: boolean;
   plugins?: TPluginOptions;
   syncWasm?: boolean;
   withHMR?: boolean;

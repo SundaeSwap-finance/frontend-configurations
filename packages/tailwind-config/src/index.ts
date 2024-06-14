@@ -4,13 +4,17 @@ import type { ThemeConfig } from "tailwindcss/types/config.js";
 import { colors } from "./colors.js";
 import { fontFamily } from "./fontFamily.js";
 import { keyFrames } from "./keyFrames.js";
-import { plugins } from "./plugins.js";
 
-interface SundaeSwapTheme extends Omit<ThemeConfig, "colors"> {
+export * from "./colors.js";
+export * from "./fontFamily.js";
+export * from "./keyFrames.js";
+export * from "./plugins.js";
+
+interface ISundaeSwapTheme extends Omit<ThemeConfig, "colors"> {
   colors: typeof colors;
 }
 
-const theme: Partial<SundaeSwapTheme> & {
+export const theme: Partial<ISundaeSwapTheme> & {
   // For our specific keyframes, we have to overwrite the _keyframes_ property.
   // TailwindThemeAnimations officially only allows _opacity_ and _transform_ as keyframe values.
   // keyframes?: {
@@ -110,5 +114,3 @@ const theme: Partial<SundaeSwapTheme> & {
       "https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&display=swap",
   },
 };
-
-export { theme, colors, plugins };

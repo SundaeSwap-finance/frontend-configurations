@@ -41,26 +41,26 @@ export const getPlugins = (
     eslint,
     hmr,
   }: TPluginOptions = {},
-  withHMR?: boolean
+  withHMR?: boolean,
 ): TPlugins[] => {
   const plugins: TPlugins[] = [
     new CleanWebpackPlugin(clean),
     new HtmlWebpackPlugin(
       html ?? {
         template: "./src/index.html",
-      }
+      },
     ),
     new ForkTsCheckerWebpackPlugin(),
     new ESLintWebpackPlugin(
       eslint ?? {
         extensions: [".tsx", ".ts"],
         exclude: "node_modules",
-      }
+      },
     ),
     new MiniCssExtractPlugin(
       css ?? {
         filename: "[name].[contenthash].css",
-      }
+      },
     ),
   ];
 
@@ -77,7 +77,7 @@ export const getPlugins = (
       new CopyPlugin({
         ...copy,
         patterns: copyPatterns,
-      })
+      }),
     );
   }
 

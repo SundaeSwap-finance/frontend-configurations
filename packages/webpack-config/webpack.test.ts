@@ -1,8 +1,5 @@
-const { getBaseConfig } = require("./src");
+import { getBaseConfig } from "./src/index";
 
-module.exports = getBaseConfig({
+export default getBaseConfig({
   useCSSModules: true,
-  stringReplace: {
-    API_URL: "http://localhost:3000/graphql",
-  },
 });

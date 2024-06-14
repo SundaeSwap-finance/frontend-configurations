@@ -2,10 +2,17 @@
   "name": "@sundaeswap/i18n-config",
   "version": "2.1.0",
   "description": "A generic i18n config all other i18n-configs can use as plugin.",
-  "main": "dist/esm/index.js",
+  "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -25,12 +32,8 @@
     "test": "yarn run build"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
-    "eslint": "^8.14.0",
     "i18next": "^21.8.10",
     "i18next-browser-languagedetector": "^6.1.4",
-    "prettier": "^2.6.2",
     "react-i18next": "^11.17.2",
     "storybook-react-i18next": "^1.1.2"
   },

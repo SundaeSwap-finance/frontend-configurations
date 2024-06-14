@@ -8,7 +8,7 @@ import { i18nLangDetectionConfig } from "./language-detector.js";
 const i18next = i18nextPackage.use(initReactI18next).use(LanguageDetector);
 
 const i18nDefaultOptions = (
-  supportedLngs?: TSupportedLocale[]
+  supportedLngs?: TSupportedLocale[],
 ): InitOptions => ({
   interpolation: { escapeValue: false },
   fallbackLng: "en",
