@@ -35,6 +35,8 @@ export const theme: Partial<ISundaeSwapTheme> & {
   },
   animation: {
     ...defaultTheme.animation,
+    "marquee-left": "marquee-left var(--duration, 40s) linear infinite",
+    "marquee-up": "marquee-up var(--duration, 40s) linear infinite",
     // bell shake
     "bell-shake": "bell-shake 1s cubic-bezier(.36,.07,.19,.97) both",
     // Toast progress bar
