@@ -6,14 +6,14 @@ This is a utility libary for quickly creating `webpack.config.js` files in downs
 To install, run:
 
 ```
-yarn add @sundae/webpack-config webpack webpack-cli -D
+yarn add @sundaeswap/webpack-config webpack webpack-cli -D
 ```
 
 And then from your root project's `webpack.config.js` file, utilize standard base rulesets:
 
 ```js
 const { merge } = require("webpack-merge");
-const { getBaseConfig } = require("@sundae/webpack-config");
+const { getBaseConfig } = require("@sundaeswap/webpack-config");
 
 module.exports = merge(
   getBaseConfig({

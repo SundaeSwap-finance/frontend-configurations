@@ -7,7 +7,7 @@ This is a base shared `i18n.ts` which all other `i18n.ts`'s can require as a plu
 To install, run:
 
 ```
-yarn add i18next react-i18next @sundae/i18n-config -D
+yarn add i18next react-i18next @sundaeswap/i18n-config -D
 ```
 
 And then from your root project's `i18n.ts` file, _init_ the base config like this:
@@ -16,7 +16,7 @@ And then from your root project's `i18n.ts` file, _init_ the base config like th
 import { InitOptions } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import resourcesToBackend from "i18next-resources-to-backend";
-import { i18next, i18nDefaultOptions } from "@sundae/i18n-config";
+import { i18next, i18nDefaultOptions } from "@sundaeswap/i18n-config";
 
 // in case you want to extend the default options
 const options: InitOptions = {
@@ -62,7 +62,7 @@ In case you're running an app that's using `i18n`, make sure to properly set up 
 
 ```js
 // .storybook/i18next.js
-import { i18next, i18nDefaultOptions } from "@sundae/i18n-config";
+import { i18next, i18nDefaultOptions } from "@sundaeswap/i18n-config";
 
 const supportedLngs = ["en", "fr"];
 const options = { ...i18nDefaultOptions, supportedLngs };

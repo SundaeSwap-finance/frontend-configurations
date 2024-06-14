@@ -3,17 +3,17 @@ import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import webpack from "webpack";
 import webpackDevServer from "webpack-dev-server";
 
-import { getPlugins, TPluginOptions } from "./rulesets/plugins";
-import { getScssRules, getTypescriptRules } from "./rulesets/loaders";
+import { getPlugins, TPluginOptions } from "./rulesets/plugins.js";
+import { getScssRules, getTypescriptRules } from "./rulesets/loaders.js";
 
 // Export rulesets.
-export { getPlugins } from "./rulesets/plugins";
-export * from "./rulesets/loaders";
+export { getPlugins } from "./rulesets/plugins.js";
+export * from "./rulesets/loaders.js";
 
 interface IBaseConfigArgs {
   useCSSModules: boolean;
-  stringReplaceRules: Record<string, unknown> | undefined;
-  verbose: boolean;
+  stringReplaceRules?: Record<string, unknown> | undefined;
+  verbose?: boolean;
   plugins?: TPluginOptions;
   syncWasm?: boolean;
   withHMR?: boolean;

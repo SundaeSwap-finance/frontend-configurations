@@ -1,7 +1,6 @@
 {
   "packages": [
-    "packages/*",
-    "apps/*"
+    "packages/*"
   ],
   "useWorkspaces": true,
   "npmClient": "yarn",
@@ -12,9 +11,8 @@
   ],
   "command": {
     "publish": {
-      "message": "chore(release): publish",
-      "registry": "https://sundae-320450105600.d.codeartifact.us-east-2.amazonaws.com/npm/ui/"
+      "message": "chore(release): publish"
     }
   },
-  "version": "1.6.1"
+  "version": "independent"
 }
