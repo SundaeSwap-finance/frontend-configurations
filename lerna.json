@@ -1,9 +1,8 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "useNx": true,
-  "useWorkspaces": true,
   "version": "independent",
-  "npmClient": "yarn",
+  "npmClient": "bun",
   "ignoreChanges": [
     "**/__tests__/**",
     "**/__fixtures__/**",
