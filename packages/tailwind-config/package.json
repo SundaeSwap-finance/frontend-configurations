@@ -1,38 +1,46 @@
 {
-  "name": "@sundae/tailwind-config",
-  "version": "1.7.11",
+  "name": "@sundaeswap/tailwind-config",
+  "version": "2.0.0",
   "description": "A generic tailwind config all other tailwind-configs can use as plugin.",
-  "main": "dist/index.js",
+  "main": "dist/esm/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/tailwind-config",
   "scripts": {
-    "build": "yarn run clean && yarn run compile",
-    "dev": "tsc -p tsconfig.json --watch",
+    "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
+    "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
+    "types": "tsc --project ./tsconfig.json",
+    "build": "yarn clean && yarn types && yarn build:esm && yarn build:cjs",
+    "watch": "yarn clean && yarn build && yarn build:esm --watch",
     "preview": "tailwind-config-viewer -o",
     "clean": "rm -rf ./dist",
-    "compile": "tsc -p tsconfig.json",
     "prepublishOnly": "yarn run build",
     "test": "yarn run build"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
-    "eslint": "^8",
-    "prettier": "^2",
-    "prettier-plugin-tailwindcss": "^0.1.10"
-  },
-  "peerDependencies": {
-    "eslint": "^8",
-    "prettier": "^2",
-    "tailwindcss": "^3",
     "tailwindcss-animation-delay": "^1",
     "tailwindcss-radix": "^2"
   },
+  "peerDependencies": {
+    "prettier": "^2",
+    "tailwindcss": "^3"
+  },
   "devDependencies": {
+    "eslint": "^8",
+    "prettier": "^2",
     "@types/tailwindcss": "^3.0.10",
-    "tailwind-config-viewer": "^1.7.0"
+    "cross-env": "^7.0.3",
+    "tailwind-config-viewer": "^1.7.0",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "prettier-plugin-tailwindcss": "^0.1.10"
   },
   "gitHead": "5e9c25ace88c289a1e61a9185d121cf6c0099029"
 }

@@ -7,20 +7,20 @@ This is a base shared `tailwind-config.js` which all other `tailwind-config.js`'
 To install, run:
 
 ```
-yarn add tailwindcss tailwindcss-animation-delay tailwindcss-radix @sundae/tailwind-config -D
+yarn add tailwindcss tailwindcss-animation-delay tailwindcss-radix @sundaeswap/tailwind-config -D
 ```
 
 And then from your root project's `tailwind.config.js` file, extend the base theme like this:
 
 ```js
-const { plugins, theme } = require("@sundae/tailwind-config");
+const { plugins, theme } = require("@sundaeswap/tailwind-config");
 
 module.exports = {
   content: [
     "./src/components/**/*.tsx",
 
-    // Make sure to include @sundae/ui-toolkit if using.
-    "./node_modules/@sundae/ui-toolkit/**/*",
+    // Make sure to include @sundaeswap/ui-toolkit if using.
+    "./node_modules/@sundaeswap/ui-toolkit/**/*",
   ],
   theme: {
     ...theme,

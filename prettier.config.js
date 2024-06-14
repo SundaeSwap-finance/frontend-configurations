@@ -1,4 +1,4 @@
-const prettierConfig = require("@sundae/prettier-config");
+const prettierConfig = require("@sundaeswap/prettier-config");
 
 module.exports = {
   ...prettierConfig,

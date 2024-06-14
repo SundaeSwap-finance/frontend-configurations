@@ -1,22 +1,30 @@
 {
-  "name": "@sundae/jest-config",
-  "version": "1.6.0",
+  "name": "@sundaeswap/jest-config",
+  "version": "2.0.0",
   "description": "basic jest config options for SundaeSwap projects.",
   "keywords": [
     "jest"
   ],
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/jest-config",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/esm/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist",
     "package.json"
   ],
   "scripts": {
-    "build": "yarn run clean && yarn run compile",
-    "dev": "yarn run clean && tsc -p tsconfig.json --watch",
+    "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
+    "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
+    "types": "tsc --project ./tsconfig.json",
+    "build": "yarn clean && yarn types && yarn build:esm && yarn build:cjs",
+    "watch": "yarn clean && yarn build && yarn build:esm --watch",
     "clean": "rm -rf ./dist",
-    "compile": "tsc -p tsconfig.json",
     "prepublishOnly": "yarn run build",
     "test": "yarn run build"
   },

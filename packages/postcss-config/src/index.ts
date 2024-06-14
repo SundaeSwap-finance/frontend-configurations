@@ -10,6 +10,12 @@ export const getConfig = ({
   return {
     ident: "postcss",
     syntax: useScss ? "postcss-scss" : "postcss-safe-parser",
-    plugins: ["postcss-preset-env", normalize(), require("tailwindcss")],
+    plugins: {
+      "postcss-preset-env": {},
+      normalize,
+      tailwindcss: {},
+      autoprefixer: {},
+      ...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {}),
+    },
   };
 };

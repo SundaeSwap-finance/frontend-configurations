@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ["@sundae/eslint-config"],
+  extends: ["@sundaeswap/eslint-config"],
 };

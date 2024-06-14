@@ -1,5 +1,5 @@
-import { rules } from "./rules";
-import { hasNext, hasJest, hasReact } from "./utils";
+import { rules } from "./rules/index.js";
+import { hasNext, hasJest, hasReact } from "./utils.js";
 
 const pluginList = ["import", "@typescript-eslint", "prettier"];
 const extendList = ["prettier"];
@@ -14,7 +14,7 @@ if (hasNext) {
   pluginList.push("react", "react-hooks");
 }
 
-module.exports = {
+export default {
   parser: "@typescript-eslint/parser",
   plugins: pluginList,
   extends: extendList,

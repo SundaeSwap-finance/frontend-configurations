@@ -1,4 +1,4 @@
-import { hasReact } from "../utils";
+import { hasReact } from "../utils.js";
 
 export const rules = {
   "array-callback-return": "warn",
