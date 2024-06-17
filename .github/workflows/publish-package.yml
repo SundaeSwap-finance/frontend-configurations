@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
       - uses: actions/setup-node@v3
-      
+
       # Install Dependencies
       - run: bun install --frozen-lockfile
 
@@ -30,10 +30,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Bump Versions (reinstate after release)
-      # - name: Bump versions
-      #   run: bun version
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Bump versions
+        run: bun version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Create Release
       - name: Publish
