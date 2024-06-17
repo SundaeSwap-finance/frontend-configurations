@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/babel-preset",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "The standard babel preset for building SundaeSwap TypeScript libraries.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -40,6 +40,7 @@
     "@babel/core": "^7.24.7",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/preset-env": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7"
+    "@babel/preset-typescript": "^7.24.7",
+    "cross-env": "^7.0.3"
   }
 }
