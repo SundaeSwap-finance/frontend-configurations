@@ -7,23 +7,21 @@ const config: ConfigFunction = (api) => {
     plugins: ["@babel/plugin-proposal-class-properties"],
     env: {
       esmUnbundled: {
-        presets: [
-          "@babel/preset-typescript",
-          "@babel/plugin-transform-react-jsx",
-        ],
+        plugins: ["@babel/plugin-transform-react-jsx"],
+        presets: ["@babel/preset-typescript"],
       },
       esmBundled: {
+        plugins: ["@babel/plugin-transform-react-jsx"],
         presets: [
           ["@babel/env", { targets: "> 0.25%, not dead" }],
           "@babel/preset-typescript",
-          "@babel/plugin-transform-react-jsx",
         ],
       },
       cjs: {
+        plugins: ["@babel/plugin-transform-react-jsx"],
         presets: [
           ["@babel/env", { modules: "commonjs" }],
           "@babel/preset-typescript",
-          "@babel/plugin-transform-react-jsx",
         ],
       },
     },

@@ -1,11 +1,11 @@
 {
   "name": "@sundaeswap/babel-preset",
   "version": "2.0.4",
-  "description": "The standard babel preset for building SundaeSwap TypeScript libraries.",
+  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/babel-preset",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
   "type": "module",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
@@ -13,18 +13,18 @@
       "types": "./dist/types/index.d.ts"
     }
   },
+  "description": "The standard babel preset for building SundaeSwap TypeScript libraries.",
   "files": [
     "dist",
     "package.json"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "babel",
     "babel-preset"
   ],
-  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/babel-preset",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs",
     "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
@@ -38,11 +38,9 @@
     "@babel/cli": "^7.24.7",
     "@babel/core": "^7.24.7",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-transform-react-jsx": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
     "cross-env": "^7.0.3"
-  },
-  "devDependencies": {
-    "@babel/plugin-transform-react-jsx": "^7.24.7"
   }
 }
