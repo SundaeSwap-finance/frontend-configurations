@@ -40,8 +40,8 @@
   },
   "devDependencies": {
     "@types/tailwindcss": "^3.0.10",
-    "prettier-plugin-tailwindcss": "^0.1.10",
-    "tailwind-config-viewer": "^1.7.0"
+    "tailwind-config-viewer": "^1.7.0",
+    "@sundaeswap/babel-preset": "workspace:*"
   },
   "gitHead": "5e9c25ace88c289a1e61a9185d121cf6c0099029"
 }

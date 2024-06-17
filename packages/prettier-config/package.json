@@ -32,5 +32,8 @@
   "types": "dist/types/index.d.ts",
   "dependencies": {
     "prettier": "^3.3.2"
+  },
+  "devDependencies": {
+    "@sundaeswap/babel-preset": "workspace:*"
   }
 }

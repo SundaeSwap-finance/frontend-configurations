@@ -43,6 +43,9 @@
     "postcss-safe-parser": "^6.0.0",
     "postcss-scss": "^4.0.4"
   },
+  "devDependencies": {
+    "@sundaeswap/babel-preset": "workspace:*"
+  },
   "peerDependencies": {
     "tailwindcss": "^3.0.24"
   }

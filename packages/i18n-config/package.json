@@ -30,6 +30,9 @@
     "clean": "rm -rf ./dist",
     "test": "bun run build"
   },
+  "devDependencies": {
+    "@sundaeswap/babel-preset": "workspace:*"
+  },
   "dependencies": {
     "i18next": "^21.8.10",
     "i18next-browser-languagedetector": "^6.1.4",
