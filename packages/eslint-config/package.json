@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/eslint-config",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "eslint config from which all other eslint-configs inherit from.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -53,7 +53,7 @@
   },
   "gitHead": "5e9c25ace88c289a1e61a9185d121cf6c0099029",
   "devDependencies": {
-    "globals": "^15.4.0",
-    "@sundaeswap/babel-preset": "workspace:*"
+    "@sundaeswap/babel-preset": "workspace:*",
+    "globals": "^15.4.0"
   }
 }

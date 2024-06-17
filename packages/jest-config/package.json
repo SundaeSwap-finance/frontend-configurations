@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/jest-config",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "basic jest config options for SundaeSwap projects.",
   "keywords": [
     "jest"
@@ -40,7 +40,7 @@
     "ts-jest": "^28.0.5"
   },
   "devDependencies": {
-    "@types/jest": "^28.1.4",
-    "@sundaeswap/babel-preset": "workspace:*"
+    "@sundaeswap/babel-preset": "workspace:*",
+    "@types/jest": "^28.1.4"
   }
 }

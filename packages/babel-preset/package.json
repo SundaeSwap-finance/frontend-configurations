@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/babel-preset",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "The standard babel preset for building SundaeSwap TypeScript libraries.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",

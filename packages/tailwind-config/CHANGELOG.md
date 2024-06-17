@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.2 (2024-06-17)
+
+### Bug Fixes
+
+- collapsible animation ([5d26bb3](https://github.com/sundaeswap-finance/frontend-configurations/commit/5d26bb32a76c71edb0a9dd196487385c84595abc))
+- duplicate replace ([806626d](https://github.com/sundaeswap-finance/frontend-configurations/commit/806626de43e7ab56b579a248c082753d804f3c2a))
+- offcanvas animation ([b29db55](https://github.com/sundaeswap-finance/frontend-configurations/commit/b29db55db91ecdbad89319ffa66c4a4bef517858))
+- openOffCanvas animation ([2961c76](https://github.com/sundaeswap-finance/frontend-configurations/commit/2961c76370963ebd34dd2b26f8aaa0c18a32cd4f))
+- openOffCanvas animation ([5695102](https://github.com/sundaeswap-finance/frontend-configurations/commit/5695102acaab93f02dc71046c0dcd72b5403704b))
+
+### Features
+
+- add toast progress bar animation ([3abcfde](https://github.com/sundaeswap-finance/frontend-configurations/commit/3abcfdedb7df120b60f609d4aa3ea4da0cd1541c))
+- add toast slide animations ([573a4a9](https://github.com/sundaeswap-finance/frontend-configurations/commit/573a4a94b724b73f4bd2364349c3384b837867ba))
+- add toast slide animations ([e3e9843](https://github.com/sundaeswap-finance/frontend-configurations/commit/e3e98432ae2293861510fec3a11d2581c5584b8c))
+- add toast swipe animation ([8b18dcc](https://github.com/sundaeswap-finance/frontend-configurations/commit/8b18dcc71505c40adfda4fd1bc0ee968a0eab70c))
+
+# 1.6.0 (2022-07-02)
+
+### Bug Fixes
+
+- cleanup ([04ae9c1](https://github.com/sundaeswap-finance/frontend-configurations/commit/04ae9c17650cfef9c9138b5914edced1f281387e))
+- **eslint:** set main to dist/index.js, eslint config ([f6578a7](https://github.com/sundaeswap-finance/frontend-configurations/commit/f6578a70de716375055823a9a13aac07db430e3a))
+- pacakage version ([681d8f4](https://github.com/sundaeswap-finance/frontend-configurations/commit/681d8f469ca86c1fe53a7df95fa1c1ec53b40d11))
+
+### Features
+
+- **tailwind-config:** add `xxs` as fontSize ([d0b8483](https://github.com/sundaeswap-finance/frontend-configurations/commit/d0b84839bdc131848aa45d1120cf092362d16906))
+- **tailwind-config:** add ui-toolkit config to default ([cc781fb](https://github.com/sundaeswap-finance/frontend-configurations/commit/cc781fb0347caf8513ce075590c91cc8d7babaf1))
+
 # 1.7.0 (2022-09-17)
 
 ### Refactors

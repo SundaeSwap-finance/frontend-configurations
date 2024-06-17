@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/webpack-config",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "Common webpack configurations for SundaeSwap projects.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -56,10 +56,10 @@
     "swc-loader": "^0.2.3"
   },
   "devDependencies": {
+    "@sundaeswap/babel-preset": "workspace:*",
     "@types/react-dev-utils": "^9.0.11",
     "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0",
-    "@sundaeswap/babel-preset": "workspace:*"
+    "webpack-cli": "^4.10.0"
   },
   "peerDependencies": {
     "webpack": "^5.73.0",
