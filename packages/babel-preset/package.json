@@ -26,11 +26,10 @@
   ],
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/babel-preset",
   "scripts": {
-    "lint": "eslint --config ../../eslint.config.js .",
+    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs",
     "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
     "types": "tsc --project ./tsconfig.json",
-    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs",
     "watch": "bun run clean && bun run build && bun run build:esm --watch",
     "clean": "rm -rf ./dist",
     "test": "bun run build"
