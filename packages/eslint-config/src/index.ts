@@ -1,9 +1,9 @@
-import globals from "globals";
 import type { Linter } from "eslint";
-import configPrettier from "eslint-plugin-prettier/recommended";
 import pluginJest from "eslint-plugin-jest";
+import configPrettier from "eslint-plugin-prettier/recommended";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
 import configTs from "typescript-eslint";
 
 import { rules } from "./rules.js";

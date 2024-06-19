@@ -13,6 +13,10 @@
       "types": "./dist/types/index.d.ts"
     }
   },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=18"
+  },
   "files": [
     "dist",
     "package.json"
