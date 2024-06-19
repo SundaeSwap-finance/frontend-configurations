@@ -104,3 +104,5 @@ export const theme: Partial<ISundaeSwapTheme> = {
       "https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&display=swap",
   },
 };
+
+export default theme;

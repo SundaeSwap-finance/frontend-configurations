@@ -1,21 +1,22 @@
-import normalize from "postcss-normalize";
+import { Config } from "postcss-load-config";
 
-export type TPostCSSConfigFactoryProps = {
-  useScss?: boolean;
+export const configWithScss: Config = {
+  syntax: "postcss-scss",
+  plugins: {
+    "postcss-preset-env": {},
+    "postcss-normalize": {},
+    tailwindcss: {},
+    autoprefixer: {},
+    ...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {}),
+  },
 };
 
-export const getConfig = ({
-  useScss = true,
-}: TPostCSSConfigFactoryProps = {}) => {
-  return {
-    ident: "postcss",
-    syntax: useScss ? "postcss-scss" : "postcss-safe-parser",
-    plugins: {
-      "postcss-preset-env": {},
-      normalize,
-      tailwindcss: {},
-      autoprefixer: {},
-      ...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {}),
-    },
-  };
+export const config: Config = {
+  plugins: {
+    "postcss-preset-env": {},
+    "postcss-normalize": {},
+    tailwindcss: {},
+    autoprefixer: {},
+    ...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {}),
+  },
 };
