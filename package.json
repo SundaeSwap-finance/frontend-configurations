@@ -24,7 +24,7 @@
     "build": "lerna run build --scope '@sundaeswap/*'",
     "lint-staged": "lint-staged",
     "prepare": "husky",
-    "version": "lerna version patch --no-push --y --ignore-scripts",
+    "version": "lerna version patch --y --ignore-scripts",
     "publish": "bun run build && lerna publish from-package -y",
     "canary": "lerna publish from-package -y --canary",
     "test": "lerna run test",
