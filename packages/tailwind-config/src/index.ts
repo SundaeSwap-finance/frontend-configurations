@@ -14,20 +14,7 @@ export interface ISundaeSwapTheme extends Omit<ThemeConfig, "colors"> {
   colors: typeof colors;
 }
 
-export const theme: Partial<ISundaeSwapTheme> & {
-  // For our specific keyframes, we have to overwrite the _keyframes_ property.
-  // TailwindThemeAnimations officially only allows _opacity_ and _transform_ as keyframe values.
-  // keyframes?: {
-  //   [key: string]: {
-  //     [key: string]: {
-  //       [key: string]: string | number;
-  //     };
-  //   };
-  // };
-  configViewer?: {
-    fonts?: string;
-  };
-} = {
+export const theme: Partial<ISundaeSwapTheme> = {
   ...defaultTheme,
   keyframes: {
     ...defaultTheme.keyframes,
@@ -111,6 +98,7 @@ export const theme: Partial<ISundaeSwapTheme> & {
     ...defaultTheme.fontFamily,
     ...fontFamily,
   },
+  // @ts-expect-error Allow for testing the config.
   configViewer: {
     fonts:
       "https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&display=swap",
