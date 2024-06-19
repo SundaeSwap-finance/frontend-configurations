@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/postcss-config@2.0.3...@sundaeswap/postcss-config@2.0.4) (2024-06-19)
+
+### Bug Fixes
+
+- exports ([07cb71d](https://github.com/sundaeswap-finance/frontend-configurations/commit/07cb71d72501b886d4fd1b8ed1304212b86bb436))
+
 ## [2.0.3](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/postcss-config@2.0.2...@sundaeswap/postcss-config@2.0.3) (2024-06-19)
 
 **Note:** Version bump only for package @sundaeswap/postcss-config
