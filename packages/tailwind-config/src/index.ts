@@ -10,7 +10,7 @@ export * from "./fontFamily.js";
 export * from "./keyFrames.js";
 export * from "./plugins.js";
 
-interface ISundaeSwapTheme extends Omit<ThemeConfig, "colors"> {
+export interface ISundaeSwapTheme extends Omit<ThemeConfig, "colors"> {
   colors: typeof colors;
 }
 
