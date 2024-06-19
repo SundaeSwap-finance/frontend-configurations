@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/eslint-config@2.0.2...@sundaeswap/eslint-config@2.0.4) (2024-06-19)
+
+### Bug Fixes
+
+- globals in prod ([b542c3c](https://github.com/sundaeswap-finance/frontend-configurations/commit/b542c3c7368e78290834e5600c61208674d52f93))
+
 ## 2.0.2 (2024-06-17)
 
 ### Bug Fixes

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.3](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/webpack-config@2.7.2...@sundaeswap/webpack-config@2.7.3) (2024-06-19)
+
+**Note:** Version bump only for package @sundaeswap/webpack-config
+
 ## 2.7.2 (2024-06-17)
 
 ### Bug Fixes
