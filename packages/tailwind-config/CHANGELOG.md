@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.10](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@2.0.9...@sundaeswap/tailwind-config@2.0.10) (2024-06-20)
+
+### Bug Fixes
+
+- radix tailwind options ([7fe6f36](https://github.com/sundaeswap-finance/frontend-configurations/commit/7fe6f36c495fbf97a6adf2ae07c8d106e4eb74c5))
+
 ## 2.0.9 (2024-06-20)
 
 **Note:** Version bump only for package @sundaeswap/tailwind-config
