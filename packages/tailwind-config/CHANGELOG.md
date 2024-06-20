@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.12](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@2.0.11...@sundaeswap/tailwind-config@2.0.12) (2024-06-20)
+
+### Bug Fixes
+
+- missing marque keyframes ([6501940](https://github.com/sundaeswap-finance/frontend-configurations/commit/6501940365ea063ba87e2ce7469e8ef8083ae785))
+
 ## [2.0.11](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@2.0.9...@sundaeswap/tailwind-config@2.0.11) (2024-06-20)
 
 ### Bug Fixes
