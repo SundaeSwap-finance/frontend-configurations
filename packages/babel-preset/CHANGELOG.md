@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.10 (2024-06-20)
+
+**Note:** Version bump only for package @sundaeswap/babel-preset
+
 ## 2.0.9 (2024-06-20)
 
 **Note:** Version bump only for package @sundaeswap/babel-preset

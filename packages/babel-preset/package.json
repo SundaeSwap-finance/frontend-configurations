@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/babel-preset",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/babel-preset",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
