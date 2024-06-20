@@ -4,7 +4,8 @@
   "description": "basic postcss config options for SundaeSwap projects.",
   "keywords": [
     "postcss",
-    "webpack"
+    "tailwindcss",
+    "scss"
   ],
   "author": "Calvin Koepke <hello@calvinkoepke.com>",
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/postcss-config",
@@ -37,6 +38,7 @@
     "test": "bun run build"
   },
   "dependencies": {
+    "cssnano": "^7.0.3",
     "postcss": "^8.4.14",
     "postcss-normalize": "^10.0.1",
     "postcss-preset-env": "^7.6.0",
