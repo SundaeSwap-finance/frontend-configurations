@@ -1,4 +1,12 @@
 export const keyFrames = {
+  "marquee-left": {
+    from: { transform: "translateX(0)" },
+    to: { transform: "translateX(calc(-100% - var(--gap)))" },
+  },
+  "marquee-up": {
+    from: { transform: "translateY(0)" },
+    to: { transform: "translateY(calc(-100% - var(--gap)))" },
+  },
   "toast-progress-bar": {
     "0%": { left: "0" },
     "100%": { left: "-100%" },
