@@ -2,11 +2,9 @@ import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
 import { Config, ConfigPlugin } from "postcss-load-config";
 import normalize from "postcss-normalize";
-import preset from "postcss-preset-env";
 import tailwind from "tailwindcss";
 
 export const plugins: ConfigPlugin[] = [
-  preset(),
   normalize(),
   tailwind(),
   autoprefixer(),
