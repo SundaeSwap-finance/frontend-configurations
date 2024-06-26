@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.10](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/jest-config@2.0.9...@sundaeswap/jest-config@2.0.10) (2024-06-26)
+
+**Note:** Version bump only for package @sundaeswap/jest-config
+
 ## [2.0.9](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/jest-config@2.0.8...@sundaeswap/jest-config@2.0.9) (2024-06-26)
 
 ### Bug Fixes
