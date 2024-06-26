@@ -23,7 +23,7 @@ In your `package.json` file, use the following build scripts (replace `bun run` 
 ```json
 {
   "scripts": {
-    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs",
+    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs && bun run set-cjs",
     "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
     "types": "tsc --project ./tsconfig.json"

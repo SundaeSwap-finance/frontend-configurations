@@ -25,11 +25,11 @@
     "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
     "types": "tsc --project ./tsconfig.json",
-    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs",
+    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs && bun run set-cjs",
     "watch": "bun run clean && bun run build && bun run build:esm --watch",
     "clean": "rm -rf ./dist",
     "test": "bun run build",
-    "prepublish": "echo '{ \"type\": \"commonjs\" }' > ./dist/cjs/package.json"
+    "set-cjs": "echo '{ \"type\": \"commonjs\" }' > ./dist/cjs/package.json"
   },
   "devDependencies": {
     "@sundaeswap/babel-preset": "workspace:*"
