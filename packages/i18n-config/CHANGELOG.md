@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.9](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/i18n-config@2.1.8...@sundaeswap/i18n-config@2.1.9) (2024-06-26)
+
+### Bug Fixes
+
+- cjs exports ([b6720fc](https://github.com/sundaeswap-finance/frontend-configurations/commit/b6720fc27363ecbb808d3311bbf06482df472916))
+
 ## 2.1.8 (2024-06-20)
 
 **Note:** Version bump only for package @sundaeswap/i18n-config

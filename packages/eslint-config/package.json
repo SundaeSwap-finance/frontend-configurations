@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/eslint-config",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "eslint config from which all other eslint-configs inherit from.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
