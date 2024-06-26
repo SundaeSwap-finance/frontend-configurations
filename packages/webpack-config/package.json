@@ -32,7 +32,8 @@
     "lint": "eslint . --ext js,jsx,ts,tsx --max-warnings=0",
     "lint:fix": "bun run lint -- --fix",
     "clean": "rm -rf ./dist",
-    "test": "webpack-cli configtest ./webpack.test.ts"
+    "test": "webpack-cli configtest ./webpack.test.ts",
+    "prepublish": "echo '{ \"type\": \"commonjs\" }' > ./dist/cjs/package.json"
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",

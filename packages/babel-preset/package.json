@@ -32,7 +32,8 @@
     "types": "tsc --project ./tsconfig.json",
     "watch": "bun run clean && bun run build && bun run build:esm --watch",
     "clean": "rm -rf ./dist",
-    "test": "bun run build"
+    "test": "bun run build",
+    "prepublish": "echo '{ \"type\": \"commonjs\" }' > ./dist/cjs/package.json"
   },
   "dependencies": {
     "@babel/cli": "^7.24.7",

@@ -35,7 +35,8 @@
     "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs",
     "watch": "bun run clean && bun run build && bun run build:esm --watch",
     "clean": "rm -rf ./dist",
-    "test": "bun run build"
+    "test": "bun run build",
+    "prepublish": "echo '{ \"type\": \"commonjs\" }' > ./dist/cjs/package.json"
   },
   "dependencies": {
     "cssnano": "^7.0.3",
