@@ -1,17 +1,16 @@
-import path from "path";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import path from "path";
 import webpack from "webpack";
 import webpackDevServer from "webpack-dev-server";
 
-import { getPlugins, TPluginOptions } from "./rulesets/plugins.js";
 import { getScssRules, getTypescriptRules } from "./rulesets/loaders.js";
+import { getPlugins, TPluginOptions } from "./rulesets/plugins.js";
 
 // Export rulesets.
-export { getPlugins } from "./rulesets/plugins.js";
 export * from "./rulesets/loaders.js";
+export { getPlugins } from "./rulesets/plugins.js";
 
 interface IBaseConfigArgs {
-  useCSSModules: boolean;
   stringReplaceRules?: Record<string, unknown> | undefined;
   verbose?: boolean;
   plugins?: TPluginOptions;
@@ -21,7 +20,6 @@ interface IBaseConfigArgs {
 
 // Export base config.
 export const getBaseConfig = ({
-  useCSSModules,
   stringReplaceRules = undefined,
   verbose = false,
   plugins,
@@ -48,17 +46,9 @@ export const getBaseConfig = ({
           type: "asset/resource",
         },
         {
-          test: /\.scss$/i,
-          use: [...getScssRules(true, false)],
-          exclude: /\.module\.scss$/,
+          test: /\.s[ac]ss$/i,
+          use: getScssRules(true),
         },
-        useCSSModules
-          ? {
-              test: /\.module\.scss$/,
-              exclude: /node_modules/,
-              use: [...getScssRules()],
-            }
-          : {},
         stringReplaceRules
           ? {
               test: /\.tsx|.ts?$/,

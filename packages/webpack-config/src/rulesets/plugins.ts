@@ -1,3 +1,4 @@
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import {
   CleanWebpackPlugin,
   Options as CleanWebpackPluginOptions,
@@ -9,7 +10,6 @@ import ESLintWebpackPlugin, {
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 
 type TPlugins =
   | CleanWebpackPlugin
@@ -21,7 +21,7 @@ type TPlugins =
   | ReactRefreshWebpackPlugin;
 
 export type TPluginOptions = {
-  staticFolderName?: "string";
+  staticFolderName?: string;
   clean?: CleanWebpackPluginOptions;
   copy?: CopyPlugin.PluginOptions;
   html?: HtmlWebpackPlugin.Options;
@@ -55,6 +55,7 @@ export const getPlugins = (
       eslint ?? {
         extensions: [".tsx", ".ts"],
         exclude: "node_modules",
+        configType: "flat",
       },
     ),
     new MiniCssExtractPlugin(
