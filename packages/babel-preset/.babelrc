@@ -6,13 +6,13 @@
     },
     "esmBundled": {
       "presets": [
-        ["@babel/env", { "targets": "> 0.25%, not dead" }],
+        ["@babel/preset-env", { "targets": "> 0.25%, not dead" }],
         "@babel/preset-typescript"
       ]
     },
     "cjs": {
       "presets": [
-        ["@babel/env", { "modules": "commonjs" }],
+        ["@babel/preset-env", { "modules": "commonjs" }],
         "@babel/preset-typescript"
       ]
     }
