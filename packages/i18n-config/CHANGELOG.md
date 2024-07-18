@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.13](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/i18n-config@2.1.12...@sundaeswap/i18n-config@2.1.13) (2024-07-18)
+
+**Note:** Version bump only for package @sundaeswap/i18n-config
+
 ## [2.1.12](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/i18n-config@2.1.11...@sundaeswap/i18n-config@2.1.12) (2024-07-18)
 
 **Note:** Version bump only for package @sundaeswap/i18n-config

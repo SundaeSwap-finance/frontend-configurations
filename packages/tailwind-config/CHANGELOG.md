@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.17](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@2.0.16...@sundaeswap/tailwind-config@2.0.17) (2024-07-18)
+
+**Note:** Version bump only for package @sundaeswap/tailwind-config
+
 ## [2.0.16](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@2.0.15...@sundaeswap/tailwind-config@2.0.16) (2024-07-18)
 
 **Note:** Version bump only for package @sundaeswap/tailwind-config
