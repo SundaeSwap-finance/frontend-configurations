@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/babel-preset@2.0.12...@sundaeswap/babel-preset@2.0.13) (2024-07-17)
+
+### Bug Fixes
+
+- preset name ([d2b835a](https://github.com/sundaeswap-finance/frontend-configurations/commit/d2b835a3ab929687482101984a5e7d58408be3fb))
+
 ## [2.0.12](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/babel-preset@2.0.11...@sundaeswap/babel-preset@2.0.12) (2024-06-26)
 
 **Note:** Version bump only for package @sundaeswap/babel-preset

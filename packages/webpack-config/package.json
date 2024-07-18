@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/webpack-config",
-  "version": "2.7.12",
+  "version": "2.7.13",
   "description": "Common webpack configurations for SundaeSwap projects.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
