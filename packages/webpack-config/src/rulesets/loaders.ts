@@ -32,6 +32,7 @@ export const getTypescriptRules = (production: boolean, withHMR?: boolean) => {
         dynamicImport: true,
       },
     },
+    sourceMaps: process.env.NODE_ENV === "development",
   };
 
   if (withHMR) {
