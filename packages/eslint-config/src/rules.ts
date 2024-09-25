@@ -81,7 +81,6 @@ export const rules: ESLint.ConfigData["rules"] = {
   "no-unused-expressions": [
     "error",
     {
-      allowShortCircuit: true,
       allowTernary: true,
       allowTaggedTemplates: true,
     },
