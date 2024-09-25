@@ -89,6 +89,14 @@ export const theme: Partial<ISundaeSwapTheme> = {
     xl: "1440px",
     xxl: "1920px",
   },
+  spacing: {
+    ...defaultTheme.spacing,
+    xs: "4px",
+    sm: "8px",
+    md: "12px",
+    lg: "16px",
+    xl: "24px",
+  },
   colors,
   fontSize: {
     ...defaultTheme.fontSize,
