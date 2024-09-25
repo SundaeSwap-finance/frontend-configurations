@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.15](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/eslint-config@2.0.14...@sundaeswap/eslint-config@2.0.15) (2024-09-25)
+
+### Bug Fixes
+
+- eslint ([58399a0](https://github.com/sundaeswap-finance/frontend-configurations/commit/58399a03a83ce5aa2c27fe40317725d2542aaf98))
+
 ## [2.0.14](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/eslint-config@2.0.13...@sundaeswap/eslint-config@2.0.14) (2024-07-18)
 
 **Note:** Version bump only for package @sundaeswap/eslint-config

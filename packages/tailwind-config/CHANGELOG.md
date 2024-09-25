@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@2.0.17...@sundaeswap/tailwind-config@3.0.1) (2024-09-25)
+
+### Bug Fixes
+
+- eslint ([58399a0](https://github.com/sundaeswap-finance/frontend-configurations/commit/58399a03a83ce5aa2c27fe40317725d2542aaf98))
+
 ## [2.0.17](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@2.0.16...@sundaeswap/tailwind-config@2.0.17) (2024-07-18)
 
 **Note:** Version bump only for package @sundaeswap/tailwind-config
