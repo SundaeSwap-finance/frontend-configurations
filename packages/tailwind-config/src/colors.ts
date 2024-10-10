@@ -77,10 +77,9 @@ export const colors = {
     900: "#696143",
   },
   accent: {
-    yellow: "#F9E79F",
-    blue: "#48CAE4",
-    red: "#F5B7B1",
-    orange: "#F0CCAE",
+    100: "#48CAE4",
+    200: "#F5B7B1",
+    300: "#F0CCAE",
   },
   success: {
     DEFAULT: "#58C7BA",
