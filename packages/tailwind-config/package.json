@@ -1,7 +1,7 @@
 {
   "name": "@sundaeswap/tailwind-config",
-  "version": "3.0.5",
-  "description": "A generic tailwind config all other tailwind-configs can use as plugin.",
+  "version": "4.0.0",
+  "description": "SundaeSwap Tailwind CSS v4 theme configuration with colors, animations, and utilities.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
@@ -10,7 +10,8 @@
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js",
       "types": "./dist/types/index.d.ts"
-    }
+    },
+    "./theme.css": "./dist/theme.css"
   },
   "type": "module",
   "publishConfig": {
@@ -23,25 +24,23 @@
   "scripts": {
     "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
+    "build:css": "cp src/theme.css dist/theme.css",
     "types": "tsc --project ./tsconfig.json",
-    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs && bun run set-cjs",
+    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs && bun run build:css && bun run set-cjs",
     "watch:esm": "bun run clean && bun run build && bun run build:esm --watch",
     "watch:cjs": "bun run clean && bun run build && bun run build:cjs --watch",
-    "preview": "tailwind-config-viewer -o",
     "clean": "rm -rf ./dist",
     "test": "bun run build",
     "set-cjs": "echo '{ \"type\": \"commonjs\" }' > ./dist/cjs/package.json"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.19",
-    "tailwindcss": "^3.4.4",
-    "tailwindcss-animation-delay": "^1.2.0",
-    "tailwindcss-radix": "^3.0.0"
+    "tailwindcss": "^4.0.0"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
-    "@sundaeswap/babel-preset": "workspace:*",
-    "@types/tailwindcss": "^3.1.0",
-    "tailwind-config-viewer": "^1.7.0"
+    "@sundaeswap/babel-preset": "workspace:*"
   },
   "gitHead": "5e9c25ace88c289a1e61a9185d121cf6c0099029"
 }
