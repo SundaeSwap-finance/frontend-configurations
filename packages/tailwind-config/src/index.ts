@@ -107,7 +107,7 @@ export const spacing = {
 export const theme = {
   colors,
   fontFamily,
-  keyframes: keyFrames,
+  keyFrames,
   animations,
   screens,
   spacing,
