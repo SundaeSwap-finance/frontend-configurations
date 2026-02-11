@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@3.0.5...@sundaeswap/tailwind-config@4.0.1) (2026-02-11)
+
+- feat(tailwind-config)!: migrate to Tailwind CSS v4 ([81da7a7](https://github.com/sundaeswap-finance/frontend-configurations/commit/81da7a70333d77ac7388e45b802d2d5faa0c603c))
+
+### BREAKING CHANGES
+
+- This is a major version update (3.x -> 4.0.0) that migrates to Tailwind CSS v4's CSS-first configuration approach.
+
+Changes:
+
+- Add theme.css with @theme definitions for colors, animations, keyframes
+- Update package.json to v4.0.0 with tailwindcss ^4.0.0 peer dependency
+- Remove tailwindcss-radix and tailwindcss-animation-delay plugins (incompatible with v4)
+- Simplify index.ts exports, deprecate theme object
+- Update README with v4 migration guide
+
+Migration:
+Instead of extending a JS config, import the CSS theme:
+
+```css
+@import "tailwindcss";
+@import "@sundaeswap/tailwind-config/theme.css";
+```
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+
 ## [3.0.5](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@3.0.4...@sundaeswap/tailwind-config@3.0.5) (2024-10-17)
 
 **Note:** Version bump only for package @sundaeswap/tailwind-config
