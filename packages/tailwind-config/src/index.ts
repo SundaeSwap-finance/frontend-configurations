@@ -93,11 +93,11 @@ export const screens = {
  * Spacing definitions for programmatic use.
  */
 export const spacing = {
-  xs: "4px",
-  sm: "8px",
-  md: "12px",
-  lg: "16px",
-  xl: "24px",
+  "space-xs": "4px",
+  "space-sm": "8px",
+  "space-md": "12px",
+  "space-lg": "16px",
+  "space-xl": "24px",
 };
 
 /**
