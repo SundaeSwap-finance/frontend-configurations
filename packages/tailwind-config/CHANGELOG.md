@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.3](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@4.0.1...@sundaeswap/tailwind-config@4.0.3) (2026-02-12)
+
+### Bug Fixes
+
+- naming conflict ([fba297e](https://github.com/sundaeswap-finance/frontend-configurations/commit/fba297e0b7727b1c6ba24e56b7520a14512dcfed))
+
 ## [4.0.1](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@3.0.5...@sundaeswap/tailwind-config@4.0.1) (2026-02-11)
 
 - feat(tailwind-config)!: migrate to Tailwind CSS v4 ([81da7a7](https://github.com/sundaeswap-finance/frontend-configurations/commit/81da7a70333d77ac7388e45b802d2d5faa0c603c))
