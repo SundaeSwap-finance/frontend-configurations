@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/tailwind-config",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "SundaeSwap Tailwind CSS v4 theme configuration with colors, animations, and utilities.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
