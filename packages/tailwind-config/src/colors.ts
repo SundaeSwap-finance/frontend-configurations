@@ -4,22 +4,6 @@ export const colors = {
   transparent: "transparent",
   white: "#FFFFFF",
   black: "#000000",
-  /**
-   * @deprecated
-   * Use the `neutral` namespace, instead.
-   */
-  gray: {
-    DEFAULT: "#F0F6FA",
-    200: "#E6ECF0",
-    300: "#DCE2E6",
-    400: "#CAD5DB",
-    500: "#C0CBD1",
-    600: "#202231",
-    700: "#1F1928",
-    800: "#110B1B",
-    900: "#0D0415",
-    1000: "#0F0518",
-  },
   neutral: {
     DEFAULT: "#FFFFFF",
     50: "#FFFFFF",
