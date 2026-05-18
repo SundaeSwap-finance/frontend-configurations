@@ -176,6 +176,56 @@
   --spacing-space-xl: 24px;
 
   /* ========================================
+   * Radii (semantic)
+   *
+   * Component-level rounding aliases. Use these instead of raw `rounded-xl/2xl/3xl`
+   * so that the visual identity of cards/dialogs/inputs can be tuned in one place.
+   * ======================================== */
+
+  --radius-card: 1.5rem;
+  --radius-dialog: 1.5rem;
+  --radius-hover-card: 1.5rem;
+  --radius-popover: 1.5rem;
+  --radius-tooltip: 1rem;
+  --radius-input: 1.5rem;
+
+  /* ========================================
+   * Shadows (semantic)
+   *
+   * Light-mode elevation tokens for each surface. Dark-mode variants are still
+   * applied via `dark:shadow-*` modifiers in component recipes for now — they
+   * will become CSS-variable driven in a follow-up.
+   * ======================================== */
+
+  --shadow-card: 0 0 15px -3px rgb(0 0 0 / 0.15);
+  --shadow-dialog:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-hover-card:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-popover:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-tooltip:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-header:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* ========================================
+   * Motion
+   *
+   * Named durations + the snap easing curve used throughout figma.* recipes.
+   * The Tailwind defaults (linear, in, out, in-out, 75ms..1000ms) remain
+   * available alongside these aliases.
+   * ======================================== */
+
+  --duration-instant: 50ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 1000ms;
+
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ========================================
    * Animations
    * ======================================== */
 
