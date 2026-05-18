@@ -781,15 +781,13 @@
 .dark {
   --color-surface-page: var(--color-neutral-1400);
 
-  /* Overlay surfaces commit to the SundaeSwap magenta — hue 322 is the
-   * neighborhood of secondary-900 (#59115A), and 0.06 chroma at L=17% lands
-   * a visible (not garish) purple-tinged surface in dark mode. This is a
-   * deliberate Committed color strategy on focused UI moments rather than
-   * the Restrained tinted-neutral default. */
-  --color-surface-dialog: oklch(17% 0.06 322);
-  --color-surface-popover: oklch(17% 0.06 322);
-  --color-surface-hover-card: oklch(17% 0.06 322);
-  --color-surface-tooltip: oklch(17% 0.06 322);
+  /* Overlay surfaces lean SundaeSwap magenta — hue 322 is the neighborhood
+   * of secondary-900 (#59115A), and 0.045 chroma at L=16% lands clearly
+   * tinted in dark mode without crossing into full-Committed purple. */
+  --color-surface-dialog: oklch(16% 0.045 322);
+  --color-surface-popover: oklch(16% 0.045 322);
+  --color-surface-hover-card: oklch(16% 0.045 322);
+  --color-surface-tooltip: oklch(16% 0.045 322);
   --color-surface-loading: var(--color-neutral-1400);
 
   --color-heading: var(--color-silent-50);
