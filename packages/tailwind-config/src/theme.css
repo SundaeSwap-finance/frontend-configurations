@@ -199,19 +199,23 @@
    * below (outside @theme so they cascade properly).
    * ======================================== */
 
-  --color-surface-page: var(--color-neutral-100);
-  --color-surface-dialog: var(--color-neutral-100);
-  --color-surface-popover: var(--color-neutral-100);
-  --color-surface-hover-card: var(--color-neutral-100);
-  --color-surface-tooltip: var(--color-neutral-100);
-  --color-surface-loading: var(--color-neutral-100);
+  /* Tailwind v4's @theme strips values that contain var() — they must be
+   * literal CSS colours here so the corresponding utilities are generated.
+   * The `.dark` block below restores indirection via var() so dark-mode
+   * cascades resolve against the canonical neutral/silent/gray ramps. */
+  --color-surface-page: #ffffff;
+  --color-surface-dialog: #ffffff;
+  --color-surface-popover: #ffffff;
+  --color-surface-hover-card: #ffffff;
+  --color-surface-tooltip: #ffffff;
+  --color-surface-loading: #ffffff;
 
-  --color-heading: var(--color-silent-400);
-  --color-heading-muted: var(--color-silent-300);
-  --color-body: var(--color-silent);
-  --color-body-muted: var(--color-silent-200);
+  --color-heading: #65597c; /* silent-400 */
+  --color-heading-muted: #9890a7; /* silent-300 */
+  --color-body: #65597c; /* silent */
+  --color-body-muted: #b8b3c3; /* silent-200 */
 
-  --color-outline: var(--color-gray-200);
+  --color-outline: #e6ecf0; /* gray-200 */
 
   /* ========================================
    * Typography
