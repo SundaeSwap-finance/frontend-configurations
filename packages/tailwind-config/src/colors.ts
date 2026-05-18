@@ -22,6 +22,7 @@ export const colors = {
   },
   neutral: {
     DEFAULT: "#FFFFFF",
+    50: "#FFFFFF",
     100: "#FFFFFF",
     200: "#FDFDFD",
     300: "#F6F6F7",
