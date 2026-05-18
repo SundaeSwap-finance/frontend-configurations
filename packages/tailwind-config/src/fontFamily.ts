@@ -1,5 +1,6 @@
 export const fontFamily = {
   sans: [
+    "Geist",
     "DM Sans",
     "ui-sans-serif",
     "system-ui",

@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/postcss-config",
-  "version": "2.0.14",
+  "version": "3.0.0",
   "description": "basic postcss config options for SundaeSwap projects.",
   "keywords": [
     "postcss",
@@ -39,8 +39,10 @@
     "set-cjs": "echo '{ \"type\": \"commonjs\" }' > ./dist/cjs/package.json"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
     "cssnano": "^7.0.3",
     "postcss": "^8.4.14",
+    "postcss-load-config": "^6.0.1",
     "postcss-normalize": "^10.0.1",
     "postcss-safe-parser": "^7.0.0",
     "postcss-scss": "^4.0.4"
@@ -49,6 +51,6 @@
     "@sundaeswap/babel-preset": "workspace:*"
   },
   "peerDependencies": {
-    "tailwindcss": "^3.0.24"
+    "tailwindcss": "^4.0.0"
   }
 }
