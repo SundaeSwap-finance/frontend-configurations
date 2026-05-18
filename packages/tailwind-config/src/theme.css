@@ -780,10 +780,15 @@
 
 .dark {
   --color-surface-page: var(--color-neutral-1400);
-  --color-surface-dialog: var(--color-silent-900);
-  --color-surface-popover: var(--color-neutral-1400);
-  --color-surface-hover-card: var(--color-neutral-1400);
-  --color-surface-tooltip: var(--color-neutral-1400);
+
+  /* Overlay surfaces use a magenta-leaning near-black rather than a cold gray
+   * so elevated UI reads as SundaeSwap rather than generic fintech. The 320°
+   * hue and 0.012 chroma are barely perceptible but shift the brand vibe; the
+   * 15.5% L keeps a ~4pp gap above the page bg. */
+  --color-surface-dialog: oklch(15.5% 0.012 320);
+  --color-surface-popover: oklch(15.5% 0.012 320);
+  --color-surface-hover-card: oklch(15.5% 0.012 320);
+  --color-surface-tooltip: oklch(15.5% 0.012 320);
   --color-surface-loading: var(--color-neutral-1400);
 
   --color-heading: var(--color-silent-50);
