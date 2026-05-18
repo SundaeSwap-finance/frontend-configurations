@@ -186,6 +186,34 @@
   --color-socials-youtube: #ff0000;
 
   /* ========================================
+   * Semantic theme tokens — surface / text / border
+   *
+   * Mode-aware aliases that swap automatically with the `.dark` class.
+   * Consumers should reach for these (`bg-surface-page`, `text-body-primary`,
+   * `border-default`) instead of pairing `bg-* dark:bg-*` recipes by hand —
+   * dark mode then "just works" via cascade, and a fork-free rebrand only
+   * needs to rebind these vars.
+   *
+   * Light defaults are declared here in @theme so Tailwind generates the
+   * corresponding utility classes. Dark overrides live in the `.dark` block
+   * below (outside @theme so they cascade properly).
+   * ======================================== */
+
+  --color-surface-page: var(--color-neutral-100);
+  --color-surface-dialog: var(--color-neutral-100);
+  --color-surface-popover: var(--color-neutral-100);
+  --color-surface-hover-card: var(--color-neutral-100);
+  --color-surface-tooltip: var(--color-neutral-100);
+  --color-surface-loading: var(--color-neutral-100);
+
+  --color-heading: var(--color-silent-400);
+  --color-heading-muted: var(--color-silent-300);
+  --color-body: var(--color-silent);
+  --color-body-muted: var(--color-silent-200);
+
+  --color-outline: var(--color-gray-200);
+
+  /* ========================================
    * Typography
    * ======================================== */
 
@@ -736,4 +764,28 @@
       height: 0;
     }
   }
+}
+
+/* ============================================================
+ * Dark-mode overrides for the semantic surface/text/border tokens.
+ *
+ * Outside @theme so they cascade — Tailwind v4 emits the @theme block
+ * verbatim into :root; placing the dark map here lets `.dark` win the
+ * cascade for any descendant.
+ * ============================================================ */
+
+.dark {
+  --color-surface-page: var(--color-neutral-1400);
+  --color-surface-dialog: var(--color-silent-900);
+  --color-surface-popover: var(--color-neutral-1400);
+  --color-surface-hover-card: var(--color-neutral-1400);
+  --color-surface-tooltip: var(--color-neutral-1400);
+  --color-surface-loading: var(--color-neutral-1400);
+
+  --color-heading: var(--color-silent-50);
+  --color-heading-muted: var(--color-silent-400);
+  --color-body: var(--color-silent-100);
+  --color-body-muted: var(--color-silent);
+
+  --color-outline: color-mix(in oklab, var(--color-silent-1000) 50%, transparent);
 }
