@@ -275,6 +275,12 @@
   --shadow-header:
     0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
+  /* Soft elevation pair — paired rest + hover shadows for floating tiles
+   * that should feel light enough to read as draggable/promotional without
+   * looking like dialog modals. Currently consumed by StableSwapsBanner. */
+  --shadow-soft-rest: 0 14px 32px rgba(72, 12, 88, 0.08);
+  --shadow-soft-hover: 0 18px 44px rgba(72, 12, 88, 0.20);
+
   /* ========================================
    * Motion
    *
@@ -804,4 +810,9 @@
   --color-body-muted: var(--color-silent);
 
   --color-outline: color-mix(in oklab, var(--color-silent-1000) 50%, transparent);
+
+  /* Soft elevation pair, dark-mode: stronger neutral drop at rest, magenta
+   * tint surfacing on hover. */
+  --shadow-soft-rest: 0 14px 32px rgba(0, 0, 0, 0.20);
+  --shadow-soft-hover: 0 18px 44px rgba(72, 12, 88, 0.28);
 }
