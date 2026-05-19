@@ -70,9 +70,9 @@
   --color-highlight-900: #696143;
 
   /* Accent */
-  --color-accent-100: #48CAE4;
-  --color-accent-200: #F5B7B1;
-  --color-accent-300: #F0CCAE;
+  --color-accent-cyan: #48CAE4;
+  --color-accent-salmon: #F5B7B1;
+  --color-accent-peach: #F0CCAE;
 
   /* Success */
   --color-success: #58C7BA;

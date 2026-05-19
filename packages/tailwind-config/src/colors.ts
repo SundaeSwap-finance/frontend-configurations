@@ -63,9 +63,9 @@ export const colors = {
     900: "#696143",
   },
   accent: {
-    100: "#48CAE4",
-    200: "#F5B7B1",
-    300: "#F0CCAE",
+    cyan: "#48CAE4",
+    salmon: "#F5B7B1",
+    peach: "#F0CCAE",
   },
   success: {
     DEFAULT: "#58C7BA",
