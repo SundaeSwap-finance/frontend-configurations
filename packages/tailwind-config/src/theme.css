@@ -915,9 +915,15 @@
   --color-action-warning-disabled: color-mix(in oklab, var(--color-warning-900) 75%, transparent);
   --color-action-warning-muted: var(--color-warning);
 
-  --color-action-silent: var(--color-silent);
-  --color-action-silent-hover: color-mix(in oklab, var(--color-silent-400) 80%, transparent);
-  --color-action-silent-active: var(--color-silent-600);
+  /* Solid silent surface in dark mode lives on the deep end of the ramp.
+   * silent-500 (L=45%) reads fine as text but makes a muddy mid-gray slab
+   * when used as a fill against the near-black page; silent-800 is dark
+   * enough to read as a surface while still distinguishable from the page.
+   * The muted /10–/15 alpha treatment continues to anchor off silent-500
+   * because the tint is what carries that recipe, not luminance. */
+  --color-action-silent: var(--color-silent-800);
+  --color-action-silent-hover: var(--color-silent-700);
+  --color-action-silent-active: var(--color-silent-900);
   --color-action-silent-disabled: var(--color-silent-900);
   --color-action-silent-muted: var(--color-silent);
 
