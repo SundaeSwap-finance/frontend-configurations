@@ -206,6 +206,68 @@
   --color-outline: #e6ecf0;
 
   /* ========================================
+   * Stateful action surfaces
+   *
+   * `bg-action-{color}` / `-hover` / `-active` / `-disabled` collapse the
+   * old eight-utility recipes (`bg-X-400 dark:bg-X-600 hover:bg-X-300 ...`)
+   * down to four state-aware utilities. Dark mode is handled in the .dark
+   * cascade below — no `dark:` prefixes needed at call sites.
+   *
+   * `bg-action-{color}-muted` is the solid base for translucent recipes;
+   * pair with /10 /15 /5 alpha modifiers at call sites for the muted
+   * default/hover/active states.
+   * ======================================== */
+
+  /* primary (light: primary-400 base, dark cascade swaps to primary-600 below) */
+  --color-action-primary: #66A8EA; /* primary-400 */
+  --color-action-primary-hover: #7FB6EE; /* primary-300 */
+  --color-action-primary-active: rgba(64, 146, 229, 0.8); /* primary/80 */
+  --color-action-primary-disabled: rgba(45, 104, 163, 0.75); /* primary-700/75 */
+  --color-action-primary-muted: #66A8EA; /* primary-400, modulate via /10 /15 */
+
+  /* secondary */
+  --color-action-secondary: #DC53DE; /* secondary-400 */
+  --color-action-secondary-hover: #E26FE4; /* secondary-300 */
+  --color-action-secondary-active: rgba(211, 40, 214, 0.9); /* secondary/90 */
+  --color-action-secondary-disabled: rgba(150, 28, 152, 0.75); /* secondary-700/75 */
+  --color-action-secondary-muted: #DC53DE; /* secondary-400 */
+
+  /* success */
+  --color-action-success: #58C7BA; /* success */
+  --color-action-success-hover: #79D2C8; /* success-400 */
+  --color-action-success-active: rgba(80, 181, 169, 0.8); /* success-600/80 */
+  --color-action-success-disabled: rgba(62, 141, 132, 0.75); /* success-700/75 */
+  --color-action-success-muted: #79D2C8; /* success-400 */
+
+  /* error */
+  --color-action-error: #DE5555; /* error */
+  --color-action-error-hover: #E57777; /* error-400 */
+  --color-action-error-active: rgba(202, 77, 77, 0.8); /* error-600/80 */
+  --color-action-error-disabled: rgba(158, 60, 60, 0.75); /* error-700/75 */
+  --color-action-error-muted: #E57777; /* error-400 */
+
+  /* warning */
+  --color-action-warning: #F19436; /* warning */
+  --color-action-warning-hover: #F4A95E; /* warning-400 */
+  --color-action-warning-active: rgba(219, 135, 49, 0.9); /* warning-600/90 */
+  --color-action-warning-disabled: rgba(171, 105, 38, 0.75); /* warning-700/75 */
+  --color-action-warning-muted: #F4A95E; /* warning-400 */
+
+  /* silent */
+  --color-action-silent: #9890A7; /* silent-300 */
+  --color-action-silent-hover: rgba(152, 144, 167, 0.8); /* silent-300/80 */
+  --color-action-silent-active: rgba(132, 122, 150, 0.8); /* silent-400/80 */
+  --color-action-silent-disabled: #483F58; /* silent-700 */
+  --color-action-silent-muted: #847A96; /* silent-400 */
+
+  /* highlight */
+  --color-action-highlight: #FAECB2; /* highlight-400 */
+  --color-action-highlight-hover: rgba(249, 231, 159, 0.7); /* highlight/70 */
+  --color-action-highlight-active: #F9E79F; /* highlight */
+  --color-action-highlight-disabled: rgba(177, 164, 113, 0.75); /* highlight-700/75 */
+  --color-action-highlight-muted: #FAECB2; /* highlight-400 */
+
+  /* ========================================
    * Typography
    * ======================================== */
 
@@ -815,4 +877,50 @@
    * tint surfacing on hover. */
   --shadow-soft-rest: 0 14px 32px rgba(0, 0, 0, 0.20);
   --shadow-soft-hover: 0 18px 44px rgba(72, 12, 88, 0.28);
+
+  /* Stateful action surfaces, dark-mode. The light values declared in @theme
+   * above; here we swap each one for the appropriate dark-mode primitive so
+   * `bg-action-{color}` resolves correctly without `dark:` prefixes. */
+
+  --color-action-primary: var(--color-primary-600);
+  --color-action-primary-hover: var(--color-primary);
+  --color-action-primary-active: var(--color-primary-600);
+  --color-action-primary-disabled: color-mix(in oklab, var(--color-primary-900) 75%, transparent);
+  --color-action-primary-muted: var(--color-primary);
+
+  --color-action-secondary: var(--color-secondary-600);
+  --color-action-secondary-hover: var(--color-secondary);
+  --color-action-secondary-active: var(--color-secondary-600);
+  --color-action-secondary-disabled: color-mix(in oklab, var(--color-secondary-900) 75%, transparent);
+  --color-action-secondary-muted: var(--color-secondary);
+
+  --color-action-success: var(--color-success-600);
+  --color-action-success-hover: var(--color-success);
+  --color-action-success-active: var(--color-success-600);
+  --color-action-success-disabled: color-mix(in oklab, var(--color-success-900) 75%, transparent);
+  --color-action-success-muted: var(--color-success);
+
+  --color-action-error: var(--color-error-600);
+  --color-action-error-hover: var(--color-error);
+  --color-action-error-active: var(--color-error-600);
+  --color-action-error-disabled: color-mix(in oklab, var(--color-error-900) 75%, transparent);
+  --color-action-error-muted: var(--color-error);
+
+  --color-action-warning: var(--color-warning-600);
+  --color-action-warning-hover: var(--color-warning);
+  --color-action-warning-active: var(--color-warning-600);
+  --color-action-warning-disabled: color-mix(in oklab, var(--color-warning-900) 75%, transparent);
+  --color-action-warning-muted: var(--color-warning);
+
+  --color-action-silent: var(--color-silent);
+  --color-action-silent-hover: color-mix(in oklab, var(--color-silent-400) 80%, transparent);
+  --color-action-silent-active: var(--color-silent-600);
+  --color-action-silent-disabled: var(--color-silent-900);
+  --color-action-silent-muted: var(--color-silent);
+
+  --color-action-highlight: var(--color-highlight);
+  --color-action-highlight-hover: var(--color-highlight-400);
+  --color-action-highlight-active: var(--color-highlight-600);
+  --color-action-highlight-disabled: color-mix(in oklab, var(--color-highlight-900) 75%, transparent);
+  --color-action-highlight-muted: var(--color-highlight);
 }
