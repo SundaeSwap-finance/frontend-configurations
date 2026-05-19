@@ -533,6 +533,26 @@
     }
   }
 
+  @keyframes dialog-overlay-hide {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes dialog-content-hide {
+    0% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+      scale: 0.96;
+    }
+  }
+
   @keyframes collapsible-open {
     0% {
       height: 0;

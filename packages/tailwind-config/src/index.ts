@@ -13,21 +13,18 @@
  *
  * For programmatic access to values:
  * ```ts
- * import { colors, fontFamily, keyFrames } from "@sundaeswap/tailwind-config";
+ * import { colors, fontFamily } from "@sundaeswap/tailwind-config";
  * ```
  */
 
 export * from "./colors.js";
 export * from "./fontFamily.js";
-export * from "./keyFrames.js";
-
-import { colors } from "./colors.js";
-import { fontFamily } from "./fontFamily.js";
-import { keyFrames } from "./keyFrames.js";
 
 /**
- * Animation definitions for programmatic use.
- * In Tailwind v4, these are defined in theme.css via @theme.
+ * Animation shorthand strings for programmatic use (e.g. inline `style`
+ * props). Keyframes themselves live in `theme.css` under `@theme`; this map
+ * just gives consumers the timing functions and durations that pair with
+ * each keyframe name.
  */
 export const animations = {
   "marquee-left": "marquee-left var(--duration, 40s) linear infinite",
@@ -55,6 +52,10 @@ export const animations = {
     "dialog-overlay-show 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards",
   "dialog-content-show":
     "dialog-content-show 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+  "dialog-overlay-hide":
+    "dialog-overlay-hide 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards",
+  "dialog-content-hide":
+    "dialog-content-hide 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards",
   "collapsible-open": "collapsible-open 0.3s ease-out forwards",
   "collapsible-close": "collapsible-close 0.3s ease-out forwards",
   "dot-flashing": "dot-flashing 1s infinite alternate",
@@ -99,18 +100,3 @@ export const spacing = {
   "space-lg": "16px",
   "space-xl": "24px",
 };
-
-/**
- * @deprecated The `theme` export is deprecated in v4. Import theme.css instead.
- * For programmatic access, use the individual exports (colors, fontFamily, etc.)
- */
-export const theme = {
-  colors,
-  fontFamily,
-  keyFrames,
-  animations,
-  screens,
-  spacing,
-};
-
-export default theme;
