@@ -106,19 +106,24 @@ export const colors = {
     800: "#85511E",
     900: "#653E17",
   },
+  /**
+   * Brand-tinted neutral. Hue 320, low chroma — appears as a quiet
+   * lavender-magenta rather than the prior cool-lavender (hue ~290) gray.
+   * Use these for muted text, secondary surfaces, and quiet borders.
+   */
   silent: {
-    DEFAULT: "#65597C",
-    50: "#F0EEF2",
-    100: "#CFCCD6",
-    200: "#B8B3C3",
-    300: "#9890A7",
-    400: "#847A96",
-    500: "#65597C",
-    600: "#5C5171",
-    700: "#483F58",
-    800: "#383144",
-    900: "#2A2534",
-    1000: "#2B2438",
+    DEFAULT: "oklch(45% 0.032 320)",
+    50: "oklch(93% 0.012 320)",
+    100: "oklch(82% 0.018 320)",
+    200: "oklch(74% 0.022 320)",
+    300: "oklch(63% 0.028 320)",
+    400: "oklch(55% 0.030 320)",
+    500: "oklch(45% 0.032 320)",
+    600: "oklch(42% 0.032 320)",
+    700: "oklch(33% 0.030 320)",
+    800: "oklch(27% 0.028 320)",
+    900: "oklch(19% 0.025 320)",
+    1000: "oklch(19% 0.027 320)",
   },
   violet: {
     DEFAULT: "#8B5CF6",

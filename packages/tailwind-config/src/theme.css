@@ -113,19 +113,22 @@
   --color-warning-800: #85511E;
   --color-warning-900: #653E17;
 
-  /* Silent */
-  --color-silent: #65597C;
-  --color-silent-50: #F0EEF2;
-  --color-silent-100: #CFCCD6;
-  --color-silent-200: #B8B3C3;
-  --color-silent-300: #9890A7;
-  --color-silent-400: #847A96;
-  --color-silent-500: #65597C;
-  --color-silent-600: #5C5171;
-  --color-silent-700: #483F58;
-  --color-silent-800: #383144;
-  --color-silent-900: #2A2534;
-  --color-silent-1000: #2B2438;
+  /* Silent — brand-tinted neutrals. Hue 320 (matching secondary/dialog
+   * surface direction), chroma scaled with L so the tint reads at midtones
+   * without garishness at extremes. Replaces the older cool-lavender ramp
+   * (hue ~290, dead-gray feel). */
+  --color-silent: oklch(45% 0.032 320);
+  --color-silent-50: oklch(93% 0.012 320);
+  --color-silent-100: oklch(82% 0.018 320);
+  --color-silent-200: oklch(74% 0.022 320);
+  --color-silent-300: oklch(63% 0.028 320);
+  --color-silent-400: oklch(55% 0.030 320);
+  --color-silent-500: oklch(45% 0.032 320);
+  --color-silent-600: oklch(42% 0.032 320);
+  --color-silent-700: oklch(33% 0.030 320);
+  --color-silent-800: oklch(27% 0.028 320);
+  --color-silent-900: oklch(19% 0.025 320);
+  --color-silent-1000: oklch(19% 0.027 320);
 
   /* ========================================
    * Accent ramps — violet & blue
