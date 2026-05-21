@@ -1,156 +1,206 @@
+/**
+ * SundaeSwap V4 color ramps — programmatic mirror of Layer 1 (styles/tokens.css).
+ *
+ * The CSS token layer is authored in OKLCH; these are the sRGB-hex equivalents.
+ * Hex is required here because the JS consumers of this module — chart
+ * libraries (Chart.js, Recharts), `polished`, canvas APIs — cannot parse
+ * `oklch()`. Keep these in lockstep with `styles/tokens.css`.
+ *
+ * Ramps are exported under their true-color name (`pink`, `violet`, `mint`, ...)
+ * and aliased to the legacy role name (`primary`, `secondary`, `success`, ...).
+ */
+
+/** Violet-black neutral spine. */
+const ink = {
+  DEFAULT: "#f4f3f7",
+  50: "#faf9fc",
+  100: "#f4f3f7",
+  200: "#e8e7ed",
+  300: "#d5d2dc",
+  400: "#bfbcc7",
+  500: "#a09ca9",
+  600: "#827d8d",
+  700: "#656071",
+  800: "#4f4a5b",
+  900: "#3b3449",
+  1000: "#2b2538",
+  1100: "#221b2d",
+  1200: "#181322",
+  1300: "#0e0a15",
+  1400: "#050407",
+  1500: "#010101",
+};
+
+/** Violet-tinted surface ladder. */
+const slate = {
+  DEFAULT: "#575263",
+  50: "#efedf3",
+  100: "#d2cfd9",
+  200: "#b0abb9",
+  300: "#918c9c",
+  400: "#716c7c",
+  500: "#575263",
+  600: "#44404d",
+  700: "#34313c",
+  800: "#25222c",
+  900: "#19171f",
+  1000: "#0e0c12",
+};
+
+/** Brand primary. */
+const pink = {
+  DEFAULT: "#f7538e",
+  50: "#fff1f4",
+  100: "#ffdce5",
+  200: "#ffbccf",
+  300: "#ff95b7",
+  400: "#ff73a2",
+  500: "#f7538e",
+  600: "#d83977",
+  700: "#ad2458",
+  800: "#80183c",
+  900: "#5c1328",
+  950: "#3b0b18",
+};
+
+/** Brand secondary — soft pastel lavender. */
+const violet = {
+  DEFAULT: "#b6aae9",
+  50: "#f7f6fd",
+  100: "#efecfc",
+  200: "#e2ddfa",
+  300: "#d3ccf6",
+  400: "#c5bcef",
+  500: "#b6aae9",
+  600: "#9d90d3",
+  700: "#8072b0",
+  800: "#615388",
+  900: "#463b61",
+  950: "#2e2641",
+};
+
+/** Periwinkle. Info / links. */
+const indigo = {
+  DEFAULT: "#959af7",
+  50: "#f3f4fd",
+  100: "#e3e6ff",
+  200: "#cbd0ff",
+  300: "#b1b7fd",
+  400: "#959af7",
+  500: "#7b7ded",
+  600: "#6062db",
+  700: "#464bb5",
+  800: "#31398c",
+  900: "#202962",
+  950: "#141b41",
+};
+
+/** Sky. Closes the iris gradient. */
+const cyan = {
+  DEFAULT: "#63ccf8",
+  50: "#edf7fc",
+  100: "#d1edfb",
+  200: "#afe0f7",
+  300: "#89d7f9",
+  400: "#63ccf8",
+  500: "#32b3e6",
+  600: "#0096ce",
+  700: "#0076ab",
+  800: "#005781",
+  900: "#003d5c",
+  950: "#01273d",
+};
+
+/** Warm honey. Warning / highlight. */
+const gold = {
+  DEFAULT: "#fdb85b",
+  50: "#fcf4e8",
+  100: "#fee7cb",
+  200: "#ffd6a3",
+  300: "#ffc981",
+  400: "#febc66",
+  500: "#fdb85b",
+  600: "#da943f",
+  700: "#af702b",
+  800: "#835021",
+  900: "#5e381a",
+  950: "#3e2412",
+};
+
+/** Spring green. Success. */
+const mint = {
+  DEFAULT: "#36ca95",
+  50: "#ebf9f1",
+  100: "#cef2df",
+  200: "#a8e9c7",
+  300: "#81deb1",
+  400: "#62d8a6",
+  500: "#36ca95",
+  600: "#00ac7c",
+  700: "#008761",
+  800: "#00664a",
+  900: "#004935",
+  950: "#023124",
+};
+
+/** Red. Error / destructive. */
+const coral = {
+  DEFAULT: "#ed3d57",
+  50: "#fff1f0",
+  100: "#ffddda",
+  200: "#ffbab9",
+  300: "#ff898e",
+  400: "#fe6270",
+  500: "#ed3d57",
+  600: "#d12444",
+  700: "#a81032",
+  800: "#7e0a21",
+  900: "#590915",
+  950: "#3a060c",
+};
+
 export const colors = {
   inherit: "inherit",
   current: "currentColor",
   transparent: "transparent",
   white: "#FFFFFF",
   black: "#000000",
-  neutral: {
-    DEFAULT: "#FFFFFF",
-    50: "#FFFFFF",
-    100: "#FFFFFF",
-    200: "#FDFDFD",
-    300: "#F6F6F7",
-    400: "#F2F2F3",
-    500: "#DEDEE0",
-    600: "#C7C8CB",
-    700: "#9B9CA2",
-    800: "#6E6F78",
-    900: "#5C5E68",
-    1000: "#41434F",
-    1100: "#3B3D49",
-    1200: "#323441",
-    1300: "#202230",
-    1400: "#0B0514",
-    1500: "#000000",
-  },
-  primary: {
-    DEFAULT: "#4092E5",
-    50: "#ECF4FC",
-    100: "#C4DDF7",
-    200: "#A7CDF3",
-    300: "#7FB6EE",
-    400: "#66A8EA",
-    500: "#4092E5",
-    600: "#3A85D0",
-    700: "#2D68A3",
-    800: "#23507E",
-    900: "#1B3D60",
-  },
-  secondary: {
-    DEFAULT: "#D328D6",
-    50: "#FBEAFB",
-    100: "#F1BCF2",
-    200: "#EB9CEC",
-    300: "#E26FE4",
-    400: "#DC53DE",
-    500: "#D328D6",
-    600: "#C024C3",
-    700: "#961C98",
-    800: "#741676",
-    900: "#59115A",
-  },
-  highlight: {
-    DEFAULT: "#F9E79F",
-    50: "#FEFDF5",
-    100: "#FDF8E1",
-    200: "#FCF4D3",
-    300: "#FBEFBF",
-    400: "#FAECB2",
-    500: "#F9E79F",
-    600: "#E3D291",
-    700: "#B1A471",
-    800: "#897F57",
-    900: "#696143",
-  },
+
+  /* True-color ramps */
+  ink,
+  slate,
+  pink,
+  violet,
+  indigo,
+  cyan,
+  gold,
+  mint,
+  coral,
+
+  /* Legacy role aliases */
+  neutral: ink,
+  primary: pink,
+  secondary: violet,
+  highlight: gold,
+  success: mint,
+  error: coral,
+  warning: gold,
+  silent: slate,
+  blue: indigo,
+
+  /* Named accents — the five-note neon chord */
   accent: {
-    cyan: "#48CAE4",
-    salmon: "#F5B7B1",
-    peach: "#F0CCAE",
+    pink: pink[500],
+    violet: violet[500],
+    indigo: indigo[400],
+    cyan: cyan[400],
+    gold: gold[500],
+    /* legacy accent aliases */
+    salmon: coral[300],
+    peach: gold[300],
   },
-  success: {
-    DEFAULT: "#58C7BA",
-    50: "#EEF9F8",
-    100: "#CBEEEA",
-    200: "#B2E5DF",
-    300: "#8FD9D1",
-    400: "#79D2C8",
-    500: "#58C7BA",
-    600: "#50B5A9",
-    700: "#3E8D84",
-    800: "#306D66",
-    900: "#25544E",
-  },
-  error: {
-    DEFAULT: "#DE5555",
-    50: "#FCEEEE",
-    100: "#F5CACA",
-    200: "#F0B1B1",
-    300: "#E98D8D",
-    400: "#E57777",
-    500: "#DE5555",
-    600: "#CA4D4D",
-    700: "#9E3C3C",
-    800: "#7A2F2F",
-    900: "#5D2424",
-  },
-  warning: {
-    DEFAULT: "#F19436",
-    50: "#FEF4EB",
-    100: "#FBDEC1",
-    200: "#F9CEA3",
-    300: "#F6B778",
-    400: "#F4A95E",
-    500: "#F19436",
-    600: "#DB8731",
-    700: "#AB6926",
-    800: "#85511E",
-    900: "#653E17",
-  },
-  /**
-   * Brand-tinted neutral. Hue 320, low chroma — appears as a quiet
-   * lavender-magenta rather than the prior cool-lavender (hue ~290) gray.
-   * Use these for muted text, secondary surfaces, and quiet borders.
-   */
-  silent: {
-    DEFAULT: "oklch(45% 0.032 320)",
-    50: "oklch(93% 0.012 320)",
-    100: "oklch(82% 0.018 320)",
-    200: "oklch(74% 0.022 320)",
-    300: "oklch(63% 0.028 320)",
-    400: "oklch(55% 0.030 320)",
-    500: "oklch(45% 0.032 320)",
-    600: "oklch(42% 0.032 320)",
-    700: "oklch(33% 0.030 320)",
-    800: "oklch(27% 0.028 320)",
-    900: "oklch(19% 0.025 320)",
-    1000: "oklch(19% 0.027 320)",
-  },
-  violet: {
-    DEFAULT: "#8B5CF6",
-    50: "#F5F3FF",
-    100: "#EDE9FE",
-    200: "#DDD6FE",
-    300: "#C4B5FD",
-    400: "#A78BFA",
-    500: "#8B5CF6",
-    600: "#7C3AED",
-    700: "#6D28D9",
-    800: "#5B21B6",
-    900: "#4C1D95",
-  },
-  blue: {
-    DEFAULT: "#3B82F6",
-    50: "#EFF6FF",
-    100: "#DBEAFE",
-    200: "#BFDBFE",
-    300: "#93C5FD",
-    400: "#60A5FA",
-    500: "#3B82F6",
-    600: "#2563EB",
-    700: "#1D4ED8",
-    800: "#1E40AF",
-    900: "#1E3A8A",
-  },
+
+  /* Third-party social brand colors — not part of the palette */
   socials: {
     github: "#6e5494",
     twitter: "#1da1f2",

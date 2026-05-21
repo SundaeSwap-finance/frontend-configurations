@@ -1,0 +1,268 @@
+/**
+ * ============================================================================
+ * LAYER 2 — Semantic / Role tokens
+ * ============================================================================
+ *
+ * Assigns roles to the Layer 1 primitives. Components and Layer 3 reference
+ * THESE — never the raw ramps directly. A re-skin or rebrand only edits this
+ * file (or, for a new ramp, Layer 1).
+ *
+ * Mode strategy: dark is the default (`:root, .dark`). `.light` is a real,
+ * muted variant — violet-on-paper, not neon-on-paper, because neon does not
+ * survive on a light surface. `.light` is declared last so it wins the
+ * cascade against `:root` when the app sets the class explicitly.
+ *
+ * Naming: semantic tokens are bare (`--surface-page`, `--action-primary`).
+ * Layer 3 bridges them into Tailwind's `--color-*` namespace.
+ * ============================================================================
+ */
+
+/* ============================================================================
+ * DARK — the default
+ * ========================================================================== */
+:root,
+.dark {
+  color-scheme: dark;
+
+  /* --- Surfaces -------------------------------------------------------------
+   * Page = the elevation floor: the HTML reference's #09060d violet-black.
+   * Cards lift off it via the surface elevation system below.
+   */
+  --surface-page: var(--surface-base);
+  --surface-hover: var(--slate-600);
+  /* Inset wells (inputs, search fields, table headers) sit just above the
+   * elevation floor — always recessed relative to any card that contains them. */
+  --surface-input: oklch(12% 0.012 300);
+  --surface-disabled: var(--slate-900);
+
+  /* --- Surfaces ------------------------------------------------------------
+   * Surfaces are translucent: one --surface-card tint painted over the page.
+   * They stack — a surface nested inside another lifts because the /10 layers
+   * add up — and the page glow reads softly through. The `@utility surface`
+   * (styles/tailwind.theme.css) paints it; --surface-level only scales shadow.
+   */
+  --surface-base: #09060d; /* HTML reference page color */
+  --surface-shadow-color: rgb(0 0 0 / 0.45);
+
+  /* The surface tint — a translucent neutral slate at /10 alpha: the same
+   * material as the silent/muted button (`bg-action-silent-muted/10`, e.g.
+   * the wallet connect button). Nested surfaces lift as the /10 layers
+   * stack over one another. */
+  --surface-card: color-mix(in oklab, var(--slate-500) 10%, transparent);
+
+  /* --- Borders -------------------------------------------------------------- */
+  --border-subtle: var(--ink-1200);
+  --border-default: var(--ink-1100);
+  --border-strong: var(--ink-900);
+  --border-hover: var(--ink-900);
+
+  /* --- Text ----------------------------------------------------------------- */
+  --text-heading: var(--ink-100);
+  --text-body: var(--ink-200);
+  --text-muted: var(--slate-300);
+  --text-faint: var(--slate-500);
+  --text-on-accent: var(--ink-1400);
+  --text-link: var(--indigo-400);
+  --text-link-hover: var(--cyan-400);
+
+  /* --- Action: primary (pink) ---------------------------------------------- */
+  --action-primary: var(--pink-500);
+  --action-primary-hover: var(--pink-400);
+  --action-primary-active: var(--pink-600);
+  --action-primary-disabled: color-mix(in oklab, var(--pink-800) 55%, transparent);
+  --action-primary-muted: var(--pink-500);
+
+  /* --- Action: secondary (violet) ------------------------------------------ */
+  --action-secondary: var(--violet-500);
+  --action-secondary-hover: var(--violet-400);
+  --action-secondary-active: var(--violet-600);
+  --action-secondary-disabled: color-mix(in oklab, var(--violet-800) 55%, transparent);
+  --action-secondary-muted: var(--violet-500);
+
+  /* --- Action: success (mint) ---------------------------------------------- */
+  --action-success: var(--mint-500);
+  --action-success-hover: var(--mint-400);
+  --action-success-active: var(--mint-600);
+  --action-success-disabled: color-mix(in oklab, var(--mint-800) 55%, transparent);
+  --action-success-muted: var(--mint-500);
+
+  /* --- Action: error (coral) ----------------------------------------------- */
+  --action-error: var(--coral-500);
+  --action-error-hover: var(--coral-400);
+  --action-error-active: var(--coral-600);
+  --action-error-disabled: color-mix(in oklab, var(--coral-800) 55%, transparent);
+  --action-error-muted: var(--coral-500);
+
+  /* --- Action: warning (gold) ---------------------------------------------- */
+  --action-warning: var(--gold-500);
+  --action-warning-hover: var(--gold-400);
+  --action-warning-active: var(--gold-600);
+  --action-warning-disabled: color-mix(in oklab, var(--gold-800) 55%, transparent);
+  --action-warning-muted: var(--gold-500);
+
+  /* --- Action: info (indigo) ----------------------------------------------- */
+  --action-info: var(--indigo-400);
+  --action-info-hover: var(--indigo-300);
+  --action-info-active: var(--indigo-500);
+  --action-info-disabled: color-mix(in oklab, var(--indigo-800) 55%, transparent);
+  --action-info-muted: var(--indigo-400);
+
+  /* --- Action: silent (neutral) -------------------------------------------- */
+  --action-silent: var(--slate-700);
+  --action-silent-hover: var(--slate-600);
+  --action-silent-active: var(--slate-800);
+  --action-silent-disabled: var(--slate-900);
+  --action-silent-muted: var(--slate-500);
+
+  /* --- Action: highlight (soft gold) --------------------------------------- */
+  --action-highlight: var(--gold-400);
+  --action-highlight-hover: var(--gold-300);
+  --action-highlight-active: var(--gold-500);
+  --action-highlight-disabled: color-mix(in oklab, var(--gold-800) 55%, transparent);
+  --action-highlight-muted: var(--gold-400);
+
+  /* --- Named accents — the five-note neon chord ---------------------------
+   * For charts, phase-coding, decorative UI that needs a color outside the
+   * action axes. Each keeps a consistent identity across the whole app.
+   */
+  --accent-pink: var(--pink-500);
+  --accent-violet: var(--violet-500);
+  --accent-indigo: var(--indigo-400);
+  --accent-cyan: var(--cyan-400);
+  --accent-gold: var(--gold-500);
+
+  /* --- Data-viz series (maps onto the chord) ------------------------------- */
+  --chart-1: var(--pink-500);
+  --chart-2: var(--violet-500);
+  --chart-3: var(--indigo-400);
+  --chart-4: var(--cyan-400);
+  --chart-5: var(--gold-500);
+
+  /* --- Brand gradient ------------------------------------------------------- */
+  --gradient-brand: var(--gradient-iris);
+
+  /* --- Focus ring ---------------------------------------------------------- */
+  --ring: var(--violet-400);
+  --ring-offset: var(--surface-page);
+
+  /* --- Elevation — deep black drops + an optional neon glow ----------------- */
+  --elevation-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.55);
+  --elevation-raised: 0 4px 8px rgb(0 0 0 / 0.45), 0 16px 40px -16px rgb(0 0 0 / 0.6);
+  --elevation-overlay: 0 8px 16px rgb(0 0 0 / 0.5), 0 24px 56px -20px rgb(0 0 0 / 0.7);
+  --elevation-glow-primary: 0 0 34px -10px color-mix(in oklab, var(--pink-500) 60%, transparent);
+  --elevation-glow-secondary: 0 0 34px -10px color-mix(in oklab, var(--violet-500) 60%, transparent);
+  --elevation-glow-highlight: 0 0 34px -10px color-mix(in oklab, var(--gold-500) 55%, transparent);
+}
+
+/* ============================================================================
+ * LIGHT — a muted violet-on-paper variant. Declared last so it wins the
+ * cascade against `:root` when `.light` is on the tree.
+ * ========================================================================== */
+.light {
+  color-scheme: light;
+
+  /* --- Surfaces -----------------------------------------------------------
+   * Near the white ceiling there is no headroom to lift by lightening, so
+   * the color shift caps after ~level 2 and the level-scaled shadow carries
+   * elevation past it. */
+  --surface-page: var(--surface-base);
+  --surface-hover: var(--ink-200);
+  /* Inset wells — a soft gray, recessed against the near-white card surfaces. */
+  --surface-input: var(--ink-200);
+  --surface-disabled: var(--ink-200);
+
+  --surface-base: var(--ink-200);
+  --surface-shadow-color: oklch(32% 0.03 300 / 0.13);
+  /* Light has no headroom for translucent lift toward white, so its surface
+   * is a solid near-white; the shadow carries elevation. */
+  --surface-card: var(--ink-50);
+
+  /* --- Borders ------------------------------------------------------------- */
+  --border-subtle: var(--ink-200);
+  --border-default: var(--ink-300);
+  --border-strong: var(--ink-400);
+  --border-hover: var(--ink-400);
+
+  /* --- Text ---------------------------------------------------------------- */
+  --text-heading: var(--ink-1300);
+  --text-body: var(--ink-1100);
+  --text-muted: var(--ink-800);
+  --text-faint: var(--ink-700);
+  --text-on-accent: var(--ink-50);
+  --text-link: var(--indigo-700);
+  --text-link-hover: var(--violet-700);
+
+  /* --- Actions — deeper ramp stops so neon does not blow out on white ------- */
+  --action-primary: var(--pink-600);
+  --action-primary-hover: var(--pink-500);
+  --action-primary-active: var(--pink-700);
+  --action-primary-disabled: color-mix(in oklab, var(--pink-300) 60%, transparent);
+  --action-primary-muted: var(--pink-600);
+
+  --action-secondary: var(--violet-600);
+  --action-secondary-hover: var(--violet-500);
+  --action-secondary-active: var(--violet-700);
+  --action-secondary-disabled: color-mix(in oklab, var(--violet-300) 60%, transparent);
+  --action-secondary-muted: var(--violet-600);
+
+  --action-success: var(--mint-600);
+  --action-success-hover: var(--mint-500);
+  --action-success-active: var(--mint-700);
+  --action-success-disabled: color-mix(in oklab, var(--mint-300) 60%, transparent);
+  --action-success-muted: var(--mint-600);
+
+  --action-error: var(--coral-600);
+  --action-error-hover: var(--coral-500);
+  --action-error-active: var(--coral-700);
+  --action-error-disabled: color-mix(in oklab, var(--coral-300) 60%, transparent);
+  --action-error-muted: var(--coral-600);
+
+  --action-warning: var(--gold-600);
+  --action-warning-hover: var(--gold-500);
+  --action-warning-active: var(--gold-700);
+  --action-warning-disabled: color-mix(in oklab, var(--gold-300) 60%, transparent);
+  --action-warning-muted: var(--gold-600);
+
+  --action-info: var(--indigo-600);
+  --action-info-hover: var(--indigo-500);
+  --action-info-active: var(--indigo-700);
+  --action-info-disabled: color-mix(in oklab, var(--indigo-300) 60%, transparent);
+  --action-info-muted: var(--indigo-600);
+
+  --action-silent: var(--ink-300);
+  --action-silent-hover: var(--ink-400);
+  --action-silent-active: var(--ink-500);
+  --action-silent-disabled: var(--ink-200);
+  --action-silent-muted: var(--ink-500);
+
+  --action-highlight: var(--gold-300);
+  --action-highlight-hover: var(--gold-400);
+  --action-highlight-active: var(--gold-500);
+  --action-highlight-disabled: color-mix(in oklab, var(--gold-200) 60%, transparent);
+  --action-highlight-muted: var(--gold-300);
+
+  /* --- Named accents — deeper stops for legibility on paper ----------------- */
+  --accent-pink: var(--pink-600);
+  --accent-violet: var(--violet-600);
+  --accent-indigo: var(--indigo-600);
+  --accent-cyan: var(--cyan-700);
+  --accent-gold: var(--gold-700);
+
+  --chart-1: var(--pink-600);
+  --chart-2: var(--violet-600);
+  --chart-3: var(--indigo-600);
+  --chart-4: var(--cyan-700);
+  --chart-5: var(--gold-700);
+
+  /* --- Focus ring ---------------------------------------------------------- */
+  --ring: var(--violet-600);
+  --ring-offset: var(--surface-page);
+
+  /* --- Elevation — soft, low-contrast drops; no glow on paper --------------- */
+  --elevation-card: 0 1px 2px rgb(40 20 60 / 0.06), 0 6px 18px -10px rgb(40 20 60 / 0.12);
+  --elevation-raised: 0 4px 10px rgb(40 20 60 / 0.08), 0 14px 32px -14px rgb(40 20 60 / 0.16);
+  --elevation-overlay: 0 8px 20px rgb(40 20 60 / 0.1), 0 24px 48px -18px rgb(40 20 60 / 0.2);
+  --elevation-glow-primary: 0 6px 20px -8px color-mix(in oklab, var(--pink-600) 35%, transparent);
+  --elevation-glow-secondary: 0 6px 20px -8px color-mix(in oklab, var(--violet-600) 35%, transparent);
+  --elevation-glow-highlight: 0 6px 20px -8px color-mix(in oklab, var(--gold-600) 35%, transparent);
+}

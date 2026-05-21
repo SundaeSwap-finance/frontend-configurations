@@ -1,0 +1,704 @@
+/**
+ * ============================================================================
+ * LAYER 3 — Tailwind registration
+ * ============================================================================
+ *
+ * Bridges Layer 1 (primitives) and Layer 2 (semantic roles) into Tailwind v4's
+ * theme namespaces so utilities are generated.
+ *
+ * Colors use `@theme inline`: Tailwind generates the utility and INLINES the
+ * `var()` reference rather than emitting its own copy of the variable. That is
+ * what lets a single `bg-surface-page` resolve live against the `.dark` /
+ * `.light` cascade in Layer 2 — no `dark:` prefixes required at call sites.
+ *
+ * Self-contained values that Tailwind needs verbatim (breakpoints, fonts,
+ * keyframes, animation shorthands) use a plain `@theme` block.
+ *
+ * Two name sets are registered for every ramp: the true-color name (`pink`,
+ * `violet`, `mint`, ...) and the legacy role name (`primary`, `secondary`,
+ * `success`, ...). Tailwind tree-shakes unused utilities, so registering both
+ * costs nothing in output size and keeps existing components working.
+ * ============================================================================
+ */
+
+/* Mode variants — the design system owns these. The app toggles `.dark` /
+ * `.light` on <html>; dark is also the bare `:root` default. */
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:where(.light, .light *));
+
+/* ============================================================================
+ * COLORS — semantic roles (Layer 2) + ramps (Layer 1), inline-bridged.
+ * ========================================================================== */
+@theme inline {
+  /* --- Surfaces -----------------------------------------------------------
+   * Surface backgrounds are not fixed tiers — they are computed per-level by
+   * the `surface` utility (see SURFACE ELEVATION below). Only the role tokens
+   * that sit OUTSIDE the elevation ladder are registered here. */
+  --color-surface-page: var(--surface-page);
+  --color-surface-card: var(--surface-card);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-input: var(--surface-input);
+  --color-surface-disabled: var(--surface-disabled);
+  --color-surface-loading: var(--surface-page);
+
+  /* --- Borders ------------------------------------------------------------ */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-border-hover: var(--border-hover);
+  --color-outline: var(--border-default); /* legacy */
+
+  /* --- Text --------------------------------------------------------------- */
+  --color-heading: var(--text-heading);
+  --color-heading-muted: var(--text-muted);
+  --color-body: var(--text-body);
+  --color-body-muted: var(--text-faint);
+  --color-text-heading: var(--text-heading);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-text-on-accent: var(--text-on-accent);
+  --color-text-link: var(--text-link);
+  --color-text-link-hover: var(--text-link-hover);
+
+  /* --- Action surfaces — base / hover / active / disabled / muted ---------- */
+  --color-action-primary: var(--action-primary);
+  --color-action-primary-hover: var(--action-primary-hover);
+  --color-action-primary-active: var(--action-primary-active);
+  --color-action-primary-disabled: var(--action-primary-disabled);
+  --color-action-primary-muted: var(--action-primary-muted);
+
+  --color-action-secondary: var(--action-secondary);
+  --color-action-secondary-hover: var(--action-secondary-hover);
+  --color-action-secondary-active: var(--action-secondary-active);
+  --color-action-secondary-disabled: var(--action-secondary-disabled);
+  --color-action-secondary-muted: var(--action-secondary-muted);
+
+  --color-action-success: var(--action-success);
+  --color-action-success-hover: var(--action-success-hover);
+  --color-action-success-active: var(--action-success-active);
+  --color-action-success-disabled: var(--action-success-disabled);
+  --color-action-success-muted: var(--action-success-muted);
+
+  --color-action-error: var(--action-error);
+  --color-action-error-hover: var(--action-error-hover);
+  --color-action-error-active: var(--action-error-active);
+  --color-action-error-disabled: var(--action-error-disabled);
+  --color-action-error-muted: var(--action-error-muted);
+
+  --color-action-warning: var(--action-warning);
+  --color-action-warning-hover: var(--action-warning-hover);
+  --color-action-warning-active: var(--action-warning-active);
+  --color-action-warning-disabled: var(--action-warning-disabled);
+  --color-action-warning-muted: var(--action-warning-muted);
+
+  --color-action-info: var(--action-info);
+  --color-action-info-hover: var(--action-info-hover);
+  --color-action-info-active: var(--action-info-active);
+  --color-action-info-disabled: var(--action-info-disabled);
+  --color-action-info-muted: var(--action-info-muted);
+
+  --color-action-silent: var(--action-silent);
+  --color-action-silent-hover: var(--action-silent-hover);
+  --color-action-silent-active: var(--action-silent-active);
+  --color-action-silent-disabled: var(--action-silent-disabled);
+  --color-action-silent-muted: var(--action-silent-muted);
+
+  --color-action-highlight: var(--action-highlight);
+  --color-action-highlight-hover: var(--action-highlight-hover);
+  --color-action-highlight-active: var(--action-highlight-active);
+  --color-action-highlight-disabled: var(--action-highlight-disabled);
+  --color-action-highlight-muted: var(--action-highlight-muted);
+
+  /* --- Named accents + data-viz series ------------------------------------ */
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-violet: var(--accent-violet);
+  --color-accent-indigo: var(--accent-indigo);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-salmon: var(--coral-300); /* legacy alias */
+  --color-accent-peach: var(--gold-300); /* legacy alias */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* --- Focus ring --------------------------------------------------------- */
+  --color-ring: var(--ring);
+
+  /* --- Ramp: ink (true) / neutral (legacy) -------------------------------- */
+  --color-ink-50: var(--ink-50);
+  --color-ink-100: var(--ink-100);
+  --color-ink-200: var(--ink-200);
+  --color-ink-300: var(--ink-300);
+  --color-ink-400: var(--ink-400);
+  --color-ink-500: var(--ink-500);
+  --color-ink-600: var(--ink-600);
+  --color-ink-700: var(--ink-700);
+  --color-ink-800: var(--ink-800);
+  --color-ink-900: var(--ink-900);
+  --color-ink-1000: var(--ink-1000);
+  --color-ink-1100: var(--ink-1100);
+  --color-ink-1200: var(--ink-1200);
+  --color-ink-1300: var(--ink-1300);
+  --color-ink-1400: var(--ink-1400);
+  --color-ink-1500: var(--ink-1500);
+  --color-neutral: var(--ink-50);
+  --color-neutral-50: var(--ink-50);
+  --color-neutral-100: var(--ink-100);
+  --color-neutral-200: var(--ink-200);
+  --color-neutral-300: var(--ink-300);
+  --color-neutral-400: var(--ink-400);
+  --color-neutral-500: var(--ink-500);
+  --color-neutral-600: var(--ink-600);
+  --color-neutral-700: var(--ink-700);
+  --color-neutral-800: var(--ink-800);
+  --color-neutral-900: var(--ink-900);
+  --color-neutral-1000: var(--ink-1000);
+  --color-neutral-1100: var(--ink-1100);
+  --color-neutral-1200: var(--ink-1200);
+  --color-neutral-1300: var(--ink-1300);
+  --color-neutral-1400: var(--ink-1400);
+  --color-neutral-1500: var(--ink-1500);
+
+  /* --- Ramp: slate (true) / silent (legacy) ------------------------------- */
+  --color-slate-50: var(--slate-50);
+  --color-slate-100: var(--slate-100);
+  --color-slate-200: var(--slate-200);
+  --color-slate-300: var(--slate-300);
+  --color-slate-400: var(--slate-400);
+  --color-slate-500: var(--slate-500);
+  --color-slate-600: var(--slate-600);
+  --color-slate-700: var(--slate-700);
+  --color-slate-800: var(--slate-800);
+  --color-slate-900: var(--slate-900);
+  --color-slate-1000: var(--slate-1000);
+  --color-silent: var(--slate-500);
+  --color-silent-50: var(--slate-50);
+  --color-silent-100: var(--slate-100);
+  --color-silent-200: var(--slate-200);
+  --color-silent-300: var(--slate-300);
+  --color-silent-400: var(--slate-400);
+  --color-silent-500: var(--slate-500);
+  --color-silent-600: var(--slate-600);
+  --color-silent-700: var(--slate-700);
+  --color-silent-800: var(--slate-800);
+  --color-silent-900: var(--slate-900);
+  --color-silent-1000: var(--slate-1000);
+
+  /* --- Ramp: pink (true) / primary (legacy) ------------------------------- */
+  --color-pink-50: var(--pink-50);
+  --color-pink-100: var(--pink-100);
+  --color-pink-200: var(--pink-200);
+  --color-pink-300: var(--pink-300);
+  --color-pink-400: var(--pink-400);
+  --color-pink-500: var(--pink-500);
+  --color-pink-600: var(--pink-600);
+  --color-pink-700: var(--pink-700);
+  --color-pink-800: var(--pink-800);
+  --color-pink-900: var(--pink-900);
+  --color-pink-950: var(--pink-950);
+  --color-primary: var(--pink-500);
+  --color-primary-50: var(--pink-50);
+  --color-primary-100: var(--pink-100);
+  --color-primary-200: var(--pink-200);
+  --color-primary-300: var(--pink-300);
+  --color-primary-400: var(--pink-400);
+  --color-primary-500: var(--pink-500);
+  --color-primary-600: var(--pink-600);
+  --color-primary-700: var(--pink-700);
+  --color-primary-800: var(--pink-800);
+  --color-primary-900: var(--pink-900);
+
+  /* --- Ramp: violet (true) / secondary (legacy) --------------------------- */
+  --color-violet-50: var(--violet-50);
+  --color-violet-100: var(--violet-100);
+  --color-violet-200: var(--violet-200);
+  --color-violet-300: var(--violet-300);
+  --color-violet-400: var(--violet-400);
+  --color-violet-500: var(--violet-500);
+  --color-violet-600: var(--violet-600);
+  --color-violet-700: var(--violet-700);
+  --color-violet-800: var(--violet-800);
+  --color-violet-900: var(--violet-900);
+  --color-violet-950: var(--violet-950);
+  --color-secondary: var(--violet-500);
+  --color-secondary-50: var(--violet-50);
+  --color-secondary-100: var(--violet-100);
+  --color-secondary-200: var(--violet-200);
+  --color-secondary-300: var(--violet-300);
+  --color-secondary-400: var(--violet-400);
+  --color-secondary-500: var(--violet-500);
+  --color-secondary-600: var(--violet-600);
+  --color-secondary-700: var(--violet-700);
+  --color-secondary-800: var(--violet-800);
+  --color-secondary-900: var(--violet-900);
+
+  /* --- Ramp: indigo (true) / blue (legacy) -------------------------------- */
+  --color-indigo-50: var(--indigo-50);
+  --color-indigo-100: var(--indigo-100);
+  --color-indigo-200: var(--indigo-200);
+  --color-indigo-300: var(--indigo-300);
+  --color-indigo-400: var(--indigo-400);
+  --color-indigo-500: var(--indigo-500);
+  --color-indigo-600: var(--indigo-600);
+  --color-indigo-700: var(--indigo-700);
+  --color-indigo-800: var(--indigo-800);
+  --color-indigo-900: var(--indigo-900);
+  --color-indigo-950: var(--indigo-950);
+  --color-blue: var(--indigo-500);
+  --color-blue-50: var(--indigo-50);
+  --color-blue-100: var(--indigo-100);
+  --color-blue-200: var(--indigo-200);
+  --color-blue-300: var(--indigo-300);
+  --color-blue-400: var(--indigo-400);
+  --color-blue-500: var(--indigo-500);
+  --color-blue-600: var(--indigo-600);
+  --color-blue-700: var(--indigo-700);
+  --color-blue-800: var(--indigo-800);
+  --color-blue-900: var(--indigo-900);
+
+  /* --- Ramp: cyan --------------------------------------------------------- */
+  --color-cyan-50: var(--cyan-50);
+  --color-cyan-100: var(--cyan-100);
+  --color-cyan-200: var(--cyan-200);
+  --color-cyan-300: var(--cyan-300);
+  --color-cyan-400: var(--cyan-400);
+  --color-cyan-500: var(--cyan-500);
+  --color-cyan-600: var(--cyan-600);
+  --color-cyan-700: var(--cyan-700);
+  --color-cyan-800: var(--cyan-800);
+  --color-cyan-900: var(--cyan-900);
+  --color-cyan-950: var(--cyan-950);
+
+  /* --- Ramp: gold (true) / highlight + warning (legacy) ------------------- */
+  --color-gold-50: var(--gold-50);
+  --color-gold-100: var(--gold-100);
+  --color-gold-200: var(--gold-200);
+  --color-gold-300: var(--gold-300);
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
+  --color-gold-700: var(--gold-700);
+  --color-gold-800: var(--gold-800);
+  --color-gold-900: var(--gold-900);
+  --color-gold-950: var(--gold-950);
+  --color-highlight: var(--gold-400);
+  --color-highlight-50: var(--gold-50);
+  --color-highlight-100: var(--gold-100);
+  --color-highlight-200: var(--gold-200);
+  --color-highlight-300: var(--gold-300);
+  --color-highlight-400: var(--gold-400);
+  --color-highlight-500: var(--gold-500);
+  --color-highlight-600: var(--gold-600);
+  --color-highlight-700: var(--gold-700);
+  --color-highlight-800: var(--gold-800);
+  --color-highlight-900: var(--gold-900);
+  --color-warning: var(--gold-500);
+  --color-warning-50: var(--gold-50);
+  --color-warning-100: var(--gold-100);
+  --color-warning-200: var(--gold-200);
+  --color-warning-300: var(--gold-300);
+  --color-warning-400: var(--gold-400);
+  --color-warning-500: var(--gold-500);
+  --color-warning-600: var(--gold-600);
+  --color-warning-700: var(--gold-700);
+  --color-warning-800: var(--gold-800);
+  --color-warning-900: var(--gold-900);
+
+  /* --- Ramp: mint (true) / success (legacy) ------------------------------- */
+  --color-mint-50: var(--mint-50);
+  --color-mint-100: var(--mint-100);
+  --color-mint-200: var(--mint-200);
+  --color-mint-300: var(--mint-300);
+  --color-mint-400: var(--mint-400);
+  --color-mint-500: var(--mint-500);
+  --color-mint-600: var(--mint-600);
+  --color-mint-700: var(--mint-700);
+  --color-mint-800: var(--mint-800);
+  --color-mint-900: var(--mint-900);
+  --color-mint-950: var(--mint-950);
+  --color-success: var(--mint-500);
+  --color-success-50: var(--mint-50);
+  --color-success-100: var(--mint-100);
+  --color-success-200: var(--mint-200);
+  --color-success-300: var(--mint-300);
+  --color-success-400: var(--mint-400);
+  --color-success-500: var(--mint-500);
+  --color-success-600: var(--mint-600);
+  --color-success-700: var(--mint-700);
+  --color-success-800: var(--mint-800);
+  --color-success-900: var(--mint-900);
+
+  /* --- Ramp: coral (true) / error (legacy) -------------------------------- */
+  --color-coral-50: var(--coral-50);
+  --color-coral-100: var(--coral-100);
+  --color-coral-200: var(--coral-200);
+  --color-coral-300: var(--coral-300);
+  --color-coral-400: var(--coral-400);
+  --color-coral-500: var(--coral-500);
+  --color-coral-600: var(--coral-600);
+  --color-coral-700: var(--coral-700);
+  --color-coral-800: var(--coral-800);
+  --color-coral-900: var(--coral-900);
+  --color-coral-950: var(--coral-950);
+  --color-error: var(--coral-500);
+  --color-error-50: var(--coral-50);
+  --color-error-100: var(--coral-100);
+  --color-error-200: var(--coral-200);
+  --color-error-300: var(--coral-300);
+  --color-error-400: var(--coral-400);
+  --color-error-500: var(--coral-500);
+  --color-error-600: var(--coral-600);
+  --color-error-700: var(--coral-700);
+  --color-error-800: var(--coral-800);
+  --color-error-900: var(--coral-900);
+
+  /* --- Social brand colors — third-party, not part of the palette --------- */
+  --color-socials-github: #6e5494;
+  --color-socials-twitter: #1da1f2;
+  --color-socials-discord: #5865f2;
+  --color-socials-telegram: #229ed9;
+  --color-socials-medium: #00ab6c;
+  --color-socials-reddit: #ff4500;
+  --color-socials-linkedin: #0077b5;
+  --color-socials-youtube: #ff0000;
+}
+
+/* ============================================================================
+ * RADII / SHADOWS / MOTION — inline-bridged from Layers 1 & 2.
+ * ========================================================================== */
+@theme inline {
+  /* Semantic radii — component rounding lives in one place. */
+  --radius-card: var(--radius-xl);
+  --radius-dialog: var(--radius-xl);
+  --radius-popover: var(--radius-xl);
+  --radius-hover-card: var(--radius-xl);
+  --radius-input: var(--radius-lg);
+  --radius-tooltip: var(--radius-md);
+  --radius-pill: var(--radius-full);
+
+  /* Elevation — mode-aware shadows from Layer 2. */
+  --shadow-card: var(--elevation-card);
+  --shadow-raised: var(--elevation-raised);
+  --shadow-overlay: var(--elevation-overlay);
+  --shadow-dialog: var(--elevation-raised);
+  --shadow-popover: var(--elevation-overlay);
+  --shadow-hover-card: var(--elevation-raised);
+  --shadow-tooltip: var(--elevation-overlay);
+  --shadow-header: var(--elevation-card);
+  --shadow-glow-primary: var(--elevation-glow-primary);
+  --shadow-glow-secondary: var(--elevation-glow-secondary);
+  --shadow-glow-highlight: var(--elevation-glow-highlight);
+
+  /* Motion — durations + easing curves from Layer 1. */
+  --duration-instant: var(--duration-instant);
+  --duration-fast: var(--duration-fast);
+  --duration-base: var(--duration-base);
+  --duration-slow: var(--duration-slow);
+  --duration-slower: var(--duration-slower);
+  --duration-slowest: var(--duration-slowest);
+  --ease-snap: var(--ease-snap);
+  --ease-out-quart: var(--ease-out-quart);
+  --ease-in-out-soft: var(--ease-in-out-soft);
+}
+
+/* ============================================================================
+ * STATIC THEME — values Tailwind needs verbatim.
+ * ========================================================================== */
+@theme {
+  /* --- Typography --------------------------------------------------------- */
+  --font-sans: "Geist", "DM Sans", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "DM Mono", Menlo, Consolas, Monaco, "Liberation Mono",
+    "Lucida Console", monospace;
+
+  --text-xxs: 0.625rem;
+  --text-xxs--line-height: 0.75rem;
+
+  /* --- Breakpoints -------------------------------------------------------- */
+  --breakpoint-xxs: 240px;
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+  --breakpoint-xxl: 1920px;
+
+  /* --- Spacing aliases --------------------------------------------------- */
+  --spacing-space-xs: 4px;
+  --spacing-space-sm: 8px;
+  --spacing-space-md: 12px;
+  --spacing-space-lg: 16px;
+  --spacing-space-xl: 24px;
+
+  /* --- Animation shorthands ---------------------------------------------- */
+  --animate-marquee-left: marquee-left var(--duration, 40s) linear infinite;
+  --animate-marquee-up: marquee-up var(--duration, 40s) linear infinite;
+  --animate-bell-shake: bell-shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  --animate-toast-progress-bar: toast-progress-bar 6s linear forwards;
+  --animate-toast-swipe-out: toast-swipe-out 100ms ease-out forwards;
+  --animate-toast-slide-in-from-bottom: toast-slide-in-from-bottom 0.6s
+    cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-toast-slide-down-to-bottom: toast-slide-down-to-bottom 0.6s
+    cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-toast-slide-in-from-right: toast-slide-in-from-right 0.6s
+    cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-toast-slide-out-to-right: toast-slide-out-to-right 0.6s
+    cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-up-fade: slide-up-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-right-fade: slide-right-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-down-fade: slide-down-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-left-fade: slide-left-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-down: slide-down 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-up: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-left: slide-left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-right: slide-right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-dialog-overlay-show: dialog-overlay-show 0.4s
+    cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-dialog-content-show: dialog-content-show 0.4s
+    cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-collapsible-open: collapsible-open 0.3s ease-out forwards;
+  --animate-collapsible-close: collapsible-close 0.3s ease-out forwards;
+  --animate-dot-flashing: dot-flashing 1s infinite alternate;
+  --animate-dot-flashing-dark: dot-flashing-dark 1s infinite alternate;
+  --animate-shadow-pulse: shadow-pulse 0.3s forwards;
+  --animate-shake: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  --animate-spin-slow: spin 5s linear infinite;
+  --animate-enter-from-right: enterFromRight 250ms ease;
+  --animate-enter-from-left: enterFromLeft 250ms ease;
+  --animate-exit-to-right: exitToRight 250ms ease;
+  --animate-exit-to-left: exitToLeft 250ms ease;
+  --animate-scale-in: scaleIn 200ms ease;
+  --animate-scale-out: scaleOut 200ms ease;
+  --animate-fade-in: fadeIn 200ms ease;
+  --animate-fade-out: fadeOut 200ms ease;
+  --animate-open-off-canvas: openOffCanvas 250ms ease forwards;
+  --animate-close-off-canvas: closeOffCanvas 250ms ease forwards;
+  --animate-open-accordion: openAccordion 250ms cubic-bezier(0.87, 0, 0.13, 1);
+  --animate-close-accordion: closeAccordion 250ms cubic-bezier(0.87, 0, 0.13, 1);
+  --animate-iris-drift: iris-drift 9s ease-in-out infinite;
+
+  /* --- Keyframes --------------------------------------------------------- */
+  @keyframes marquee-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - var(--gap))); }
+  }
+  @keyframes marquee-up {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(-100% - var(--gap))); }
+  }
+  @keyframes toast-progress-bar {
+    0% { left: 0; }
+    100% { left: -100%; }
+  }
+  @keyframes toast-swipe-out {
+    0% { transform: translateX(var(--radix-toast-swipe-end-x)); }
+    100% { transform: translateX(calc(100% + 1rem)); }
+  }
+  @keyframes toast-slide-in-from-bottom {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes toast-slide-down-to-bottom {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(10px); }
+  }
+  @keyframes toast-slide-in-from-right {
+    0% { opacity: 0; transform: translateX(10px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes toast-slide-out-to-right {
+    0% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(10px); }
+  }
+  @keyframes slide-up-fade {
+    0% { opacity: 0; transform: translateY(2px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-right-fade {
+    0% { opacity: 0; transform: translateX(-2px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slide-down-fade {
+    0% { opacity: 0; transform: translateY(-2px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-left-fade {
+    0% { opacity: 0; transform: translateX(2px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slide-down {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-up {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-left {
+    0% { opacity: 0; transform: translateX(10px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slide-right {
+    0% { opacity: 0; transform: translateX(-10px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes dialog-overlay-show {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes dialog-content-show {
+    0% { opacity: 0; scale: 0.96; }
+    100% { opacity: 1; scale: 1; }
+  }
+  @keyframes dialog-overlay-hide {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  @keyframes dialog-content-hide {
+    0% { opacity: 1; scale: 1; }
+    100% { opacity: 0; scale: 0.96; }
+  }
+  @keyframes collapsible-open {
+    0% { height: 0; }
+    100% { height: var(--radix-collapsible-content-height); }
+  }
+  @keyframes collapsible-close {
+    0% { height: var(--radix-collapsible-content-height); }
+    100% { height: 0; }
+  }
+  @keyframes dot-flashing {
+    0% { background-color: var(--indigo-400); }
+    50%, 100% { background-color: var(--ink-100); }
+  }
+  @keyframes dot-flashing-dark {
+    0% { background-color: var(--indigo-400); }
+    50%, 100% { background-color: var(--slate-700); }
+  }
+  @keyframes shadow-pulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--violet-500) 40%, transparent); }
+    70% { box-shadow: 0 0 0 20px color-mix(in oklab, var(--violet-500) 0%, transparent); }
+    100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--violet-500) 0%, transparent); }
+  }
+  @keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+  }
+  @keyframes bell-shake {
+    0% { transform: rotate(0); }
+    15% { transform: rotate(5deg); }
+    30% { transform: rotate(-5deg); }
+    45% { transform: rotate(3deg); }
+    60% { transform: rotate(-3deg); }
+    75% { transform: rotate(2deg); }
+    85% { transform: rotate(-2deg); }
+    92% { transform: rotate(1deg); }
+    100% { transform: rotate(0); }
+  }
+  @keyframes enterFromRight {
+    from { transform: translateX(200px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes enterFromLeft {
+    from { transform: translateX(-200px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes exitToRight {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(200px); opacity: 0; }
+  }
+  @keyframes exitToLeft {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-200px); opacity: 0; }
+  }
+  @keyframes scaleIn {
+    from { transform: rotateX(-30deg) scale(0.9); opacity: 0; }
+    to { transform: rotateX(0deg) scale(1); opacity: 1; }
+  }
+  @keyframes scaleOut {
+    from { transform: rotateX(0deg) scale(1); opacity: 1; }
+    to { transform: rotateX(-10deg) scale(0.95); opacity: 0; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes openOffCanvas {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(-1.5rem); opacity: 1; }
+  }
+  @keyframes closeOffCanvas {
+    from { transform: translateX(-1.5rem); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+  }
+  @keyframes openAccordion {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes closeAccordion {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+  @keyframes iris-drift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+}
+
+/* ============================================================================
+ * IRIS GRADIENT — fill utility. The brand signature for hero CTAs, avatars,
+ * badges, and active states. Never applied as background-clip:text.
+ * ========================================================================== */
+@utility bg-iris {
+  background-image: var(--gradient-iris);
+}
+
+@utility bg-iris-animated {
+  background-image: var(--gradient-iris);
+  background-size: 220% 220%;
+  animation: var(--animate-iris-drift);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-iris-animated {
+    animation: none;
+  }
+}
+
+/* ============================================================================
+ * SURFACE — a translucent tint that stacks.
+ *
+ * Every surface paints the same translucent --surface-card. Nested surfaces
+ * lift automatically as their /10 layers composite over one another. The
+ * --surface-level integer (set by the <Surface> component, parent + 1) no
+ * longer drives color — it only scales the drop shadow.
+ * ========================================================================== */
+@property --surface-level {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@utility surface {
+  /* Frosted glass — a translucent tint over a backdrop blur. Nested surfaces
+   * lift as the /10 layers stack; the blur diffuses the page glow so every
+   * card reads consistently wherever it sits on the page. */
+  background-color: var(--surface-card);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 calc(min(var(--surface-level, 0), 6) * 1.5px)
+    calc(min(var(--surface-level, 0), 6) * 5px)
+    calc(min(var(--surface-level, 0), 6) * -1.5px)
+    var(--surface-shadow-color);
+}
