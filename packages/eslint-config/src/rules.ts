@@ -1,6 +1,48 @@
 import { ESLint } from "eslint";
 import { hasReact } from "./utils.js";
 
+/**
+ * SundaeSwap V4 design-system drift guards. These flag the exact patterns the
+ * token/a11y audit found so the drift can't silently regenerate. They are NOT
+ * part of the base `rules` — unrelated consumers of this config are unaffected.
+ * Design-system apps/libs (dex-v2, ui-toolkit) opt in via the `designSystemConfig`
+ * export in `index.ts`. Severity is "warn" so they never block CI.
+ */
+export const designSystemRestrictedSyntax = [
+  // (a) Raw color-ramp utilities bypass mode-switching — they resolve via
+  // aliases but never react to .light/.dark. Reference semantic role tokens
+  // (action-*, surface-*, text-*, border-*, accent-*, chart-*) instead.
+  {
+    selector:
+      "JSXAttribute[name.name='className'] Literal[value=/(?<![\\w-])(?:bg|text|border|from|to|via|ring|fill|stroke)-(?:pink|violet|indigo|cyan|gold|mint|coral|slate|ink|neutral|silent|primary|secondary|success|error|warning|highlight|blue)-\\d/]",
+    message:
+      "Raw color-ramp utility in className: bypasses light/dark mode-switching. Use a semantic token (e.g. bg-surface-card, text-body, border-default, action-primary) instead of a raw ramp like bg-pink-500.",
+  },
+  // (b) Hardcoded white/black ignore the theme entirely.
+  {
+    selector:
+      "JSXAttribute[name.name='className'] Literal[value=/(?<![\\w-])(?:text-white|bg-white|bg-black|text-black)(?![\\w-])/]",
+    message:
+      "Hardcoded text-white/bg-white/bg-black/text-black ignore theme switching. Use semantic tokens (e.g. text-on-accent, text-heading, surface-page).",
+  },
+  // (c) Bold weight utilities — V4 hierarchy comes from size/variant/layout,
+  // never from heavy font weights.
+  {
+    selector:
+      "JSXAttribute[name.name='className'] Literal[value=/(?<![\\w-])font-(?:bold|semibold|extrabold|black)(?![\\w-])/]",
+    message:
+      "Bold weight utility (font-bold/semibold/extrabold/black). V4 typography derives hierarchy from size/variant/layout, not weight. Remove it.",
+  },
+  // (d) The Text/Heading `weight="bold|semibold|extrabold|black"` prop — same
+  // rule as (c) but at the component-prop layer.
+  {
+    selector:
+      "JSXAttribute[name.name='weight'] > Literal[value=/^(?:bold|semibold|extrabold|black)$/]",
+    message:
+      'weight="bold|semibold|extrabold|black" on Text/Heading. V4 typography derives hierarchy from size/variant/layout, not weight. Drop the weight prop.',
+  },
+];
+
 export const rules: ESLint.ConfigData["rules"] = {
   "array-callback-return": "warn",
   "default-case": ["warn", { commentPattern: "^no default$" }],
