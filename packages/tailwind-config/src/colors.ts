@@ -22,7 +22,7 @@ const ink = {
   600: "#827d8d",
   700: "#656071",
   800: "#4f4a5b",
-  900: "#3b3449",
+  900: "#3a3447",
   1000: "#2b2538",
   1100: "#221b2d",
   1200: "#181322",
@@ -47,14 +47,33 @@ const slate = {
   1000: "#0e0c12",
 };
 
-/** Brand primary. */
+/** Brand primary — deep regal purple, the warm pole of the V4 iris gradient.
+ *  Anchors the Unicorn morph palette (purple → cyan → mint). DEFAULT is the
+ *  700 stop so chart/token surfaces read as rich purple, not pastel lavender. */
+const purple = {
+  DEFAULT: "#451a8b",
+  50: "#f2f0fd",
+  100: "#e6e0fd",
+  200: "#d1c4fd",
+  300: "#b199f4",
+  400: "#8c6de2",
+  500: "#6c42c3",
+  600: "#552ba3",
+  700: "#451a8b",
+  800: "#350d70",
+  900: "#23044e",
+  950: "#0f0129",
+};
+
+/** Legacy pink ramp. Demoted from brand-primary in V4; still available for
+ *  callsites that want explicit pink (legacy charts, error accents). */
 const pink = {
   DEFAULT: "#f7538e",
   50: "#fff1f4",
-  100: "#ffdce5",
-  200: "#ffbccf",
-  300: "#ff95b7",
-  400: "#ff73a2",
+  100: "#ffdee6",
+  200: "#fec1d0",
+  300: "#fe9cb8",
+  400: "#fe78a2",
   500: "#f7538e",
   600: "#d83977",
   700: "#ad2458",
@@ -81,12 +100,12 @@ const violet = {
 
 /** Periwinkle. Info / links. */
 const indigo = {
-  DEFAULT: "#959af7",
+  DEFAULT: "#8b9bff",
   50: "#f3f4fd",
   100: "#e3e6ff",
-  200: "#cbd0ff",
+  200: "#cbd0fe",
   300: "#b1b7fd",
-  400: "#959af7",
+  400: "#8b9bff",
   500: "#7b7ded",
   600: "#6062db",
   700: "#464bb5",
@@ -97,29 +116,29 @@ const indigo = {
 
 /** Sky. Closes the iris gradient. */
 const cyan = {
-  DEFAULT: "#63ccf8",
+  DEFAULT: "#5ed6ff",
   50: "#edf7fc",
   100: "#d1edfb",
   200: "#afe0f7",
   300: "#89d7f9",
-  400: "#63ccf8",
+  400: "#5ed6ff",
   500: "#32b3e6",
-  600: "#0096ce",
-  700: "#0076ab",
-  800: "#005781",
-  900: "#003d5c",
+  600: "#0995c8",
+  700: "#0775a1",
+  800: "#04567b",
+  900: "#023c59",
   950: "#01273d",
 };
 
 /** Warm honey. Warning / highlight. */
 const gold = {
-  DEFAULT: "#fdb85b",
+  DEFAULT: "#f9bb5c",
   50: "#fcf4e8",
   100: "#fee7cb",
   200: "#ffd6a3",
-  300: "#ffc981",
+  300: "#feca88",
   400: "#febc66",
-  500: "#fdb85b",
+  500: "#f9bb5c",
   600: "#da943f",
   700: "#af702b",
   800: "#835021",
@@ -136,20 +155,20 @@ const mint = {
   300: "#81deb1",
   400: "#62d8a6",
   500: "#36ca95",
-  600: "#00ac7c",
-  700: "#008761",
-  800: "#00664a",
-  900: "#004935",
+  600: "#0bac7d",
+  700: "#0a8662",
+  800: "#04654a",
+  900: "#024936",
   950: "#023124",
 };
 
 /** Red. Error / destructive. */
 const coral = {
   DEFAULT: "#ed3d57",
-  50: "#fff1f0",
-  100: "#ffddda",
-  200: "#ffbab9",
-  300: "#ff898e",
+  50: "#fff2f1",
+  100: "#ffdfdd",
+  200: "#febebd",
+  300: "#fe8f92",
   400: "#fe6270",
   500: "#ed3d57",
   600: "#d12444",
@@ -169,6 +188,7 @@ export const colors = {
   /* True-color ramps */
   ink,
   slate,
+  purple,
   pink,
   violet,
   indigo,
@@ -177,10 +197,11 @@ export const colors = {
   mint,
   coral,
 
-  /* Legacy role aliases */
+  /* Legacy role aliases — V4 brand: purple → cyan, with mint/gold/coral as
+   * status accents. Pink stays available as `pink` but no longer leads. */
   neutral: ink,
-  primary: pink,
-  secondary: violet,
+  primary: purple,
+  secondary: cyan,
   highlight: gold,
   success: mint,
   error: coral,
@@ -188,13 +209,16 @@ export const colors = {
   silent: slate,
   blue: indigo,
 
-  /* Named accents — the five-note neon chord */
+  /* Named accents — the V4 five-note chord (purple → violet → cyan → mint → gold).
+   * `pink` retained as an accent for callsites still on the legacy palette. */
   accent: {
-    pink: pink[500],
+    purple: purple[700],
     violet: violet[500],
-    indigo: indigo[400],
     cyan: cyan[400],
+    mint: mint[400],
     gold: gold[500],
+    pink: pink[500],
+    indigo: indigo[400],
     /* legacy accent aliases */
     salmon: coral[300],
     peach: gold[300],

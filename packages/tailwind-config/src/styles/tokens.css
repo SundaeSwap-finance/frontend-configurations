@@ -31,7 +31,7 @@
   --ink-600: oklch(60% 0.024 300);
   --ink-700: oklch(50% 0.027 300);
   --ink-800: oklch(42% 0.030 300);
-  --ink-900: oklch(34% 0.038 300);
+  --ink-900: oklch(34% 0.034 300);
   --ink-1000: oklch(28% 0.036 300);
   --ink-1100: oklch(24% 0.034 300);
   --ink-1200: oklch(20% 0.030 300);
@@ -61,10 +61,10 @@
    * Pink — brand primary. Hue 2 (red-pink boundary). 500 is the neon stop.
    * ========================================================================== */
   --pink-50: oklch(97% 0.015 2);
-  --pink-100: oklch(93% 0.045 2);
-  --pink-200: oklch(87% 0.090 2);
-  --pink-300: oklch(80% 0.140 2);
-  --pink-400: oklch(74% 0.180 2);
+  --pink-100: oklch(93% 0.037 2);
+  --pink-200: oklch(87% 0.073 2);
+  --pink-300: oklch(80% 0.121 2);
+  --pink-400: oklch(74% 0.168 2);
   --pink-500: oklch(68% 0.205 2);
   --pink-600: oklch(60% 0.200 2);
   --pink-700: oklch(50% 0.175 4);
@@ -95,10 +95,10 @@
    * Anchored at 400 (the reference #8b9bff).
    * ========================================================================== */
   --indigo-50: oklch(97% 0.012 280);
-  --indigo-100: oklch(93% 0.035 280);
-  --indigo-200: oklch(87% 0.065 280);
+  --indigo-100: oklch(93% 0.034 280);
+  --indigo-200: oklch(87% 0.064 280);
   --indigo-300: oklch(80% 0.100 280);
-  --indigo-400: oklch(72% 0.135 280);
+  --indigo-400: oklch(72% 0.146 275.2);
   --indigo-500: oklch(64% 0.165 280);
   --indigo-600: oklch(56% 0.180 278);
   --indigo-700: oklch(47% 0.165 276);
@@ -114,24 +114,26 @@
   --cyan-100: oklch(93% 0.035 228);
   --cyan-200: oklch(88% 0.060 228);
   --cyan-300: oklch(84% 0.090 228);
-  --cyan-400: oklch(80% 0.115 228);
+  --cyan-400: oklch(82.3% 0.121 223.7);
   --cyan-500: oklch(72% 0.130 230);
-  --cyan-600: oklch(63% 0.140 232);
-  --cyan-700: oklch(53% 0.130 234);
-  --cyan-800: oklch(43% 0.105 236);
-  --cyan-900: oklch(34% 0.080 238);
+  --cyan-600: oklch(63% 0.127 232);
+  --cyan-700: oklch(53% 0.109 234);
+  --cyan-800: oklch(43% 0.091 236);
+  --cyan-900: oklch(34% 0.074 238);
   --cyan-950: oklch(26% 0.058 240);
 
   /* ==========================================================================
    * Gold — warm honey. Hue 72. Warning, highlight, the launch-phase accent.
-   * Anchored at 500 (the reference #ffc163).
+   * Tuned toward the reference #ffc163; kept one stop below gold-400 to hold
+   * the ramp's monotone lightness, so 500 renders ~#f9bb5c (the brand hue/chroma
+   * at a slightly deeper L). Use accent-gold for the exact brand chip.
    * ========================================================================== */
   --gold-50: oklch(97% 0.018 75);
   --gold-100: oklch(94% 0.045 74);
   --gold-200: oklch(90% 0.080 73);
-  --gold-300: oklch(87% 0.110 72);
+  --gold-300: oklch(87% 0.102 72);
   --gold-400: oklch(84% 0.128 72);
-  --gold-500: oklch(83% 0.135 72);
+  --gold-500: oklch(83% 0.132 75.7);
   --gold-600: oklch(72% 0.130 68);
   --gold-700: oklch(60% 0.115 64);
   --gold-800: oklch(48% 0.092 60);
@@ -148,20 +150,20 @@
   --mint-300: oklch(83% 0.110 162);
   --mint-400: oklch(80% 0.130 163);
   --mint-500: oklch(75% 0.145 164);
-  --mint-600: oklch(66% 0.140 165);
-  --mint-700: oklch(55% 0.120 166);
-  --mint-800: oklch(45% 0.098 167);
-  --mint-900: oklch(36% 0.075 168);
+  --mint-600: oklch(66% 0.137 165);
+  --mint-700: oklch(55% 0.112 166);
+  --mint-800: oklch(45% 0.091 167);
+  --mint-900: oklch(36% 0.072 168);
   --mint-950: oklch(28% 0.055 168);
 
   /* ==========================================================================
    * Coral — red. Hue 18 (orange-shifted so it never collides with brand pink
    * at hue 2). Error / destructive / losses. Derived.
    * ========================================================================== */
-  --coral-50: oklch(97% 0.016 22);
-  --coral-100: oklch(93% 0.045 22);
-  --coral-200: oklch(86% 0.090 20);
-  --coral-300: oklch(77% 0.150 19);
+  --coral-50: oklch(97% 0.014 22);
+  --coral-100: oklch(93% 0.035 22);
+  --coral-200: oklch(86% 0.074 20);
+  --coral-300: oklch(77% 0.134 19);
   --coral-400: oklch(70% 0.190 18);
   --coral-500: oklch(63% 0.210 18);
   --coral-600: oklch(56% 0.205 18);
@@ -171,27 +173,67 @@
   --coral-950: oklch(23% 0.080 20);
 
   /* ==========================================================================
-   * Iris — the signature gradient. pink → violet → cyan. Defined as a
-   * primitive so a single edit re-tunes every brand surface that paints it.
-   * NOTE: only ever used as a fill (buttons, avatars, badges, glows). Never
-   * as background-clip:text — gradient text is banned.
+   * Iris — the signature gradient. deep violet → violet → cyan → mint.
+   * Defined as a primitive so a single edit re-tunes every brand surface
+   * that paints it (CTAs, avatars, badges, glows, chart anchors, ring
+   * indicators). NOTE: only ever used as a fill — gradient text is banned.
+   *
+   * Re-anchored from pink → violet → cyan to deep-violet → cyan → mint to
+   * match the Unicorn morph scene that paints the V4 animated CTAs. Pink is
+   * retired as a brand anchor — it stays available in the primitive ramp
+   * for legacy/error uses but no longer leads the gradient.
    * ========================================================================== */
-  --iris-from: var(--pink-500);
-  --iris-via: oklch(64% 0.205 313); /* dedicated vivid violet — keeps the gradient electric */
+  /* Deep regal purple — the V4 brand anchor. Mirrors the `purple` hex ramp in
+   * colors.ts (JS side). Used by --action-primary, --chart-1, and the iris
+   * gradient's warm pole. Distinct from --violet-* which stays as the V3
+   * pastel lavender ramp for legacy callsites. */
+  --purple-50: oklch(96% 0.018 295);
+  --purple-100: oklch(92% 0.040 295);
+  --purple-200: oklch(85% 0.080 295);
+  --purple-300: oklch(74% 0.130 295);
+  --purple-400: oklch(62% 0.170 293);
+  --purple-500: oklch(50% 0.190 293);
+  --purple-600: oklch(42% 0.180 293);
+  --purple-700: oklch(36% 0.170 293);
+  --purple-800: oklch(30% 0.150 293);
+  --purple-900: oklch(23% 0.120 293);
+  --purple-950: oklch(15% 0.080 293);
+
+  --iris-from: var(--purple-700); /* deep regal purple — anchors the warm pole */
+  --iris-via: oklch(64% 0.205 295); /* vivid violet — keeps the gradient electric */
   --iris-to: var(--cyan-400);
+  --iris-tail: var(--mint-400); /* mint endpoint — the cool pole of the morph */
   --iris-angle: 115deg;
   --gradient-iris: linear-gradient(
     var(--iris-angle),
     var(--iris-from),
-    var(--iris-via) 46%,
-    var(--iris-to)
+    var(--iris-via) 32%,
+    var(--iris-to) 68%,
+    var(--iris-tail)
   );
+  /* Seamless loop variant — bookends match so background-position animation
+   * never flashes an edge when it wraps. */
+  --gradient-iris-loop: linear-gradient(
+    90deg,
+    var(--iris-from) 0%,
+    var(--iris-via) 22%,
+    var(--iris-to) 50%,
+    var(--iris-tail) 75%,
+    var(--iris-via) 88%,
+    var(--iris-from) 100%
+  );
+
+  /* Muted iris — pearlescent soap-bubble chrome. Lavender → soft cyan →
+   * mint, thin-film iridescence on dark glass (not the electric hero
+   * gradient). Same family as the hero gradient, lower saturation. */
+  --iris-muted-from: oklch(70% 0.12 295);
+  --iris-muted-via: oklch(78% 0.10 230);
+  --iris-muted-to: oklch(82% 0.09 165);
 
   /* ==========================================================================
    * Dimension primitives — radius, duration, easing. Context-free scales;
    * Layer 2/3 give them component roles.
    * ========================================================================== */
-  --radius-2xs: 0.25rem;
   --radius-xs: 0.5rem;
   --radius-sm: 0.75rem;
   --radius-md: 1rem;

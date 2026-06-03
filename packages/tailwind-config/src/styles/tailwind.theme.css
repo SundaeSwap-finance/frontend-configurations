@@ -28,6 +28,11 @@
 
 /* ============================================================================
  * COLORS — semantic roles (Layer 2) + ramps (Layer 1), inline-bridged.
+ *
+ * @deprecated — the legacy role aliases interleaved below
+ * (--color-primary/secondary/blue/silent/highlight + warning and
+ * --color-accent-salmon/accent-peach) prefer the true-color names
+ * (pink/violet/indigo/slate/gold). Kept for back-compat, slated for removal.
  * ========================================================================== */
 @theme inline {
   /* --- Surfaces -----------------------------------------------------------
@@ -39,6 +44,8 @@
   --color-surface-hover: var(--surface-hover);
   --color-surface-input: var(--surface-input);
   --color-surface-disabled: var(--surface-disabled);
+  /* TODO(Layer 2): surface-loading aliases surface-page with no distinct value.
+   * Add a real --surface-loading role token in Layer 2 and point this at it. */
   --color-surface-loading: var(--surface-page);
 
   /* --- Borders ------------------------------------------------------------ */
@@ -46,6 +53,7 @@
   --color-border-default: var(--border-default);
   --color-border-strong: var(--border-strong);
   --color-border-hover: var(--border-hover);
+  --color-border-control: var(--border-control);
   --color-outline: var(--border-default); /* legacy */
 
   /* --- Text --------------------------------------------------------------- */
@@ -53,6 +61,9 @@
   --color-heading-muted: var(--text-muted);
   --color-body: var(--text-body);
   --color-body-muted: var(--text-faint);
+  /* Named content tiers below the primary scion. `text-heading-muted` (slate-300)
+   * is the secondary alias; `text-tertiary` (slate-400) is the third step. */
+  --color-tertiary: var(--text-tertiary);
   --color-text-heading: var(--text-heading);
   --color-text-body: var(--text-body);
   --color-text-muted: var(--text-muted);
@@ -60,6 +71,8 @@
   --color-text-on-accent: var(--text-on-accent);
   --color-text-link: var(--text-link);
   --color-text-link-hover: var(--text-link-hover);
+  --color-accent-chrome: var(--accent-chrome);
+  --color-accent-chrome-muted: var(--accent-chrome-muted);
 
   /* --- Action surfaces — base / hover / active / disabled / muted ---------- */
   --color-action-primary: var(--action-primary);
@@ -187,7 +200,10 @@
   --color-silent-900: var(--slate-900);
   --color-silent-1000: var(--slate-1000);
 
-  /* --- Ramp: pink (true) / primary (legacy) ------------------------------- */
+  /* --- Ramp: pink (legacy accent) + purple (true) / primary (legacy) ------
+   * V4 re-anchored `primary` onto the purple ramp (see --color-primary below).
+   * Pink is no longer the primary alias — it is retained only as a standalone
+   * legacy accent ramp for callsites that still want explicit pink. */
   --color-pink-50: var(--pink-50);
   --color-pink-100: var(--pink-100);
   --color-pink-200: var(--pink-200);
@@ -199,17 +215,32 @@
   --color-pink-800: var(--pink-800);
   --color-pink-900: var(--pink-900);
   --color-pink-950: var(--pink-950);
-  --color-primary: var(--pink-500);
-  --color-primary-50: var(--pink-50);
-  --color-primary-100: var(--pink-100);
-  --color-primary-200: var(--pink-200);
-  --color-primary-300: var(--pink-300);
-  --color-primary-400: var(--pink-400);
-  --color-primary-500: var(--pink-500);
-  --color-primary-600: var(--pink-600);
-  --color-primary-700: var(--pink-700);
-  --color-primary-800: var(--pink-800);
-  --color-primary-900: var(--pink-900);
+  /* V4: primary repointed at the new --purple-* ramp (was pink). Adds a
+   * dedicated `--color-purple-*` block alongside so callsites can opt-in
+   * explicitly. */
+  --color-purple-50: var(--purple-50);
+  --color-purple-100: var(--purple-100);
+  --color-purple-200: var(--purple-200);
+  --color-purple-300: var(--purple-300);
+  --color-purple-400: var(--purple-400);
+  --color-purple-500: var(--purple-500);
+  --color-purple-600: var(--purple-600);
+  --color-purple-700: var(--purple-700);
+  --color-purple-800: var(--purple-800);
+  --color-purple-900: var(--purple-900);
+  --color-purple-950: var(--purple-950);
+
+  --color-primary: var(--purple-700);
+  --color-primary-50: var(--purple-50);
+  --color-primary-100: var(--purple-100);
+  --color-primary-200: var(--purple-200);
+  --color-primary-300: var(--purple-300);
+  --color-primary-400: var(--purple-400);
+  --color-primary-500: var(--purple-500);
+  --color-primary-600: var(--purple-600);
+  --color-primary-700: var(--purple-700);
+  --color-primary-800: var(--purple-800);
+  --color-primary-900: var(--purple-900);
 
   /* --- Ramp: violet (true) / secondary (legacy) --------------------------- */
   --color-violet-50: var(--violet-50);
@@ -223,17 +254,19 @@
   --color-violet-800: var(--violet-800);
   --color-violet-900: var(--violet-900);
   --color-violet-950: var(--violet-950);
-  --color-secondary: var(--violet-500);
-  --color-secondary-50: var(--violet-50);
-  --color-secondary-100: var(--violet-100);
-  --color-secondary-200: var(--violet-200);
-  --color-secondary-300: var(--violet-300);
-  --color-secondary-400: var(--violet-400);
-  --color-secondary-500: var(--violet-500);
-  --color-secondary-600: var(--violet-600);
-  --color-secondary-700: var(--violet-700);
-  --color-secondary-800: var(--violet-800);
-  --color-secondary-900: var(--violet-900);
+  /* V4: secondary repointed at the cyan ramp (was violet) so `bg-secondary`,
+   * `text-secondary`, etc. read as the cool pole of the morph palette. */
+  --color-secondary: var(--cyan-400);
+  --color-secondary-50: var(--cyan-50);
+  --color-secondary-100: var(--cyan-100);
+  --color-secondary-200: var(--cyan-200);
+  --color-secondary-300: var(--cyan-300);
+  --color-secondary-400: var(--cyan-400);
+  --color-secondary-500: var(--cyan-500);
+  --color-secondary-600: var(--cyan-600);
+  --color-secondary-700: var(--cyan-700);
+  --color-secondary-800: var(--cyan-800);
+  --color-secondary-900: var(--cyan-900);
 
   /* --- Ramp: indigo (true) / blue (legacy) -------------------------------- */
   --color-indigo-50: var(--indigo-50);
@@ -377,20 +410,14 @@
   --radius-hover-card: var(--radius-xl);
   --radius-input: var(--radius-lg);
   --radius-tooltip: var(--radius-md);
-  --radius-pill: var(--radius-full);
 
   /* Elevation — mode-aware shadows from Layer 2. */
   --shadow-card: var(--elevation-card);
-  --shadow-raised: var(--elevation-raised);
-  --shadow-overlay: var(--elevation-overlay);
   --shadow-dialog: var(--elevation-raised);
   --shadow-popover: var(--elevation-overlay);
   --shadow-hover-card: var(--elevation-raised);
   --shadow-tooltip: var(--elevation-overlay);
   --shadow-header: var(--elevation-card);
-  --shadow-glow-primary: var(--elevation-glow-primary);
-  --shadow-glow-secondary: var(--elevation-glow-secondary);
-  --shadow-glow-highlight: var(--elevation-glow-highlight);
 
   /* Motion — durations + easing curves from Layer 1. */
   --duration-instant: var(--duration-instant);
@@ -429,11 +456,24 @@
   --breakpoint-xxl: 1920px;
 
   /* --- Spacing aliases --------------------------------------------------- */
-  --spacing-space-xs: 4px;
-  --spacing-space-sm: 8px;
-  --spacing-space-md: 12px;
-  --spacing-space-lg: 16px;
-  --spacing-space-xl: 24px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+
+  /* --- Z-index layers ----------------------------------------------------
+   * Named stacking layers. Consumers should use these (z-dropdown, z-modal,
+   * z-toast, …) instead of arbitrary values like z-[1111] so stacking order
+   * stays coordinated across the system. */
+  --z-index-base: 0;
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1100;
+  --z-index-overlay: 1200;
+  --z-index-modal: 1300;
+  --z-index-popover: 1400;
+  --z-index-toast: 1500;
+  --z-index-max: 9999;
 
   /* --- Animation shorthands ---------------------------------------------- */
   --animate-marquee-left: marquee-left var(--duration, 40s) linear infinite;
@@ -457,12 +497,10 @@
   --animate-slide-up: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-slide-left: slide-left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-slide-right: slide-right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  --animate-dialog-overlay-show: dialog-overlay-show 0.4s
-    cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-dialog-content-show: dialog-content-show 0.4s
-    cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-collapsible-open: collapsible-open 0.3s ease-out forwards;
-  --animate-collapsible-close: collapsible-close 0.3s ease-out forwards;
+  --animate-dialog-overlay-show: dialog-overlay-show 150ms ease-out;
+  --animate-dialog-content-show: dialog-content-show 150ms ease-out;
+  --animate-dialog-overlay-hide: dialog-overlay-hide 150ms ease-in forwards;
+  --animate-dialog-content-hide: dialog-content-hide 150ms ease-in forwards;
   --animate-dot-flashing: dot-flashing 1s infinite alternate;
   --animate-dot-flashing-dark: dot-flashing-dark 1s infinite alternate;
   --animate-shadow-pulse: shadow-pulse 0.3s forwards;
@@ -480,7 +518,10 @@
   --animate-close-off-canvas: closeOffCanvas 250ms ease forwards;
   --animate-open-accordion: openAccordion 250ms cubic-bezier(0.87, 0, 0.13, 1);
   --animate-close-accordion: closeAccordion 250ms cubic-bezier(0.87, 0, 0.13, 1);
-  --animate-iris-drift: iris-drift 9s ease-in-out infinite;
+  --animate-iris-drift: iris-morph 2.8s ease-in-out infinite;
+  /* --animate-iris-drift-muted retired with the bg-iris-muted-animated utility. */
+  --animate-iris-drift-pearl: iris-pearl-morph 5.5s cubic-bezier(0.42, 0.02, 0.38, 1) infinite;
+  --animate-pearl-ring: pearl-ring-spin 10s linear infinite;
 
   /* --- Keyframes --------------------------------------------------------- */
   @keyframes marquee-left {
@@ -563,14 +604,6 @@
     0% { opacity: 1; scale: 1; }
     100% { opacity: 0; scale: 0.96; }
   }
-  @keyframes collapsible-open {
-    0% { height: 0; }
-    100% { height: var(--radix-collapsible-content-height); }
-  }
-  @keyframes collapsible-close {
-    0% { height: var(--radix-collapsible-content-height); }
-    100% { height: 0; }
-  }
   @keyframes dot-flashing {
     0% { background-color: var(--indigo-400); }
     50%, 100% { background-color: var(--ink-100); }
@@ -649,9 +682,185 @@
     from { height: var(--radix-accordion-content-height); }
     to { height: 0; }
   }
-  @keyframes iris-drift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+  /* Layer order matches the bg-iris(-muted)-animated radial stacks:
+   *   1 = pink   2 = cyan   3 = violet   (4 = linear, anchored "center")
+   * Pink and violet roam freely — pooling those brand hues in a corner reads
+   * as intentional. The cyan (column 2) is kept inside a tight central band so
+   * it stays a soft iridescent shimmer instead of pooling into the corners. */
+  @keyframes iris-morph {
+    0%,
+    100% {
+      background-position:
+        0% 35%,
+        56% 54%,
+        45% 8%,
+        center;
+    }
+    25% {
+      background-position:
+        88% 18%,
+        46% 60%,
+        92% 48%,
+        center;
+    }
+    50% {
+      background-position:
+        72% 78%,
+        58% 44%,
+        8% 52%,
+        center;
+    }
+    75% {
+      background-position:
+        18% 72%,
+        44% 52%,
+        58% 92%,
+        center;
+    }
+  }
+
+  @keyframes iris-pearl-morph {
+    0%,
+    100% {
+      background-position:
+        0% 42%,
+        100% 58%,
+        48% 4%,
+        72% 96%,
+        center top;
+      background-size:
+        220% 220%,
+        240% 240%,
+        200% 200%,
+        190% 190%,
+        100% 100%;
+    }
+    17% {
+      background-position:
+        58% 18%,
+        42% 82%,
+        12% 52%,
+        28% 78%,
+        35% top;
+      background-size:
+        235% 210%,
+        225% 255%,
+        215% 195%,
+        200% 180%,
+        105% 100%;
+    }
+    34% {
+      background-position:
+        82% 68%,
+        18% 32%,
+        88% 22%,
+        55% 88%,
+        62% top;
+      background-size:
+        210% 245%,
+        250% 215%,
+        195% 220%,
+        175% 200%,
+        100% 105%;
+    }
+    51% {
+      background-position:
+        24% 78%,
+        76% 22%,
+        38% 88%,
+        82% 62%,
+        48% top;
+      background-size:
+        245% 200%,
+        205% 240%,
+        225% 190%,
+        195% 175%,
+        102% 100%;
+    }
+    68% {
+      background-position:
+        92% 38%,
+        8% 62%,
+        62% 12%,
+        15% 72%,
+        55% top;
+      background-size:
+        215% 230%,
+        235% 205%,
+        200% 215%,
+        185% 195%,
+        100% 102%;
+    }
+    84% {
+      background-position:
+        38% 28%,
+        62% 72%,
+        78% 48%,
+        45% 92%,
+        42% top;
+      background-size:
+        228% 218%,
+        218% 232%,
+        210% 205%,
+        180% 188%,
+        101% 100%;
+    }
+  }
+
+  @keyframes pearl-ring-spin {
+    to {
+      --pearl-angle: 360deg;
+    }
+  }
+
+  --animate-select-token-glow: select-token-glow 2.4s ease-in-out infinite;
+  --animate-review-ready-glow: review-ready-glow 2.4s ease-in-out infinite;
+
+  /* Directional multi-color glow — deep violet pooled toward the top-left,
+   * cyan + mint pooled toward the bottom-right. `drop-shadow` honors the
+   * element's rounded shape (unlike `box-shadow`'s rectangular outset), and
+   * the X/Y offsets bias each color toward a quadrant, matching the
+   * Unicorn morph's diagonal flow (violet → cyan → mint).
+   *
+   * Violet uses a custom OKLCH (chroma 0.18 at L 38%) — deeper AND more
+   * saturated than any token on the violet ramp (the ramp's max chroma is
+   * 0.098 at violet-600). The shorthand `--iris-violet-deep` is local to the
+   * glow so it stays out of the public token API.
+   *
+   * Blur radii and color-mix percentages dialed down from the first pass —
+   * the previous values washed the whole input row in light. */
+  --iris-violet-deep: oklch(38% 0.18 293);
+
+  @keyframes select-token-glow {
+    0%,
+    100% {
+      filter:
+        drop-shadow(-4px -5px 8px color-mix(in oklab, var(--iris-violet-deep) 40%, transparent))
+        drop-shadow(-2px -3px 4px color-mix(in oklab, var(--iris-violet-deep) 30%, transparent))
+        drop-shadow(6px 6px 12px color-mix(in oklab, var(--cyan-400) 22%, transparent))
+        drop-shadow(4px 4px 7px color-mix(in oklab, var(--mint-400) 14%, transparent));
+    }
+    50% {
+      filter:
+        drop-shadow(-6px -8px 12px color-mix(in oklab, var(--iris-violet-deep) 50%, transparent))
+        drop-shadow(-3px -4px 6px color-mix(in oklab, var(--iris-violet-deep) 38%, transparent))
+        drop-shadow(8px 8px 16px color-mix(in oklab, var(--cyan-400) 30%, transparent))
+        drop-shadow(5px 5px 9px color-mix(in oklab, var(--mint-400) 20%, transparent));
+    }
+  }
+
+  @keyframes review-ready-glow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 10px color-mix(in oklab, var(--pink-500) 24%, transparent),
+        0 0 5px color-mix(in oklab, var(--violet-500) 16%, transparent);
+    }
+    50% {
+      box-shadow:
+        0 0 16px color-mix(in oklab, var(--pink-500) 36%, transparent),
+        0 0 8px color-mix(in oklab, var(--cyan-400) 18%, transparent);
+    }
   }
 }
 
@@ -664,15 +873,128 @@
 }
 
 @utility bg-iris-animated {
-  background-image: var(--gradient-iris);
-  background-size: 220% 220%;
+  background-color: var(--iris-via);
+  background-image:
+    radial-gradient(
+      ellipse 72% 95% at 30% 35%,
+      color-mix(in oklab, var(--iris-from) 92%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 82% 88% at 72% 68%,
+      color-mix(in oklab, var(--iris-to) 88%, transparent),
+      transparent 56%
+    ),
+    radial-gradient(
+      ellipse 68% 92% at 52% 18%,
+      color-mix(in oklab, var(--iris-via) 84%, transparent),
+      transparent 54%
+    ),
+    linear-gradient(
+      var(--iris-angle),
+      var(--iris-from),
+      var(--iris-via) 46%,
+      var(--iris-to)
+    );
+  background-size:
+    200% 200%,
+    200% 200%,
+    220% 220%,
+    100% 100%;
+  background-position:
+    0% 35%,
+    56% 54%,
+    45% 8%,
+    center;
+  /* Each oversized radial fades to transparent before its tile edge, so the
+     default `repeat` paints a second copy of the blob at the opposite edge as
+     iris-morph pans — reading as a blue seam looping in from the left. */
+  background-repeat: no-repeat;
   animation: var(--animate-iris-drift);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bg-iris-animated {
+  .bg-iris-animated,
+  .bg-iris-pearl-animated,
+  .iris-pearl-ring,
+  .iris-pearl-glow,
+  .select-token-glow,
+  .review-ready-glow,
+  .animate-marquee-left,
+  .animate-marquee-up,
+  .animate-spin-slow,
+  .animate-pearl-ring,
+  .animate-dot-flashing,
+  .animate-dot-flashing-dark {
     animation: none;
   }
+}
+
+/* The bg-iris-muted / bg-iris-muted-animated / iris-muted-glow utilities
+ * (and the iris-morph-muted animation that drove them) were retired. The
+ * pearlescent pink → lavender → cyan soap-bubble wash read as decorative
+ * noise on non-CTA chrome and stamped a rectangular halo on rounded
+ * elements via the radial backdrop. Consumers that previously used these
+ * now use flat tonals (bg-action-{primary,secondary}-muted/10) or
+ * glass-pill for surface fills. */
+
+/* Pearl tier — hero muted CTAs. Five-layer soap-bubble fill + glass specular. */
+@property --pearl-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@utility bg-iris-pearl-animated {
+  background-color: color-mix(in oklab, var(--slate-600) 9%, transparent);
+  background-image:
+    radial-gradient(
+      ellipse 110% 150% at 20% 55%,
+      color-mix(in oklab, var(--iris-muted-from) 32%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 120% 140% at 82% 48%,
+      color-mix(in oklab, var(--iris-muted-to) 34%, transparent),
+      transparent 56%
+    ),
+    radial-gradient(
+      ellipse 90% 120% at 50% 8%,
+      color-mix(in oklab, var(--iris-muted-via) 28%, transparent),
+      transparent 54%
+    ),
+    radial-gradient(
+      ellipse 75% 95% at 68% 92%,
+      color-mix(in oklab, var(--pink-400) 22%, transparent),
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse 55% 35% at 50% 0%,
+      color-mix(in oklab, white 14%, transparent),
+      transparent 72%
+    );
+  background-size: 220% 220%, 240% 240%, 200% 200%, 190% 190%, 100% 100%;
+  background-position: 0% 42%, 100% 58%, 48% 4%, 72% 96%, center top;
+  background-repeat: no-repeat;
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  animation: var(--animate-iris-drift-pearl);
+}
+
+@utility iris-pearl-glow {
+  box-shadow:
+    0 0 32px color-mix(in oklab, var(--cyan-400) 20%, transparent),
+    0 0 18px color-mix(in oklab, var(--violet-400) 15%, transparent),
+    0 0 10px color-mix(in oklab, var(--pink-400) 12%, transparent);
+}
+
+@utility iris-pearl-ring {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-full);
+  filter:
+    drop-shadow(0 0 14px color-mix(in oklab, var(--cyan-400) 16%, transparent))
+    drop-shadow(0 0 6px color-mix(in oklab, var(--pink-400) 10%, transparent));
 }
 
 /* ============================================================================
@@ -690,15 +1012,170 @@
 }
 
 @utility surface {
-  /* Frosted glass — a translucent tint over a backdrop blur. Nested surfaces
-   * lift as the /10 layers stack; the blur diffuses the page glow so every
-   * card reads consistently wherever it sits on the page. */
-  background-color: var(--surface-card);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  background-image: var(--glass-sheen);
+  background-color: var(--glass-fill);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.06);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.06);
   box-shadow:
+    var(--glass-rim-inset),
     0 calc(min(var(--surface-level, 0), 6) * 1.5px)
     calc(min(var(--surface-level, 0), 6) * 5px)
     calc(min(var(--surface-level, 0), 6) * -1.5px)
-    var(--surface-shadow-color);
+    var(--glass-shadow),
+    0 0 calc(min(var(--surface-level, 0), 6) * 6px + 16px)
+    calc(min(var(--surface-level, 0), 6) * -6px - 14px)
+    var(--glass-ambient),
+    0 0 calc(min(var(--surface-level, 0), 6) * 3px + 10px)
+    calc(min(var(--surface-level, 0), 6) * -8px - 16px)
+    var(--glass-ambient-accent);
+}
+
+@utility surface-glow {
+  filter:
+    drop-shadow(0 0 14px color-mix(in oklab, var(--violet-500) 16%, transparent))
+    drop-shadow(0 0 6px color-mix(in oklab, var(--pink-500) 10%, transparent));
+}
+
+@utility surface-inset {
+  background-color: var(--glass-fill-nested);
+  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
+  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
+  box-shadow: var(--glass-rim-inset-nested);
+}
+
+@utility glass-pill {
+  background-color: var(--glass-fill-nested);
+  box-shadow: var(--glass-rim-inset-nested);
+}
+
+@utility surface-chrome {
+  background-image: var(--glass-sheen);
+  background-color: var(--glass-fill-chrome);
+  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  box-shadow: var(--glass-rim-inset-nested);
+}
+
+@utility glass-banner {
+  background-color: var(--glass-fill-banner);
+  background-image:
+    var(--glass-sheen),
+    radial-gradient(
+      ellipse 85% 120% at 14% 50%,
+      var(--glass-iris-wash-from),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 75% 110% at 86% 42%,
+      var(--glass-iris-wash-to),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 65% 95% at 50% 12%,
+      var(--glass-iris-wash-via),
+      transparent 54%
+    );
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.08);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.08);
+  box-shadow: var(--glass-rim-inset);
+}
+
+@utility bg-iris-wash {
+  background-image:
+    radial-gradient(
+      ellipse 80% 120% at 18% 50%,
+      var(--glass-iris-wash-from),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 70% 100% at 82% 40%,
+      var(--glass-iris-wash-to),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 60% 90% at 52% 20%,
+      var(--glass-iris-wash-via),
+      transparent 55%
+    );
+}
+
+@utility text-accent-chrome {
+  color: var(--accent-chrome);
+}
+
+@utility text-accent-chrome-muted {
+  color: var(--accent-chrome-muted);
+}
+
+/* Callouts / notices — same glass rim as exchange input wells. */
+@utility glass-callout {
+  background-image: var(--glass-sheen);
+  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
+  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
+  box-shadow: var(--glass-rim-inset-nested);
+}
+
+@utility glass-callout-emphasis {
+  box-shadow: var(--glass-rim-inset);
+}
+
+@utility glass-callout-info {
+  background-color: var(--glass-fill-callout-info);
+}
+
+@utility glass-callout-warning {
+  background-color: var(--glass-fill-callout-warning);
+}
+
+@utility glass-callout-error {
+  background-color: var(--glass-fill-callout-error);
+}
+
+@utility glass-callout-success {
+  background-color: var(--glass-fill-callout-success);
+}
+
+/* Full callout surfaces — sheen + tone fill + tone-tinted glass rim. */
+@utility glass-callout-info-surface {
+  background-image: var(--glass-sheen);
+  background-color: var(--glass-fill-callout-info);
+  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  box-shadow: var(--glass-shadow-callout-info);
+}
+
+@utility glass-callout-warning-surface {
+  background-image: var(--glass-sheen);
+  background-color: var(--glass-fill-callout-warning);
+  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  box-shadow: var(--glass-shadow-callout-warning);
+}
+
+@utility glass-callout-error-surface {
+  background-image: var(--glass-sheen);
+  background-color: var(--glass-fill-callout-error);
+  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  box-shadow: var(--glass-shadow-callout-error);
+}
+
+@utility glass-callout-success-surface {
+  background-image: var(--glass-sheen);
+  background-color: var(--glass-fill-callout-success);
+  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  box-shadow: var(--glass-shadow-callout-success);
+}
+
+@utility select-token-glow {
+  filter:
+    drop-shadow(0 0 10px color-mix(in oklab, var(--violet-500) 42%, transparent))
+    drop-shadow(0 0 22px color-mix(in oklab, var(--pink-500) 28%, transparent))
+    drop-shadow(0 0 8px color-mix(in oklab, var(--cyan-400) 18%, transparent));
+  animation: var(--animate-select-token-glow);
+}
+
+@utility review-ready-glow {
+  animation: var(--animate-review-ready-glow);
 }

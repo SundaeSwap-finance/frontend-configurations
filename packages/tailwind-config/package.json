@@ -34,7 +34,8 @@
     "watch:esm": "bun run clean && bun run build && bun run build:esm --watch",
     "watch:cjs": "bun run clean && bun run build && bun run build:cjs --watch",
     "clean": "rm -rf ./dist",
-    "test": "bun run build",
+    "check:tokens": "node scripts/check-tokens.mjs",
+    "test": "bun run build && node scripts/check-tokens.mjs",
     "set-cjs": "echo '{ \"type\": \"commonjs\" }' > ./dist/cjs/package.json"
   },
   "dependencies": {
