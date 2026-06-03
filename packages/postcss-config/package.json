@@ -4,8 +4,7 @@
   "description": "basic postcss config options for SundaeSwap projects.",
   "keywords": [
     "postcss",
-    "tailwindcss",
-    "scss"
+    "tailwindcss"
   ],
   "author": "Calvin Koepke <hello@calvinkoepke.com>",
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/postcss-config",
@@ -43,9 +42,7 @@
     "cssnano": "^7.0.3",
     "postcss": "^8.4.14",
     "postcss-load-config": "^6.0.1",
-    "postcss-normalize": "^10.0.1",
-    "postcss-safe-parser": "^7.0.0",
-    "postcss-scss": "^4.0.4"
+    "postcss-normalize": "^10.0.1"
   },
   "devDependencies": {
     "@sundaeswap/babel-preset": "workspace:*"

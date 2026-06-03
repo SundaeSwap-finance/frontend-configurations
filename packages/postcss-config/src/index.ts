@@ -9,11 +9,6 @@ if (process.env.NODE_ENV === "production") {
   plugins.push(cssnano());
 }
 
-export const configWithScss: Config = {
-  syntax: "postcss-scss",
-  plugins,
-};
-
 export const config: Config = {
   plugins,
 };
