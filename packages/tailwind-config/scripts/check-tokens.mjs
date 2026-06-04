@@ -317,10 +317,19 @@ const contrastPairs = [
     floor: 4.5,
   },
   {
-    // theme.css --action-primary (light) = var(--violet-800).
-    name: "light action-primary (violet-800) with white label",
+    // theme.css --action-primary (light) = var(--purple-500). Some consumers
+    // pair a white label with bg-action-primary, so the fill must clear AA.
+    name: "light action-primary (purple-500) with white label",
     fg: WHITE,
-    bg: ramp("violet", 800),
+    bg: ramp("purple", 500),
+    floor: 4.5,
+  },
+  {
+    // theme.css --action-secondary (light) = var(--cyan-400), paired with a
+    // dark highlight-900 label (Button secondary). Light fill, dark text.
+    name: "light action-secondary (cyan-400) with highlight-900 label",
+    fg: ramp("gold", 900),
+    bg: ramp("cyan", 400),
     floor: 4.5,
   },
   {

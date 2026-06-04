@@ -166,15 +166,18 @@
   --text-link: var(--indigo-400);
   --text-link-hover: var(--cyan-400);
 
-  /* --- Action: primary (deep violet) --------------------------------------
-   * Re-anchored from pink to deep violet to lead the V4 violet → cyan → mint
-   * brand palette (matches the Unicorn morph scene that paints animated
-   * CTAs). Pink is retired as the primary brand color. */
-  --action-primary: var(--violet-600);
-  --action-primary-hover: var(--violet-500);
-  --action-primary-active: var(--violet-700);
-  --action-primary-disabled: color-mix(in oklab, var(--violet-800) 55%, transparent);
-  --action-primary-muted: var(--violet-600);
+  /* --- Action: primary (purple) -------------------------------------------
+   * Anchored on the `purple` ramp at the neon 400 stop so the semantic
+   * primary fill matches the `primary` Tailwind namespace (which already maps
+   * to purple) — previously it lagged on the pastel `violet` ramp. The 400
+   * stop is the brand's lit neon tone; it pairs with a near-black on-accent
+   * label. (The hero CTA still paints the iris gradient — see --gradient-iris;
+   * this token drives bg-action-primary fills and muted/tint treatments.) */
+  --action-primary: var(--purple-400);
+  --action-primary-hover: var(--purple-300);
+  --action-primary-active: var(--purple-500);
+  --action-primary-disabled: color-mix(in oklab, var(--purple-800) 55%, transparent);
+  --action-primary-muted: var(--purple-400);
 
   /* --- Action: secondary (cyan) -------------------------------------------
    * Re-anchored from violet to cyan — the cool pole of the new palette. */
@@ -184,12 +187,13 @@
   --action-secondary-disabled: color-mix(in oklab, var(--cyan-800) 55%, transparent);
   --action-secondary-muted: var(--cyan-400);
 
-  /* --- Action: success (mint) ---------------------------------------------- */
-  --action-success: var(--mint-500);
-  --action-success-hover: var(--mint-400);
-  --action-success-active: var(--mint-600);
+  /* --- Action: success (mint) ----------------------------------------------
+   * Anchored at the neon 400 stop (paired with a dark mint-900 label). */
+  --action-success: var(--mint-400);
+  --action-success-hover: var(--mint-300);
+  --action-success-active: var(--mint-500);
   --action-success-disabled: color-mix(in oklab, var(--mint-800) 55%, transparent);
-  --action-success-muted: var(--mint-500);
+  --action-success-muted: var(--mint-400);
 
   /* --- Action: error (coral) ----------------------------------------------- */
   --action-error: var(--coral-500);
@@ -198,12 +202,15 @@
   --action-error-disabled: color-mix(in oklab, var(--coral-800) 55%, transparent);
   --action-error-muted: var(--coral-500);
 
-  /* --- Action: warning (gold) ---------------------------------------------- */
-  --action-warning: var(--gold-500);
-  --action-warning-hover: var(--gold-400);
-  --action-warning-active: var(--gold-600);
+  /* --- Action: warning (gold) ----------------------------------------------
+   * Anchored at the neon 400 stop (paired with a dark gold-900 label). gold-400
+   * ≈ gold-500 in lightness, so this also brings warning in line with the
+   * `highlight` axis, which already sits at gold-400. */
+  --action-warning: var(--gold-400);
+  --action-warning-hover: var(--gold-300);
+  --action-warning-active: var(--gold-500);
   --action-warning-disabled: color-mix(in oklab, var(--gold-800) 55%, transparent);
-  --action-warning-muted: var(--gold-500);
+  --action-warning-muted: var(--gold-400);
 
   /* --- Action: info (indigo) ----------------------------------------------- */
   --action-info: var(--indigo-400);
@@ -363,39 +370,43 @@
   --text-link: var(--indigo-700);
   --text-link-hover: var(--violet-800); /* violet-700 was 3.44:1 — below AA and below the resting link */
 
-  /* --- Actions — deeper ramp stops so neon does not blow out on white ------- */
-  /* violet-700 clears AA white-on (~6.0:1). Hover/active darken further to
-   * stay legible across the state ramp on light surfaces. */
-  --action-primary: var(--violet-800);
-  --action-primary-hover: var(--violet-900);
-  --action-primary-active: var(--violet-950);
-  --action-primary-disabled: color-mix(in oklab, var(--violet-300) 60%, transparent);
-  --action-primary-muted: var(--violet-700);
+  /* --- Actions — vivid, lit ramp stops (not the dull deep tones) -----------
+   * Light mode tracks the dark-native palette: bright neon fills carrying a
+   * near-black on-accent label. Because the label is dark, a *lighter* fill
+   * reads with MORE contrast on paper, not less — so the dark-text axes
+   * (primary/secondary/success/warning) sit at the neon 400 stop here too.
+   * Error is the exception: it keeps a white label (danger convention), so its
+   * fill must stay deep enough to clear AA white-on. */
+  --action-primary: var(--purple-500);
+  --action-primary-hover: var(--purple-400);
+  --action-primary-active: var(--purple-600);
+  --action-primary-disabled: color-mix(in oklab, var(--purple-300) 60%, transparent);
+  --action-primary-muted: var(--purple-500);
 
-  /* Cyan secondary — `cyan-700` is the lightest stop that clears AA white-on. */
-  --action-secondary: var(--cyan-700);
-  --action-secondary-hover: var(--cyan-800);
-  --action-secondary-active: var(--cyan-900);
+  --action-secondary: var(--cyan-400);
+  --action-secondary-hover: var(--cyan-300);
+  --action-secondary-active: var(--cyan-500);
   --action-secondary-disabled: color-mix(in oklab, var(--cyan-300) 60%, transparent);
-  --action-secondary-muted: var(--cyan-700);
+  --action-secondary-muted: var(--cyan-400);
 
-  --action-success: var(--mint-600);
-  --action-success-hover: var(--mint-500);
-  --action-success-active: var(--mint-700);
+  --action-success: var(--mint-400);
+  --action-success-hover: var(--mint-300);
+  --action-success-active: var(--mint-500);
   --action-success-disabled: color-mix(in oklab, var(--mint-300) 60%, transparent);
-  --action-success-muted: var(--mint-600);
+  --action-success-muted: var(--mint-400);
 
+  /* Error keeps a white label, so the fill stays deep enough to clear AA. */
   --action-error: var(--coral-600);
   --action-error-hover: var(--coral-500);
   --action-error-active: var(--coral-700);
   --action-error-disabled: color-mix(in oklab, var(--coral-300) 60%, transparent);
   --action-error-muted: var(--coral-600);
 
-  --action-warning: var(--gold-600);
-  --action-warning-hover: var(--gold-500);
-  --action-warning-active: var(--gold-700);
+  --action-warning: var(--gold-400);
+  --action-warning-hover: var(--gold-300);
+  --action-warning-active: var(--gold-500);
   --action-warning-disabled: color-mix(in oklab, var(--gold-300) 60%, transparent);
-  --action-warning-muted: var(--gold-600);
+  --action-warning-muted: var(--gold-400);
 
   --action-info: var(--indigo-600);
   --action-info-hover: var(--indigo-500);
