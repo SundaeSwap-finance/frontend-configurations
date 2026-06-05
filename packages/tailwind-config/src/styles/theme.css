@@ -43,6 +43,12 @@
   --glass-fill-callout-warning: color-mix(in srgb, var(--gold-500) 22%, transparent);
   --glass-fill-callout-error: color-mix(in srgb, var(--coral-500) 22%, transparent);
   --glass-fill-callout-success: color-mix(in srgb, var(--mint-500) 20%, transparent);
+  /* Feature / promo banner tint — fuchsia (the accent-magenta family). Its sole
+   * consumer, the Stableswaps banner, is a magenta-themed unit end to end (chip,
+   * CTA, illustration), so the card fill matches those accents rather than the
+   * old muted purple. Held at a low alpha so it reads as a calm tinted surface,
+   * not an alert. Consumed by glass-callout-feature-surface. */
+  --glass-fill-callout-feature: color-mix(in srgb, var(--magenta-500) 12%, transparent);
   --glass-shadow-callout-info:
     var(--glass-rim-inset-nested),
     inset 0 0 0 1px color-mix(in srgb, var(--violet-500) 30%, transparent);
@@ -61,6 +67,11 @@
     color-mix(in oklab, var(--violet-500) 2.5%, transparent) 40%,
     transparent 100%
   );
+  /* Sheen presence per theme — the `surface` utility folds this into a
+   * per-element, depth-aware sheen (full on top panes, off once nested) so
+   * stacked surfaces don't draw a highlight seam between them. Dark shows it;
+   * light flattens to white after step 2, so it stays off. */
+  --glass-sheen-strength: 1;
   --glass-rim-inset: 0 0 0 0 transparent;
   --glass-rim-inset-nested: 0 0 0 0 transparent;
   --glass-ambient: color-mix(in oklab, var(--violet-500) 11%, transparent);
@@ -123,13 +134,31 @@
   --surface-card: var(--glass-fill);
 
   /* Floating overlays (dialogs, tooltips, hover cards) sit ABOVE the page and
-   * over its colorful atmosphere. A near-opaque dark slate reads as a clean,
-   * legible panel — the translucent glass fill (10%) sampled the gradient
-   * backdrop through 16px blur and washed out to a muddy mid-gray. */
-  --surface-overlay: color-mix(in oklab, var(--slate-900) 92%, transparent);
+   * over its colorful atmosphere. Near-opaque (the translucent 10% glass fill
+   * sampled the gradient backdrop through 16px blur and washed out to a muddy
+   * mid-gray), but tuned to the same deep-violet family as the page floor
+   * (oklch ~12% 0.044 298) — just lifted in lightness for elevation. The old
+   * slate-900 mix sat too light and near-chromaless (0.016), reading as a flat
+   * gray panel over the violet-black page. */
+  --surface-overlay: color-mix(in oklab, oklch(17% 0.032 296) 92%, transparent);
 
   /* Inset wells (native inputs, search fields) stay opaque and recessed. */
   --surface-input: oklch(12% 0.012 300);
+
+  /* Well — the innermost READABLE tier (stat cells, amount-input wells, detail
+   * rows that live inside a card). OPAQUE and blur-free by design: a translucent
+   * nested tier that backdrop-blurs re-samples the page atmosphere and washes to
+   * a muddy gradient (the same trap --surface-overlay was hardened against).
+   * Sits one lightness step below the card composite so it reads carved-in; a
+   * whisper of violet chroma keeps it "lit from within" rather than a black pit.
+   * Depth comes from --elevation-well (a concave inset rim), never from blur. */
+  --surface-well: oklch(10.5% 0.024 300);
+
+  /* Opaque flattened card/widget surface — for controls that can't be
+   * translucent because they straddle the seam between two glass panels
+   * (e.g. the swap-direction toggle). The solid sample of the glass card
+   * composited over the page atmosphere: #120d20 ≈ oklch(17.7% 0.039 294). */
+  --surface-solid: #120d20;
   --surface-disabled: var(--slate-900);
 
   /* --- Borders -------------------------------------------------------------- */
@@ -160,6 +189,12 @@
    * existing *-muted utilities map onto the ladder. */
   --text-secondary: oklch(66% 0 0); /* labels, descriptions — ~6.4:1 */
   --text-tertiary: oklch(55% 0 0); /* metadata, %, sub-values, denominators — ~4.2:1 */
+  /* Subtle — the 4th and faintest neutral step, completing the ladder
+   * (scion → secondary → tertiary → subtle). For placeholders, watermarks,
+   * disabled hints and ghost affordances — intentionally sub-AA, so NEVER for
+   * load-bearing text. Replaces ad-hoc `/40`–`/60` opacity hacks and the
+   * chromatic `silent` slate that read mauve. */
+  --text-subtle: oklch(44% 0 0);
   --text-muted: var(--text-secondary);
   --text-faint: var(--text-tertiary);
   --text-on-accent: var(--ink-1400);
@@ -238,9 +273,10 @@
    * action axes. Each keeps a consistent identity across the whole app.
    */
   --accent-pink: var(--pink-500);
-  --accent-violet: var(--violet-500);
+  --accent-magenta: var(--magenta-500);
+  --accent-violet: var(--iris-lavender); /* exact iris-morph stop */
   --accent-indigo: var(--indigo-400);
-  --accent-cyan: var(--cyan-400);
+  --accent-cyan: var(--iris-sky); /* exact iris-morph stop */
   --accent-gold: var(--gold-500);
 
   /* --- Data-viz series (maps onto the new violet → mint chord) ------------
@@ -273,6 +309,13 @@
     0 8px 16px rgb(0 0 0 / 0.42),
     0 24px 52px -18px rgb(0 0 0 / 0.58),
     0 0 48px -18px color-mix(in oklab, var(--violet-500) 14%, transparent);
+
+  /* Well — concave recess for the opaque --surface-well tier. A soft top inset
+   * shadow reads "carved in"; a faint lit bottom edge (the catch-light on the
+   * lower lip) sells the depth without any blur. */
+  --elevation-well:
+    inset 0 1px 3px rgb(0 0 0 / 0.45),
+    inset 0 -1px 0 color-mix(in oklab, var(--violet-400) 7%, transparent);
 }
 
 /* ============================================================================
@@ -290,6 +333,12 @@
   --surface-hover: var(--ink-200);
   --surface-input: var(--ink-200);
   --surface-disabled: var(--ink-200);
+  /* Well — opaque recess one ink step below the near-white card; depth comes
+   * from --elevation-well (inset shadow + rim), matching the light philosophy
+   * where surfaces separate by rim, not by lightness. */
+  --surface-well: var(--ink-100);
+  /* Light glass is already opaque, so the solid surface mirrors the card base. */
+  --surface-solid: var(--ink-50);
 
   --glass-blur: 0px;
   --glass-blur-nested: 0px;
@@ -299,6 +348,7 @@
   --glass-fill-callout-warning: color-mix(in srgb, var(--gold-600) 16%, transparent);
   --glass-fill-callout-error: color-mix(in srgb, var(--coral-600) 16%, transparent);
   --glass-fill-callout-success: color-mix(in srgb, var(--mint-600) 14%, transparent);
+  --glass-fill-callout-feature: color-mix(in srgb, var(--magenta-600) 14%, transparent);
   --glass-shadow-callout-info:
     var(--glass-rim-inset-nested),
     inset 0 0 0 1px color-mix(in srgb, var(--violet-600) 26%, transparent);
@@ -312,32 +362,35 @@
     var(--glass-rim-inset-nested),
     inset 0 0 0 1px color-mix(in srgb, var(--mint-600) 26%, transparent);
   --glass-sheen: none;
-  --glass-rim-inset: 0 0 0 0 transparent;
-  --glass-rim-inset-nested: 0 0 0 0 transparent;
+  /* No directional sheen in light mode — surfaces separate by rim, not highlight. */
+  --glass-sheen-strength: 0;
+  /* Cards/containers are defined by a hairline rim, not by lifting off the page
+   * with lightness — the page and card fills are both near-white (see
+   * --surface-base below), so a rim does the separating the lightness can't. */
+  --glass-rim-inset: inset 0 0 0 1px var(--border-subtle);
+  --glass-rim-inset-nested: inset 0 0 0 1px var(--border-subtle);
   --glass-ambient: transparent;
   --glass-ambient-accent: transparent;
   --glass-shadow: oklch(32% 0.03 300 / 0.13);
 
-  /* Iridescent chrome text on a near-white page must run dark to stay legible.
-   * Deepened to ink-900 base so it clears AA (was ~4.0/2.75:1 — both failing). */
-  --accent-chrome: color-mix(
-    in oklab,
-    var(--ink-900) 60%,
-    color-mix(in oklab, var(--violet-500) 30%, var(--cyan-500) 70%) 40%
-  );
-  --accent-chrome-muted: color-mix(
-    in oklab,
-    var(--ink-900) 55%,
-    color-mix(in oklab, var(--violet-500) 35%, var(--cyan-500) 65%) 45%
-  );
-  --glass-fill-chrome: var(--ink-50);
+  /* Chrome accents track the neutral primary ink (mirroring dark, which
+   * re-points --accent-chrome to white). The iridescent cyan/violet chord made
+   * active nav tabs read cyan on paper; iris now lives only on CTAs. */
+  --accent-chrome: var(--ink-1100);
+  --accent-chrome-muted: var(--ink-900);
+  /* Chrome bars (table headers) must read as a distinct tier, so — unlike
+   * rim-separated cards — the fill lifts one ink step off the page floor
+   * (--surface-base is also --ink-50; matching it left headers invisible). */
+  --glass-fill-chrome: var(--ink-100);
   --glass-fill-banner: color-mix(in oklab, var(--ink-100) 90%, transparent);
   --glass-iris-wash-from: color-mix(in oklab, var(--violet-400) 10%, transparent);
   --glass-iris-wash-via: color-mix(in oklab, var(--violet-500) 8%, transparent);
   --glass-iris-wash-to: color-mix(in oklab, var(--cyan-400) 8%, transparent);
   /* --glass-iris-muted-wash-* retired with bg-iris-muted. */
 
-  --surface-base: var(--ink-200);
+  /* White page floor. Cards used to lift by being ink-50 on this ink-200 grey;
+   * now the page IS near-white, so cards separate via --glass-rim-inset. */
+  --surface-base: var(--ink-50);
   --surface-card: var(--glass-fill);
   --surface-inset: var(--glass-fill-nested);
   /* Light mode keeps the standard card surface for overlays (unchanged). */
@@ -362,6 +415,9 @@
    * lighter than the primary. --text-muted/-faint alias them. */
   --text-secondary: var(--ink-800);
   --text-tertiary: var(--ink-700);
+  /* Faintest neutral step (placeholders, watermarks, disabled hints) — one ink
+   * step lighter than tertiary. Sub-AA by design; never for load-bearing text. */
+  --text-subtle: var(--ink-600);
   --text-muted: var(--text-secondary);
   --text-faint: var(--text-tertiary);
   /* Dark ink, not white: the only consumer is the ::selection over violet, and
@@ -428,9 +484,10 @@
 
   /* --- Named accents — deeper stops for legibility on paper ----------------- */
   --accent-pink: var(--pink-600);
-  --accent-violet: var(--violet-600);
+  --accent-magenta: var(--magenta-600);
+  --accent-violet: var(--iris-lavender); /* exact iris-morph stop */
   --accent-indigo: var(--indigo-600);
-  --accent-cyan: var(--cyan-700);
+  --accent-cyan: var(--iris-sky); /* exact iris-morph stop */
   --accent-gold: var(--gold-700);
 
   --chart-1: var(--violet-700);
@@ -447,4 +504,10 @@
   --elevation-card: 0 1px 2px rgb(40 20 60 / 0.06), 0 6px 18px -10px rgb(40 20 60 / 0.12);
   --elevation-raised: 0 4px 10px rgb(40 20 60 / 0.08), 0 14px 32px -14px rgb(40 20 60 / 0.16);
   --elevation-overlay: 0 8px 20px rgb(40 20 60 / 0.1), 0 24px 48px -18px rgb(40 20 60 / 0.2);
+
+  /* Well — recess on paper: a soft inner shadow + the hairline rim do the work
+   * (no catch-light edge; on white it reads as a faint depression). */
+  --elevation-well:
+    inset 0 1px 2px rgb(40 20 60 / 0.08),
+    inset 0 0 0 1px var(--border-subtle);
 }

@@ -44,6 +44,10 @@
   --color-surface-hover: var(--surface-hover);
   --color-surface-input: var(--surface-input);
   --color-surface-disabled: var(--surface-disabled);
+  --color-surface-solid: var(--surface-solid);
+  /* Opaque, blur-free recessed well — the innermost readable tier. Pair the
+   * `surface-well` utility (below) for the matching concave shadow. */
+  --color-surface-well: var(--surface-well);
   /* TODO(Layer 2): surface-loading aliases surface-page with no distinct value.
    * Add a real --surface-loading role token in Layer 2 and point this at it. */
   --color-surface-loading: var(--surface-page);
@@ -68,6 +72,8 @@
   --color-text-body: var(--text-body);
   --color-text-muted: var(--text-muted);
   --color-text-faint: var(--text-faint);
+  /* `text-text-subtle` — the faintest neutral step (placeholders, ghost hints). */
+  --color-text-subtle: var(--text-subtle);
   --color-text-on-accent: var(--text-on-accent);
   --color-text-link: var(--text-link);
   --color-text-link-hover: var(--text-link-hover);
@@ -125,6 +131,7 @@
 
   /* --- Named accents + data-viz series ------------------------------------ */
   --color-accent-pink: var(--accent-pink);
+  --color-accent-magenta: var(--accent-magenta);
   --color-accent-violet: var(--accent-violet);
   --color-accent-indigo: var(--accent-indigo);
   --color-accent-cyan: var(--accent-cyan);
@@ -215,6 +222,18 @@
   --color-pink-800: var(--pink-800);
   --color-pink-900: var(--pink-900);
   --color-pink-950: var(--pink-950);
+  /* Magenta — vivid fuchsia accent ramp (hue 328), sibling to pink (rose). */
+  --color-magenta-50: var(--magenta-50);
+  --color-magenta-100: var(--magenta-100);
+  --color-magenta-200: var(--magenta-200);
+  --color-magenta-300: var(--magenta-300);
+  --color-magenta-400: var(--magenta-400);
+  --color-magenta-500: var(--magenta-500);
+  --color-magenta-600: var(--magenta-600);
+  --color-magenta-700: var(--magenta-700);
+  --color-magenta-800: var(--magenta-800);
+  --color-magenta-900: var(--magenta-900);
+  --color-magenta-950: var(--magenta-950);
   /* V4: primary repointed at the new --purple-* ramp (was pink). Adds a
    * dedicated `--color-purple-*` block alongside so callsites can opt-in
    * explicitly. */
@@ -230,7 +249,13 @@
   --color-purple-900: var(--purple-900);
   --color-purple-950: var(--purple-950);
 
-  --color-primary: var(--purple-700);
+  /* V4: the bare `primary` base now tracks the primary action hue —
+   * purple-400 (dark) / purple-500 (light) — instead of the deep purple-700
+   * anchor, so text-/bg-/border-primary read as the brand's lit neon purple.
+   * Because this is the lit stop, bg-primary now pairs with a near-black
+   * label (--text-on-accent), not white. The numbered primary-50..900 steps
+   * below stay mapped to the raw purple ramp. */
+  --color-primary: var(--action-primary);
   --color-primary-50: var(--purple-50);
   --color-primary-100: var(--purple-100);
   --color-primary-200: var(--purple-200);
@@ -403,21 +428,35 @@
  * RADII / SHADOWS / MOTION — inline-bridged from Layers 1 & 2.
  * ========================================================================== */
 @theme inline {
-  /* Semantic radii — component rounding lives in one place. */
+  /* Semantic radii — component rounding lives in one place.
+   *
+   * CONCENTRIC LADDER — nested elements step DOWN one rung so inner and outer
+   * corners stay visually parallel (an outer xl never wraps an inner xl):
+   *   card/dialog/popover (xl 1.5rem) ▸ well (lg 1.25rem) ▸ input (lg 1.25rem)
+   *   ▸ chip (sm 0.75rem) ▸ pill (full). A chip inside a well inside a card
+   *   should read `rounded-chip` / `rounded-well` / `rounded-card`. */
   --radius-card: var(--radius-xl);
   --radius-dialog: var(--radius-xl);
   --radius-popover: var(--radius-xl);
   --radius-hover-card: var(--radius-xl);
+  --radius-well: var(--radius-lg);
   --radius-input: var(--radius-lg);
+  --radius-chip: var(--radius-sm);
+  --radius-pill: var(--radius-full);
   --radius-tooltip: var(--radius-md);
 
   /* Elevation — mode-aware shadows from Layer 2. */
-  --shadow-card: var(--elevation-card);
+  /* Prepend the hairline rim so cards that paint shadow-card (which overrides
+   * the `surface` utility's own box-shadow) still get the rim. --glass-rim-inset
+   * is transparent in dark, so this only shows in light. Header is unaffected
+   * (it reads --elevation-card directly). */
+  --shadow-card: var(--glass-rim-inset), var(--elevation-card);
   --shadow-dialog: var(--elevation-raised);
   --shadow-popover: var(--elevation-overlay);
   --shadow-hover-card: var(--elevation-raised);
   --shadow-tooltip: var(--elevation-overlay);
   --shadow-header: var(--elevation-card);
+  --shadow-well: var(--elevation-well);
 
   /* Motion — durations + easing curves from Layer 1. */
   --duration-instant: var(--duration-instant);
@@ -1012,7 +1051,29 @@
 }
 
 @utility surface {
-  background-image: var(--glass-sheen);
+  /* Depth-aware sheen. The directional top-left highlight is a top-pane
+   * affordance: it must fade as surfaces nest, or two surfaces tiled
+   * vertically (e.g. stacked swap inputs) draw the lower pane's highlight as a
+   * seam between them. --surface-level must be read HERE (per element) — folding
+   * it into the --glass-sheen token instead resolves it once at :root and
+   * inherits flat. Full on top panes (level 0–1), off once nested (level ≥2);
+   * --glass-sheen-strength gates it off entirely in light mode. */
+  --glass-sheen-depth: clamp(0, 2 - var(--surface-level, 0), 1);
+  background-image: linear-gradient(
+    145deg,
+    color-mix(
+      in oklab,
+      white calc(5% * var(--glass-sheen-strength, 1) * var(--glass-sheen-depth)),
+      transparent
+    ) 0%,
+    color-mix(
+      in oklab,
+      var(--violet-500)
+        calc(2.5% * var(--glass-sheen-strength, 1) * var(--glass-sheen-depth)),
+      transparent
+    ) 40%,
+    transparent 100%
+  );
   background-color: var(--glass-fill);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.06);
   backdrop-filter: blur(var(--glass-blur)) saturate(1.06);
@@ -1041,6 +1102,19 @@
   -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
   backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
   box-shadow: var(--glass-rim-inset-nested);
+}
+
+/* ----------------------------------------------------------------------------
+ * surface-well — the innermost READABLE tier. Material rule: blur DECREASES as
+ * you nest inward, and the deepest tier is OPAQUE. Unlike `surface-inset` (a
+ * translucent, blurred nested glass), a well paints a solid fill and carries NO
+ * backdrop-filter — so it can never re-sample the page atmosphere into a stray
+ * gradient. Depth is a concave inset shadow, not blur. Use for amount-input
+ * wells, stat cells, and detail rows that sit inside a card and hold text/values.
+ * -------------------------------------------------------------------------- */
+@utility surface-well {
+  background-color: var(--surface-well);
+  box-shadow: var(--shadow-well);
 }
 
 @utility glass-pill {
@@ -1166,6 +1240,16 @@
   -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
   backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
   box-shadow: var(--glass-shadow-callout-success);
+}
+
+/* Calm purple promo/feature banner — flat tinted glass (no iris wash). The
+ * quiet, V4-correct alternative to glass-banner for non-CTA "now live" surfaces;
+ * uses the V4 brand purple held at a low alpha so it reads ambient, not loud. */
+@utility glass-callout-feature-surface {
+  background-image: var(--glass-sheen);
+  background-color: var(--glass-fill-callout-feature);
+  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
+  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
 }
 
 @utility select-token-glow {
