@@ -73,6 +73,24 @@
   --pink-950: oklch(24% 0.075 8);
 
   /* ==========================================================================
+   * Magenta — vivid fuchsia accent. Hue 328 (a cooler, electric magenta than
+   * `pink`'s rose hue 2). 500 is the neon stop (#d020d0), lifted from the
+   * Stableswaps "Slippage Minimized" chip so the color survives as a token
+   * instead of staying trapped in a raster illustration.
+   * ========================================================================== */
+  --magenta-50: oklch(97% 0.018 328);
+  --magenta-100: oklch(94% 0.042 328);
+  --magenta-200: oklch(88% 0.088 328);
+  --magenta-300: oklch(80% 0.150 328);
+  --magenta-400: oklch(70% 0.215 328);
+  --magenta-500: oklch(61% 0.265 328);
+  --magenta-600: oklch(55% 0.250 329);
+  --magenta-700: oklch(47% 0.215 330);
+  --magenta-800: oklch(39% 0.175 330);
+  --magenta-900: oklch(32% 0.135 331);
+  --magenta-950: oklch(24% 0.095 331);
+
+  /* ==========================================================================
    * Violet — brand secondary. A soft pastel lavender (hue 293, low chroma):
    * gentle and airy, never electric. Solid lavender fills carry dark text.
    * The iris gradient does NOT use this ramp — it keeps a dedicated vivid
@@ -198,6 +216,18 @@
   --purple-800: oklch(30% 0.150 293);
   --purple-900: oklch(23% 0.120 293);
   --purple-950: oklch(15% 0.080 293);
+
+  /* Exact iris-morph animation stops (sRGB hex, sampled from
+   * static/iris-morph.json). The canonical V4 accent ramp: the --accent-*
+   * semantic tokens sample these so flat accents match the animated CTA
+   * pixel-for-pixel. Hex (not oklch) to stay identical to the WebGL scene and
+   * the colors.ts mirror. NB: sky/mint are bright dark-surface accents — use a
+   * deeper stop for accent text on light backgrounds. */
+  --iris-indigo: #350699; /* 0%   — warm pole */
+  --iris-aubergine: #2d0337; /* 25%  — near-black, ramp only */
+  --iris-lavender: #a26ae9; /* 50% */
+  --iris-sky: #43d2ff; /* 75% */
+  --iris-mint: #c7fcae; /* 100% — cool pole */
 
   --iris-from: var(--purple-700); /* deep regal purple — anchors the warm pole */
   --iris-via: oklch(64% 0.205 295); /* vivid violet — keeps the gradient electric */

@@ -178,6 +178,20 @@ const coral = {
   950: "#3a060c",
 };
 
+/** The Unicorn iris-morph animation's exact gradient stops (sRGB). The V4
+ *  signature accent ramp — deep indigo → aubergine → lavender → sky → mint —
+ *  sampled straight from `static/iris-morph.json` so flat accents match the
+ *  animated CTA pixel-for-pixel. Hex (not a named ramp) because these are the
+ *  precise WebGL-sampled values, and the chart/`polished` consumers can't parse
+ *  oklch. Mirrored on the CSS side by the `--iris-*` stops in tokens.css. */
+const iris = {
+  indigo: "#350699", // 0%   — deep regal indigo (the warm pole)
+  aubergine: "#2d0337", // 25%  — near-black; too dark for a fill, ramp only
+  lavender: "#a26ae9", // 50%  — electric lavender
+  sky: "#43d2ff", // 75%  — bright cyan
+  mint: "#c7fcae", // 100% — pale spring green (the cool pole)
+};
+
 export const colors = {
   inherit: "inherit",
   current: "currentColor",
@@ -196,6 +210,7 @@ export const colors = {
   gold,
   mint,
   coral,
+  iris,
 
   /* Legacy role aliases — V4 brand: purple → cyan, with mint/gold/coral as
    * status accents. Pink stays available as `pink` but no longer leads. */
@@ -209,13 +224,15 @@ export const colors = {
   silent: slate,
   blue: indigo,
 
-  /* Named accents — the V4 five-note chord (purple → violet → cyan → mint → gold).
-   * `pink` retained as an accent for callsites still on the legacy palette. */
+  /* Named accents — the cool notes now sample the iris-morph animation exactly
+   * (indigo → lavender → sky → mint, the brand's hero gradient). The warm status
+   * accents (`gold`, `pink`) and the info periwinkle (`indigo`) sit outside the
+   * morph and keep their own identities. */
   accent: {
-    purple: purple[700],
-    violet: violet[500],
-    cyan: cyan[400],
-    mint: mint[400],
+    purple: iris.indigo,
+    violet: iris.lavender,
+    cyan: iris.sky,
+    mint: iris.mint,
     gold: gold[500],
     pink: pink[500],
     indigo: indigo[400],
