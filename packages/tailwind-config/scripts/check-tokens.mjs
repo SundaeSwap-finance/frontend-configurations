@@ -10,7 +10,7 @@
  *                  exceeds the sRGB boundary at its L/H (out-of-gamut color).
  *   (b) LOCKSTEP — a ramp stop whose hex in src/colors.ts does not equal the
  *                  sRGB render of the matching oklch() in tokens.css (<=1 LSB).
- *   (c) CONTRAST — a hardcoded table of must-pass WCAG pairs, resolved from the
+ *   (c) CONTRAST — a must-pass WCAG pair, resolved live by parsing the
  *                  theme.css role->ramp mapping, drops below its floor.
  *
  * The CSS/TS token files are stable, regex-parseable formats. This script only
@@ -26,6 +26,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const TOKENS_CSS = join(ROOT, "src/styles/tokens.css");
 const COLORS_TS = join(ROOT, "src/colors.ts");
+const THEME_CSS = join(ROOT, "src/styles/theme.css");
 
 /* ============================================================================
  * Color math — OKLCH -> OKLab -> linear sRGB -> gamma sRGB.
@@ -187,14 +188,73 @@ function parseColorsTs(src) {
 }
 
 /* ============================================================================
+ * theme.css role resolution — the live source of truth for contrast pairs.
+ * ========================================================================== */
+
+/** Resolve a `--<ramp>-<stop>` reference to its colors.ts hex, as RGB. */
+function ramp(name, stop) {
+  const hex = tsRamps[name]?.[stop];
+  if (!hex) throw new Error(`contrast: missing ${name}-${stop} in colors.ts`);
+  return hexToRgb(hex);
+}
+
+/**
+ * Extract a `{ varName -> rawValue }` map for one theme.css scope block
+ * (`.dark { ... }` / `.light { ... }`). theme.css is two flat, brace-free
+ * custom-property blocks, so a non-greedy match to the closing brace is safe.
+ */
+function parseThemeScope(src, scope) {
+  const block = new RegExp(`\\.${scope}\\s*\\{([\\s\\S]*?)\\n\\}`).exec(src);
+  if (!block) throw new Error(`theme.css: no .${scope} block found`);
+  const map = {};
+  const re = /--([a-z][a-z0-9-]*):\s*([^;]+);/g;
+  let m;
+  while ((m = re.exec(block[1])) !== null) {
+    map[m[1]] = m[2].trim();
+  }
+  return map;
+}
+
+/**
+ * Resolve a theme.css role variable to its on-screen RGB, following the same
+ * var()/oklch() chain the browser would: a `var(--<ramp>-<stop>)` ref lands in
+ * colors.ts (the hex consumers see), a bare `oklch()` is rendered directly, and
+ * a `var(--<other-role>)` recurses within the same scope. This is what keeps the
+ * contrast table honest — it reads the LIVE role->ramp mapping rather than a
+ * hand-copied table that silently drifts from theme.css.
+ */
+function resolveRole(scopeMap, name, seen = new Set()) {
+  if (seen.has(name)) throw new Error(`theme.css: cyclic role --${name}`);
+  seen.add(name);
+  const raw = scopeMap[name];
+  if (raw === undefined)
+    throw new Error(`theme.css: role --${name} not defined in scope`);
+
+  const ok = /^oklch\(\s*([\d.]+)%\s+([\d.]+)\s+([\d.]+)\s*\)$/.exec(raw);
+  if (ok) return oklchToSrgb(Number(ok[1]), Number(ok[2]), Number(ok[3]));
+
+  const v = /^var\(\s*--([a-z0-9-]+)\s*\)$/.exec(raw);
+  if (v) {
+    const ref = v[1];
+    const rs = /^([a-z]+)-(\d+)$/.exec(ref);
+    if (rs && tsRamps[rs[1]]) return ramp(rs[1], Number(rs[2]));
+    return resolveRole(scopeMap, ref, seen);
+  }
+  throw new Error(`theme.css: cannot resolve --${name}: "${raw}"`);
+}
+
+/* ============================================================================
  * Run.
  * ========================================================================== */
 
 const tokensSrc = readFileSync(TOKENS_CSS, "utf8");
 const colorsSrc = readFileSync(COLORS_TS, "utf8");
+const themeSrc = readFileSync(THEME_CSS, "utf8");
 
 const cssStops = parseTokensCss(tokensSrc);
 const tsRamps = parseColorsTs(colorsSrc);
+const DARK = parseThemeScope(themeSrc, "dark");
+const LIGHT = parseThemeScope(themeSrc, "light");
 
 let failures = 0;
 const log = (s = "") => process.stdout.write(s + "\n");
@@ -224,7 +284,9 @@ log(
 );
 
 /* ---- (b) LOCKSTEP ------------------------------------------------------- */
-log("\n[b] LOCKSTEP — colors.ts hex must equal sRGB render of tokens.css oklch (<=1 LSB)");
+log(
+  "\n[b] LOCKSTEP — colors.ts hex must equal sRGB render of tokens.css oklch (<=1 LSB)",
+);
 let lockstepFails = 0;
 let lockstepChecked = 0;
 for (const s of cssStops) {
@@ -233,7 +295,9 @@ for (const s of cssStops) {
     // A CSS stop with no hex mirror (e.g. a stop colors.ts omits) — report it.
     lockstepFails++;
     failures++;
-    log(`  FAIL --${s.ramp}-${s.stop}: present in tokens.css but missing in colors.ts`);
+    log(
+      `  FAIL --${s.ramp}-${s.stop}: present in tokens.css but missing in colors.ts`,
+    );
     continue;
   }
   lockstepChecked++;
@@ -263,79 +327,69 @@ log(
 
 /* ---- (c) CONTRAST ------------------------------------------------------- */
 /**
- * Must-pass WCAG pairs, resolved from the theme.css role->ramp mapping.
- * Each fg/bg is given as the resolved ramp hex (pulled from colors.ts) OR a
- * literal for surfaces that are authored as a bare oklch() in theme.css and
- * have no ramp mirror (the dark page floor: --surface-base: oklch(12% .046 298)).
- *
- * We resolve ramp roles through colors.ts so this table tracks the same hex the
- * JS consumers see, and stays honest if a ramp stop ever shifts.
+ * Must-pass WCAG pairs. Foreground/background are resolved LIVE from the
+ * theme.css `.dark` / `.light` scope blocks (see resolveRole) — never copied —
+ * so the table tracks the role->ramp mapping the browser actually applies and
+ * cannot silently drift from it. The only literals are component label colors
+ * (a white or gold-900 label some buttons paint on an action fill); those are
+ * call-site choices with no theme role to resolve.
  */
-function ramp(name, stop) {
-  const hex = tsRamps[name]?.[stop];
-  if (!hex) throw new Error(`contrast table: missing ${name}-${stop} in colors.ts`);
-  return hexToRgb(hex);
-}
-function oklchLiteral(Lpct, C, Hdeg) {
-  return oklchToSrgb(Lpct, C, Hdeg);
-}
-
-// Dark page floor: theme.css --surface-base: oklch(12% 0.046 298). No ramp mirror.
-const DARK_PAGE = oklchLiteral(12, 0.046, 298);
-// Light page floor: theme.css --surface-base: var(--ink-200).
-const LIGHT_PAGE = ramp("ink", 200);
 const WHITE = { r: 255, g: 255, b: 255 };
 
 const contrastPairs = [
   {
-    // theme.css --text-tertiary (dark) = oklch(55% 0 0) — hueless grey.
-    name: "dark text-tertiary (hueless grey) on surface-page",
-    fg: oklchLiteral(55, 0, 0),
-    bg: DARK_PAGE,
+    // --text-tertiary: metadata, %, sub-values, denominators.
+    name: "dark text-tertiary on surface-page",
+    fg: resolveRole(DARK, "text-tertiary"),
+    bg: resolveRole(DARK, "surface-page"),
     floor: 3.0, // WCAG 1.4.11 non-text / large-text territory
   },
   {
-    // theme.css --text-scion (dark) = oklch(98% 0 0) — a hueless near-white.
-    // --text-heading and --text-body both resolve to it.
-    name: "dark text primary scion (heading == body) on surface-page",
-    fg: oklchLiteral(98, 0, 0),
-    bg: DARK_PAGE,
+    // --text-heading == --text-body == --text-scion.
+    name: "dark text primary (heading == body) on surface-page",
+    fg: resolveRole(DARK, "text-body"),
+    bg: resolveRole(DARK, "surface-page"),
     floor: 4.5,
   },
   {
-    // theme.css --text-scion (light) = var(--ink-1100); heading == body.
-    name: "light text primary scion (ink-1100, heading == body) on surface-page",
-    fg: ramp("ink", 1100),
-    bg: LIGHT_PAGE,
+    name: "light text primary (heading == body) on surface-page",
+    fg: resolveRole(LIGHT, "text-body"),
+    bg: resolveRole(LIGHT, "surface-page"),
     floor: 4.5,
   },
   {
-    // theme.css --text-secondary (dark) = oklch(66% 0 0) — hueless grey.
-    name: "dark text-secondary (hueless grey) on surface-page",
-    fg: oklchLiteral(66, 0, 0),
-    bg: DARK_PAGE,
+    name: "dark text-secondary on surface-page",
+    fg: resolveRole(DARK, "text-secondary"),
+    bg: resolveRole(DARK, "surface-page"),
     floor: 4.5,
   },
   {
-    // theme.css --action-primary (light) = var(--purple-500). Some consumers
-    // pair a white label with bg-action-primary, so the fill must clear AA.
-    name: "light action-primary (purple-500) with white label",
+    // Some consumers paint a white label on bg-action-primary, so the fill
+    // must clear AA against white.
+    name: "light action-primary with white label",
     fg: WHITE,
-    bg: ramp("purple", 500),
+    bg: resolveRole(LIGHT, "action-primary"),
     floor: 4.5,
   },
   {
-    // theme.css --action-secondary (light) = var(--cyan-400), paired with a
-    // dark highlight-900 label (Button secondary). Light fill, dark text.
-    name: "light action-secondary (cyan-400) with highlight-900 label",
+    // Button secondary paints a dark gold-900 label on the action-secondary
+    // fill (light fill, dark text).
+    name: "light action-secondary with gold-900 label",
     fg: ramp("gold", 900),
-    bg: ramp("cyan", 400),
+    bg: resolveRole(LIGHT, "action-secondary"),
     floor: 4.5,
   },
   {
-    name: "light text-link-hover (violet-800) on surface-page",
-    fg: ramp("violet", 800),
-    bg: LIGHT_PAGE,
+    name: "light text-link-hover on surface-page",
+    fg: resolveRole(LIGHT, "text-link-hover"),
+    bg: resolveRole(LIGHT, "surface-page"),
+    floor: 4.5,
+  },
+  {
+    // Dark-mode link hover — previously untested.
+    name: "dark text-link-hover on surface-page",
+    fg: resolveRole(DARK, "text-link-hover"),
+    bg: resolveRole(DARK, "surface-page"),
     floor: 4.5,
   },
 ];
