@@ -68,7 +68,7 @@ console.log(colors.secondary[400]); // "#5ed6ff" (cyan)
 | ----------- | --------- | --------- |
 | `primary`   | `#451a8b` | 50-950    |
 | `secondary` | `#5ed6ff` | 50-950    |
-| `success`   | `#36ca95` | 50-950    |
+| `success`   | `#5fc77d` | 50-950    |
 | `error`     | `#ed3d57` | 50-950    |
 | `warning`   | `#f9bb5c` | 50-950    |
 | `highlight` | `#f9bb5c` | 50-950    |

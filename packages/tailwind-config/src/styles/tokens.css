@@ -159,20 +159,27 @@
   --gold-950: oklch(29% 0.050 54);
 
   /* ==========================================================================
-   * Mint — spring green. Hue 164. Success / positive deltas. Derived to sit
-   * inside the neon chord (the reference palette had no dedicated green).
+   * Mint — spring green. Hue ~150. Success / positive deltas. Nudged ~13° warmer
+   * (was 162–168) toward the iris-morph mint pole (--iris-mint, hue 136) so the
+   * success greens read as the same family as the brand gradient — without
+   * adopting iris-mint itself (94% L, too pale for a functional state, and it
+   * would couple a semantic status to a decorative brand accent). 150 is the
+   * deliberate middle: clearly warmer/iris-leaning, still unmistakably "go" green
+   * and not the lime that 136 starts to read as. Lightness/chroma curve is
+   * untouched, so contrast on white is preserved. Keeps its natural warm-drift
+   * toward the shadows.
    * ========================================================================== */
-  --mint-50: oklch(97% 0.018 162);
-  --mint-100: oklch(93% 0.045 162);
-  --mint-200: oklch(88% 0.080 162);
-  --mint-300: oklch(83% 0.110 162);
-  --mint-400: oklch(80% 0.130 163);
-  --mint-500: oklch(75% 0.145 164);
-  --mint-600: oklch(66% 0.137 165);
-  --mint-700: oklch(55% 0.112 166);
-  --mint-800: oklch(45% 0.091 167);
-  --mint-900: oklch(36% 0.072 168);
-  --mint-950: oklch(28% 0.055 168);
+  --mint-50: oklch(97% 0.018 149);
+  --mint-100: oklch(93% 0.045 149);
+  --mint-200: oklch(88% 0.080 149);
+  --mint-300: oklch(83% 0.110 149);
+  --mint-400: oklch(80% 0.130 150);
+  --mint-500: oklch(75% 0.145 151);
+  --mint-600: oklch(66% 0.137 152);
+  --mint-700: oklch(55% 0.112 153);
+  --mint-800: oklch(45% 0.091 154);
+  --mint-900: oklch(36% 0.072 155);
+  --mint-950: oklch(28% 0.055 155);
 
   /* ==========================================================================
    * Coral — red. Hue 18 (orange-shifted so it never collides with brand pink

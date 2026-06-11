@@ -319,6 +319,31 @@
 }
 
 /* ============================================================================
+ * SUCCESS — dark mode adopts the iris-tail green.
+ * Every success surface (Badge, Button, StatusDot, Delta, chart-4, callout
+ * fills) dereferences the raw `--mint-*` ramp, so retuning the bright stops
+ * here flips them all at once — no component or semantic-token edits needed.
+ * `:root:not(.light)` scopes this to dark/default only (it can't match a
+ * `.light` tree, which falls back to the darker tokens.css mint), and its
+ * (0,2,0) specificity outranks the `:root` ramp it overrides.
+ *
+ * The bright pole lands exactly on `--iris-tail` (#c7fcae, oklch 93.6% .116
+ * 136) at the 400/fill stop; 300/600 give hover/active room and 500 carries
+ * the resting text a hair deeper for saturation. Deep stops (700–950) keep
+ * their dark tokens.css values — they serve on-fill labels (text-success-900)
+ * and the disabled state, which must stay dark under the pale fill.
+ * ========================================================================== */
+:root:not(.light) {
+  --mint-50: oklch(97.6% 0.035 136); /* #edfde6 — faint tint */
+  --mint-100: oklch(96.8% 0.055 136); /* #e4fed9 */
+  --mint-200: oklch(96.0% 0.080 136); /* #daffc9 */
+  --mint-300: oklch(95.4% 0.098 136); /* #d2ffbe — action hover */
+  --mint-400: oklch(93.6% 0.116 136); /* #c7fcae — = --iris-tail; fill, status dot, chart-4 */
+  --mint-500: oklch(90.0% 0.130 137); /* #b5f29c — resting success text, action active */
+  --mint-600: oklch(83.0% 0.150 138); /* #95de7c — deeper border / active text */
+}
+
+/* ============================================================================
  * LIGHT — a muted violet-on-paper variant. Declared last so it wins the
  * cascade against `:root` when `.light` is on the tree.
  * ========================================================================== */

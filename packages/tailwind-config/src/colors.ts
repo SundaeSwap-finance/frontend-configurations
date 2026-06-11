@@ -146,20 +146,22 @@ const gold = {
   950: "#3e2412",
 };
 
-/** Spring green. Success. */
+/** Spring green. Success. Hue nudged ~13° warmer toward the iris-mint pole —
+ *  mirror of the oklch ramp in styles/tokens.css (kept in lockstep so the
+ *  chart libs that read these hexes stay aligned with the CSS-token greens). */
 const mint = {
-  DEFAULT: "#36ca95",
-  50: "#ebf9f1",
-  100: "#cef2df",
-  200: "#a8e9c7",
-  300: "#81deb1",
-  400: "#62d8a6",
-  500: "#36ca95",
-  600: "#0bac7d",
-  700: "#0a8662",
-  800: "#04654a",
-  900: "#024936",
-  950: "#023124",
+  DEFAULT: "#5fc77d",
+  50: "#edf9ef",
+  100: "#d4f1d8",
+  200: "#b3e7bb",
+  300: "#93dca0",
+  400: "#7cd591",
+  500: "#5fc77d",
+  600: "#44aa67",
+  700: "#338451",
+  800: "#23643d",
+  900: "#17482c",
+  950: "#0e311d",
 };
 
 /** Red. Error / destructive. */
