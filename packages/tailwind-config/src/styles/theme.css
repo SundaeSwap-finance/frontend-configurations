@@ -134,13 +134,13 @@
   --surface-card: var(--glass-fill);
 
   /* Floating overlays (dialogs, tooltips, hover cards) sit ABOVE the page and
-   * over its colorful atmosphere. Near-opaque (the translucent 10% glass fill
-   * sampled the gradient backdrop through 16px blur and washed out to a muddy
-   * mid-gray), but tuned to the same deep-violet family as the page floor
-   * (oklch ~12% 0.044 298) — just lifted in lightness for elevation. The old
-   * slate-900 mix sat too light and near-chromaless (0.016), reading as a flat
-   * gray panel over the violet-black page. */
-  --surface-overlay: color-mix(in oklab, oklch(17% 0.032 296) 92%, transparent);
+   * over its colorful atmosphere. FULLY opaque — the `surface` utility under
+   * these overlays carries a 16px backdrop-filter, and any residual transparency
+   * (even 8%) lets that blur sample the colorful page/card beneath and paint a
+   * stray horizontal "sheen" band across the panel. Tuned to the same
+   * deep-violet family as the page floor (oklch ~12% 0.044 298), lifted in
+   * lightness for elevation. */
+  --surface-overlay: oklch(17% 0.032 296);
 
   /* Inset wells (native inputs, search fields) stay opaque and recessed. */
   --surface-input: oklch(12% 0.012 300);
