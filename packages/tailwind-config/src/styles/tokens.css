@@ -236,29 +236,71 @@
   --iris-sky: #43d2ff; /* 75% */
   --iris-mint: #c7fcae; /* 100% — cool pole */
 
-  --iris-from: var(--purple-700); /* deep regal purple — anchors the warm pole */
-  --iris-via: oklch(64% 0.205 295); /* vivid violet — keeps the gradient electric */
-  --iris-to: var(--cyan-400);
-  --iris-tail: var(--mint-400); /* mint endpoint — the cool pole of the morph */
+  /* The gradient stops ARE the iris-morph ramp (above), so the static fill
+   * matches the animated CTA + the portfolio ring pixel-for-pixel instead of
+   * drifting onto neighbouring ramps. Aubergine (25%) is skipped — too dark to
+   * read as a fill, ramp-only. */
+  --iris-from: var(--iris-indigo); /* deep regal indigo — the warm pole */
+  --iris-via: var(--iris-lavender); /* electric lavender — the vivid mid */
+  --iris-to: var(--iris-sky); /* bright cyan */
+  --iris-tail: var(--iris-mint); /* pale mint — the cool pole */
   --iris-angle: 115deg;
-  --gradient-iris: linear-gradient(
-    var(--iris-angle),
-    var(--iris-from),
-    var(--iris-via) 32%,
-    var(--iris-to) 68%,
-    var(--iris-tail)
-  );
-  /* Seamless loop variant — bookends match so background-position animation
-   * never flashes an edge when it wraps. */
-  --gradient-iris-loop: linear-gradient(
-    90deg,
-    var(--iris-from) 0%,
-    var(--iris-via) 22%,
-    var(--iris-to) 50%,
-    var(--iris-tail) 75%,
-    var(--iris-via) 88%,
-    var(--iris-from) 100%
-  );
+  /* Atmospheric, not a flat ramp: the warm→cool linear sweep (the brand
+   * direction + full coverage) carries three soft radial blooms so the bands
+   * pool organically instead of running perfectly parallel — the still-frame
+   * cousin of the animated `bg-iris-animated` CTA, which builds its mesh the
+   * same way. Self-sizing: each bloom is box-relative (`at X% Y%`) and fades to
+   * transparent, so the token stays a drop-in `background-image` at any size
+   * with no extra background-size/position. Same four iris-morph stops. */
+  --gradient-iris:
+    radial-gradient(
+      120% 130% at 18% 28%,
+      color-mix(in oklab, var(--iris-from) 70%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      95% 120% at 60% 82%,
+      color-mix(in oklab, var(--iris-to) 52%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      95% 110% at 90% 34%,
+      color-mix(in oklab, var(--iris-tail) 58%, transparent) 0%,
+      transparent 62%
+    ),
+    linear-gradient(
+      var(--iris-angle),
+      var(--iris-from),
+      var(--iris-via) 34%,
+      var(--iris-to) 66%,
+      var(--iris-tail)
+    );
+  /* Seamless loop variant — for `background-position` pan animation. Both
+   * layers stay 90deg (purely horizontal) with matched 0%/100% bookends so the
+   * wrap never flashes a seam; radials are deliberately avoided here (they
+   * can't tile seamlessly under a horizontal pan). The translucent top layer
+   * adds luminosity drift over the round-trip base so it reads atmospheric, not
+   * a flat band. */
+  --gradient-iris-loop:
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--iris-to) 38%, transparent) 0%,
+      transparent 16%,
+      color-mix(in oklab, var(--iris-via) 42%, transparent) 36%,
+      transparent 58%,
+      color-mix(in oklab, var(--iris-tail) 34%, transparent) 78%,
+      color-mix(in oklab, var(--iris-to) 38%, transparent) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--iris-from) 0%,
+      var(--iris-via) 17%,
+      var(--iris-to) 38%,
+      var(--iris-tail) 56%,
+      var(--iris-to) 73%,
+      var(--iris-via) 88%,
+      var(--iris-from) 100%
+    );
 
   /* Muted iris — pearlescent soap-bubble chrome. Lavender → soft cyan →
    * mint, thin-film iridescence on dark glass (not the electric hero

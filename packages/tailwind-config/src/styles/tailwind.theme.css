@@ -138,6 +138,15 @@
   --color-accent-gold: var(--accent-gold);
   --color-accent-salmon: var(--coral-300); /* legacy alias */
   --color-accent-peach: var(--gold-300); /* legacy alias */
+  /* Iris — the brand signature ramp (the iris-morph gradient stops). Registered
+   * so the hero gradient's exact colors are reusable as utilities
+   * (bg-/text-/ring-iris-*), e.g. portfolio token indicators that should sit on
+   * the brand sweep. Aubergine is the near-black 25% stop (ramp-only). */
+  --color-iris-indigo: var(--iris-indigo);
+  --color-iris-aubergine: var(--iris-aubergine);
+  --color-iris-lavender: var(--iris-lavender);
+  --color-iris-sky: var(--iris-sky);
+  --color-iris-mint: var(--iris-mint);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -1154,25 +1163,6 @@
   box-shadow: var(--glass-rim-inset);
 }
 
-@utility bg-iris-wash {
-  background-image:
-    radial-gradient(
-      ellipse 80% 120% at 18% 50%,
-      var(--glass-iris-wash-from),
-      transparent 62%
-    ),
-    radial-gradient(
-      ellipse 70% 100% at 82% 40%,
-      var(--glass-iris-wash-to),
-      transparent 58%
-    ),
-    radial-gradient(
-      ellipse 60% 90% at 52% 20%,
-      var(--glass-iris-wash-via),
-      transparent 55%
-    );
-}
-
 @utility text-accent-chrome {
   color: var(--accent-chrome);
 }
@@ -1242,9 +1232,10 @@
   box-shadow: var(--glass-shadow-callout-success);
 }
 
-/* Calm purple promo/feature banner — flat tinted glass (no iris wash). The
- * quiet, V4-correct alternative to glass-banner for non-CTA "now live" surfaces;
- * uses the V4 brand purple held at a low alpha so it reads ambient, not loud. */
+/* Calm fuchsia/magenta promo/feature banner — flat tinted glass (no iris wash).
+ * The quiet, V4-correct alternative to glass-banner for non-CTA "now live"
+ * surfaces; uses the accent-magenta family (--glass-fill-callout-feature, the
+ * Stableswaps banner's hue) held at a low alpha so it reads ambient, not loud. */
 @utility glass-callout-feature-surface {
   background-image: var(--glass-sheen);
   background-color: var(--glass-fill-callout-feature);
