@@ -362,12 +362,16 @@
    * from --elevation-well (inset shadow + rim), matching the light philosophy
    * where surfaces separate by rim, not by lightness. */
   --surface-well: var(--ink-100);
-  /* Light glass is already opaque, so the solid surface mirrors the card base. */
+  /* Opaque flattened surface for seam-straddling controls. Held at the near-white
+   * floor (ink-50); the card base itself now lifts to pure white — see --glass-fill. */
   --surface-solid: var(--ink-50);
 
   --glass-blur: 0px;
   --glass-blur-nested: 0px;
-  --glass-fill: var(--ink-50);
+  /* Card surface lifts to pure white — one step above the near-white page floor
+   * (--surface-base = ink-50). Card/Surface/menu/panel/overlay fills all derive
+   * from this, so every card reads as a crisp white card in light mode. */
+  --glass-fill: white;
   --glass-fill-nested: color-mix(in oklab, var(--ink-100) 88%, transparent);
   --glass-fill-callout-info: color-mix(in srgb, var(--violet-600) 14%, transparent);
   --glass-fill-callout-warning: color-mix(in srgb, var(--gold-600) 16%, transparent);
@@ -389,9 +393,9 @@
   --glass-sheen: none;
   /* No directional sheen in light mode — surfaces separate by rim, not highlight. */
   --glass-sheen-strength: 0;
-  /* Cards/containers are defined by a hairline rim, not by lifting off the page
-   * with lightness — the page and card fills are both near-white (see
-   * --surface-base below), so a rim does the separating the lightness can't. */
+  /* Cards lift off the near-white page to pure white (--glass-fill) and keep a
+   * hairline rim for crisp edge definition — the rim still carries separation
+   * where the white-on-near-white lightness step alone would be too subtle. */
   --glass-rim-inset: inset 0 0 0 1px var(--border-subtle);
   --glass-rim-inset-nested: inset 0 0 0 1px var(--border-subtle);
   --glass-ambient: transparent;
@@ -413,8 +417,8 @@
   --glass-iris-wash-to: color-mix(in oklab, var(--cyan-400) 8%, transparent);
   /* --glass-iris-muted-wash-* retired with bg-iris-muted. */
 
-  /* White page floor. Cards used to lift by being ink-50 on this ink-200 grey;
-   * now the page IS near-white, so cards separate via --glass-rim-inset. */
+  /* Near-white page floor (ink-50). Cards lift above it to pure white
+   * (--glass-fill) plus a hairline rim. */
   --surface-base: var(--ink-50);
   --surface-card: var(--glass-fill);
   --surface-inset: var(--glass-fill-nested);
