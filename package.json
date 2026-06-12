@@ -43,5 +43,10 @@
     "typescript": "^5.4.5",
     "autoprefixer": "^10.4.24"
   },
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
 }
