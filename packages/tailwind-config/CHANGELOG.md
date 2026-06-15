@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@4.0.4...@sundaeswap/tailwind-config@5.0.1) (2026-06-15)
+
+### Bug Fixes
+
+- **colors:** sync neutral ramp with theme.css — add neutral-50 ([c257383](https://github.com/sundaeswap-finance/frontend-configurations/commit/c2573834654958538c5036c85423b5dc59b7f37a))
+- **tailwind-config:** bump overlay surface chroma to be perceptible ([54bfac3](https://github.com/sundaeswap-finance/frontend-configurations/commit/54bfac3cb6150956d27fcb82e25c9e794f5fd2cd))
+- **tailwind-config:** commit to magenta on overlay surfaces ([4e9704b](https://github.com/sundaeswap-finance/frontend-configurations/commit/4e9704b4d76a86b084eb389f00cb657a117b075b))
+- **tailwind-config:** dial back overlay tint to oklch(16% 0.045 322) ([439bd7c](https://github.com/sundaeswap-finance/frontend-configurations/commit/439bd7c0fdcafa4522ff57bfa03a9c27058c3756))
+- **tailwind-config:** make dark surface-overlay fully opaque to remove sheen band ([fefd6b8](https://github.com/sundaeswap-finance/frontend-configurations/commit/fefd6b822d11b48c0382680d27f89153280a25f6))
+- **tailwind-config:** resolve token-gate contrast pairs live from theme.css ([6ee9831](https://github.com/sundaeswap-finance/frontend-configurations/commit/6ee983103ee80120b9fc7bc72831b1023af88d64))
+- **theme:** use deep-ramp silent values for dark action surfaces ([43e8a27](https://github.com/sundaeswap-finance/frontend-configurations/commit/43e8a27b8c68a342e1425b4b20bb013da03ca32e))
+- **theme:** use literal hex values for semantic tokens in [@theme](https://github.com/theme) ([a514d82](https://github.com/sundaeswap-finance/frontend-configurations/commit/a514d825c2777fbc0cf035b731b421e88752b710))
+
+- refactor(tailwind-config)!: consolidate keyframes into theme.css ([0559424](https://github.com/sundaeswap-finance/frontend-configurations/commit/0559424a6d54dbf2b68ee13723bbe8cc9f75fed0))
+- refactor(tailwind-config)!: rename accent ramp to semantic hue keys ([22ddb0a](https://github.com/sundaeswap-finance/frontend-configurations/commit/22ddb0a9b75422cbcefdd7e80b20e21e728b6530)), closes [#48CAE4](https://github.com/sundaeswap-finance/frontend-configurations/issues/48CAE4) [#F5B7B1](https://github.com/sundaeswap-finance/frontend-configurations/issues/F5B7B1) [#F0](https://github.com/sundaeswap-finance/frontend-configurations/issues/F0)
+- feat(tailwind-config)!: remove deprecated gray namespace ([5e2384d](https://github.com/sundaeswap-finance/frontend-configurations/commit/5e2384d933270a858baaa8f8d4fe9aa8fc357823)), closes [sundaeswap/ui-toolkit#39d7](https://github.com/sundaeswap/ui-toolkit/issues/39d7) [dex-v2#8d5baee9](https://github.com/dex-v2/issues/8d5baee9) [#e6ecf0](https://github.com/sundaeswap-finance/frontend-configurations/issues/e6ecf0)
+- feat(design-system)!: promote Geist to canonical sans + migrate postcss-config to Tailwind v4 ([451c05c](https://github.com/sundaeswap-finance/frontend-configurations/commit/451c05ce94ed179dc81fb2fa6b5393fcbd83af6c))
+
+### Features
+
+- **colors:** retune silent ramp toward brand magenta hue ([5641b19](https://github.com/sundaeswap-finance/frontend-configurations/commit/5641b19a2ca7b2b647f72cab943e0b5074b7e87e))
+- **tailwind-config:** add iris-morph and magenta color ramps ([4bc4acd](https://github.com/sundaeswap-finance/frontend-configurations/commit/4bc4acda205af33ab951f0bb128338ee31e23f7e))
+- **tailwind-config:** add semantic radii, shadows, and motion tokens ([22e8db9](https://github.com/sundaeswap-finance/frontend-configurations/commit/22e8db983497409976c177ff9296379602e62c78))
+- **tailwind-config:** add shadow-soft-rest and shadow-soft-hover tokens ([2347582](https://github.com/sundaeswap-finance/frontend-configurations/commit/2347582e307acb840c232068167bf65fb3dca69d))
+- **tailwind-config:** add stateful action surface tokens ([c1b42c1](https://github.com/sundaeswap-finance/frontend-configurations/commit/c1b42c1cf4e2881efd56b6dd39752d87ad531c17))
+- **tailwind-config:** add surface-well tier and refine light mode surfaces ([617fa74](https://github.com/sundaeswap-finance/frontend-configurations/commit/617fa74548551feb4ba4d3261a5ee80b227b95c6))
+- **tailwind-config:** add violet, blue, and socials color namespaces ([4e6a591](https://github.com/sundaeswap-finance/frontend-configurations/commit/4e6a59178f7bd1369f9a4d72a53d27b6f563941b)), closes [#A78](https://github.com/sundaeswap-finance/frontend-configurations/issues/A78) [#7C3](https://github.com/sundaeswap-finance/frontend-configurations/issues/7C3) [#8B5CF6](https://github.com/sundaeswap-finance/frontend-configurations/issues/8B5CF6) [#60A5](https://github.com/sundaeswap-finance/frontend-configurations/issues/60A5) [#2563](https://github.com/sundaeswap-finance/frontend-configurations/issues/2563)
+- **tailwind-config:** lift light-mode cards to pure white ([d0796a8](https://github.com/sundaeswap-finance/frontend-configurations/commit/d0796a84b3e0f6461ab68af38f40f323ea6996c9))
+- **tailwind-config:** re-anchor action tokens to neon ramp stops ([f96c00c](https://github.com/sundaeswap-finance/frontend-configurations/commit/f96c00c4adbfbfdea5af0815159689ec55b06602))
+- **tailwind-config:** re-anchor success green toward the iris-mint family ([055d3ec](https://github.com/sundaeswap-finance/frontend-configurations/commit/055d3ec65e2bf7cc002f9b03e39a01e198541943))
+- **tailwind-config:** semantic surface/text/border tokens with dark cascade ([9223ff0](https://github.com/sundaeswap-finance/frontend-configurations/commit/9223ff077a4359337cf1a22945c40d003aa88f41))
+- **tailwind-config:** source iris gradient from the brand ramp and expose iris utilities ([b76bd34](https://github.com/sundaeswap-finance/frontend-configurations/commit/b76bd343f2519f7262d618bff5c7162173801c2d))
+- **tailwind-config:** warm-tint overlay surfaces in dark mode ([7369de3](https://github.com/sundaeswap-finance/frontend-configurations/commit/7369de3450b803688470b504aff6ddd525883a24)), closes [#202230](https://github.com/sundaeswap-finance/frontend-configurations/issues/202230)
+
+### BREAKING CHANGES
+
+- drops the \`keyFrames\` and \`theme\` JS exports.
+  Consumers had none in this org, but external consumers should import
+  animations and individual color/spacing maps directly.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+- consumers must update to the new keys.
+  bg-accent-100/200/300 -> bg-accent-cyan/salmon/peach
+  colors.accent[100/200/300] -> colors.accent.cyan/salmon/peach
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+- consumers of bg-gray-_, text-gray-_, colors.gray._,
+  etc. must migrate to the neutral-_ equivalents. Migration mapping
+  documented in the ui-toolkit and dex-v2 migration commits.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+- @sundaeswap/postcss-config v3 requires tailwindcss ^4.0.0.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
 ## [4.0.4](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@4.0.3...@sundaeswap/tailwind-config@4.0.4) (2026-02-12)
 
 **Note:** Version bump only for package @sundaeswap/tailwind-config

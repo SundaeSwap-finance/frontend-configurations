@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.16](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/eslint-config@2.0.15...@sundaeswap/eslint-config@2.0.16) (2026-06-15)
+
+### Bug Fixes
+
+- **eslint-config:** derive raw-ramp drift guard from a single family list ([8d083d8](https://github.com/sundaeswap-finance/frontend-configurations/commit/8d083d8a79085f0cd7dbb04efdf9f29757ff4f04))
+
+### Features
+
+- **eslint-config:** add V4 design-system drift guards ([b290d87](https://github.com/sundaeswap-finance/frontend-configurations/commit/b290d8708d7978c717e50e58f2e4f022a8b644be))
+
 ## [2.0.15](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/eslint-config@2.0.14...@sundaeswap/eslint-config@2.0.15) (2024-09-25)
 
 ### Bug Fixes

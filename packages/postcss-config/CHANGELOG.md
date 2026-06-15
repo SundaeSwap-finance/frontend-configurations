@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/postcss-config@2.0.14...@sundaeswap/postcss-config@3.0.1) (2026-06-15)
+
+- feat(design-system)!: promote Geist to canonical sans + migrate postcss-config to Tailwind v4 ([451c05c](https://github.com/sundaeswap-finance/frontend-configurations/commit/451c05ce94ed179dc81fb2fa6b5393fcbd83af6c))
+
+### BREAKING CHANGES
+
+- @sundaeswap/postcss-config v3 requires tailwindcss ^4.0.0.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
 ## [2.0.14](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/postcss-config@2.0.13...@sundaeswap/postcss-config@2.0.14) (2024-07-18)
 
 **Note:** Version bump only for package @sundaeswap/postcss-config
