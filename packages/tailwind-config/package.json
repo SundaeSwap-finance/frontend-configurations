@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/tailwind-config",
-  "version": "4.0.4",
+  "version": "5.0.0",
   "description": "SundaeSwap Tailwind CSS v4 theme configuration with colors, animations, and utilities.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -11,26 +11,31 @@
       "require": "./dist/cjs/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./theme.css": "./dist/theme.css"
+    "./theme.css": "./src/theme.css",
+    "./styles/tokens.css": "./src/styles/tokens.css",
+    "./styles/theme.css": "./src/styles/theme.css",
+    "./styles/tailwind.theme.css": "./src/styles/tailwind.theme.css"
   },
   "type": "module",
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/theme.css",
+    "src/styles"
   ],
   "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/tailwind-config",
   "scripts": {
     "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
-    "build:css": "cp src/theme.css dist/theme.css",
     "types": "tsc --project ./tsconfig.json",
-    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs && bun run build:css && bun run set-cjs",
+    "build": "bun run clean && bun run types && bun run build:esm && bun run build:cjs && bun run set-cjs",
     "watch:esm": "bun run clean && bun run build && bun run build:esm --watch",
     "watch:cjs": "bun run clean && bun run build && bun run build:cjs --watch",
     "clean": "rm -rf ./dist",
-    "test": "bun run build",
+    "check:tokens": "node scripts/check-tokens.mjs",
+    "test": "bun run build && node scripts/check-tokens.mjs",
     "set-cjs": "echo '{ \"type\": \"commonjs\" }' > ./dist/cjs/package.json"
   },
   "dependencies": {

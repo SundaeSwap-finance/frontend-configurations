@@ -1,138 +1,257 @@
+/**
+ * SundaeSwap V4 color ramps — programmatic mirror of Layer 1 (styles/tokens.css).
+ *
+ * The CSS token layer is authored in OKLCH; these are the sRGB-hex equivalents.
+ * Hex is required here because the JS consumers of this module — chart
+ * libraries (Chart.js, Recharts), `polished`, canvas APIs — cannot parse
+ * `oklch()`. Keep these in lockstep with `styles/tokens.css`.
+ *
+ * Ramps are exported under their true-color name (`pink`, `violet`, `mint`, ...)
+ * and aliased to the legacy role name (`primary`, `secondary`, `success`, ...).
+ */
+
+/** Violet-black neutral spine. */
+const ink = {
+  DEFAULT: "#f4f3f7",
+  50: "#faf9fc",
+  100: "#f4f3f7",
+  200: "#e8e7ed",
+  300: "#d5d2dc",
+  400: "#bfbcc7",
+  500: "#a09ca9",
+  600: "#827d8d",
+  700: "#656071",
+  800: "#4f4a5b",
+  900: "#3a3447",
+  1000: "#2b2538",
+  1100: "#221b2d",
+  1200: "#181322",
+  1300: "#0e0a15",
+  1400: "#050407",
+  1500: "#010101",
+};
+
+/** Violet-tinted surface ladder. */
+const slate = {
+  DEFAULT: "#575263",
+  50: "#efedf3",
+  100: "#d2cfd9",
+  200: "#b0abb9",
+  300: "#918c9c",
+  400: "#716c7c",
+  500: "#575263",
+  600: "#44404d",
+  700: "#34313c",
+  800: "#25222c",
+  900: "#19171f",
+  1000: "#0e0c12",
+};
+
+/** Brand primary — deep regal purple, the warm pole of the V4 iris gradient.
+ *  Anchors the Unicorn morph palette (purple → cyan → mint). DEFAULT is the
+ *  700 stop so chart/token surfaces read as rich purple, not pastel lavender. */
+const purple = {
+  DEFAULT: "#451a8b",
+  50: "#f2f0fd",
+  100: "#e6e0fd",
+  200: "#d1c4fd",
+  300: "#b199f4",
+  400: "#8c6de2",
+  500: "#6c42c3",
+  600: "#552ba3",
+  700: "#451a8b",
+  800: "#350d70",
+  900: "#23044e",
+  950: "#0f0129",
+};
+
+/** Legacy pink ramp. Demoted from brand-primary in V4; still available for
+ *  callsites that want explicit pink (legacy charts, error accents). */
+const pink = {
+  DEFAULT: "#f7538e",
+  50: "#fff1f4",
+  100: "#ffdee6",
+  200: "#fec1d0",
+  300: "#fe9cb8",
+  400: "#fe78a2",
+  500: "#f7538e",
+  600: "#d83977",
+  700: "#ad2458",
+  800: "#80183c",
+  900: "#5c1328",
+  950: "#3b0b18",
+};
+
+/** Brand secondary — soft pastel lavender. */
+const violet = {
+  DEFAULT: "#b6aae9",
+  50: "#f7f6fd",
+  100: "#efecfc",
+  200: "#e2ddfa",
+  300: "#d3ccf6",
+  400: "#c5bcef",
+  500: "#b6aae9",
+  600: "#9d90d3",
+  700: "#8072b0",
+  800: "#615388",
+  900: "#463b61",
+  950: "#2e2641",
+};
+
+/** Periwinkle. Info / links. */
+const indigo = {
+  DEFAULT: "#8b9bff",
+  50: "#f3f4fd",
+  100: "#e3e6ff",
+  200: "#cbd0fe",
+  300: "#b1b7fd",
+  400: "#8b9bff",
+  500: "#7b7ded",
+  600: "#6062db",
+  700: "#464bb5",
+  800: "#31398c",
+  900: "#202962",
+  950: "#141b41",
+};
+
+/** Sky. Closes the iris gradient. */
+const cyan = {
+  DEFAULT: "#5ed6ff",
+  50: "#edf7fc",
+  100: "#d1edfb",
+  200: "#afe0f7",
+  300: "#89d7f9",
+  400: "#5ed6ff",
+  500: "#32b3e6",
+  600: "#0995c8",
+  700: "#0775a1",
+  800: "#04567b",
+  900: "#023c59",
+  950: "#01273d",
+};
+
+/** Warm honey. Warning / highlight. */
+const gold = {
+  DEFAULT: "#f9bb5c",
+  50: "#fcf4e8",
+  100: "#fee7cb",
+  200: "#ffd6a3",
+  300: "#feca88",
+  400: "#febc66",
+  500: "#f9bb5c",
+  600: "#da943f",
+  700: "#af702b",
+  800: "#835021",
+  900: "#5e381a",
+  950: "#3e2412",
+};
+
+/** Spring green. Success. Hue nudged ~13° warmer toward the iris-mint pole —
+ *  mirror of the oklch ramp in styles/tokens.css (kept in lockstep so the
+ *  chart libs that read these hexes stay aligned with the CSS-token greens). */
+const mint = {
+  DEFAULT: "#5fc77d",
+  50: "#edf9ef",
+  100: "#d4f1d8",
+  200: "#b3e7bb",
+  300: "#93dca0",
+  400: "#7cd591",
+  500: "#5fc77d",
+  600: "#44aa67",
+  700: "#338451",
+  800: "#23643d",
+  900: "#17482c",
+  950: "#0e311d",
+};
+
+/** Red. Error / destructive. */
+const coral = {
+  DEFAULT: "#ed3d57",
+  50: "#fff2f1",
+  100: "#ffdfdd",
+  200: "#febebd",
+  300: "#fe8f92",
+  400: "#fe6270",
+  500: "#ed3d57",
+  600: "#d12444",
+  700: "#a81032",
+  800: "#7e0a21",
+  900: "#590915",
+  950: "#3a060c",
+};
+
+/** The Unicorn iris-morph animation's exact gradient stops (sRGB). The V4
+ *  signature accent ramp — deep indigo → aubergine → lavender → sky → mint —
+ *  sampled straight from `static/iris-morph.json` so flat accents match the
+ *  animated CTA pixel-for-pixel. Hex (not a named ramp) because these are the
+ *  precise WebGL-sampled values, and the chart/`polished` consumers can't parse
+ *  oklch. Mirrored on the CSS side by the `--iris-*` stops in tokens.css. */
+const iris = {
+  indigo: "#350699", // 0%   — deep regal indigo (the warm pole)
+  aubergine: "#2d0337", // 25%  — near-black; too dark for a fill, ramp only
+  lavender: "#a26ae9", // 50%  — electric lavender
+  sky: "#43d2ff", // 75%  — bright cyan
+  mint: "#c7fcae", // 100% — pale spring green (the cool pole)
+};
+
 export const colors = {
   inherit: "inherit",
   current: "currentColor",
   transparent: "transparent",
   white: "#FFFFFF",
   black: "#000000",
-  /**
-   * @deprecated
-   * Use the `neutral` namespace, instead.
-   */
-  gray: {
-    DEFAULT: "#F0F6FA",
-    200: "#E6ECF0",
-    300: "#DCE2E6",
-    400: "#CAD5DB",
-    500: "#C0CBD1",
-    600: "#202231",
-    700: "#1F1928",
-    800: "#110B1B",
-    900: "#0D0415",
-    1000: "#0F0518",
-  },
-  neutral: {
-    DEFAULT: "#FFFFFF",
-    100: "#FFFFFF",
-    200: "#FDFDFD",
-    300: "#F6F6F7",
-    400: "#F2F2F3",
-    500: "#DEDEE0",
-    600: "#C7C8CB",
-    700: "#9B9CA2",
-    800: "#6E6F78",
-    900: "#5C5E68",
-    1000: "#41434F",
-    1100: "#3B3D49",
-    1200: "#323441",
-    1300: "#202230",
-    1400: "#0B0514",
-    1500: "#000000",
-  },
-  primary: {
-    DEFAULT: "#4092E5",
-    50: "#ECF4FC",
-    100: "#C4DDF7",
-    200: "#A7CDF3",
-    300: "#7FB6EE",
-    400: "#66A8EA",
-    500: "#4092E5",
-    600: "#3A85D0",
-    700: "#2D68A3",
-    800: "#23507E",
-    900: "#1B3D60",
-  },
-  secondary: {
-    DEFAULT: "#D328D6",
-    50: "#FBEAFB",
-    100: "#F1BCF2",
-    200: "#EB9CEC",
-    300: "#E26FE4",
-    400: "#DC53DE",
-    500: "#D328D6",
-    600: "#C024C3",
-    700: "#961C98",
-    800: "#741676",
-    900: "#59115A",
-  },
-  highlight: {
-    DEFAULT: "#F9E79F",
-    50: "#FEFDF5",
-    100: "#FDF8E1",
-    200: "#FCF4D3",
-    300: "#FBEFBF",
-    400: "#FAECB2",
-    500: "#F9E79F",
-    600: "#E3D291",
-    700: "#B1A471",
-    800: "#897F57",
-    900: "#696143",
-  },
+
+  /* True-color ramps */
+  ink,
+  slate,
+  purple,
+  pink,
+  violet,
+  indigo,
+  cyan,
+  gold,
+  mint,
+  coral,
+  iris,
+
+  /* Legacy role aliases — V4 brand: purple → cyan, with mint/gold/coral as
+   * status accents. Pink stays available as `pink` but no longer leads. */
+  neutral: ink,
+  primary: purple,
+  secondary: cyan,
+  highlight: gold,
+  success: mint,
+  error: coral,
+  warning: gold,
+  silent: slate,
+  blue: indigo,
+
+  /* Named accents — the cool notes now sample the iris-morph animation exactly
+   * (indigo → lavender → sky → mint, the brand's hero gradient). The warm status
+   * accents (`gold`, `pink`) and the info periwinkle (`indigo`) sit outside the
+   * morph and keep their own identities. */
   accent: {
-    100: "#48CAE4",
-    200: "#F5B7B1",
-    300: "#F0CCAE",
+    purple: iris.indigo,
+    violet: iris.lavender,
+    cyan: iris.sky,
+    mint: iris.mint,
+    gold: gold[500],
+    pink: pink[500],
+    indigo: indigo[400],
+    /* legacy accent aliases */
+    salmon: coral[300],
+    peach: gold[300],
   },
-  success: {
-    DEFAULT: "#58C7BA",
-    50: "#EEF9F8",
-    100: "#CBEEEA",
-    200: "#B2E5DF",
-    300: "#8FD9D1",
-    400: "#79D2C8",
-    500: "#58C7BA",
-    600: "#50B5A9",
-    700: "#3E8D84",
-    800: "#306D66",
-    900: "#25544E",
-  },
-  error: {
-    DEFAULT: "#DE5555",
-    50: "#FCEEEE",
-    100: "#F5CACA",
-    200: "#F0B1B1",
-    300: "#E98D8D",
-    400: "#E57777",
-    500: "#DE5555",
-    600: "#CA4D4D",
-    700: "#9E3C3C",
-    800: "#7A2F2F",
-    900: "#5D2424",
-  },
-  warning: {
-    DEFAULT: "#F19436",
-    50: "#FEF4EB",
-    100: "#FBDEC1",
-    200: "#F9CEA3",
-    300: "#F6B778",
-    400: "#F4A95E",
-    500: "#F19436",
-    600: "#DB8731",
-    700: "#AB6926",
-    800: "#85511E",
-    900: "#653E17",
-  },
-  silent: {
-    DEFAULT: "#65597C",
-    50: "#F0EEF2",
-    100: "#CFCCD6",
-    200: "#B8B3C3",
-    300: "#9890A7",
-    400: "#847A96",
-    500: "#65597C",
-    600: "#5C5171",
-    700: "#483F58",
-    800: "#383144",
-    900: "#2A2534",
-    1000: "#2B2438",
+
+  /* Third-party social brand colors — not part of the palette */
+  socials: {
+    github: "#6e5494",
+    twitter: "#1da1f2",
+    discord: "#5865f2",
+    telegram: "#229ed9",
+    medium: "#00ab6c",
+    reddit: "#ff4500",
+    linkedin: "#0077b5",
+    youtube: "#ff0000",
   },
 };

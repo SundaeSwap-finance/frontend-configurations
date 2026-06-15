@@ -1,0 +1,334 @@
+/**
+ * ============================================================================
+ * LAYER 1 — Primitives & Ramps
+ * ============================================================================
+ *
+ * Raw, context-free values. Every color is an OKLCH ramp; chroma is tapered
+ * toward both lightness extremes so the tint never reads garish at the ends.
+ * These primitives carry NO meaning — they do not know what a "button" or a
+ * "page" is. Layer 2 (theme.css) assigns them roles.
+ *
+ * Nothing here is registered with Tailwind and nothing here switches with
+ * light/dark mode. Pure custom properties on :root.
+ *
+ * Palette identity — "Sundae V4": a dark-native violet-black surface system
+ * lit by a five-note neon chord (pink, violet, indigo, cyan, gold). The
+ * pink → violet → cyan sweep is the brand's iris gradient.
+ * ============================================================================
+ */
+
+:root {
+  /* ==========================================================================
+   * Ink — the violet-black neutral spine. Hue 300, chroma scaled with L.
+   * The full surface + text range, lightest (50) to deepest (1500).
+   * ========================================================================== */
+  --ink-50: oklch(98.5% 0.004 300);
+  --ink-100: oklch(96.5% 0.006 300);
+  --ink-200: oklch(93% 0.009 300);
+  --ink-300: oklch(87% 0.013 300);
+  --ink-400: oklch(80% 0.016 300);
+  --ink-500: oklch(70% 0.020 300);
+  --ink-600: oklch(60% 0.024 300);
+  --ink-700: oklch(50% 0.027 300);
+  --ink-800: oklch(42% 0.030 300);
+  --ink-900: oklch(34% 0.034 300);
+  --ink-1000: oklch(28% 0.036 300);
+  --ink-1100: oklch(24% 0.034 300);
+  --ink-1200: oklch(20% 0.030 300);
+  --ink-1300: oklch(15.5% 0.024 300);
+  --ink-1400: oklch(11% 0.011 300);
+  --ink-1500: oklch(6% 0.008 300);
+
+  /* ==========================================================================
+   * Slate — violet-tinted surface ladder for dark mode. Hue 300, a touch more
+   * chroma than ink so raised surfaces read as "lit from within" rather than
+   * flat gray. 900 → card, 800 → raised, 700 → overlay, 600 → hover.
+   * (Mid stops 50–500 double as muted-text values.)
+   * ========================================================================== */
+  --slate-50: oklch(95% 0.008 300);
+  --slate-100: oklch(86% 0.014 300);
+  --slate-200: oklch(75% 0.020 300);
+  --slate-300: oklch(65% 0.024 300);
+  --slate-400: oklch(54% 0.026 300);
+  --slate-500: oklch(45% 0.028 300);
+  --slate-600: oklch(38% 0.022 300);
+  --slate-700: oklch(32% 0.020 300);
+  --slate-800: oklch(26% 0.018 300);
+  --slate-900: oklch(21% 0.016 300);
+  --slate-1000: oklch(16% 0.014 300);
+
+  /* ==========================================================================
+   * Pink — brand primary. Hue 2 (red-pink boundary). 500 is the neon stop.
+   * ========================================================================== */
+  --pink-50: oklch(97% 0.015 2);
+  --pink-100: oklch(93% 0.037 2);
+  --pink-200: oklch(87% 0.073 2);
+  --pink-300: oklch(80% 0.121 2);
+  --pink-400: oklch(74% 0.168 2);
+  --pink-500: oklch(68% 0.205 2);
+  --pink-600: oklch(60% 0.200 2);
+  --pink-700: oklch(50% 0.175 4);
+  --pink-800: oklch(40% 0.140 6);
+  --pink-900: oklch(32% 0.105 8);
+  --pink-950: oklch(24% 0.075 8);
+
+  /* ==========================================================================
+   * Magenta — vivid fuchsia accent. Hue 328 (a cooler, electric magenta than
+   * `pink`'s rose hue 2). 500 is the neon stop (#d020d0), lifted from the
+   * Stableswaps "Slippage Minimized" chip so the color survives as a token
+   * instead of staying trapped in a raster illustration.
+   * ========================================================================== */
+  --magenta-50: oklch(97% 0.018 328);
+  --magenta-100: oklch(94% 0.042 328);
+  --magenta-200: oklch(88% 0.088 328);
+  --magenta-300: oklch(80% 0.150 328);
+  --magenta-400: oklch(70% 0.215 328);
+  --magenta-500: oklch(61% 0.265 328);
+  --magenta-600: oklch(55% 0.250 329);
+  --magenta-700: oklch(47% 0.215 330);
+  --magenta-800: oklch(39% 0.175 330);
+  --magenta-900: oklch(32% 0.135 331);
+  --magenta-950: oklch(24% 0.095 331);
+
+  /* ==========================================================================
+   * Violet — brand secondary. A soft pastel lavender (hue 293, low chroma):
+   * gentle and airy, never electric. Solid lavender fills carry dark text.
+   * The iris gradient does NOT use this ramp — it keeps a dedicated vivid
+   * violet (--iris-via) so the brand signature stays punchy.
+   * ========================================================================== */
+  --violet-50: oklch(97.5% 0.010 293);
+  --violet-100: oklch(95% 0.022 293);
+  --violet-200: oklch(91% 0.040 293);
+  --violet-300: oklch(86.5% 0.058 293);
+  --violet-400: oklch(82% 0.072 293);
+  --violet-500: oklch(77% 0.090 293);
+  --violet-600: oklch(69% 0.098 293);
+  --violet-700: oklch(59% 0.095 294);
+  --violet-800: oklch(48% 0.084 295);
+  --violet-900: oklch(38% 0.066 296);
+  --violet-950: oklch(29% 0.050 297);
+
+  /* ==========================================================================
+   * Indigo — periwinkle. Hue 280. The calm note: info, links, neutral signal.
+   * Anchored at 400 (the reference #8b9bff).
+   * ========================================================================== */
+  --indigo-50: oklch(97% 0.012 280);
+  --indigo-100: oklch(93% 0.034 280);
+  --indigo-200: oklch(87% 0.064 280);
+  --indigo-300: oklch(80% 0.100 280);
+  --indigo-400: oklch(72% 0.146 275.2);
+  --indigo-500: oklch(64% 0.165 280);
+  --indigo-600: oklch(56% 0.180 278);
+  --indigo-700: oklch(47% 0.165 276);
+  --indigo-800: oklch(39% 0.135 274);
+  --indigo-900: oklch(31% 0.100 272);
+  --indigo-950: oklch(24% 0.072 272);
+
+  /* ==========================================================================
+   * Cyan — sky. Hue 228. The bright accent; closes the iris gradient.
+   * Anchored at 400 (the reference #5dd6ff).
+   * ========================================================================== */
+  --cyan-50: oklch(97% 0.013 228);
+  --cyan-100: oklch(93% 0.035 228);
+  --cyan-200: oklch(88% 0.060 228);
+  --cyan-300: oklch(84% 0.090 228);
+  --cyan-400: oklch(82.3% 0.121 223.7);
+  --cyan-500: oklch(72% 0.130 230);
+  --cyan-600: oklch(63% 0.127 232);
+  --cyan-700: oklch(53% 0.109 234);
+  --cyan-800: oklch(43% 0.091 236);
+  --cyan-900: oklch(34% 0.074 238);
+  --cyan-950: oklch(26% 0.058 240);
+
+  /* ==========================================================================
+   * Gold — warm honey. Hue 72. Warning, highlight, the launch-phase accent.
+   * Tuned toward the reference #ffc163; kept one stop below gold-400 to hold
+   * the ramp's monotone lightness, so 500 renders ~#f9bb5c (the brand hue/chroma
+   * at a slightly deeper L). Use accent-gold for the exact brand chip.
+   * ========================================================================== */
+  --gold-50: oklch(97% 0.018 75);
+  --gold-100: oklch(94% 0.045 74);
+  --gold-200: oklch(90% 0.080 73);
+  --gold-300: oklch(87% 0.102 72);
+  --gold-400: oklch(84% 0.128 72);
+  --gold-500: oklch(83% 0.132 75.7);
+  --gold-600: oklch(72% 0.130 68);
+  --gold-700: oklch(60% 0.115 64);
+  --gold-800: oklch(48% 0.092 60);
+  --gold-900: oklch(38% 0.070 56);
+  --gold-950: oklch(29% 0.050 54);
+
+  /* ==========================================================================
+   * Mint — spring green. Hue ~150. Success / positive deltas. Nudged ~13° warmer
+   * (was 162–168) toward the iris-morph mint pole (--iris-mint, hue 136) so the
+   * success greens read as the same family as the brand gradient — without
+   * adopting iris-mint itself (94% L, too pale for a functional state, and it
+   * would couple a semantic status to a decorative brand accent). 150 is the
+   * deliberate middle: clearly warmer/iris-leaning, still unmistakably "go" green
+   * and not the lime that 136 starts to read as. Lightness/chroma curve is
+   * untouched, so contrast on white is preserved. Keeps its natural warm-drift
+   * toward the shadows.
+   * ========================================================================== */
+  --mint-50: oklch(97% 0.018 149);
+  --mint-100: oklch(93% 0.045 149);
+  --mint-200: oklch(88% 0.080 149);
+  --mint-300: oklch(83% 0.110 149);
+  --mint-400: oklch(80% 0.130 150);
+  --mint-500: oklch(75% 0.145 151);
+  --mint-600: oklch(66% 0.137 152);
+  --mint-700: oklch(55% 0.112 153);
+  --mint-800: oklch(45% 0.091 154);
+  --mint-900: oklch(36% 0.072 155);
+  --mint-950: oklch(28% 0.055 155);
+
+  /* ==========================================================================
+   * Coral — red. Hue 18 (orange-shifted so it never collides with brand pink
+   * at hue 2). Error / destructive / losses. Derived.
+   * ========================================================================== */
+  --coral-50: oklch(97% 0.014 22);
+  --coral-100: oklch(93% 0.035 22);
+  --coral-200: oklch(86% 0.074 20);
+  --coral-300: oklch(77% 0.134 19);
+  --coral-400: oklch(70% 0.190 18);
+  --coral-500: oklch(63% 0.210 18);
+  --coral-600: oklch(56% 0.205 18);
+  --coral-700: oklch(47% 0.180 18);
+  --coral-800: oklch(38% 0.145 19);
+  --coral-900: oklch(30% 0.110 20);
+  --coral-950: oklch(23% 0.080 20);
+
+  /* ==========================================================================
+   * Iris — the signature gradient. deep violet → violet → cyan → mint.
+   * Defined as a primitive so a single edit re-tunes every brand surface
+   * that paints it (CTAs, avatars, badges, glows, chart anchors, ring
+   * indicators). NOTE: only ever used as a fill — gradient text is banned.
+   *
+   * Re-anchored from pink → violet → cyan to deep-violet → cyan → mint to
+   * match the Unicorn morph scene that paints the V4 animated CTAs. Pink is
+   * retired as a brand anchor — it stays available in the primitive ramp
+   * for legacy/error uses but no longer leads the gradient.
+   * ========================================================================== */
+  /* Deep regal purple — the V4 brand anchor. Mirrors the `purple` hex ramp in
+   * colors.ts (JS side). Used by --action-primary, --chart-1, and the iris
+   * gradient's warm pole. Distinct from --violet-* which stays as the V3
+   * pastel lavender ramp for legacy callsites. */
+  --purple-50: oklch(96% 0.018 295);
+  --purple-100: oklch(92% 0.040 295);
+  --purple-200: oklch(85% 0.080 295);
+  --purple-300: oklch(74% 0.130 295);
+  --purple-400: oklch(62% 0.170 293);
+  --purple-500: oklch(50% 0.190 293);
+  --purple-600: oklch(42% 0.180 293);
+  --purple-700: oklch(36% 0.170 293);
+  --purple-800: oklch(30% 0.150 293);
+  --purple-900: oklch(23% 0.120 293);
+  --purple-950: oklch(15% 0.080 293);
+
+  /* Exact iris-morph animation stops (sRGB hex, sampled from
+   * static/iris-morph.json). The canonical V4 accent ramp: the --accent-*
+   * semantic tokens sample these so flat accents match the animated CTA
+   * pixel-for-pixel. Hex (not oklch) to stay identical to the WebGL scene and
+   * the colors.ts mirror. NB: sky/mint are bright dark-surface accents — use a
+   * deeper stop for accent text on light backgrounds. */
+  --iris-indigo: #350699; /* 0%   — warm pole */
+  --iris-aubergine: #2d0337; /* 25%  — near-black, ramp only */
+  --iris-lavender: #a26ae9; /* 50% */
+  --iris-sky: #43d2ff; /* 75% */
+  --iris-mint: #c7fcae; /* 100% — cool pole */
+
+  /* The gradient stops ARE the iris-morph ramp (above), so the static fill
+   * matches the animated CTA + the portfolio ring pixel-for-pixel instead of
+   * drifting onto neighbouring ramps. Aubergine (25%) is skipped — too dark to
+   * read as a fill, ramp-only. */
+  --iris-from: var(--iris-indigo); /* deep regal indigo — the warm pole */
+  --iris-via: var(--iris-lavender); /* electric lavender — the vivid mid */
+  --iris-to: var(--iris-sky); /* bright cyan */
+  --iris-tail: var(--iris-mint); /* pale mint — the cool pole */
+  --iris-angle: 115deg;
+  /* Atmospheric, not a flat ramp: the warm→cool linear sweep (the brand
+   * direction + full coverage) carries three soft radial blooms so the bands
+   * pool organically instead of running perfectly parallel — the still-frame
+   * cousin of the animated `bg-iris-animated` CTA, which builds its mesh the
+   * same way. Self-sizing: each bloom is box-relative (`at X% Y%`) and fades to
+   * transparent, so the token stays a drop-in `background-image` at any size
+   * with no extra background-size/position. Same four iris-morph stops. */
+  --gradient-iris:
+    radial-gradient(
+      120% 130% at 18% 28%,
+      color-mix(in oklab, var(--iris-from) 70%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      95% 120% at 60% 82%,
+      color-mix(in oklab, var(--iris-to) 52%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      95% 110% at 90% 34%,
+      color-mix(in oklab, var(--iris-tail) 58%, transparent) 0%,
+      transparent 62%
+    ),
+    linear-gradient(
+      var(--iris-angle),
+      var(--iris-from),
+      var(--iris-via) 34%,
+      var(--iris-to) 66%,
+      var(--iris-tail)
+    );
+  /* Seamless loop variant — for `background-position` pan animation. Both
+   * layers stay 90deg (purely horizontal) with matched 0%/100% bookends so the
+   * wrap never flashes a seam; radials are deliberately avoided here (they
+   * can't tile seamlessly under a horizontal pan). The translucent top layer
+   * adds luminosity drift over the round-trip base so it reads atmospheric, not
+   * a flat band. */
+  --gradient-iris-loop:
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--iris-to) 38%, transparent) 0%,
+      transparent 16%,
+      color-mix(in oklab, var(--iris-via) 42%, transparent) 36%,
+      transparent 58%,
+      color-mix(in oklab, var(--iris-tail) 34%, transparent) 78%,
+      color-mix(in oklab, var(--iris-to) 38%, transparent) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--iris-from) 0%,
+      var(--iris-via) 17%,
+      var(--iris-to) 38%,
+      var(--iris-tail) 56%,
+      var(--iris-to) 73%,
+      var(--iris-via) 88%,
+      var(--iris-from) 100%
+    );
+
+  /* Muted iris — pearlescent soap-bubble chrome. Lavender → soft cyan →
+   * mint, thin-film iridescence on dark glass (not the electric hero
+   * gradient). Same family as the hero gradient, lower saturation. */
+  --iris-muted-from: oklch(70% 0.12 295);
+  --iris-muted-via: oklch(78% 0.10 230);
+  --iris-muted-to: oklch(82% 0.09 165);
+
+  /* ==========================================================================
+   * Dimension primitives — radius, duration, easing. Context-free scales;
+   * Layer 2/3 give them component roles.
+   * ========================================================================== */
+  --radius-xs: 0.5rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+
+  --duration-instant: 50ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 600ms;
+  --duration-slowest: 1000ms;
+
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-soft: cubic-bezier(0.45, 0, 0.2, 1);
+}
