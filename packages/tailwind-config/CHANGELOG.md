@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@5.0.1...@sundaeswap/tailwind-config@5.0.2) (2026-09-16)
+
+### Features
+
+- **tailwind-config:** retune cosmic palette and expand chart colors ([03e87d0](https://github.com/sundaeswap-finance/frontend-configurations/commit/03e87d0d47fd7668e0e859e8c27202f8acdd2763))
+
 ## [5.0.1](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@4.0.4...@sundaeswap/tailwind-config@5.0.1) (2026-06-15)
 
 ### Bug Fixes
