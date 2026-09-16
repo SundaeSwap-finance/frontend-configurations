@@ -152,6 +152,10 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+  --color-chart-9: var(--chart-9);
 
   /* --- Focus ring --------------------------------------------------------- */
   --color-ring: var(--ring);
@@ -338,6 +342,34 @@
   --color-cyan-800: var(--cyan-800);
   --color-cyan-900: var(--cyan-900);
   --color-cyan-950: var(--cyan-950);
+
+  /* --- Ramp: aqua (spearmint, hue 172) ------------------------------------
+   * Data-viz hue that fills the gap between mint (147) and cyan (230). */
+  --color-aqua-50: var(--aqua-50);
+  --color-aqua-100: var(--aqua-100);
+  --color-aqua-200: var(--aqua-200);
+  --color-aqua-300: var(--aqua-300);
+  --color-aqua-400: var(--aqua-400);
+  --color-aqua-500: var(--aqua-500);
+  --color-aqua-600: var(--aqua-600);
+  --color-aqua-700: var(--aqua-700);
+  --color-aqua-800: var(--aqua-800);
+  --color-aqua-900: var(--aqua-900);
+  --color-aqua-950: var(--aqua-950);
+
+  /* --- Ramp: citron (pale yellow-green, hue 112) --------------------------
+   * Data-viz hue between gold (74) and mint (147); carries no status meaning. */
+  --color-citron-50: var(--citron-50);
+  --color-citron-100: var(--citron-100);
+  --color-citron-200: var(--citron-200);
+  --color-citron-300: var(--citron-300);
+  --color-citron-400: var(--citron-400);
+  --color-citron-500: var(--citron-500);
+  --color-citron-600: var(--citron-600);
+  --color-citron-700: var(--citron-700);
+  --color-citron-800: var(--citron-800);
+  --color-citron-900: var(--citron-900);
+  --color-citron-950: var(--citron-950);
 
   /* --- Ramp: gold (true) / highlight + warning (legacy) ------------------- */
   --color-gold-50: var(--gold-50);
@@ -872,12 +904,12 @@
    *
    * Violet uses a custom OKLCH (chroma 0.18 at L 38%) — deeper AND more
    * saturated than any token on the violet ramp (the ramp's max chroma is
-   * 0.098 at violet-600). The shorthand `--iris-violet-deep` is local to the
+   * 0.180 at violet-700). The shorthand `--iris-violet-deep` is local to the
    * glow so it stays out of the public token API.
    *
    * Blur radii and color-mix percentages dialed down from the first pass —
    * the previous values washed the whole input row in light. */
-  --iris-violet-deep: oklch(38% 0.18 293);
+  --iris-violet-deep: oklch(38% 0.19 289);
 
   @keyframes select-token-glow {
     0%,

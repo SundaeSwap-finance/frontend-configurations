@@ -10,59 +10,59 @@
  * and aliased to the legacy role name (`primary`, `secondary`, `success`, ...).
  */
 
-/** Violet-black neutral spine. */
+/** Blue-violet near-black neutral spine (cosmic-night hue 286). */
 const ink = {
-  DEFAULT: "#f4f3f7",
-  50: "#faf9fc",
-  100: "#f4f3f7",
-  200: "#e8e7ed",
-  300: "#d5d2dc",
-  400: "#bfbcc7",
-  500: "#a09ca9",
-  600: "#827d8d",
-  700: "#656071",
-  800: "#4f4a5b",
-  900: "#3a3447",
-  1000: "#2b2538",
-  1100: "#221b2d",
-  1200: "#181322",
-  1300: "#0e0a15",
-  1400: "#050407",
-  1500: "#010101",
+  DEFAULT: "#f1f1fc",
+  50: "#f7f7fe",
+  100: "#f1f1fc",
+  200: "#e5e5f3",
+  300: "#d1d1e3",
+  400: "#babacf",
+  500: "#9a9ab3",
+  600: "#7c7b97",
+  700: "#5f5e7b",
+  800: "#494866",
+  900: "#363453",
+  1000: "#272443",
+  1100: "#1c1936",
+  1200: "#13112a",
+  1300: "#0a071c",
+  1400: "#03020e",
+  1500: "#010102",
 };
 
-/** Violet-tinted surface ladder. */
+/** Blue-violet surface ladder. */
 const slate = {
-  DEFAULT: "#575263",
-  50: "#efedf3",
-  100: "#d2cfd9",
-  200: "#b0abb9",
-  300: "#918c9c",
-  400: "#716c7c",
-  500: "#575263",
-  600: "#44404d",
-  700: "#34313c",
-  800: "#25222c",
-  900: "#19171f",
-  1000: "#0e0c12",
+  DEFAULT: "#54526d",
+  50: "#eeedf7",
+  100: "#d0cfdf",
+  200: "#acabc2",
+  300: "#8d8ca6",
+  400: "#6d6b86",
+  500: "#54526d",
+  600: "#414055",
+  700: "#323042",
+  800: "#232231",
+  900: "#181624",
+  1000: "#0d0c16",
 };
 
 /** Brand primary — deep regal purple, the warm pole of the V4 iris gradient.
  *  Anchors the Unicorn morph palette (purple → cyan → mint). DEFAULT is the
  *  700 stop so chart/token surfaces read as rich purple, not pastel lavender. */
 const purple = {
-  DEFAULT: "#451a8b",
-  50: "#f2f0fd",
-  100: "#e6e0fd",
-  200: "#d1c4fd",
-  300: "#b199f4",
-  400: "#8c6de2",
-  500: "#6c42c3",
-  600: "#552ba3",
-  700: "#451a8b",
-  800: "#350d70",
-  900: "#23044e",
-  950: "#0f0129",
+  DEFAULT: "#401993",
+  50: "#f1f0ff",
+  100: "#e3e1ff",
+  200: "#cbc6fe",
+  300: "#a79bfe",
+  400: "#846cf0",
+  500: "#6948d5",
+  600: "#522cb1",
+  700: "#401993",
+  800: "#310a77",
+  900: "#1f0253",
+  950: "#0d002c",
 };
 
 /** Legacy pink ramp. Demoted from brand-primary in V4; still available for
@@ -82,102 +82,153 @@ const pink = {
   950: "#3b0b18",
 };
 
-/** Brand secondary — soft pastel lavender. */
-const violet = {
-  DEFAULT: "#b6aae9",
-  50: "#f7f6fd",
-  100: "#efecfc",
-  200: "#e2ddfa",
-  300: "#d3ccf6",
-  400: "#c5bcef",
-  500: "#b6aae9",
-  600: "#9d90d3",
-  700: "#8072b0",
-  800: "#615388",
-  900: "#463b61",
-  950: "#2e2641",
+/** Vivid fuchsia accent (hue 328) — sibling to pink's rose. Its pastel 300/400
+ *  stops are the chart's orchid note. */
+const magenta = {
+  DEFAULT: "#d020d0",
+  50: "#fcf1fb",
+  100: "#fbe2fa",
+  200: "#f8c3f5",
+  300: "#f199ee",
+  400: "#e263e0",
+  500: "#d020d0",
+  600: "#b905b6",
+  700: "#960491",
+  800: "#730370",
+  900: "#560851",
+  950: "#360633",
 };
 
-/** Periwinkle. Info / links. */
+/** The cosmic-night accent, saturated — periwinkle lavender. The pastel
+ *  chord's lead note (ring, glass tint, chart-1). */
+const violet = {
+  DEFAULT: "#ac99fe",
+  50: "#f6f6ff",
+  100: "#eeecff",
+  200: "#e1ddfe",
+  300: "#d2cbff",
+  400: "#c4bafe",
+  500: "#ac99fe",
+  600: "#957bf1",
+  700: "#7b5dd7",
+  800: "#5f42ae",
+  900: "#432c80",
+  950: "#2b1b55",
+};
+
+/** Periwinkle (hue 272). Info / links / the chart's blue note. */
 const indigo = {
-  DEFAULT: "#8b9bff",
-  50: "#f3f4fd",
-  100: "#e3e6ff",
-  200: "#cbd0fe",
-  300: "#b1b7fd",
-  400: "#8b9bff",
-  500: "#7b7ded",
-  600: "#6062db",
-  700: "#464bb5",
-  800: "#31398c",
-  900: "#202962",
-  950: "#141b41",
+  DEFAULT: "#869dfe",
+  50: "#f2f5ff",
+  100: "#e0e7ff",
+  200: "#c5d3ff",
+  300: "#a7bafe",
+  400: "#869dfe",
+  500: "#677ffb",
+  600: "#5064e4",
+  700: "#3c4abd",
+  800: "#2c3893",
+  900: "#1f2867",
+  950: "#131a44",
 };
 
 /** Sky. Closes the iris gradient. */
 const cyan = {
-  DEFAULT: "#5ed6ff",
-  50: "#edf7fc",
-  100: "#d1edfb",
-  200: "#afe0f7",
-  300: "#89d7f9",
-  400: "#5ed6ff",
-  500: "#32b3e6",
-  600: "#0995c8",
-  700: "#0775a1",
-  800: "#04567b",
-  900: "#023c59",
-  950: "#01273d",
+  DEFAULT: "#69cffd",
+  50: "#ebf7fd",
+  100: "#ceeefe",
+  200: "#aae1fc",
+  300: "#84d7fe",
+  400: "#69cffd",
+  500: "#11b3eb",
+  600: "#0996c5",
+  700: "#07769c",
+  800: "#025875",
+  900: "#013e54",
+  950: "#012838",
+};
+
+/** Spearmint (hue 172) — the data-viz hue between mint and sky. */
+const aqua = {
+  DEFAULT: "#8ae6ca",
+  50: "#e8faf3",
+  100: "#ccf6e7",
+  200: "#a8efd8",
+  300: "#8ae6ca",
+  400: "#70dbbc",
+  500: "#4ac3a2",
+  600: "#33a587",
+  700: "#27836b",
+  800: "#1b6350",
+  900: "#124739",
+  950: "#0b3026",
+};
+
+/** Pale yellow-green (hue 112) — data-viz only; the warm note that carries no
+ *  status meaning (gold is warning, mint is success). */
+const citron = {
+  DEFAULT: "#dde37c",
+  50: "#f7f9e5",
+  100: "#eff3c5",
+  200: "#e6ec9f",
+  300: "#dde37c",
+  400: "#d0d757",
+  500: "#c1c736",
+  600: "#a1a716",
+  700: "#80840a",
+  800: "#5f6308",
+  900: "#444606",
+  950: "#2c2e04",
 };
 
 /** Warm honey. Warning / highlight. */
 const gold = {
-  DEFAULT: "#f9bb5c",
-  50: "#fcf4e8",
-  100: "#fee7cb",
-  200: "#ffd6a3",
-  300: "#feca88",
-  400: "#febc66",
-  500: "#f9bb5c",
-  600: "#da943f",
-  700: "#af702b",
-  800: "#835021",
-  900: "#5e381a",
-  950: "#3e2412",
+  DEFAULT: "#fcb956",
+  50: "#fef3e7",
+  100: "#ffe7c9",
+  200: "#fed7a3",
+  300: "#ffca83",
+  400: "#febd60",
+  500: "#fcb956",
+  600: "#d89529",
+  700: "#ab7312",
+  800: "#7e5409",
+  900: "#5a3b09",
+  950: "#3b2707",
 };
 
-/** Spring green. Success. Hue nudged ~13° warmer toward the iris-mint pole —
- *  mirror of the oklch ramp in styles/tokens.css (kept in lockstep so the
- *  chart libs that read these hexes stay aligned with the CSS-token greens). */
+/** Spring green (hue 147 — the cosmic-night "up" hue, more saturated).
+ *  Success. Mirror of the oklch ramp in styles/tokens.css (kept in lockstep so
+ *  the chart libs that read these hexes stay aligned with the CSS greens). */
 const mint = {
-  DEFAULT: "#5fc77d",
-  50: "#edf9ef",
-  100: "#d4f1d8",
-  200: "#b3e7bb",
-  300: "#93dca0",
-  400: "#7cd591",
-  500: "#5fc77d",
-  600: "#44aa67",
-  700: "#338451",
-  800: "#23643d",
-  900: "#17482c",
-  950: "#0e311d",
+  DEFAULT: "#4fc765",
+  50: "#ecf9ed",
+  100: "#d2f2d4",
+  200: "#afe9b4",
+  300: "#8dde96",
+  400: "#6fd57e",
+  500: "#4fc765",
+  600: "#3ca851",
+  700: "#2f823e",
+  800: "#22622e",
+  900: "#17461f",
+  950: "#0e2e13",
 };
 
-/** Red. Error / destructive. */
+/** Red (hue 17 — the cosmic-night "down" hue, more saturated). Error. */
 const coral = {
-  DEFAULT: "#ed3d57",
-  50: "#fff2f1",
-  100: "#ffdfdd",
-  200: "#febebd",
-  300: "#fe8f92",
-  400: "#fe6270",
-  500: "#ed3d57",
-  600: "#d12444",
-  700: "#a81032",
-  800: "#7e0a21",
-  900: "#590915",
-  950: "#3a060c",
+  DEFAULT: "#f23156",
+  50: "#fff2f2",
+  100: "#ffdfdf",
+  200: "#ffbebf",
+  300: "#fe8f95",
+  400: "#fe6273",
+  500: "#f23156",
+  600: "#d10e41",
+  700: "#a50431",
+  800: "#7a0322",
+  900: "#570115",
+  950: "#38020c",
 };
 
 /** The Unicorn iris-morph animation's exact gradient stops (sRGB). The V4
@@ -206,9 +257,12 @@ export const colors = {
   slate,
   purple,
   pink,
+  magenta,
   violet,
   indigo,
   cyan,
+  aqua,
+  citron,
   gold,
   mint,
   coral,
@@ -242,6 +296,23 @@ export const colors = {
     salmon: coral[300],
     peach: gold[300],
   },
+
+  /* Data-viz — the pastel chord, in series order. Mirrors --chart-1..9 in
+   * styles/theme.css (dark). Hues walk the wheel so adjacent series in a
+   * stacked chart are maximally separated; slot 1 is the brand lead and slot 5
+   * the warm "rewards / fees" note. Light mode's deeper equivalents live in
+   * theme.css only — a JS chart on paper should read the CSS vars. */
+  chart: [
+    violet[500], // lavender  — brand lead
+    mint[300], // mint
+    magenta[400], // orchid
+    cyan[300], // sky
+    gold[300], // honey     — rewards / fees
+    indigo[400], // periwinkle
+    aqua[300], // spearmint
+    coral[300], // rose
+    citron[300], // citron
+  ],
 
   /* Third-party social brand colors — not part of the palette */
   socials: {

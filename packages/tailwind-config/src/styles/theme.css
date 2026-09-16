@@ -25,7 +25,9 @@
   color-scheme: dark;
 
   /* --- Surfaces -------------------------------------------------------------
-   * Page = the elevation floor: the HTML reference's #09060d violet-black.
+   * Page = the elevation floor: the cosmic-night blue-violet near-black. Held
+   * ~2% L below the Cosmic Night reference (#0f0f19) and at double its chroma,
+   * so the page reads as deep indigo glass rather than charcoal.
    * Cards lift off it via the glass material system below.
    */
   --surface-page: var(--surface-base);
@@ -79,12 +81,21 @@
   --glass-shadow: rgb(0 0 0 / 0.38);
 
   /* Page atmosphere — linear depth + soft washes only (no conic/radial hotspots that
-   * band or read as a visible spiral through glass cards). */
+   * band or read as a visible spiral through glass cards).
+   *
+   * The depth sweep stays a NARROW band around --surface-page (15.5% L): +1.5%
+   * at the top, -1.5% at the bottom, hue held in the 284–288 spine. Every
+   * surface in the app derives its fill from --surface-page, so a wide sweep
+   * (the old 17.5% → 12.5%, a 40% relative swing at this lightness) left the
+   * bottom of a long page several points darker and bluer than the tone the
+   * cards were mixed from — the page and the panels stopped reading as one
+   * field. Elevation is carried by the ladder and the vignette, not by
+   * repainting the floor. */
   --page-atmosphere-depth: linear-gradient(
     180deg,
-    oklch(13.8% 0.048 304) 0%,
-    oklch(12% 0.044 298) 40%,
-    oklch(9.6% 0.032 288) 100%
+    oklch(17% 0.048 288) 0%,
+    oklch(15.5% 0.044 286) 45%,
+    oklch(14% 0.040 284) 100%
   );
   --page-atmosphere-sheen: linear-gradient(
     132deg,
@@ -97,7 +108,7 @@
     168deg,
     color-mix(in oklab, var(--violet-500) 5%, transparent) 0%,
     transparent 38%,
-    color-mix(in oklab, var(--slate-1000) 22%, transparent) 100%
+    color-mix(in oklab, var(--slate-1000) 10%, transparent) 100%
   );
   --page-atmosphere-horizon: radial-gradient(
     ellipse 140% 85% at 50% -22%,
@@ -130,7 +141,7 @@
   /* Legacy aliases still referenced by components/utilities. (Eight unused
    * --surface-* aliases were removed — they had zero references workspace-wide.) */
   --surface-inset: var(--glass-fill-nested);
-  --surface-base: oklch(12% 0.044 298);
+  --surface-base: oklch(15.5% 0.044 286);
   --surface-card: var(--glass-fill);
 
   /* Floating overlays (dialogs, tooltips, hover cards) sit ABOVE the page and
@@ -138,12 +149,12 @@
    * these overlays carries a 16px backdrop-filter, and any residual transparency
    * (even 8%) lets that blur sample the colorful page/card beneath and paint a
    * stray horizontal "sheen" band across the panel. Tuned to the same
-   * deep-violet family as the page floor (oklch ~12% 0.044 298), lifted in
+   * blue-violet family as the page floor (oklch ~15.5% 0.044 286), lifted in
    * lightness for elevation. */
-  --surface-overlay: oklch(17% 0.032 296);
+  --surface-overlay: oklch(20.5% 0.038 287);
 
   /* Inset wells (native inputs, search fields) stay opaque and recessed. */
-  --surface-input: oklch(12% 0.012 300);
+  --surface-input: oklch(15% 0.022 286);
 
   /* Well — the innermost READABLE tier (stat cells, amount-input wells, detail
    * rows that live inside a card). OPAQUE and blur-free by design: a translucent
@@ -152,13 +163,13 @@
    * Sits one lightness step below the card composite so it reads carved-in; a
    * whisper of violet chroma keeps it "lit from within" rather than a black pit.
    * Depth comes from --elevation-well (a concave inset rim), never from blur. */
-  --surface-well: oklch(10.5% 0.024 300);
+  --surface-well: oklch(13% 0.032 286);
 
   /* Opaque flattened card/widget surface — for controls that can't be
    * translucent because they straddle the seam between two glass panels
    * (e.g. the swap-direction toggle). The solid sample of the glass card
-   * composited over the page atmosphere: #120d20 ≈ oklch(17.7% 0.039 294). */
-  --surface-solid: #120d20;
+   * composited over the page atmosphere: #100e24 ≈ oklch(19.5% 0.040 287). */
+  --surface-solid: #100e24;
   --surface-disabled: var(--slate-900);
 
   /* --- Borders -------------------------------------------------------------- */
@@ -279,17 +290,31 @@
   --accent-cyan: var(--iris-sky); /* exact iris-morph stop */
   --accent-gold: var(--gold-500);
 
-  /* --- Data-viz series (maps onto the new violet → mint chord) ------------
-   * chart-1 leads with deep violet — the brand anchor, used for the largest
-   * series (e.g., total balance ring). chart-2/3/4 walk through the morph
-   * palette (violet → cyan → mint). chart-5 keeps gold as the warm odd-one-
-   * out for "rewards / fees" coding. Pink is dropped from the data-viz
-   * vocabulary entirely. */
-  --chart-1: var(--violet-600);
-  --chart-2: var(--violet-400);
-  --chart-3: var(--cyan-400);
-  --chart-4: var(--mint-400);
-  --chart-5: var(--gold-500);
+  /* --- Data-viz series — the pastel chord ---------------------------------
+   * Nine series, each a PASTEL stop (high L, mid chroma): the only band that
+   * survives as a flat fill on a near-black page — a stacked bar of deep,
+   * fully saturated fills collapses into one dark mass and the segments stop
+   * being separable. Hues walk the wheel so NEIGHBOURING series sit as far
+   * apart as possible (291 → 147 → 328 → 230 → 74 → 272 → 172 → 17 → 112):
+   * adjacent bands, not the 1st and the 7th, are the pair that must never
+   * blur together.
+   *
+   * Slots 1–5 keep their V4 meanings — 1 is the brand lead (largest series,
+   * e.g. the total-balance ring) and 5 stays the warm "rewards / fees" note —
+   * so existing chart callsites keep their coding; 6–9 are new capacity.
+   * Light mode re-weights all nine for paper (see .light).
+   *
+   * Orchid takes magenta's 400 stop, not 300: at 300 it read as a second
+   * rose beside chart-8. */
+  --chart-1: var(--violet-500); /* lavender — brand lead */
+  --chart-2: var(--mint-300); /* mint */
+  --chart-3: var(--magenta-400); /* orchid */
+  --chart-4: var(--cyan-300); /* sky */
+  --chart-5: var(--gold-300); /* honey — rewards / fees */
+  --chart-6: var(--indigo-400); /* periwinkle */
+  --chart-7: var(--aqua-300); /* spearmint */
+  --chart-8: var(--coral-300); /* rose */
+  --chart-9: var(--citron-300); /* citron */
 
 
   /* --- Focus ring ---------------------------------------------------------- */
@@ -400,7 +425,7 @@
   --glass-rim-inset-nested: inset 0 0 0 1px var(--border-subtle);
   --glass-ambient: transparent;
   --glass-ambient-accent: transparent;
-  --glass-shadow: oklch(32% 0.03 300 / 0.13);
+  --glass-shadow: oklch(32% 0.042 287 / 0.13);
 
   /* Chrome accents track the neutral primary ink (mirroring dark, which
    * re-points --accent-chrome to white). The iridescent cyan/violet chord made
@@ -519,24 +544,42 @@
   --accent-cyan: var(--iris-sky); /* exact iris-morph stop */
   --accent-gold: var(--gold-700);
 
-  --chart-1: var(--violet-700);
-  --chart-2: var(--violet-500);
-  --chart-3: var(--cyan-700);
-  --chart-4: var(--mint-600);
-  --chart-5: var(--gold-700);
+  /* Data-viz — the same nine hues and slot order as dark, re-weighted for
+   * paper. A pastel fill that reads as a lit band on the near-black page
+   * washes out on white, and the raw ramp stops do not share a weight:
+   * magenta-500 carries chroma 0.265 where aqua-500 carries 0.118, so a
+   * stacked bar built from raw stops reads as two electric bands plus seven
+   * quiet ones.
+   *
+   * So each slot is NORMALIZED off its hue's 500 stop rather than picked:
+   * hold lightness at 60% (dark enough to separate from the near-white page,
+   * light enough to stay in the pastel family), cap chroma at 0.15, keep the
+   * hue. `min(c, 0.15)` only bites on the hues that can exceed it — magenta,
+   * coral, indigo, mint, citron — so the loud notes come down to the level
+   * the pale ones can actually reach and the chord reads as ONE family. Two
+   * numbers tune the whole light chord. */
+  --chart-1: oklch(from var(--violet-500) 60% min(c, 0.15) h); /* lavender */
+  --chart-2: oklch(from var(--mint-500) 60% min(c, 0.15) h); /* mint */
+  --chart-3: oklch(from var(--magenta-500) 60% min(c, 0.15) h); /* orchid */
+  --chart-4: oklch(from var(--cyan-500) 60% min(c, 0.15) h); /* sky */
+  --chart-5: oklch(from var(--gold-500) 60% min(c, 0.15) h); /* honey */
+  --chart-6: oklch(from var(--indigo-500) 60% min(c, 0.15) h); /* periwinkle */
+  --chart-7: oklch(from var(--aqua-500) 60% min(c, 0.15) h); /* spearmint */
+  --chart-8: oklch(from var(--coral-500) 60% min(c, 0.15) h); /* rose */
+  --chart-9: oklch(from var(--citron-500) 60% min(c, 0.15) h); /* citron */
 
   /* --- Focus ring ---------------------------------------------------------- */
   --ring: var(--violet-600);
   --ring-offset: var(--surface-page);
 
   /* --- Elevation — soft, low-contrast drops; no glow on paper --------------- */
-  --elevation-card: 0 1px 2px rgb(40 20 60 / 0.06), 0 6px 18px -10px rgb(40 20 60 / 0.12);
-  --elevation-raised: 0 4px 10px rgb(40 20 60 / 0.08), 0 14px 32px -14px rgb(40 20 60 / 0.16);
-  --elevation-overlay: 0 8px 20px rgb(40 20 60 / 0.1), 0 24px 48px -18px rgb(40 20 60 / 0.2);
+  --elevation-card: 0 1px 2px rgb(34 20 74 / 0.06), 0 6px 18px -10px rgb(34 20 74 / 0.12);
+  --elevation-raised: 0 4px 10px rgb(34 20 74 / 0.08), 0 14px 32px -14px rgb(34 20 74 / 0.16);
+  --elevation-overlay: 0 8px 20px rgb(34 20 74 / 0.1), 0 24px 48px -18px rgb(34 20 74 / 0.2);
 
   /* Well — recess on paper: a soft inner shadow + the hairline rim do the work
    * (no catch-light edge; on white it reads as a faint depression). */
   --elevation-well:
-    inset 0 1px 2px rgb(40 20 60 / 0.08),
+    inset 0 1px 2px rgb(34 20 74 / 0.08),
     inset 0 0 0 1px var(--border-subtle);
 }

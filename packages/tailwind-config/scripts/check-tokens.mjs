@@ -131,16 +131,19 @@ function parseTokensCss(src) {
     "slate",
     "purple",
     "pink",
+    "magenta",
     "violet",
     "indigo",
     "cyan",
+    "aqua",
+    "citron",
     "gold",
     "mint",
     "coral",
   ];
   const stops = [];
   const re =
-    /--(ink|slate|purple|pink|violet|indigo|cyan|gold|mint|coral)-(\d+):\s*oklch\(\s*([\d.]+)%\s+([\d.]+)\s+([\d.]+)\s*\)/g;
+    /--(ink|slate|purple|pink|magenta|violet|indigo|cyan|aqua|citron|gold|mint|coral)-(\d+):\s*oklch\(\s*([\d.]+)%\s+([\d.]+)\s+([\d.]+)\s*\)/g;
   let m;
   while ((m = re.exec(src)) !== null) {
     const [, ramp, stop, L, C, H] = m;
@@ -166,9 +169,12 @@ function parseColorsTs(src) {
     "slate",
     "purple",
     "pink",
+    "magenta",
     "violet",
     "indigo",
     "cyan",
+    "aqua",
+    "citron",
     "gold",
     "mint",
     "coral",
