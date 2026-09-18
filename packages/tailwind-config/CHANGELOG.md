@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.3](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@5.0.2...@sundaeswap/tailwind-config@5.0.3) (2026-09-18)
+
+### Features
+
+- **tailwind-config:** re-hue brand purple and make borders translucent ([#48](https://github.com/sundaeswap-finance/frontend-configurations/issues/48)) ([1bc9c7a](https://github.com/sundaeswap-finance/frontend-configurations/commit/1bc9c7ac7356a54f2c6df52c5d88917cbfba07fd))
+
 ## [5.0.2](https://github.com/sundaeswap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@5.0.1...@sundaeswap/tailwind-config@5.0.2) (2026-09-16)
 
 ### Features
