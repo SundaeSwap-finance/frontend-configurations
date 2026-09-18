@@ -254,22 +254,27 @@
    * retired as a brand anchor — it stays available in the primitive ramp
    * for legacy/error uses but no longer leads the gradient.
    * ========================================================================== */
-  /* Deep regal purple — the V4 brand anchor, re-hued onto the cosmic spine
-   * (288, was 293) and held at the deepest saturation the ramp will carry.
+  /* Hot purple — the V4 brand neon. Hue 316 sits between the old cosmic
+   * periwinkle (303) and magenta (328): Uniswap-hot energy, still purple on
+   * charcoal rather than fuchsia. Chroma is 97% of the sRGB edge at every
+   * stop (check-tokens gate [a]). 400 is the dark-mode action fill (#d04efc)
+   * — 6.1:1 under the near-black on-accent label and 5.8:1 on the charcoal
+   * page. 500 is the light-mode fill (#b614e4), 5.0:1 under a white label.
+   *
    * Mirrors the `purple` hex ramp in colors.ts (JS side). Used by
    * --action-primary, the light-mode CTA fill, and the iris gradient's warm
    * pole. Distinct from --violet-*, which is the lit pastel accent. */
-  --purple-50: oklch(96% 0.020 288);
-  --purple-100: oklch(92% 0.040 288);
-  --purple-200: oklch(85% 0.077 288);
-  --purple-300: oklch(74% 0.140 288);
-  --purple-400: oklch(62% 0.190 288);
-  --purple-500: oklch(52% 0.205 288);
-  --purple-600: oklch(43% 0.195 288);
-  --purple-700: oklch(36% 0.180 288);
-  --purple-800: oklch(30% 0.160 288);
-  --purple-900: oklch(23% 0.128 288);
-  --purple-950: oklch(15% 0.085 288);
+  --purple-50: oklch(96% 0.026 316);
+  --purple-100: oklch(92% 0.054 316);
+  --purple-200: oklch(85% 0.104 316);
+  --purple-300: oklch(76% 0.173 316);
+  --purple-400: oklch(67% 0.257 316);
+  --purple-500: oklch(58% 0.276 316);
+  --purple-600: oklch(50% 0.240 316);
+  --purple-700: oklch(42% 0.202 316);
+  --purple-800: oklch(34% 0.164 316);
+  --purple-900: oklch(26% 0.125 316);
+  --purple-950: oklch(17% 0.083 316);
 
   /* Exact iris-morph animation stops (sRGB hex, sampled from
    * static/iris-morph.json). The canonical V4 accent ramp: the --accent-*
@@ -277,9 +282,9 @@
    * pixel-for-pixel. Hex (not oklch) to stay identical to the WebGL scene and
    * the colors.ts mirror. NB: sky/mint are bright dark-surface accents — use a
    * deeper stop for accent text on light backgrounds. */
-  --iris-indigo: #350699; /* 0%   — warm pole */
+  --iris-indigo: #750694; /* 0%   — warm pole, purple-700 */
   --iris-aubergine: #2d0337; /* 25%  — near-black, ramp only */
-  --iris-lavender: #a26ae9; /* 50% */
+  --iris-lavender: #d04efc; /* 50% — purple-400 neon */
   --iris-sky: #43d2ff; /* 75% */
   --iris-mint: #c7fcae; /* 100% — cool pole */
 

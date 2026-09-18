@@ -172,11 +172,17 @@
   --surface-solid: #100e24;
   --surface-disabled: var(--slate-900);
 
-  /* --- Borders -------------------------------------------------------------- */
-  --border-subtle: var(--ink-1200);
-  --border-default: var(--ink-1100);
-  --border-strong: var(--ink-900);
-  --border-hover: var(--ink-900);
+  /* --- Borders --------------------------------------------------------------
+   * Dark hairlines are white-on-transparent so they composite a step lighter
+   * than whatever surface they sit on (page, card, dialog). An opaque ink
+   * stop at 19–23% L sat at or below the charcoal floor and read as a
+   * vanished purple seam. 5% is the quiet divider; default / strong step up
+   * for rules that have to hold a column or a card edge. Control stays
+   * opaque — it is a WCAG 1.4.11 boundary, not a hairline. */
+  --border-subtle: color-mix(in oklab, white 5%, transparent);
+  --border-default: color-mix(in oklab, white 8%, transparent);
+  --border-strong: color-mix(in oklab, white 12%, transparent);
+  --border-hover: color-mix(in oklab, white 14%, transparent);
   /* Load-bearing control boundary — must stay >=3:1 vs the page (WCAG 1.4.11).
    * Distinct from the decorative hairline borders above. */
   --border-control: var(--slate-400);
