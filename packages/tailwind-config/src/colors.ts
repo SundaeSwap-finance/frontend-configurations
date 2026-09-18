@@ -47,22 +47,24 @@ const slate = {
   1000: "#0d0c16",
 };
 
-/** Brand primary — deep regal purple, the warm pole of the V4 iris gradient.
- *  Anchors the Unicorn morph palette (purple → cyan → mint). DEFAULT is the
- *  700 stop so chart/token surfaces read as rich purple, not pastel lavender. */
+/** Brand primary — hot purple (hue 316). Uniswap-energy neon that still
+ *  reads purple on charcoal, not fuchsia. Anchors the Unicorn morph palette
+ *  (purple → cyan → mint). DEFAULT is the 700 stop so chart/token surfaces
+ *  read as rich purple, not pastel lavender. These are the sRGB renders of the
+ *  oklch stops in styles/tokens.css — `bun check:tokens` gates the lockstep. */
 const purple = {
-  DEFAULT: "#401993",
-  50: "#f1f0ff",
-  100: "#e3e1ff",
-  200: "#cbc6fe",
-  300: "#a79bfe",
-  400: "#846cf0",
-  500: "#6948d5",
-  600: "#522cb1",
-  700: "#401993",
-  800: "#310a77",
-  900: "#1f0253",
-  950: "#0d002c",
+  DEFAULT: "#750694",
+  50: "#f9edfe",
+  100: "#f3dafd",
+  200: "#e9b9fc",
+  300: "#db8bfa",
+  400: "#d04efc",
+  500: "#b614e4",
+  600: "#950abc",
+  700: "#750694",
+  800: "#57026f",
+  900: "#3a014b",
+  950: "#1c0027",
 };
 
 /** Legacy pink ramp. Demoted from brand-primary in V4; still available for
@@ -238,9 +240,9 @@ const coral = {
  *  precise WebGL-sampled values, and the chart/`polished` consumers can't parse
  *  oklch. Mirrored on the CSS side by the `--iris-*` stops in tokens.css. */
 const iris = {
-  indigo: "#350699", // 0%   — deep regal indigo (the warm pole)
+  indigo: "#750694", // 0%   — hot purple-700 (the warm pole)
   aubergine: "#2d0337", // 25%  — near-black; too dark for a fill, ramp only
-  lavender: "#a26ae9", // 50%  — electric lavender
+  lavender: "#d04efc", // 50%  — hot purple-400 neon
   sky: "#43d2ff", // 75%  — bright cyan
   mint: "#c7fcae", // 100% — pale spring green (the cool pole)
 };
