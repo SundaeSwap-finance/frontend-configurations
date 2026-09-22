@@ -13,7 +13,11 @@
     }
   },
   "type": "module",
-  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/eslint-config-sundae",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SundaeSwap-finance/frontend-configurations.git",
+    "directory": "packages/webpack-config"
+  },
   "author": "Calvin Koepke <hello@calvinkoepke.com>",
   "license": "MIT",
   "publishConfig": {

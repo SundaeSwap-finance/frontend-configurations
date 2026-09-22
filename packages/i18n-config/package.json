@@ -20,7 +20,11 @@
     "dist"
   ],
   "license": "MIT",
-  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/i18n-config",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SundaeSwap-finance/frontend-configurations.git",
+    "directory": "packages/i18n-config"
+  },
   "scripts": {
     "build:esm": "cross-env BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir './dist/esm' --source-maps",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",

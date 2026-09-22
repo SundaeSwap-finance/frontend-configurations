@@ -5,7 +5,11 @@
   "keywords": [
     "jest"
   ],
-  "repository": "https://github.com/sundaeswap-finance/frontend-configurations/tree/master/packages/jest-config",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SundaeSwap-finance/frontend-configurations.git",
+    "directory": "packages/jest-config"
+  },
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
