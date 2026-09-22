@@ -1,6 +1,6 @@
 {
   "name": "@sundaeswap/babel-preset",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SundaeSwap-finance/frontend-configurations.git",
