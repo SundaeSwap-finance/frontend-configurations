@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.5](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@5.0.4...@sundaeswap/tailwind-config@5.0.5) (2026-09-28)
+
+### Features
+
+- **tailwind-config:** re-anchor palette to plum and replace iris with opal finish ([541a81d](https://github.com/SundaeSwap-finance/frontend-configurations/commit/541a81dd5135cf5906e910a7aa2f5f80eefdbfbf))
+
 ## [5.0.4](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@5.0.3...@sundaeswap/tailwind-config@5.0.4) (2026-09-22)
 
 **Note:** Version bump only for package @sundaeswap/tailwind-config
