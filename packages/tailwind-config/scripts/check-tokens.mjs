@@ -12,6 +12,14 @@
  *                  sRGB render of the matching oklch() in tokens.css (<=1 LSB).
  *   (c) CONTRAST — a must-pass WCAG pair, resolved live by parsing the
  *                  theme.css role->ramp mapping, drops below its floor.
+ *   (d) ANCHORS  — a stop pinned to an exact website hex drifts by even one
+ *                  LSB: the plum `purple` / `ground` anchors (CSS render AND
+ *                  colors.ts), the six `opal` stops (tokens.css AND colors.ts),
+ *                  and the two page floors theme.css resolves to.
+ *   (e) SHAPE    — a ramp loses its intent: `ink`/`slate` leave the hue-300
+ *                  plum spine, `purple`/`ground` leave their hue band, stop
+ *                  tapering chroma toward both ends (one peak), or `purple`
+ *                  climbs back toward a neon (peak chroma above the muted cap).
  *
  * The CSS/TS token files are stable, regex-parseable formats. This script only
  * reads them; it never mutates anything.
@@ -27,6 +35,62 @@ const ROOT = join(__dirname, "..");
 const TOKENS_CSS = join(ROOT, "src/styles/tokens.css");
 const COLORS_TS = join(ROOT, "src/colors.ts");
 const THEME_CSS = join(ROOT, "src/styles/theme.css");
+
+/** Ramp families that live in tokens.css as oklch() AND in colors.ts as hex. */
+const RAMP_NAMES = [
+  "ink",
+  "slate",
+  "purple",
+  "ground",
+  "pink",
+  "magenta",
+  "violet",
+  "indigo",
+  "cyan",
+  "aqua",
+  "citron",
+  "gold",
+  "mint",
+  "coral",
+];
+
+/** Ramp stops pinned to exact website hexes (tokens.css comments cite them). */
+const RAMP_ANCHORS = [
+  { ramp: "purple", stop: 300, hex: "#cdb8fa" }, // lilac — dark link / ring
+  { ramp: "purple", stop: 600, hex: "#6a4e97" }, // plum gloss top — light fill
+  { ramp: "purple", stop: 700, hex: "#523a7d" }, // plum gloss mid
+  { ramp: "purple", stop: 800, hex: "#3b2a5c" }, // plum gloss base
+  { ramp: "purple", stop: 900, hex: "#261d38" }, // website plum-900
+  { ramp: "purple", stop: 950, hex: "#110a1f" }, // website plum-950
+  { ramp: "ground", stop: 50, hex: "#fffbff" },
+  { ramp: "ground", stop: 100, hex: "#fff6ff" },
+  { ramp: "ground", stop: 200, hex: "#fceaff" }, // THE ground
+  { ramp: "ground", stop: 300, hex: "#efd4f5" },
+];
+
+/** The opal finish — the website holo palette, exact. */
+const OPAL = {
+  pink: "#f6a8dc",
+  lilac: "#cdb8fa",
+  azure: "#6e9cff",
+  cyan: "#8fe7f2",
+  pearl: "#f3f5ff",
+  peach: "#fad3c8",
+};
+
+/** Page floors theme.css must resolve to, per mode. */
+const PAGE_ANCHORS = [
+  { scope: "dark", role: "surface-page", hex: "#110a1f" }, // plum-950
+  { scope: "light", role: "surface-page", hex: "#fceaff" }, // ground
+];
+
+/** Intent of each shaped ramp: hue band, and (purple) the muted chroma cap. */
+const RAMP_SHAPES = {
+  ink: { hue: [300, 300] },
+  slate: { hue: [300, 300] },
+  purple: { hue: [296, 301], maxChroma: 0.13, unimodal: true },
+  ground: { hue: [319, 327], unimodal: true },
+};
 
 /* ============================================================================
  * Color math — OKLCH -> OKLab -> linear sRGB -> gamma sRGB.
@@ -125,29 +189,14 @@ function contrastRatio(fg, bg) {
 
 /** All `--<ramp>-<stop>: oklch(L% C H);` declarations (the Layer-1 ramps). */
 function parseTokensCss(src) {
-  // Restrict to ramp families that have a hex mirror in colors.ts.
-  const RAMP_NAMES = [
-    "ink",
-    "slate",
-    "purple",
-    "pink",
-    "magenta",
-    "violet",
-    "indigo",
-    "cyan",
-    "aqua",
-    "citron",
-    "gold",
-    "mint",
-    "coral",
-  ];
   const stops = [];
-  const re =
-    /--(ink|slate|purple|pink|magenta|violet|indigo|cyan|aqua|citron|gold|mint|coral)-(\d+):\s*oklch\(\s*([\d.]+)%\s+([\d.]+)\s+([\d.]+)\s*\)/g;
+  const re = new RegExp(
+    `--(${RAMP_NAMES.join("|")})-(\\d+):\\s*oklch\\(\\s*([\\d.]+)%\\s+([\\d.]+)\\s+([\\d.]+)\\s*\\)`,
+    "g",
+  );
   let m;
   while ((m = re.exec(src)) !== null) {
     const [, ramp, stop, L, C, H] = m;
-    if (!RAMP_NAMES.includes(ramp)) continue;
     stops.push({
       ramp,
       stop: Number(stop),
@@ -164,21 +213,6 @@ function parseTokensCss(src) {
  * `const <ramp> = { 50: "#...", 100: "#...", ... }` object literals.
  */
 function parseColorsTs(src) {
-  const RAMP_NAMES = [
-    "ink",
-    "slate",
-    "purple",
-    "pink",
-    "magenta",
-    "violet",
-    "indigo",
-    "cyan",
-    "aqua",
-    "citron",
-    "gold",
-    "mint",
-    "coral",
-  ];
   const out = {};
   for (const ramp of RAMP_NAMES) {
     const block = new RegExp(`const ${ramp} = \\{([\\s\\S]*?)\\};`).exec(src);
@@ -192,6 +226,29 @@ function parseColorsTs(src) {
   }
   return out;
 }
+
+/** `--opal-<name>: #rrggbb;` declarations in tokens.css -> { name -> hex }. */
+function parseOpalCss(src) {
+  const out = {};
+  const re = /--opal-([a-z]+):\s*(#[0-9a-fA-F]{6})\s*;/g;
+  let m;
+  while ((m = re.exec(src)) !== null) out[m[1]] = m[2].toLowerCase();
+  return out;
+}
+
+/** The `const opal = { name: "#rrggbb", ... }` literal in colors.ts. */
+function parseOpalTs(src) {
+  const out = {};
+  const block = /const opal = \{([\s\S]*?)\};/.exec(src);
+  if (!block) return out;
+  const re = /([a-z]+):\s*"(#[0-9a-fA-F]{6})"/g;
+  let m;
+  while ((m = re.exec(block[1])) !== null) out[m[1]] = m[2].toLowerCase();
+  return out;
+}
+
+const toHex = ({ r, g, b }) =>
+  "#" + [r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("");
 
 /* ============================================================================
  * theme.css role resolution — the live source of truth for contrast pairs.
@@ -261,6 +318,9 @@ const cssStops = parseTokensCss(tokensSrc);
 const tsRamps = parseColorsTs(colorsSrc);
 const DARK = parseThemeScope(themeSrc, "dark");
 const LIGHT = parseThemeScope(themeSrc, "light");
+const SCOPES = { dark: DARK, light: LIGHT };
+const opalCss = parseOpalCss(tokensSrc);
+const opalTs = parseOpalTs(colorsSrc);
 
 let failures = 0;
 const log = (s = "") => process.stdout.write(s + "\n");
@@ -315,11 +375,7 @@ for (const s of cssStops) {
   if (dr > 1 || dg > 1 || db > 1) {
     lockstepFails++;
     failures++;
-    const got =
-      "#" +
-      [rendered.r, rendered.g, rendered.b]
-        .map((c) => c.toString(16).padStart(2, "0"))
-        .join("");
+    const got = toHex(rendered);
     log(
       `  FAIL --${s.ramp}-${s.stop}: tokens.css renders ${got} but colors.ts has ${hex} (Δ ${dr},${dg},${db})`,
     );
@@ -342,36 +398,38 @@ log(
  */
 const WHITE = { r: 255, g: 255, b: 255 };
 
+/** A theme.css role pair in one mode — fg/bg resolved live. */
+const rolePair = (scope, fg, bg, floor) => ({
+  name: `${scope} ${fg} on ${bg}`,
+  fg: resolveRole(SCOPES[scope], fg),
+  bg: resolveRole(SCOPES[scope], bg),
+  floor,
+});
+
 const contrastPairs = [
+  // The text ladder: scion (heading == body), secondary, tertiary are all
+  // load-bearing and must clear AA on the page floor in both modes. (Subtle
+  // is sub-AA by design and deliberately absent.)
+  rolePair("dark", "text-body", "surface-page", 4.5),
+  rolePair("dark", "text-secondary", "surface-page", 4.5),
+  rolePair("dark", "text-tertiary", "surface-page", 4.5),
+  rolePair("light", "text-body", "surface-page", 4.5),
+  rolePair("light", "text-secondary", "surface-page", 4.5),
+  rolePair("light", "text-tertiary", "surface-page", 4.5),
+  // The label every primary pill paints on its fill.
+  rolePair("dark", "text-on-primary", "action-primary", 4.5),
+  rolePair("light", "text-on-primary", "action-primary", 4.5),
+  // Links, resting and hover.
+  rolePair("dark", "text-link", "surface-page", 4.5),
+  rolePair("dark", "text-link-hover", "surface-page", 4.5),
+  rolePair("light", "text-link", "surface-page", 4.5),
+  rolePair("light", "text-link-hover", "surface-page", 4.5),
+  // Focus ring — a WCAG 1.4.11 non-text boundary.
+  rolePair("dark", "ring", "surface-page", 3.0),
+  rolePair("light", "ring", "surface-page", 3.0),
   {
-    // --text-tertiary: metadata, %, sub-values, denominators.
-    name: "dark text-tertiary on surface-page",
-    fg: resolveRole(DARK, "text-tertiary"),
-    bg: resolveRole(DARK, "surface-page"),
-    floor: 3.0, // WCAG 1.4.11 non-text / large-text territory
-  },
-  {
-    // --text-heading == --text-body == --text-scion.
-    name: "dark text primary (heading == body) on surface-page",
-    fg: resolveRole(DARK, "text-body"),
-    bg: resolveRole(DARK, "surface-page"),
-    floor: 4.5,
-  },
-  {
-    name: "light text primary (heading == body) on surface-page",
-    fg: resolveRole(LIGHT, "text-body"),
-    bg: resolveRole(LIGHT, "surface-page"),
-    floor: 4.5,
-  },
-  {
-    name: "dark text-secondary on surface-page",
-    fg: resolveRole(DARK, "text-secondary"),
-    bg: resolveRole(DARK, "surface-page"),
-    floor: 4.5,
-  },
-  {
-    // Some consumers paint a white label on bg-action-primary, so the fill
-    // must clear AA against white.
+    // Some consumers paint a literal white label on bg-action-primary, so the
+    // light fill must clear AA against white too.
     name: "light action-primary with white label",
     fg: WHITE,
     bg: resolveRole(LIGHT, "action-primary"),
@@ -383,19 +441,6 @@ const contrastPairs = [
     name: "light action-secondary with gold-900 label",
     fg: ramp("gold", 900),
     bg: resolveRole(LIGHT, "action-secondary"),
-    floor: 4.5,
-  },
-  {
-    name: "light text-link-hover on surface-page",
-    fg: resolveRole(LIGHT, "text-link-hover"),
-    bg: resolveRole(LIGHT, "surface-page"),
-    floor: 4.5,
-  },
-  {
-    // Dark-mode link hover — previously untested.
-    name: "dark text-link-hover on surface-page",
-    fg: resolveRole(DARK, "text-link-hover"),
-    bg: resolveRole(DARK, "surface-page"),
     floor: 4.5,
   },
 ];
@@ -419,10 +464,98 @@ log(
     : `  ${contrastFails} pair(s) below floor`,
 );
 
+/* ---- (d) ANCHORS -------------------------------------------------------- */
+log("\n[d] ANCHORS — website-pinned stops must render to their exact hex");
+let anchorFails = 0;
+const anchorFail = (msg) => {
+  anchorFails++;
+  failures++;
+  log(`  FAIL ${msg}`);
+};
+for (const a of RAMP_ANCHORS) {
+  const s = cssStops.find((x) => x.ramp === a.ramp && x.stop === a.stop);
+  if (!s) {
+    anchorFail(`--${a.ramp}-${a.stop}: missing from tokens.css`);
+    continue;
+  }
+  const css = toHex(oklchToSrgb(s.L, s.C, s.H));
+  if (css !== a.hex)
+    anchorFail(`--${a.ramp}-${a.stop}: tokens.css renders ${css}, anchor is ${a.hex}`);
+  const ts = tsRamps[a.ramp]?.[a.stop]?.toLowerCase();
+  if (ts !== a.hex)
+    anchorFail(`${a.ramp}[${a.stop}]: colors.ts has ${ts}, anchor is ${a.hex}`);
+}
+for (const [name, hex] of Object.entries(OPAL)) {
+  if (opalCss[name] !== hex)
+    anchorFail(`--opal-${name}: tokens.css has ${opalCss[name]}, anchor is ${hex}`);
+  if (opalTs[name] !== hex)
+    anchorFail(`opal.${name}: colors.ts has ${opalTs[name]}, anchor is ${hex}`);
+}
+for (const name of new Set([...Object.keys(opalCss), ...Object.keys(opalTs)])) {
+  if (!(name in OPAL)) anchorFail(`opal stop "${name}" is not part of the opal finish`);
+}
+for (const p of PAGE_ANCHORS) {
+  const got = toHex(resolveRole(SCOPES[p.scope], p.role));
+  if (got !== p.hex)
+    anchorFail(`${p.scope} --${p.role}: resolves to ${got}, anchor is ${p.hex}`);
+}
+const anchorCount =
+  RAMP_ANCHORS.length + Object.keys(OPAL).length + PAGE_ANCHORS.length;
+log(
+  anchorFails === 0
+    ? `  PASS — ${anchorCount} anchors exact`
+    : `  ${anchorFails} anchor(s) drifted`,
+);
+
+/* ---- (e) SHAPE ---------------------------------------------------------- */
+log("\n[e] SHAPE — spine hue, ramp hue bands, chroma taper, muted plum cap");
+let shapeFails = 0;
+const shapeFail = (msg) => {
+  shapeFails++;
+  failures++;
+  log(`  FAIL ${msg}`);
+};
+for (const [rampName, shape] of Object.entries(RAMP_SHAPES)) {
+  const stops = cssStops
+    .filter((s) => s.ramp === rampName)
+    .sort((a, b) => a.stop - b.stop);
+  if (stops.length === 0) {
+    shapeFail(`--${rampName}-*: no stops in tokens.css`);
+    continue;
+  }
+  const [lo, hi] = shape.hue;
+  for (const s of stops) {
+    if (s.H < lo || s.H > hi)
+      shapeFail(`--${rampName}-${s.stop}: hue ${s.H} outside ${lo}–${hi}`);
+  }
+  if (shape.maxChroma !== undefined) {
+    const peak = Math.max(...stops.map((s) => s.C));
+    if (peak > shape.maxChroma)
+      shapeFail(`--${rampName}-*: peak chroma ${peak} above the ${shape.maxChroma} cap`);
+  }
+  if (shape.unimodal) {
+    // Chroma rises to one peak and falls after it: tapered at both extremes.
+    const peakAt = stops.reduce((best, s, i) => (s.C > stops[best].C ? i : best), 0);
+    for (let i = 1; i < stops.length; i++) {
+      const rising = i <= peakAt;
+      const ok = rising ? stops[i].C >= stops[i - 1].C : stops[i].C <= stops[i - 1].C;
+      if (!ok)
+        shapeFail(
+          `--${rampName}-${stops[i].stop}: chroma ${stops[i].C} breaks the taper (${rising ? "rising" : "falling"} side)`,
+        );
+    }
+  }
+}
+log(
+  shapeFails === 0
+    ? `  PASS — ${Object.keys(RAMP_SHAPES).length} ramps hold their shape`
+    : `  ${shapeFails} shape violation(s)`,
+);
+
 /* ---- Report ------------------------------------------------------------- */
 log("\n============================================================");
 if (failures === 0) {
-  log(" RESULT: PASS — tokens are in-gamut, in lockstep, and accessible");
+  log(" RESULT: PASS — tokens are in-gamut, in lockstep, anchored, and accessible");
   log("============================================================");
   process.exit(0);
 } else {

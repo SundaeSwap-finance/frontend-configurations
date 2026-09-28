@@ -75,6 +75,10 @@
   /* `text-text-subtle` — the faintest neutral step (placeholders, ghost hints). */
   --color-text-subtle: var(--text-subtle);
   --color-text-on-accent: var(--text-on-accent);
+  /* `text-text-on-primary` — the label that sits on bg-action-primary /
+   * gloss-primary (near-black on the dark ground pill, near-white on the light
+   * plum pill). */
+  --color-text-on-primary: var(--text-on-primary);
   --color-text-link: var(--text-link);
   --color-text-link-hover: var(--text-link-hover);
   --color-accent-chrome: var(--accent-chrome);
@@ -138,15 +142,16 @@
   --color-accent-gold: var(--accent-gold);
   --color-accent-salmon: var(--coral-300); /* legacy alias */
   --color-accent-peach: var(--gold-300); /* legacy alias */
-  /* Iris — the brand signature ramp (the iris-morph gradient stops). Registered
-   * so the hero gradient's exact colors are reusable as utilities
-   * (bg-/text-/ring-iris-*), e.g. portfolio token indicators that should sit on
-   * the brand sweep. Aubergine is the near-black 25% stop (ramp-only). */
-  --color-iris-indigo: var(--iris-indigo);
-  --color-iris-aubergine: var(--iris-aubergine);
-  --color-iris-lavender: var(--iris-lavender);
-  --color-iris-sky: var(--iris-sky);
-  --color-iris-mint: var(--iris-mint);
+  /* Opal — the iridescent signature (the website's holo palette). Registered
+   * so the finish's exact stops are reusable as utilities
+   * (bg-/text-/ring-opal-*), e.g. portfolio token indicators that should sit
+   * on the brand chord. */
+  --color-opal-pink: var(--opal-pink);
+  --color-opal-lilac: var(--opal-lilac);
+  --color-opal-azure: var(--opal-azure);
+  --color-opal-cyan: var(--opal-cyan);
+  --color-opal-pearl: var(--opal-pearl);
+  --color-opal-peach: var(--opal-peach);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -247,9 +252,8 @@
   --color-magenta-800: var(--magenta-800);
   --color-magenta-900: var(--magenta-900);
   --color-magenta-950: var(--magenta-950);
-  /* V4: primary repointed at the new --purple-* ramp (was pink). Adds a
-   * dedicated `--color-purple-*` block alongside so callsites can opt-in
-   * explicitly. */
+  /* The muted plum ramp — the `primary-*` steps below alias it; the dedicated
+   * `--color-purple-*` block lets callsites opt in explicitly. */
   --color-purple-50: var(--purple-50);
   --color-purple-100: var(--purple-100);
   --color-purple-200: var(--purple-200);
@@ -262,12 +266,26 @@
   --color-purple-900: var(--purple-900);
   --color-purple-950: var(--purple-950);
 
-  /* V4: the bare `primary` base now tracks the primary action hue —
-   * purple-400 (dark) / purple-500 (light) — instead of the deep purple-700
-   * anchor, so text-/bg-/border-primary read as the brand's lit neon purple.
-   * Because this is the lit stop, bg-primary now pairs with a near-black
-   * label (--text-on-accent), not white. The numbered primary-50..900 steps
-   * below stay mapped to the raw purple ramp. */
+  /* --- Ramp: ground --------------------------------------------------------
+   * The website's pale `ground` pink (200 = #fceaff): the dark-mode primary
+   * pill and text, the light-mode page. */
+  --color-ground-50: var(--ground-50);
+  --color-ground-100: var(--ground-100);
+  --color-ground-200: var(--ground-200);
+  --color-ground-300: var(--ground-300);
+  --color-ground-400: var(--ground-400);
+  --color-ground-500: var(--ground-500);
+  --color-ground-600: var(--ground-600);
+  --color-ground-700: var(--ground-700);
+  --color-ground-800: var(--ground-800);
+  --color-ground-900: var(--ground-900);
+  --color-ground-950: var(--ground-950);
+
+  /* The bare `primary` base tracks the primary action fill — ground-200
+   * (dark) / purple-600 (light) — so text-/bg-/border-primary read as the
+   * brand pill. bg-primary pairs with --text-on-primary (near-black in dark,
+   * near-white in light). The numbered primary-50..900 steps below stay
+   * mapped to the raw purple ramp. */
   --color-primary: var(--action-primary);
   --color-primary-50: var(--purple-50);
   --color-primary-100: var(--purple-100);
@@ -598,9 +616,8 @@
   --animate-close-off-canvas: closeOffCanvas 250ms ease forwards;
   --animate-open-accordion: openAccordion 250ms cubic-bezier(0.87, 0, 0.13, 1);
   --animate-close-accordion: closeAccordion 250ms cubic-bezier(0.87, 0, 0.13, 1);
-  --animate-iris-drift: iris-morph 2.8s ease-in-out infinite;
-  /* --animate-iris-drift-muted retired with the bg-iris-muted-animated utility. */
-  --animate-iris-drift-pearl: iris-pearl-morph 5.5s cubic-bezier(0.42, 0.02, 0.38, 1) infinite;
+  --animate-opal-drift: opal-morph 2.8s ease-in-out infinite;
+  --animate-opal-drift-pearl: opal-pearl-morph 5.5s cubic-bezier(0.42, 0.02, 0.38, 1) infinite;
   --animate-pearl-ring: pearl-ring-spin 10s linear infinite;
 
   /* --- Keyframes --------------------------------------------------------- */
@@ -762,12 +779,13 @@
     from { height: var(--radix-accordion-content-height); }
     to { height: 0; }
   }
-  /* Layer order matches the bg-iris(-muted)-animated radial stacks:
-   *   1 = pink   2 = cyan   3 = violet   (4 = linear, anchored "center")
-   * Pink and violet roam freely — pooling those brand hues in a corner reads
-   * as intentional. The cyan (column 2) is kept inside a tight central band so
-   * it stays a soft iridescent shimmer instead of pooling into the corners. */
-  @keyframes iris-morph {
+  /* Layer order matches the bg-opal-animated radial stacks:
+   *   1 = pink   2 = cyan   3 = lilac   (4 = linear, anchored "center")
+   * Pink and lilac roam freely — pooling those warm opal notes in a corner
+   * reads as intentional. The cyan (column 2) is kept inside a tight central
+   * band so it stays a soft iridescent shimmer instead of pooling into the
+   * corners. */
+  @keyframes opal-morph {
     0%,
     100% {
       background-position:
@@ -799,7 +817,7 @@
     }
   }
 
-  @keyframes iris-pearl-morph {
+  @keyframes opal-pearl-morph {
     0%,
     100% {
       background-position:
@@ -896,36 +914,29 @@
   --animate-select-token-glow: select-token-glow 2.4s ease-in-out infinite;
   --animate-review-ready-glow: review-ready-glow 2.4s ease-in-out infinite;
 
-  /* Directional multi-color glow — deep violet pooled toward the top-left,
-   * cyan + mint pooled toward the bottom-right. `drop-shadow` honors the
-   * element's rounded shape (unlike `box-shadow`'s rectangular outset), and
-   * the X/Y offsets bias each color toward a quadrant, matching the
-   * Unicorn morph's diagonal flow (violet → cyan → mint).
+  /* Directional two-note glow — opal lilac pooled toward the top-left, opal
+   * pink toward the bottom-right. `drop-shadow` honors the element's rounded
+   * shape (unlike `box-shadow`'s rectangular outset), and the X/Y offsets bias
+   * each color toward a quadrant, echoing the opal finish's diagonal flow.
    *
-   * Violet uses a custom OKLCH (chroma 0.18 at L 38%) — deeper AND more
-   * saturated than any token on the violet ramp (the ramp's max chroma is
-   * 0.180 at violet-700). The shorthand `--iris-violet-deep` is local to the
-   * glow so it stays out of the public token API.
-   *
-   * Blur radii and color-mix percentages dialed down from the first pass —
-   * the previous values washed the whole input row in light. */
-  --iris-violet-deep: oklch(38% 0.19 289);
+   * Blur radii and color-mix percentages are held low — stronger values
+   * washed the whole input row in light. */
 
   @keyframes select-token-glow {
     0%,
     100% {
       filter:
-        drop-shadow(-4px -5px 8px color-mix(in oklab, var(--iris-violet-deep) 40%, transparent))
-        drop-shadow(-2px -3px 4px color-mix(in oklab, var(--iris-violet-deep) 30%, transparent))
-        drop-shadow(6px 6px 12px color-mix(in oklab, var(--cyan-400) 22%, transparent))
-        drop-shadow(4px 4px 7px color-mix(in oklab, var(--mint-400) 14%, transparent));
+        drop-shadow(-4px -5px 8px color-mix(in oklab, var(--opal-lilac) 40%, transparent))
+        drop-shadow(-2px -3px 4px color-mix(in oklab, var(--opal-lilac) 30%, transparent))
+        drop-shadow(6px 6px 12px color-mix(in oklab, var(--opal-pink) 22%, transparent))
+        drop-shadow(4px 4px 7px color-mix(in oklab, var(--opal-pink) 14%, transparent));
     }
     50% {
       filter:
-        drop-shadow(-6px -8px 12px color-mix(in oklab, var(--iris-violet-deep) 50%, transparent))
-        drop-shadow(-3px -4px 6px color-mix(in oklab, var(--iris-violet-deep) 38%, transparent))
-        drop-shadow(8px 8px 16px color-mix(in oklab, var(--cyan-400) 30%, transparent))
-        drop-shadow(5px 5px 9px color-mix(in oklab, var(--mint-400) 20%, transparent));
+        drop-shadow(-6px -8px 12px color-mix(in oklab, var(--opal-lilac) 50%, transparent))
+        drop-shadow(-3px -4px 6px color-mix(in oklab, var(--opal-lilac) 38%, transparent))
+        drop-shadow(8px 8px 16px color-mix(in oklab, var(--opal-pink) 30%, transparent))
+        drop-shadow(5px 5px 9px color-mix(in oklab, var(--opal-pink) 20%, transparent));
     }
   }
 
@@ -945,36 +956,40 @@
 }
 
 /* ============================================================================
- * IRIS GRADIENT — fill utility. The brand signature for hero CTAs, avatars,
- * badges, and active states. Never applied as background-clip:text.
+ * OPAL — the iridescent brand finish. Fill utilities for hero CTAs, avatars,
+ * badges, and active states, plus one glyph utility (`text-opal`).
  * ========================================================================== */
-@utility bg-iris {
-  background-image: var(--gradient-iris);
+@utility bg-opal {
+  background-image: var(--gradient-opal);
 }
 
-@utility bg-iris-animated {
-  background-color: var(--iris-via);
+/* The animated CTA fill — the CSS stand-in for the toolkit's OpalFill canvas
+ * (and its reduced-motion / no-WebGL frame). Three oversized radial blooms of
+ * the opal pink / cyan / lilac drift over a pink → lilac → cyan sweep, so the
+ * bands pool like the website's pearl instead of running parallel. */
+@utility bg-opal-animated {
+  background-color: var(--opal-via);
   background-image:
     radial-gradient(
       ellipse 72% 95% at 30% 35%,
-      color-mix(in oklab, var(--iris-from) 92%, transparent),
+      color-mix(in oklab, var(--opal-from) 92%, transparent),
       transparent 58%
     ),
     radial-gradient(
       ellipse 82% 88% at 72% 68%,
-      color-mix(in oklab, var(--iris-to) 88%, transparent),
+      color-mix(in oklab, var(--opal-to) 88%, transparent),
       transparent 56%
     ),
     radial-gradient(
       ellipse 68% 92% at 52% 18%,
-      color-mix(in oklab, var(--iris-via) 84%, transparent),
+      color-mix(in oklab, var(--opal-via) 84%, transparent),
       transparent 54%
     ),
     linear-gradient(
-      var(--iris-angle),
-      var(--iris-from),
-      var(--iris-via) 46%,
-      var(--iris-to)
+      var(--opal-angle),
+      var(--opal-from),
+      var(--opal-via) 46%,
+      var(--opal-to)
     );
   background-size:
     200% 200%,
@@ -988,16 +1003,46 @@
     center;
   /* Each oversized radial fades to transparent before its tile edge, so the
      default `repeat` paints a second copy of the blob at the opposite edge as
-     iris-morph pans — reading as a blue seam looping in from the left. */
+     opal-morph pans — reading as a seam looping in from the left. */
   background-repeat: no-repeat;
-  animation: var(--animate-iris-drift);
+  animation: var(--animate-opal-drift);
+}
+
+/* Opal glyphs — the website `.text-holo`: the full-strength chord clipped to
+ * the text. Guarded so engines that can't clip a background to text keep the
+ * inherited solid color instead of painting transparent words. */
+@utility text-opal {
+  @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+    background-image: var(--gradient-opal-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Gloss primary — the website's glossy primary pill (`.btn-gloss-pink` on
+ * the plum page, `.btn-gloss-plum` on paper). Paints a top-lit gradient over
+ * the action-primary fill with layered inset depth; hover swaps in the
+ * brighter ramp. No pseudo-elements, so it composes with any button. The
+ * label color stays --text-on-primary; disabled styling is the consumer's
+ * job (drop the image/shadow and paint action-primary-disabled). */
+@utility gloss-primary {
+  background-image: var(--gloss-primary-image);
+  box-shadow: var(--gloss-primary-shadow);
+  text-shadow: var(--gloss-primary-text-shadow);
+
+  @media (hover: hover) {
+    &:hover:not(:disabled, [aria-disabled="true"]) {
+      background-image: var(--gloss-primary-image-hover);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bg-iris-animated,
-  .bg-iris-pearl-animated,
-  .iris-pearl-ring,
-  .iris-pearl-glow,
+  .bg-opal-animated,
+  .bg-opal-pearl-animated,
+  .opal-pearl-ring,
+  .opal-pearl-glow,
   .select-token-glow,
   .review-ready-glow,
   .animate-marquee-left,
@@ -1010,42 +1055,35 @@
   }
 }
 
-/* The bg-iris-muted / bg-iris-muted-animated / iris-muted-glow utilities
- * (and the iris-morph-muted animation that drove them) were retired. The
- * pearlescent pink → lavender → cyan soap-bubble wash read as decorative
- * noise on non-CTA chrome and stamped a rectangular halo on rounded
- * elements via the radial backdrop. Consumers that previously used these
- * now use flat tonals (bg-action-{primary,secondary}-muted/10) or
- * glass-pill for surface fills. */
-
-/* Pearl tier — hero muted CTAs. Five-layer soap-bubble fill + glass specular. */
+/* Pearl tier — hero muted CTAs. Five-layer thin-film fill (the muted opal
+ * stops + a peach rim) + glass specular. */
 @property --pearl-angle {
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
 }
 
-@utility bg-iris-pearl-animated {
+@utility bg-opal-pearl-animated {
   background-color: color-mix(in oklab, var(--slate-600) 9%, transparent);
   background-image:
     radial-gradient(
       ellipse 110% 150% at 20% 55%,
-      color-mix(in oklab, var(--iris-muted-from) 32%, transparent),
+      color-mix(in oklab, var(--opal-muted-from) 32%, transparent),
       transparent 58%
     ),
     radial-gradient(
       ellipse 120% 140% at 82% 48%,
-      color-mix(in oklab, var(--iris-muted-to) 34%, transparent),
+      color-mix(in oklab, var(--opal-muted-to) 34%, transparent),
       transparent 56%
     ),
     radial-gradient(
       ellipse 90% 120% at 50% 8%,
-      color-mix(in oklab, var(--iris-muted-via) 28%, transparent),
+      color-mix(in oklab, var(--opal-muted-via) 28%, transparent),
       transparent 54%
     ),
     radial-gradient(
       ellipse 75% 95% at 68% 92%,
-      color-mix(in oklab, var(--pink-400) 22%, transparent),
+      color-mix(in oklab, var(--opal-peach) 22%, transparent),
       transparent 52%
     ),
     radial-gradient(
@@ -1058,23 +1096,23 @@
   background-repeat: no-repeat;
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
   backdrop-filter: blur(14px) saturate(1.4);
-  animation: var(--animate-iris-drift-pearl);
+  animation: var(--animate-opal-drift-pearl);
 }
 
-@utility iris-pearl-glow {
+@utility opal-pearl-glow {
   box-shadow:
-    0 0 32px color-mix(in oklab, var(--cyan-400) 20%, transparent),
-    0 0 18px color-mix(in oklab, var(--violet-400) 15%, transparent),
-    0 0 10px color-mix(in oklab, var(--pink-400) 12%, transparent);
+    0 0 32px color-mix(in oklab, var(--opal-cyan) 20%, transparent),
+    0 0 18px color-mix(in oklab, var(--opal-lilac) 15%, transparent),
+    0 0 10px color-mix(in oklab, var(--opal-pink) 12%, transparent);
 }
 
-@utility iris-pearl-ring {
+@utility opal-pearl-ring {
   position: relative;
   isolation: isolate;
   border-radius: var(--radius-full);
   filter:
-    drop-shadow(0 0 14px color-mix(in oklab, var(--cyan-400) 16%, transparent))
-    drop-shadow(0 0 6px color-mix(in oklab, var(--pink-400) 10%, transparent));
+    drop-shadow(0 0 14px color-mix(in oklab, var(--opal-cyan) 16%, transparent))
+    drop-shadow(0 0 6px color-mix(in oklab, var(--opal-pink) 10%, transparent));
 }
 
 /* ============================================================================
@@ -1134,8 +1172,8 @@
 
 @utility surface-glow {
   filter:
-    drop-shadow(0 0 14px color-mix(in oklab, var(--violet-500) 16%, transparent))
-    drop-shadow(0 0 6px color-mix(in oklab, var(--pink-500) 10%, transparent));
+    drop-shadow(0 0 14px color-mix(in oklab, var(--opal-lilac) 16%, transparent))
+    drop-shadow(0 0 6px color-mix(in oklab, var(--opal-pink) 10%, transparent));
 }
 
 @utility surface-inset {
@@ -1177,17 +1215,17 @@
     var(--glass-sheen),
     radial-gradient(
       ellipse 85% 120% at 14% 50%,
-      var(--glass-iris-wash-from),
+      var(--glass-opal-wash-from),
       transparent 60%
     ),
     radial-gradient(
       ellipse 75% 110% at 86% 42%,
-      var(--glass-iris-wash-to),
+      var(--glass-opal-wash-to),
       transparent 58%
     ),
     radial-gradient(
       ellipse 65% 95% at 50% 12%,
-      var(--glass-iris-wash-via),
+      var(--glass-opal-wash-via),
       transparent 54%
     );
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.08);
@@ -1264,7 +1302,7 @@
   box-shadow: var(--glass-shadow-callout-success);
 }
 
-/* Calm fuchsia/magenta promo/feature banner — flat tinted glass (no iris wash).
+/* Calm fuchsia/magenta promo/feature banner — flat tinted glass (no opal wash).
  * The quiet, V4-correct alternative to glass-banner for non-CTA "now live"
  * surfaces; uses the accent-magenta family (--glass-fill-callout-feature, the
  * Stableswaps banner's hue) held at a low alpha so it reads ambient, not loud. */
@@ -1277,9 +1315,8 @@
 
 @utility select-token-glow {
   filter:
-    drop-shadow(0 0 10px color-mix(in oklab, var(--violet-500) 42%, transparent))
-    drop-shadow(0 0 22px color-mix(in oklab, var(--pink-500) 28%, transparent))
-    drop-shadow(0 0 8px color-mix(in oklab, var(--cyan-400) 18%, transparent));
+    drop-shadow(0 0 10px color-mix(in oklab, var(--opal-lilac) 42%, transparent))
+    drop-shadow(0 0 22px color-mix(in oklab, var(--opal-pink) 28%, transparent));
   animation: var(--animate-select-token-glow);
 }
 

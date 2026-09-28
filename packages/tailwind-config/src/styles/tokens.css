@@ -11,58 +11,61 @@
  * Nothing here is registered with Tailwind and nothing here switches with
  * light/dark mode. Pure custom properties on :root.
  *
- * Palette identity — "Sundae Cosmic": a dark-native cosmic-night surface
- * system. The neutral spine is a blue-violet near-black (hue 286 — the Cosmic
- * Night family) carrying roughly double the reference chroma, so surfaces read
- * as lit indigo glass rather than grey. Over it sits a PASTEL accent chord —
+ * Palette identity — "Sundae Plum": the marketing site's plum-night surface
+ * system carried into the product. The neutral spine is a plum near-black
+ * (hue 300 — the website's `plum` scale, whose 950 stop #110a1f is the DEX
+ * page floor), so surfaces read as lit plum glass rather than grey. The
+ * primary action is the pale `ground` pink (#FCEAFF) that the website paints
+ * its plum-page pill in; `purple` is the muted plum ramp that carries links,
+ * the focus ring and the light-mode fill. Over it sits a PASTEL accent chord —
  * lavender, periwinkle, orchid, sky, aqua, mint, citron, honey, rose — the
  * high-lightness / mid-chroma band that survives on a near-black page; it is
- * what the nine data-viz series paint. Deep, fully saturated stops of the same
- * ramps drive action fills. The violet → cyan → mint sweep stays the brand's
- * iris gradient.
+ * what the nine data-viz series paint. The brand signature is the iridescent
+ * `opal` finish (pink → lilac → azure → cyan → pearl → peach), the website's
+ * holo palette.
  * ============================================================================
  */
 
 :root {
   /* ==========================================================================
-   * Ink — the blue-violet near-black neutral spine. Hue 286 (2° off Cosmic
-   * Night's 284) at roughly double its chroma, scaled with L. The full surface
-   * + text range, lightest (50) to deepest (1500).
+   * Ink — the plum near-black neutral spine. Hue 300, the website `plum`
+   * scale's hue, at a chroma scaled with L. The full surface + text range,
+   * lightest (50) to deepest (1500).
    * ========================================================================== */
-  --ink-50: oklch(97.9% 0.009 286);
-  --ink-100: oklch(96.2% 0.014 286);
-  --ink-200: oklch(92.6% 0.019 286);
-  --ink-300: oklch(86.5% 0.025 286);
-  --ink-400: oklch(79.5% 0.030 286);
-  --ink-500: oklch(69.5% 0.036 286);
-  --ink-600: oklch(59.5% 0.042 286);
-  --ink-700: oklch(49.5% 0.046 286);
-  --ink-800: oklch(41.5% 0.050 286);
-  --ink-900: oklch(34% 0.054 286);
-  --ink-1000: oklch(28% 0.056 286);
-  --ink-1100: oklch(23.5% 0.054 286);
-  --ink-1200: oklch(19.5% 0.050 286);
-  --ink-1300: oklch(15% 0.044 286);
-  --ink-1400: oklch(10.5% 0.032 286);
-  --ink-1500: oklch(6% 0.016 286);
+  --ink-50: oklch(97.9% 0.009 300);
+  --ink-100: oklch(96.2% 0.014 300);
+  --ink-200: oklch(92.6% 0.019 300);
+  --ink-300: oklch(86.5% 0.025 300);
+  --ink-400: oklch(79.5% 0.030 300);
+  --ink-500: oklch(69.5% 0.036 300);
+  --ink-600: oklch(59.5% 0.042 300);
+  --ink-700: oklch(49.5% 0.046 300);
+  --ink-800: oklch(41.5% 0.050 300);
+  --ink-900: oklch(34% 0.054 300);
+  --ink-1000: oklch(28% 0.056 300);
+  --ink-1100: oklch(23.5% 0.054 300);
+  --ink-1200: oklch(19.5% 0.050 300);
+  --ink-1300: oklch(15% 0.044 300);
+  --ink-1400: oklch(10.5% 0.032 300);
+  --ink-1500: oklch(6% 0.016 300);
 
   /* ==========================================================================
-   * Slate — blue-violet surface ladder for dark mode. Hue 288, a touch more
-   * chroma than ink so raised surfaces read as "lit from within" rather than
-   * flat gray. 900 → card, 800 → raised, 700 → overlay, 600 → hover.
+   * Slate — plum surface ladder for dark mode. Hue 300 (the ink spine's hue),
+   * a touch more chroma than ink so raised surfaces read as "lit from within"
+   * rather than flat gray. 900 → card, 800 → raised, 700 → overlay, 600 → hover.
    * (Mid stops 50–500 double as muted-text values.)
    * ========================================================================== */
-  --slate-50: oklch(95% 0.013 288);
-  --slate-100: oklch(86% 0.022 288);
-  --slate-200: oklch(75% 0.032 288);
-  --slate-300: oklch(65% 0.038 288);
-  --slate-400: oklch(54% 0.042 288);
-  --slate-500: oklch(45% 0.045 288);
-  --slate-600: oklch(38% 0.036 288);
-  --slate-700: oklch(32% 0.032 288);
-  --slate-800: oklch(26% 0.029 288);
-  --slate-900: oklch(21% 0.026 288);
-  --slate-1000: oklch(16% 0.022 288);
+  --slate-50: oklch(95% 0.013 300);
+  --slate-100: oklch(86% 0.022 300);
+  --slate-200: oklch(75% 0.032 300);
+  --slate-300: oklch(65% 0.038 300);
+  --slate-400: oklch(54% 0.042 300);
+  --slate-500: oklch(45% 0.045 300);
+  --slate-600: oklch(38% 0.036 300);
+  --slate-700: oklch(32% 0.032 300);
+  --slate-800: oklch(26% 0.029 300);
+  --slate-900: oklch(21% 0.026 300);
+  --slate-1000: oklch(16% 0.022 300);
 
   /* ==========================================================================
    * Pink — brand primary. Hue 2 (red-pink boundary). 500 is the neon stop.
@@ -98,13 +101,12 @@
   --magenta-950: oklch(24% 0.095 331);
 
   /* ==========================================================================
-   * Violet — the Cosmic Night accent, saturated. Hue 291; the 500 stop lands
-   * on the reference periwinkle-lavender (#a090f8) at a higher lightness and
+   * Violet — the periwinkle-lavender accent, saturated. Hue 291; the 500
+   * stop lands on a periwinkle-lavender (#a090f8) at a higher lightness and
    * chroma 0.143 — the same colour, more lit. This is the pastel chord's lead
-   * note: ring, glass tint, callout-info, chart-1. The 300/400 stops sit at
-   * the gamut cap for their lightness; 600–800 carry it on paper. The iris
-   * gradient does NOT use this ramp — it keeps a dedicated vivid violet
-   * (--iris-via) so the brand signature stays punchy.
+   * note: glass tint, callout-info, chart-1. The 300/400 stops sit at the
+   * gamut cap for their lightness; 600–800 carry it on paper. The opal finish
+   * does NOT use this ramp — it keeps its own exact lilac (--opal-lilac).
    * ========================================================================== */
   --violet-50: oklch(97.5% 0.012 291);
   --violet-100: oklch(95% 0.025 291);
@@ -136,7 +138,7 @@
   --indigo-950: oklch(24% 0.080 272);
 
   /* ==========================================================================
-   * Cyan — sky. Hue 230. The bright accent; closes the iris gradient.
+   * Cyan — sky. Hue 230. The bright accent (action-secondary).
    * 300/400 are the pastel sky stops the charts paint.
    * ========================================================================== */
   --cyan-50: oklch(97% 0.015 230);
@@ -207,12 +209,11 @@
   --gold-950: oklch(29% 0.054 74);
 
   /* ==========================================================================
-   * Mint — spring green. Hue 147, the Cosmic Night "up" hue (146), with chroma
-   * pushed ~12% past the reference (0.175 vs 0.157 at the 500 stop) so positive
-   * deltas read vivid on the near-black page. Success / positive deltas; 300 is
-   * the chord's pastel green. Dark mode further overrides the bright stops onto
-   * the iris-tail green — see theme.css — so the success family matches the
-   * animated CTA rather than this ramp's own greens.
+   * Mint — spring green. Hue 147, pushed ~12% past the reference chroma
+   * (0.175 at the 500 stop) so positive deltas read vivid on the near-black
+   * page. Success / positive deltas; 300 is the chord's pastel green. Dark mode
+   * further overrides the bright stops onto a pale spring green (#c7fcae) —
+   * see theme.css — so the success family reads lit on the plum floor.
    * ========================================================================== */
   --mint-50: oklch(97% 0.022 147);
   --mint-100: oklch(93% 0.052 147);
@@ -227,9 +228,9 @@
   --mint-950: oklch(27% 0.062 147);
 
   /* ==========================================================================
-   * Coral — red. Hue 17, the Cosmic Night "down" hue (15) held just clear of
-   * brand pink at hue 2, with chroma raised to 0.225 at the 500 stop (the
-   * reference is 0.172). Error / destructive / losses; 300 is the chart rose.
+   * Coral — red. Hue 17, held just clear of brand pink at hue 2, with chroma
+   * raised to 0.225 at the 500 stop. Error / destructive / losses; 300 is the
+   * chart rose.
    * ========================================================================== */
   --coral-50: oklch(97% 0.014 17);
   --coral-100: oklch(93% 0.035 17);
@@ -244,122 +245,143 @@
   --coral-950: oklch(22% 0.084 17);
 
   /* ==========================================================================
-   * Iris — the signature gradient. deep violet → violet → cyan → mint.
-   * Defined as a primitive so a single edit re-tunes every brand surface
-   * that paints it (CTAs, avatars, badges, glows, chart anchors, ring
-   * indicators). NOTE: only ever used as a fill — gradient text is banned.
+   * Purple — the muted plum ramp. Hue ~300, the website `plum` scale's hue,
+   * at a deliberately restrained chroma (peak 0.124 at 500, tapering toward
+   * both ends) — a dusk plum, not a neon. Five stops are anchored to exact
+   * website hexes and written at the precision that renders them to the LSB
+   * (check-tokens gate [d]); the rest are derived between them:
+   *   300 = #cdb8fa  the lilac (== --opal-lilac): dark link + focus ring
+   *   600 = #6a4e97  the plum gloss top: the light-mode action fill
+   *                  (6.7:1 under a white label)
+   *   700 = #523a7d  the plum gloss mid: light-mode action active
+   *   800 = #3b2a5c  the plum gloss base
+   *   900 = #261d38  website plum-900: light-mode text, dark overlay surface
+   *   950 = #110a1f  website plum-950: the dark page floor
    *
-   * Re-anchored from pink → violet → cyan to deep-violet → cyan → mint to
-   * match the Unicorn morph scene that paints the V4 animated CTAs. Pink is
-   * retired as a brand anchor — it stays available in the primitive ramp
-   * for legacy/error uses but no longer leads the gradient.
+   * Mirrors the `purple` hex ramp in colors.ts (JS side), and stays what the
+   * `primary-*` Tailwind namespace resolves to. Distinct from --violet-*,
+   * which is the lit periwinkle pastel accent at hue 291.
    * ========================================================================== */
-  /* Hot purple — the V4 brand neon. Hue 316 sits between the old cosmic
-   * periwinkle (303) and magenta (328): Uniswap-hot energy, still purple on
-   * charcoal rather than fuchsia. Chroma is 97% of the sRGB edge at every
-   * stop (check-tokens gate [a]). 400 is the dark-mode action fill (#d04efc)
-   * — 6.1:1 under the near-black on-accent label and 5.8:1 on the charcoal
-   * page. 500 is the light-mode fill (#b614e4), 5.0:1 under a white label.
-   *
-   * Mirrors the `purple` hex ramp in colors.ts (JS side). Used by
-   * --action-primary, the light-mode CTA fill, and the iris gradient's warm
-   * pole. Distinct from --violet-*, which is the lit pastel accent. */
-  --purple-50: oklch(96% 0.026 316);
-  --purple-100: oklch(92% 0.054 316);
-  --purple-200: oklch(85% 0.104 316);
-  --purple-300: oklch(76% 0.173 316);
-  --purple-400: oklch(67% 0.257 316);
-  --purple-500: oklch(58% 0.276 316);
-  --purple-600: oklch(50% 0.240 316);
-  --purple-700: oklch(42% 0.202 316);
-  --purple-800: oklch(34% 0.164 316);
-  --purple-900: oklch(26% 0.125 316);
-  --purple-950: oklch(17% 0.083 316);
+  --purple-50: oklch(97.5% 0.012 300);
+  --purple-100: oklch(94.5% 0.028 300);
+  --purple-200: oklch(89.5% 0.056 300);
+  --purple-300: oklch(82.3% 0.094 298.9);
+  --purple-400: oklch(69% 0.114 300);
+  --purple-500: oklch(56% 0.124 300);
+  --purple-600: oklch(48.7% 0.116 299.8);
+  --purple-700: oklch(40.9% 0.110 297.9);
+  --purple-800: oklch(33.1% 0.086 297.1);
+  --purple-900: oklch(25.5% 0.051 298.1);
+  --purple-950: oklch(16.7% 0.043 296.9);
 
-  /* Exact iris-morph animation stops (sRGB hex, sampled from
-   * static/iris-morph.json). The canonical V4 accent ramp: the --accent-*
-   * semantic tokens sample these so flat accents match the animated CTA
-   * pixel-for-pixel. Hex (not oklch) to stay identical to the WebGL scene and
-   * the colors.ts mirror. NB: sky/mint are bright dark-surface accents — use a
-   * deeper stop for accent text on light backgrounds. */
-  --iris-indigo: #750694; /* 0%   — warm pole, purple-700 */
-  --iris-aubergine: #2d0337; /* 25%  — near-black, ramp only */
-  --iris-lavender: #d04efc; /* 50% — purple-400 neon */
-  --iris-sky: #43d2ff; /* 75% */
-  --iris-mint: #c7fcae; /* 100% — cool pole */
+  /* ==========================================================================
+   * Ground — the pale pink the website calls `ground` (#fceaff), and the ramp
+   * its plum-page pill is lit from. Hue ~321, a pinker note than the plum
+   * spine so it reads as warm light on the plum floor. The four pale stops are
+   * anchored to the website's gloss hexes (gate [d]):
+   *   50  = #fffbff  gloss hover top
+   *   100 = #fff6ff  gloss top — dark action hover
+   *   200 = #fceaff  THE ground — dark action fill, dark primary text
+   *   300 = #efd4f5  gloss base — dark action active
+   * 400–950 are derived deeper at hue 321 for tints, borders and paper text.
+   * Mirrors the `ground` hex ramp in colors.ts.
+   * ========================================================================== */
+  --ground-50: oklch(99.23% 0.006 325.6);
+  --ground-100: oklch(98.27% 0.015 325.7);
+  --ground-200: oklch(95.7% 0.034 321.4);
+  --ground-300: oklch(90.2% 0.053 320.1);
+  --ground-400: oklch(82% 0.074 321);
+  --ground-500: oklch(72% 0.090 321);
+  --ground-600: oklch(61% 0.098 321);
+  --ground-700: oklch(50% 0.090 321);
+  --ground-800: oklch(39% 0.074 321);
+  --ground-900: oklch(29% 0.056 321);
+  --ground-950: oklch(21% 0.040 321);
 
-  /* The gradient stops ARE the iris-morph ramp (above), so the static fill
-   * matches the animated CTA + the portfolio ring pixel-for-pixel instead of
-   * drifting onto neighbouring ramps. Aubergine (25%) is skipped — too dark to
-   * read as a fill, ramp-only. */
-  --iris-from: var(--iris-indigo); /* deep regal indigo — the warm pole */
-  --iris-via: var(--iris-lavender); /* electric lavender — the vivid mid */
-  --iris-to: var(--iris-sky); /* bright cyan */
-  --iris-tail: var(--iris-mint); /* pale mint — the cool pole */
-  --iris-angle: 115deg;
-  /* Atmospheric, not a flat ramp: the warm→cool linear sweep (the brand
-   * direction + full coverage) carries three soft radial blooms so the bands
-   * pool organically instead of running perfectly parallel — the still-frame
-   * cousin of the animated `bg-iris-animated` CTA, which builds its mesh the
-   * same way. Self-sizing: each bloom is box-relative (`at X% Y%`) and fades to
-   * transparent, so the token stays a drop-in `background-image` at any size
-   * with no extra background-size/position. Same four iris-morph stops. */
-  --gradient-iris:
-    radial-gradient(
-      120% 130% at 18% 28%,
-      color-mix(in oklab, var(--iris-from) 70%, transparent) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      95% 120% at 60% 82%,
-      color-mix(in oklab, var(--iris-to) 52%, transparent) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      95% 110% at 90% 34%,
-      color-mix(in oklab, var(--iris-tail) 58%, transparent) 0%,
-      transparent 62%
-    ),
-    linear-gradient(
-      var(--iris-angle),
-      var(--iris-from),
-      var(--iris-via) 34%,
-      var(--iris-to) 66%,
-      var(--iris-tail)
-    );
+  /* ==========================================================================
+   * Opal — the iridescent signature. The website's holo palette (the froyo's
+   * pearl finish, `holoFinish.ts`): pink → lilac → azure → cyan → pearl →
+   * peach. Defined as a primitive so a single edit re-tunes every brand
+   * surface that paints it (the animated CTA, avatars, badges, glows, ring
+   * indicators, opal text). Hex (not oklch) because these are the exact
+   * website values the WebGL `OpalFill` shader and the colors.ts `opal` mirror
+   * share; gate [d] pins all three to the same six hexes.
+   * ========================================================================== */
+  --opal-pink: #f6a8dc;
+  --opal-lilac: #cdb8fa; /* == purple-300 */
+  --opal-azure: #6e9cff;
+  --opal-cyan: #8fe7f2;
+  --opal-pearl: #f3f5ff;
+  --opal-peach: #fad3c8;
+
+  /* Semantic stops for fills that sample three or four notes of the chord
+   * rather than all six. */
+  --opal-from: var(--opal-pink); /* the warm pole */
+  --opal-via: var(--opal-lilac); /* the lilac mid */
+  --opal-to: var(--opal-cyan); /* the cool pole */
+  --opal-tail: var(--opal-peach); /* the pearl's warm rim */
+  --opal-angle: 100deg;
+
+  /* The opal fill — the website `.btn-holo` background, verbatim: the six
+   * stops washed toward pearl so a flat pill reads as the pearl finish, not a
+   * rainbow. Literal hexes, because no single color-mix ratio reproduces all
+   * six (the washes land 2–6 LSB off in both sRGB and OKLab); this is the
+   * static frame the animated `OpalFill` canvas fades in over. */
+  --gradient-opal: linear-gradient(
+    var(--opal-angle),
+    #f8c6e7 0%,
+    #ddd0fb 24%,
+    #b9cdfd 46%,
+    #bdeef5 66%,
+    #f3f5ff 84%,
+    #fbdcd3 100%
+  );
+  /* Full-strength chord for glyph / icon fills (the `text-opal` utility —
+   * the website `.text-holo`). Unwashed: thin strokes need every note at full
+   * chroma to read as iridescent rather than grey. */
+  --gradient-opal-text: linear-gradient(
+    var(--opal-angle),
+    var(--opal-pink) 0%,
+    var(--opal-lilac) 20%,
+    var(--opal-azure) 40%,
+    var(--opal-cyan) 60%,
+    var(--opal-pearl) 80%,
+    var(--opal-peach) 100%
+  );
   /* Seamless loop variant — for `background-position` pan animation. Both
    * layers stay 90deg (purely horizontal) with matched 0%/100% bookends so the
    * wrap never flashes a seam; radials are deliberately avoided here (they
-   * can't tile seamlessly under a horizontal pan). The translucent top layer
-   * adds luminosity drift over the round-trip base so it reads atmospheric, not
-   * a flat band. */
-  --gradient-iris-loop:
+   * can't tile seamlessly under a horizontal pan). The translucent pearl top
+   * layer adds a travelling sheen over the round-trip base so it reads as a
+   * pearl catching light, not a flat band. */
+  --gradient-opal-loop:
     linear-gradient(
       90deg,
-      color-mix(in oklab, var(--iris-to) 38%, transparent) 0%,
+      color-mix(in oklab, var(--opal-pearl) 38%, transparent) 0%,
       transparent 16%,
-      color-mix(in oklab, var(--iris-via) 42%, transparent) 36%,
+      color-mix(in oklab, var(--opal-pearl) 42%, transparent) 36%,
       transparent 58%,
-      color-mix(in oklab, var(--iris-tail) 34%, transparent) 78%,
-      color-mix(in oklab, var(--iris-to) 38%, transparent) 100%
+      color-mix(in oklab, var(--opal-tail) 34%, transparent) 78%,
+      color-mix(in oklab, var(--opal-pearl) 38%, transparent) 100%
     ),
     linear-gradient(
       90deg,
-      var(--iris-from) 0%,
-      var(--iris-via) 17%,
-      var(--iris-to) 38%,
-      var(--iris-tail) 56%,
-      var(--iris-to) 73%,
-      var(--iris-via) 88%,
-      var(--iris-from) 100%
+      var(--opal-from) 0%,
+      var(--opal-via) 17%,
+      var(--opal-to) 38%,
+      var(--opal-tail) 56%,
+      var(--opal-to) 73%,
+      var(--opal-via) 88%,
+      var(--opal-from) 100%
     );
 
-  /* Muted iris — pearlescent soap-bubble chrome. Lavender → soft cyan →
-   * mint, thin-film iridescence on dark glass (not the electric hero
-   * gradient). Same family as the hero gradient, lower saturation. */
-  --iris-muted-from: oklch(70% 0.12 295);
-  --iris-muted-via: oklch(78% 0.10 230);
-  --iris-muted-to: oklch(82% 0.09 165);
+  /* Muted opal — the pearl tier's thin-film wash on dark glass. The three
+   * semantic stops washed toward pearl at the same strength the website's
+   * holo fill uses (the pink / lilac / cyan columns of --gradient-opal), so the
+   * quiet pearl CTA and the loud opal CTA share one palette. */
+  --opal-muted-from: color-mix(in oklab, var(--opal-from) 62%, var(--opal-pearl));
+  --opal-muted-via: color-mix(in oklab, var(--opal-via) 60%, var(--opal-pearl));
+  --opal-muted-to: color-mix(in oklab, var(--opal-to) 56%, var(--opal-pearl));
 
   /* ==========================================================================
    * Dimension primitives — radius, duration, easing. Context-free scales;

@@ -10,61 +10,81 @@
  * and aliased to the legacy role name (`primary`, `secondary`, `success`, ...).
  */
 
-/** Blue-violet near-black neutral spine (cosmic-night hue 286). */
+/** Plum near-black neutral spine (hue 300, the website `plum` scale's hue). */
 const ink = {
-  DEFAULT: "#f1f1fc",
-  50: "#f7f7fe",
-  100: "#f1f1fc",
-  200: "#e5e5f3",
-  300: "#d1d1e3",
-  400: "#babacf",
-  500: "#9a9ab3",
-  600: "#7c7b97",
-  700: "#5f5e7b",
-  800: "#494866",
-  900: "#363453",
-  1000: "#272443",
-  1100: "#1c1936",
-  1200: "#13112a",
-  1300: "#0a071c",
-  1400: "#03020e",
-  1500: "#010102",
+  DEFAULT: "#f4f1fb",
+  50: "#f9f7fd",
+  100: "#f4f1fb",
+  200: "#e8e4f2",
+  300: "#d5cfe1",
+  400: "#bfb8cd",
+  500: "#a098b0",
+  600: "#827995",
+  700: "#665c79",
+  800: "#504663",
+  900: "#3c3150",
+  1000: "#2d2240",
+  1100: "#221734",
+  1200: "#190f28",
+  1300: "#0e061b",
+  1400: "#05020c",
+  1500: "#010002",
 };
 
-/** Blue-violet surface ladder. */
+/** Plum surface ladder (hue 300). */
 const slate = {
-  DEFAULT: "#54526d",
-  50: "#eeedf7",
-  100: "#d0cfdf",
-  200: "#acabc2",
-  300: "#8d8ca6",
-  400: "#6d6b86",
-  500: "#54526d",
-  600: "#414055",
-  700: "#323042",
-  800: "#232231",
-  900: "#181624",
-  1000: "#0d0c16",
+  DEFAULT: "#59506b",
+  50: "#f0edf6",
+  100: "#d3cede",
+  200: "#b1aac0",
+  300: "#928aa3",
+  400: "#726984",
+  500: "#59506b",
+  600: "#453e53",
+  700: "#352f41",
+  800: "#262130",
+  900: "#1a1623",
+  1000: "#0f0b15",
 };
 
-/** Brand primary — hot purple (hue 316). Uniswap-energy neon that still
- *  reads purple on charcoal, not fuchsia. Anchors the Unicorn morph palette
- *  (purple → cyan → mint). DEFAULT is the 700 stop so chart/token surfaces
- *  read as rich purple, not pastel lavender. These are the sRGB renders of the
- *  oklch stops in styles/tokens.css — `bun check:tokens` gates the lockstep. */
+/** Brand primary — the muted plum ramp (hue ~300), not a neon. 300 is the
+ *  lilac (#cdb8fa, == opal.lilac), 600/700/800 the website's plum gloss
+ *  (#6a4e97 / #523a7d / #3b2a5c), 900/950 the website's plum-900 / plum-950
+ *  (#261d38 text / #110a1f the dark page floor). DEFAULT is the 700 stop so
+ *  chart/token surfaces read as rich plum, not pastel lilac. These are the
+ *  sRGB renders of the oklch stops in styles/tokens.css — `bun check:tokens`
+ *  gates the lockstep and the anchors. */
 const purple = {
-  DEFAULT: "#750694",
-  50: "#f9edfe",
-  100: "#f3dafd",
-  200: "#e9b9fc",
-  300: "#db8bfa",
-  400: "#d04efc",
-  500: "#b614e4",
-  600: "#950abc",
-  700: "#750694",
-  800: "#57026f",
-  900: "#3a014b",
-  950: "#1c0027",
+  DEFAULT: "#523a7d",
+  50: "#f8f5fe",
+  100: "#efe9fd",
+  200: "#e2d5fd",
+  300: "#cdb8fa",
+  400: "#a68bd7",
+  500: "#8062b2",
+  600: "#6a4e97",
+  700: "#523a7d",
+  800: "#3b2a5c",
+  900: "#261d38",
+  950: "#110a1f",
+};
+
+/** The website's pale `ground` pink (hue ~321). 200 (#fceaff) is THE ground:
+ *  the dark-mode primary pill + text and the light-mode page; 50–300 are the
+ *  website gloss stops, 400–950 derived deeper for tints and paper text. */
+const ground = {
+  DEFAULT: "#fceaff",
+  50: "#fffbff",
+  100: "#fff6ff",
+  200: "#fceaff",
+  300: "#efd4f5",
+  400: "#dbb5e2",
+  500: "#bf92c7",
+  600: "#9e6fa7",
+  700: "#7b5182",
+  800: "#57375d",
+  900: "#38213c",
+  950: "#211223",
 };
 
 /** Legacy pink ramp. Demoted from brand-primary in V4; still available for
@@ -101,8 +121,8 @@ const magenta = {
   950: "#360633",
 };
 
-/** The cosmic-night accent, saturated — periwinkle lavender. The pastel
- *  chord's lead note (ring, glass tint, chart-1). */
+/** Periwinkle lavender (hue 291), saturated. The pastel chord's lead note
+ *  (glass tint, callout-info, chart-1). */
 const violet = {
   DEFAULT: "#ac99fe",
   50: "#f6f6ff",
@@ -134,7 +154,7 @@ const indigo = {
   950: "#131a44",
 };
 
-/** Sky. Closes the iris gradient. */
+/** Sky (hue 230). The bright accent — action-secondary. */
 const cyan = {
   DEFAULT: "#69cffd",
   50: "#ebf7fd",
@@ -199,7 +219,7 @@ const gold = {
   950: "#3b2707",
 };
 
-/** Spring green (hue 147 — the cosmic-night "up" hue, more saturated).
+/** Spring green (hue 147, pushed past the reference chroma).
  *  Success. Mirror of the oklch ramp in styles/tokens.css (kept in lockstep so
  *  the chart libs that read these hexes stay aligned with the CSS greens). */
 const mint = {
@@ -217,7 +237,7 @@ const mint = {
   950: "#0e2e13",
 };
 
-/** Red (hue 17 — the cosmic-night "down" hue, more saturated). Error. */
+/** Red (hue 17, held clear of brand pink, more saturated). Error. */
 const coral = {
   DEFAULT: "#f23156",
   50: "#fff2f2",
@@ -233,18 +253,18 @@ const coral = {
   950: "#38020c",
 };
 
-/** The Unicorn iris-morph animation's exact gradient stops (sRGB). The V4
- *  signature accent ramp — deep indigo → aubergine → lavender → sky → mint —
- *  sampled straight from `static/iris-morph.json` so flat accents match the
- *  animated CTA pixel-for-pixel. Hex (not a named ramp) because these are the
- *  precise WebGL-sampled values, and the chart/`polished` consumers can't parse
- *  oklch. Mirrored on the CSS side by the `--iris-*` stops in tokens.css. */
-const iris = {
-  indigo: "#750694", // 0%   — hot purple-700 (the warm pole)
-  aubergine: "#2d0337", // 25%  — near-black; too dark for a fill, ramp only
-  lavender: "#d04efc", // 50%  — hot purple-400 neon
-  sky: "#43d2ff", // 75%  — bright cyan
-  mint: "#c7fcae", // 100% — pale spring green (the cool pole)
+/** Opal — the iridescent signature: the website's holo palette (the froyo's
+ *  pearl finish, `holoFinish.ts`), pink → lilac → azure → cyan → pearl →
+ *  peach. Exact website hexes, shared with the WebGL `OpalFill` shader and
+ *  mirrored on the CSS side by the `--opal-*` stops in tokens.css
+ *  (`bun check:tokens` pins both to the same six values). */
+const opal = {
+  pink: "#f6a8dc",
+  lilac: "#cdb8fa", // == purple[300]
+  azure: "#6e9cff",
+  cyan: "#8fe7f2",
+  pearl: "#f3f5ff",
+  peach: "#fad3c8",
 };
 
 export const colors = {
@@ -258,6 +278,7 @@ export const colors = {
   ink,
   slate,
   purple,
+  ground,
   pink,
   magenta,
   violet,
@@ -268,9 +289,9 @@ export const colors = {
   gold,
   mint,
   coral,
-  iris,
+  opal,
 
-  /* Legacy role aliases — V4 brand: purple → cyan, with mint/gold/coral as
+  /* Legacy role aliases — plum brand: purple → cyan, with mint/gold/coral as
    * status accents. Pink stays available as `pink` but no longer leads. */
   neutral: ink,
   primary: purple,
@@ -282,15 +303,16 @@ export const colors = {
   silent: slate,
   blue: indigo,
 
-  /* Named accents — the cool notes now sample the iris-morph animation exactly
-   * (indigo → lavender → sky → mint, the brand's hero gradient). The warm status
-   * accents (`gold`, `pink`) and the info periwinkle (`indigo`) sit outside the
-   * morph and keep their own identities. */
+  /* Named accents — the cool notes sample the opal finish exactly (lilac,
+   * cyan), purple is the brand plum, and mint is the dark-mode success fill
+   * (theme.css `:root:not(.light)` mint-400). The warm status accents
+   * (`gold`, `pink`) and the info periwinkle (`indigo`) keep their own
+   * identities. */
   accent: {
-    purple: iris.indigo,
-    violet: iris.lavender,
-    cyan: iris.sky,
-    mint: iris.mint,
+    purple: purple[600],
+    violet: opal.lilac,
+    cyan: opal.cyan,
+    mint: "#c7fcae",
     gold: gold[500],
     pink: pink[500],
     indigo: indigo[400],
