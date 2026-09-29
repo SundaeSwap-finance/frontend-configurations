@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.1](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@6.0.0...@sundaeswap/tailwind-config@6.0.1) (2026-09-29)
+
+### Bug Fixes
+
+- **tailwind-config:** deepen light violet and cyan accents, gate accent contrast ([2d784f8](https://github.com/SundaeSwap-finance/frontend-configurations/commit/2d784f8b4eaa5696aedbe7c4ff5c0620172230e0))
+
 # [6.0.0](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@5.0.5...@sundaeswap/tailwind-config@6.0.0) (2026-09-28)
 
 **Note:** Version bump only for package @sundaeswap/tailwind-config
