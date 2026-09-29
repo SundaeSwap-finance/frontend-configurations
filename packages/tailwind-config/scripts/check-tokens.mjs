@@ -281,8 +281,9 @@ function parseThemeScope(src, scope) {
 /**
  * Resolve a theme.css role variable to its on-screen RGB, following the same
  * var()/oklch() chain the browser would: a `var(--<ramp>-<stop>)` ref lands in
- * colors.ts (the hex consumers see), a bare `oklch()` is rendered directly, and
- * a `var(--<other-role>)` recurses within the same scope. This is what keeps the
+ * colors.ts (the hex consumers see), a `var(--opal-<name>)` ref lands on its
+ * exact tokens.css hex, a bare `oklch()` is rendered directly, and a
+ * `var(--<other-role>)` recurses within the same scope. This is what keeps the
  * contrast table honest — it reads the LIVE role->ramp mapping rather than a
  * hand-copied table that silently drifts from theme.css.
  */
@@ -301,6 +302,8 @@ function resolveRole(scopeMap, name, seen = new Set()) {
     const ref = v[1];
     const rs = /^([a-z]+)-(\d+)$/.exec(ref);
     if (rs && tsRamps[rs[1]]) return ramp(rs[1], Number(rs[2]));
+    const opal = /^opal-([a-z]+)$/.exec(ref);
+    if (opal && opalCss[opal[1]]) return hexToRgb(opalCss[opal[1]]);
     return resolveRole(scopeMap, ref, seen);
   }
   throw new Error(`theme.css: cannot resolve --${name}: "${raw}"`);
@@ -427,6 +430,13 @@ const contrastPairs = [
   // Focus ring — a WCAG 1.4.11 non-text boundary.
   rolePair("dark", "ring", "surface-page", 3.0),
   rolePair("light", "ring", "surface-page", 3.0),
+  // Named accents paint identity glyphs, key dots and short labels — the same
+  // WCAG 1.4.11 3:1 floor on the page in both modes. (Light once pinned violet
+  // and cyan to their opal stops, which land 1.6:1 and 1.2:1 on paper.)
+  ...["pink", "magenta", "violet", "indigo", "cyan", "gold"].flatMap((hue) => [
+    rolePair("dark", `accent-${hue}`, "surface-page", 3.0),
+    rolePair("light", `accent-${hue}`, "surface-page", 3.0),
+  ]),
   {
     // Some consumers paint a literal white label on bg-action-primary, so the
     // light fill must clear AA against white too.
