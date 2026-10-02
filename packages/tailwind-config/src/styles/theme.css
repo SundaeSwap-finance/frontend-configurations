@@ -234,7 +234,11 @@
   --action-primary: var(--ground-200);
   --action-primary-hover: var(--ground-100);
   --action-primary-active: var(--ground-300);
-  --action-primary-disabled: color-mix(in oklab, var(--ground-200) 40%, transparent);
+  /* Disabled fills (every coloured axis below): an 18% wash of the axis's own
+   * fill, so a disabled control keeps its identity. The toolkit Button lifts
+   * the label to the fill colour on top of it — a deep 800-stop fill under the
+   * dark on-fill label had no contrast left. */
+  --action-primary-disabled: color-mix(in oklab, var(--ground-200) 18%, transparent);
   --action-primary-muted: var(--ground-200);
 
   /* Gloss — the website `.btn-gloss-pink` skin, consumed by the
@@ -256,7 +260,7 @@
   --action-secondary: var(--cyan-400);
   --action-secondary-hover: var(--cyan-300);
   --action-secondary-active: var(--cyan-500);
-  --action-secondary-disabled: color-mix(in oklab, var(--cyan-800) 55%, transparent);
+  --action-secondary-disabled: color-mix(in oklab, var(--cyan-400) 18%, transparent);
   --action-secondary-muted: var(--cyan-400);
 
   /* --- Action: success (mint) ----------------------------------------------
@@ -264,14 +268,14 @@
   --action-success: var(--mint-400);
   --action-success-hover: var(--mint-300);
   --action-success-active: var(--mint-500);
-  --action-success-disabled: color-mix(in oklab, var(--mint-800) 55%, transparent);
+  --action-success-disabled: color-mix(in oklab, var(--mint-400) 18%, transparent);
   --action-success-muted: var(--mint-400);
 
   /* --- Action: error (coral) ----------------------------------------------- */
   --action-error: var(--coral-500);
   --action-error-hover: var(--coral-400);
   --action-error-active: var(--coral-600);
-  --action-error-disabled: color-mix(in oklab, var(--coral-800) 55%, transparent);
+  --action-error-disabled: color-mix(in oklab, var(--coral-500) 18%, transparent);
   --action-error-muted: var(--coral-500);
 
   /* --- Action: warning (gold) ----------------------------------------------
@@ -281,14 +285,14 @@
   --action-warning: var(--gold-400);
   --action-warning-hover: var(--gold-300);
   --action-warning-active: var(--gold-500);
-  --action-warning-disabled: color-mix(in oklab, var(--gold-800) 55%, transparent);
+  --action-warning-disabled: color-mix(in oklab, var(--gold-400) 18%, transparent);
   --action-warning-muted: var(--gold-400);
 
   /* --- Action: info (indigo) ----------------------------------------------- */
   --action-info: var(--indigo-400);
   --action-info-hover: var(--indigo-300);
   --action-info-active: var(--indigo-500);
-  --action-info-disabled: color-mix(in oklab, var(--indigo-800) 55%, transparent);
+  --action-info-disabled: color-mix(in oklab, var(--indigo-400) 18%, transparent);
   --action-info-muted: var(--indigo-400);
 
   /* --- Action: silent (neutral) -------------------------------------------- */
@@ -302,7 +306,7 @@
   --action-highlight: var(--gold-400);
   --action-highlight-hover: var(--gold-300);
   --action-highlight-active: var(--gold-500);
-  --action-highlight-disabled: color-mix(in oklab, var(--gold-800) 55%, transparent);
+  --action-highlight-disabled: color-mix(in oklab, var(--gold-400) 18%, transparent);
   --action-highlight-muted: var(--gold-400);
 
   /* --- Named accents — the five-note neon chord ---------------------------
