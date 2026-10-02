@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.2](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@6.0.1...@sundaeswap/tailwind-config@6.0.2) (2026-10-02)
+
+### Bug Fixes
+
+- **tailwind-config:** tint dark disabled action fills with their own hue ([#49](https://github.com/SundaeSwap-finance/frontend-configurations/issues/49)) ([a7c827a](https://github.com/SundaeSwap-finance/frontend-configurations/commit/a7c827a97bc7f295bb4809f1ea9709277892b30f))
+
 ## [6.0.1](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@6.0.0...@sundaeswap/tailwind-config@6.0.1) (2026-09-29)
 
 ### Bug Fixes
