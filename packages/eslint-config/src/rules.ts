@@ -49,7 +49,7 @@ export const designSystemRestrictedSyntax = [
   {
     selector: `JSXAttribute[name.name='className'] Literal[value=/(?<![\\w-])(?:bg|text|border|from|to|via|ring|fill|stroke)-(?:${RAMP_FAMILIES.join("|")})-\\d/]`,
     message:
-      "Raw color-ramp utility in className: bypasses light/dark mode-switching. Use a semantic token (e.g. bg-surface-card, text-body, border-default, action-primary) instead of a raw ramp like bg-pink-500.",
+      "Raw color-ramp utility in className: bypasses light/dark mode-switching. Use a semantic token (e.g. bg-surface-2, text-body, border-default, action-primary) instead of a raw ramp like bg-pink-500.",
   },
   // (b) Hardcoded white/black ignore the theme entirely.
   {
