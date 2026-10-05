@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.18](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/eslint-config@2.0.17...@sundaeswap/eslint-config@2.0.18) (2026-10-05)
+
+### Bug Fixes
+
+- **eslint-config:** point raw-ramp lint hint at surface-2 token ([810d270](https://github.com/SundaeSwap-finance/frontend-configurations/commit/810d270c5659943c9cc3440ef6f0f001607a7849))
+
 ## [2.0.17](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/eslint-config@2.0.16...@sundaeswap/eslint-config@2.0.17) (2026-09-22)
 
 **Note:** Version bump only for package @sundaeswap/eslint-config

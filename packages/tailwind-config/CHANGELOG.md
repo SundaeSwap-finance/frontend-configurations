@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.3](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@6.0.2...@sundaeswap/tailwind-config@6.0.3) (2026-10-05)
+
+### Features
+
+- **tailwind-config:** replace glass surface ladder with flat surface tones ([bf6a61a](https://github.com/SundaeSwap-finance/frontend-configurations/commit/bf6a61a27f7e520e5c60d82c407323832011c148))
+
 ## [6.0.2](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@6.0.1...@sundaeswap/tailwind-config@6.0.2) (2026-10-02)
 
 ### Bug Fixes
