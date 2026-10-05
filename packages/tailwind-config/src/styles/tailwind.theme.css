@@ -36,18 +36,18 @@
  * ========================================================================== */
 @theme inline {
   /* --- Surfaces -----------------------------------------------------------
-   * Surface backgrounds are not fixed tiers — they are computed per-level by
-   * the `surface` utility (see SURFACE ELEVATION below). Only the role tokens
-   * that sit OUTSIDE the elevation ladder are registered here. */
+   * Flat in-flow tones (page → main → higher → highest, plus a sunken well)
+   * and the one translucent floating material. See Layer 2 for the
+   * derivation; `shadow-surface-edge` is the matching in-flow edge. */
   --color-surface-page: var(--surface-page);
-  --color-surface-card: var(--surface-card);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-4: var(--surface-4);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-floating: var(--surface-floating);
   --color-surface-hover: var(--surface-hover);
-  --color-surface-input: var(--surface-input);
   --color-surface-disabled: var(--surface-disabled);
-  --color-surface-solid: var(--surface-solid);
-  /* Opaque, blur-free recessed well — the innermost readable tier. Pair the
-   * `surface-well` utility (below) for the matching concave shadow. */
-  --color-surface-well: var(--surface-well);
   /* TODO(Layer 2): surface-loading aliases surface-page with no distinct value.
    * Add a real --surface-loading role token in Layer 2 and point this at it. */
   --color-surface-loading: var(--surface-page);
@@ -504,18 +504,15 @@
   --radius-pill: var(--radius-full);
   --radius-tooltip: var(--radius-md);
 
-  /* Elevation — mode-aware shadows from Layer 2. */
-  /* Prepend the hairline rim so cards that paint shadow-card (which overrides
-   * the `surface` utility's own box-shadow) still get the rim. --glass-rim-inset
-   * is transparent in dark, so this only shows in light. Header is unaffected
-   * (it reads --elevation-card directly). */
-  --shadow-card: var(--glass-rim-inset), var(--elevation-card);
-  --shadow-dialog: var(--elevation-raised);
-  --shadow-popover: var(--elevation-overlay);
-  --shadow-hover-card: var(--elevation-raised);
-  --shadow-tooltip: var(--elevation-overlay);
-  --shadow-header: var(--elevation-card);
-  --shadow-well: var(--elevation-well);
+  /* Elevation — mode-aware shadows from Layer 2. In-flow surfaces carry only
+   * the edge (a hairline in light, nothing in dark); floating layers carry
+   * the popover / modal drops. The edge is painted OUTSIDE the box so an
+   * opaque child (a pinned table cell) can never cover it. */
+  --shadow-surface-edge: 0 0 0 1px var(--surface-edge);
+  --shadow-popover: var(--elevation-popover);
+  --shadow-tooltip: var(--elevation-popover);
+  --shadow-hover-card: var(--elevation-popover);
+  --shadow-dialog: var(--elevation-modal);
 
   /* Motion — durations + easing curves from Layer 1. */
   --duration-instant: var(--duration-instant);
@@ -1116,58 +1113,23 @@
 }
 
 /* ============================================================================
- * SURFACE — a translucent tint that stacks.
+ * SURFACES — flat in-flow tones and the one floating material.
  *
- * Every surface paints the same translucent --surface-card. Nested surfaces
- * lift automatically as their /10 layers composite over one another. The
- * --surface-level integer (set by the <Surface> component, parent + 1) no
- * longer drives color — it only scales the drop shadow.
+ * In-flow utilities paint an opaque tone and the in-flow edge: no blur, no
+ * sheen, no drop. They are context-free, so each names its tone; components
+ * that nest (the toolkit's <Surface>) climb the tones from context instead.
  * ========================================================================== */
-@property --surface-level {
-  syntax: "<integer>";
-  inherits: true;
-  initial-value: 0;
+@utility surface {
+  background-color: var(--surface-2);
+  box-shadow: var(--shadow-surface-edge);
 }
 
-@utility surface {
-  /* Depth-aware sheen. The directional top-left highlight is a top-pane
-   * affordance: it must fade as surfaces nest, or two surfaces tiled
-   * vertically (e.g. stacked swap inputs) draw the lower pane's highlight as a
-   * seam between them. --surface-level must be read HERE (per element) — folding
-   * it into the --glass-sheen token instead resolves it once at :root and
-   * inherits flat. Full on top panes (level 0–1), off once nested (level ≥2);
-   * --glass-sheen-strength gates it off entirely in light mode. */
-  --glass-sheen-depth: clamp(0, 2 - var(--surface-level, 0), 1);
-  background-image: linear-gradient(
-    145deg,
-    color-mix(
-      in oklab,
-      white calc(5% * var(--glass-sheen-strength, 1) * var(--glass-sheen-depth)),
-      transparent
-    ) 0%,
-    color-mix(
-      in oklab,
-      var(--violet-500)
-        calc(2.5% * var(--glass-sheen-strength, 1) * var(--glass-sheen-depth)),
-      transparent
-    ) 40%,
-    transparent 100%
-  );
-  background-color: var(--glass-fill);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.06);
-  backdrop-filter: blur(var(--glass-blur)) saturate(1.06);
-  box-shadow:
-    var(--glass-rim-inset),
-    0 calc(min(var(--surface-level, 0), 6) * 1.5px)
-    calc(min(var(--surface-level, 0), 6) * 5px)
-    calc(min(var(--surface-level, 0), 6) * -1.5px)
-    var(--glass-shadow),
-    0 0 calc(min(var(--surface-level, 0), 6) * 6px + 16px)
-    calc(min(var(--surface-level, 0), 6) * -6px - 14px)
-    var(--glass-ambient),
-    0 0 calc(min(var(--surface-level, 0), 6) * 3px + 10px)
-    calc(min(var(--surface-level, 0), 6) * -8px - 16px)
-    var(--glass-ambient-accent);
+/* Floating layers only (popovers, menus, tooltips, dialogs): a translucent
+ * film over a backdrop blur. Pair with `shadow-popover` / `shadow-dialog`. */
+@utility surface-floating {
+  background-color: var(--surface-floating);
+  -webkit-backdrop-filter: blur(var(--surface-floating-blur)) saturate(1.06);
+  backdrop-filter: blur(var(--surface-floating-blur)) saturate(1.06);
 }
 
 @utility surface-glow {
@@ -1177,42 +1139,29 @@
 }
 
 @utility surface-inset {
-  background-color: var(--glass-fill-nested);
-  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
-  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
-  box-shadow: var(--glass-rim-inset-nested);
+  background-color: var(--surface-3);
+  box-shadow: var(--shadow-surface-edge);
 }
 
-/* ----------------------------------------------------------------------------
- * surface-well — the innermost READABLE tier. Material rule: blur DECREASES as
- * you nest inward, and the deepest tier is OPAQUE. Unlike `surface-inset` (a
- * translucent, blurred nested glass), a well paints a solid fill and carries NO
- * backdrop-filter — so it can never re-sample the page atmosphere into a stray
- * gradient. Depth is a concave inset shadow, not blur. Use for amount-input
- * wells, stat cells, and detail rows that sit inside a card and hold text/values.
- * -------------------------------------------------------------------------- */
+/* A well recessed below the main tone — stat cells, detail rows. */
 @utility surface-well {
-  background-color: var(--surface-well);
-  box-shadow: var(--shadow-well);
+  background-color: var(--surface-sunken);
+  box-shadow: var(--shadow-surface-edge);
 }
 
 @utility glass-pill {
-  background-color: var(--glass-fill-nested);
-  box-shadow: var(--glass-rim-inset-nested);
+  background-color: var(--surface-3);
+  box-shadow: var(--shadow-surface-edge);
 }
 
 @utility surface-chrome {
-  background-image: var(--glass-sheen);
-  background-color: var(--glass-fill-chrome);
-  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
-  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
-  box-shadow: var(--glass-rim-inset-nested);
+  background-color: var(--surface-3);
+  box-shadow: var(--shadow-surface-edge);
 }
 
 @utility glass-banner {
-  background-color: var(--glass-fill-banner);
+  background-color: var(--surface-2);
   background-image:
-    var(--glass-sheen),
     radial-gradient(
       ellipse 85% 120% at 14% 50%,
       var(--glass-opal-wash-from),
@@ -1228,9 +1177,7 @@
       var(--glass-opal-wash-via),
       transparent 54%
     );
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.08);
-  backdrop-filter: blur(var(--glass-blur)) saturate(1.08);
-  box-shadow: var(--glass-rim-inset);
+  box-shadow: var(--shadow-surface-edge);
 }
 
 @utility text-accent-chrome {
@@ -1241,16 +1188,13 @@
   color: var(--accent-chrome-muted);
 }
 
-/* Callouts / notices — same glass rim as exchange input wells. */
+/* Callouts / notices — a semantic tint over whatever tone they sit on. */
 @utility glass-callout {
-  background-image: var(--glass-sheen);
-  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
-  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.04);
-  box-shadow: var(--glass-rim-inset-nested);
+  box-shadow: var(--shadow-surface-edge);
 }
 
 @utility glass-callout-emphasis {
-  box-shadow: var(--glass-rim-inset);
+  box-shadow: var(--shadow-surface-edge);
 }
 
 @utility glass-callout-info {
@@ -1269,48 +1213,33 @@
   background-color: var(--glass-fill-callout-success);
 }
 
-/* Full callout surfaces — sheen + tone fill + tone-tinted glass rim. */
+/* Full callout surfaces — tone fill + tone-tinted edge. */
 @utility glass-callout-info-surface {
-  background-image: var(--glass-sheen);
   background-color: var(--glass-fill-callout-info);
-  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
-  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
   box-shadow: var(--glass-shadow-callout-info);
 }
 
 @utility glass-callout-warning-surface {
-  background-image: var(--glass-sheen);
   background-color: var(--glass-fill-callout-warning);
-  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
-  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
   box-shadow: var(--glass-shadow-callout-warning);
 }
 
 @utility glass-callout-error-surface {
-  background-image: var(--glass-sheen);
   background-color: var(--glass-fill-callout-error);
-  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
-  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
   box-shadow: var(--glass-shadow-callout-error);
 }
 
 @utility glass-callout-success-surface {
-  background-image: var(--glass-sheen);
   background-color: var(--glass-fill-callout-success);
-  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
-  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
   box-shadow: var(--glass-shadow-callout-success);
 }
 
-/* Calm fuchsia/magenta promo/feature banner — flat tinted glass (no opal wash).
- * The quiet, V4-correct alternative to glass-banner for non-CTA "now live"
- * surfaces; uses the accent-magenta family (--glass-fill-callout-feature, the
- * Stableswaps banner's hue) held at a low alpha so it reads ambient, not loud. */
+/* Calm fuchsia/magenta promo/feature banner — a flat tint (no opal wash).
+ * The quiet alternative to glass-banner for non-CTA "now live" surfaces; uses
+ * the accent-magenta family (--glass-fill-callout-feature, the Stableswaps
+ * banner's hue) held at a low alpha so it reads ambient, not loud. */
 @utility glass-callout-feature-surface {
-  background-image: var(--glass-sheen);
   background-color: var(--glass-fill-callout-feature);
-  -webkit-backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
-  backdrop-filter: blur(var(--glass-blur-nested)) saturate(1.06);
 }
 
 @utility select-token-glow {

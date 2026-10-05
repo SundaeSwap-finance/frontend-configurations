@@ -27,22 +27,59 @@
   color-scheme: dark;
 
   /* --- Surfaces -------------------------------------------------------------
-   * Page = the elevation floor: the website's plum-950 (#110a1f), the DEX
-   * chrome surface the marketing site already matches, so the product and the
-   * site read as one plum night rather than an indigo app beside a plum page.
-   * Cards lift off it via the glass material system below.
-   */
+   * Page = the floor: the website's plum-950 (#110a1f), the DEX chrome surface
+   * the marketing site already matches, so the product and the site read as
+   * one plum night rather than an indigo app beside a plum page.
+   *
+   * In-flow surfaces are FLAT: opaque tones, no shadow, no blur, no
+   * translucency. Nesting climbs at most three tones off the page
+   * (`--surface-2` main → `--surface-3` higher → `--surface-4` highest), and
+   * `--surface-sunken` recesses a well below the main tone. The tones are the
+   * colours the earlier translucent ladder actually composited to over the
+   * page (each rung at 66% over the one below it), so the palette reads the
+   * same as the glass did — not the greyer solid fills that ladder was mixed
+   * from. `color-mix(in srgb, …)` IS alpha compositing, so this is exact.
+   *
+   * `--surface-tone-lo/hi` are the two ends that ladder was derived from:
+   * the page lifted +0.096 / +0.231 L at 0.93× / 0.86× its chroma (floored at
+   * 0.016 so a near-neutral page keeps a sliver of plum). Derived from the
+   * page, so a theme that recolours `--surface-base` gets matching tones. */
   --surface-page: var(--surface-base);
   --surface-hover: var(--slate-600);
+  --surface-tone-lo: oklch(
+    from var(--surface-page) calc(l + 0.096) calc(max(c, 0.016) * 0.93) h
+  );
+  --surface-tone-hi: oklch(
+    from var(--surface-page) calc(l + 0.231) calc(max(c, 0.016) * 0.86) h
+  );
+  --surface-1: var(--surface-page);
+  --surface-2: color-mix(in srgb, var(--surface-tone-lo) 66%, var(--surface-1));
+  --surface-3: color-mix(
+    in srgb,
+    color-mix(in oklab, var(--surface-tone-lo) 83%, var(--surface-tone-hi)) 66%,
+    var(--surface-2)
+  );
+  --surface-4: color-mix(
+    in srgb,
+    color-mix(in oklab, var(--surface-tone-lo) 67%, var(--surface-tone-hi)) 66%,
+    var(--surface-3)
+  );
+  --surface-sunken: color-mix(in srgb, var(--surface-1) 55%, var(--surface-2));
+  /* Dark separates by tone alone — in-flow surfaces carry no edge. */
+  --surface-edge: transparent;
 
-  /* --- Glass material (cards, wells, dialogs — one system) -----------------
-   * Soft ref: low-contrast purple tint, fine top-left rim, no black pits.
-   * Brand ref: whisper opal sheen + ambient glow at half intensity. */
-  --glass-blur: 16px;
-  --glass-blur-nested: 10px;
-  --glass-fill: color-mix(in oklab, var(--slate-600) 10%, transparent);
-  --glass-fill-nested: color-mix(in oklab, var(--slate-500) 12%, transparent);
-  /* Callouts — tinted glass fills; mix semantic color at readable strength. */
+  /* Floating layers (popovers, menus, selects, tooltips, hover cards,
+   * toasts, dialogs) are the ONE translucent material: a film of the higher
+   * tone over a backdrop blur, so the page reads through as a diffused wash,
+   * plus the floating elevation below. */
+  --surface-floating: color-mix(
+    in oklab,
+    color-mix(in oklab, var(--surface-tone-lo) 83%, var(--surface-tone-hi)) 72%,
+    transparent
+  );
+  --surface-floating-blur: 24px;
+
+  /* Callouts — semantic tints; mix the semantic color at readable strength. */
   --glass-fill-callout-info: color-mix(in srgb, var(--violet-500) 18%, transparent);
   --glass-fill-callout-warning: color-mix(in srgb, var(--gold-500) 22%, transparent);
   --glass-fill-callout-error: color-mix(in srgb, var(--coral-500) 22%, transparent);
@@ -53,37 +90,17 @@
    * old muted purple. Held at a low alpha so it reads as a calm tinted surface,
    * not an alert. Consumed by glass-callout-feature-surface. */
   --glass-fill-callout-feature: color-mix(in srgb, var(--magenta-500) 12%, transparent);
-  --glass-shadow-callout-info:
-    var(--glass-rim-inset-nested),
-    inset 0 0 0 1px color-mix(in srgb, var(--violet-500) 30%, transparent);
-  --glass-shadow-callout-warning:
-    var(--glass-rim-inset-nested),
-    inset 0 0 0 1px color-mix(in srgb, var(--gold-500) 34%, transparent);
-  --glass-shadow-callout-error:
-    var(--glass-rim-inset-nested),
-    inset 0 0 0 1px color-mix(in srgb, var(--coral-500) 34%, transparent);
-  --glass-shadow-callout-success:
-    var(--glass-rim-inset-nested),
-    inset 0 0 0 1px color-mix(in srgb, var(--mint-500) 32%, transparent);
-  --glass-sheen: linear-gradient(
-    145deg,
-    color-mix(in oklab, white 5%, transparent) 0%,
-    color-mix(in oklab, var(--violet-500) 2.5%, transparent) 40%,
-    transparent 100%
-  );
-  /* Sheen presence per theme — the `surface` utility folds this into a
-   * per-element, depth-aware sheen (full on top panes, off once nested) so
-   * stacked surfaces don't draw a highlight seam between them. Dark shows it;
-   * light flattens to white after step 2, so it stays off. */
-  --glass-sheen-strength: 1;
-  --glass-rim-inset: 0 0 0 0 transparent;
-  --glass-rim-inset-nested: 0 0 0 0 transparent;
-  --glass-ambient: color-mix(in oklab, var(--violet-500) 11%, transparent);
-  --glass-ambient-accent: color-mix(in oklab, var(--violet-700) 6%, transparent);
-  --glass-shadow: rgb(0 0 0 / 0.38);
+  --glass-shadow-callout-info: inset 0 0 0 1px
+    color-mix(in srgb, var(--violet-500) 30%, transparent);
+  --glass-shadow-callout-warning: inset 0 0 0 1px
+    color-mix(in srgb, var(--gold-500) 34%, transparent);
+  --glass-shadow-callout-error: inset 0 0 0 1px
+    color-mix(in srgb, var(--coral-500) 34%, transparent);
+  --glass-shadow-callout-success: inset 0 0 0 1px
+    color-mix(in srgb, var(--mint-500) 32%, transparent);
 
   /* Page atmosphere — linear depth + soft washes only (no conic/radial hotspots that
-   * band or read as a visible spiral through glass cards).
+   * band or read as a visible spiral behind floating panels).
    *
    * The depth sweep stays a NARROW band around --surface-page (16.7% L): +1.5%
    * at the top, -1.5% at the bottom, hue held in the 295–299 plum spine. Every
@@ -91,7 +108,7 @@
    * (a 40% relative swing at this lightness) left the bottom of a long page
    * several points darker and bluer than the tone the cards were mixed from —
    * the page and the panels stopped reading as one field. Elevation is carried
-   * by the ladder and the vignette, not by repainting the floor. The soft
+   * by the surface tones and the vignette, not by repainting the floor. The soft
    * washes above it sample the opal chord (pink / lilac / cyan) at a whisper. */
   --page-atmosphere-depth: linear-gradient(
     180deg,
@@ -134,48 +151,13 @@
    * change them in lockstep.) */
   --accent-chrome: var(--text-scion);
   --accent-chrome-muted: var(--text-secondary);
-  --glass-fill-chrome: color-mix(in oklab, var(--slate-600) 11%, transparent);
-  --glass-fill-banner: color-mix(in oklab, var(--slate-500) 13%, transparent);
   /* The glass-banner wash — the opal chord's pink / lilac / cyan at low alpha,
-   * pooled at three points so a banner reads as a pearl sheen on glass. */
+   * pooled at three points so a banner reads as a pearl sheen on its tone. */
   --glass-opal-wash-from: color-mix(in oklab, var(--opal-pink) 10%, transparent);
   --glass-opal-wash-via: color-mix(in oklab, var(--opal-lilac) 9%, transparent);
   --glass-opal-wash-to: color-mix(in oklab, var(--opal-cyan) 8%, transparent);
 
-  /* Legacy aliases still referenced by components/utilities. (Eight unused
-   * --surface-* aliases were removed — they had zero references workspace-wide.) */
-  --surface-inset: var(--glass-fill-nested);
   --surface-base: var(--purple-950); /* #110a1f — website plum-950 */
-  --surface-card: var(--glass-fill);
-
-  /* Floating overlays (dialogs, tooltips, hover cards) sit ABOVE the page and
-   * over its colorful atmosphere. FULLY opaque — the `surface` utility under
-   * these overlays carries a 16px backdrop-filter, and any residual transparency
-   * (even 8%) lets that blur sample the colorful page/card beneath and paint a
-   * stray horizontal "sheen" band across the panel. The website's plum-900
-   * (#261d38) — the same plum family as the floor, one step lighter for
-   * elevation. */
-  --surface-overlay: var(--purple-900);
-
-  /* Inset wells (native inputs, search fields) stay opaque and recessed:
-   * a hair below the floor at half its chroma. */
-  --surface-input: oklch(16.2% 0.024 298);
-
-  /* Well — the innermost READABLE tier (stat cells, amount-input wells, detail
-   * rows that live inside a card). OPAQUE and blur-free by design: a translucent
-   * nested tier that backdrop-blurs re-samples the page atmosphere and washes to
-   * a muddy gradient (the same trap --surface-overlay was hardened against).
-   * Sits one lightness step below the card composite so it reads carved-in; a
-   * whisper of plum chroma keeps it "lit from within" rather than a black pit.
-   * Depth comes from --elevation-well (a concave inset rim), never from blur. */
-  --surface-well: oklch(14.2% 0.034 298);
-
-  /* Opaque flattened card/widget surface — for controls that can't be
-   * translucent because they straddle the seam between two glass panels
-   * (e.g. the swap-direction toggle). The solid sample of the glass card
-   * (slate-600 @ 10%) composited over the plum floor: #160f24 ≈
-   * oklch(19% 0.042 297.6). */
-  --surface-solid: #160f24;
   --surface-disabled: var(--slate-900);
 
   /* --- Borders --------------------------------------------------------------
@@ -351,26 +333,26 @@
   --ring: var(--purple-300); /* the lilac — 10.9:1 on the plum floor */
   --ring-offset: var(--surface-page);
 
-  /* --- Elevation — depth with restrained ambient glow ------------------------ */
-  --elevation-card:
-    0 1px 2px rgb(0 0 0 / 0.34),
-    0 8px 24px -12px rgb(0 0 0 / 0.48),
-    0 0 32px -22px var(--glass-ambient);
-  --elevation-raised:
-    0 4px 8px rgb(0 0 0 / 0.38),
-    0 16px 36px -14px rgb(0 0 0 / 0.52),
-    0 0 40px -20px var(--glass-ambient);
-  --elevation-overlay:
-    0 8px 16px rgb(0 0 0 / 0.42),
-    0 24px 52px -18px rgb(0 0 0 / 0.58),
-    0 0 48px -18px color-mix(in oklab, var(--violet-500) 14%, transparent);
-
-  /* Well — concave recess for the opaque --surface-well tier. A soft top inset
-   * shadow reads "carved in"; a faint lit bottom edge (the catch-light on the
-   * lower lip) sells the depth without any blur. */
-  --elevation-well:
-    inset 0 1px 3px rgb(0 0 0 / 0.45),
-    inset 0 -1px 0 color-mix(in oklab, var(--violet-400) 7%, transparent);
+  /* --- Elevation — floating layers only ------------------------------------
+   * In-flow surfaces are flat; only what floats over content casts a shadow.
+   * A lit top edge and a rim, an ink ring, and stacked drops that double in
+   * blur and offset, so depth reads as accumulation rather than a smudge.
+   * `popover` is menus, selects, tooltips, hover cards and toasts; `modal` is
+   * dialogs, which sit over a dimmed page and take the widest drop. */
+  --elevation-ink: oklch(4% 0.012 300);
+  --elevation-drop: color-mix(in oklab, var(--elevation-ink) 18%, transparent);
+  --elevation-popover:
+    inset 0 1px 0 0 color-mix(in oklab, white 7%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, white 5%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--elevation-ink) 12%, transparent),
+    0 1px 1px -0.5px var(--elevation-drop), 0 3px 3px -1.5px var(--elevation-drop);
+  --elevation-modal:
+    inset 0 1px 0 0 color-mix(in oklab, white 10%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, white 12%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--elevation-ink) 18%, transparent),
+    0 1px 1px -0.5px var(--elevation-drop), 0 3px 3px -1.5px var(--elevation-drop),
+    0 6px 6px -3px var(--elevation-drop), 0 12px 12px -6px var(--elevation-drop),
+    0 24px 24px -12px var(--elevation-drop);
 }
 
 /* ============================================================================
@@ -407,80 +389,52 @@
   color-scheme: light;
 
   /* --- Surfaces -----------------------------------------------------------
-   * Near the white ceiling there is no headroom to lift by lightening, so
-   * the color shift caps after ~level 2 and the level-scaled shadow carries
-   * elevation past it. */
+   * Paper is flat: a whisper-tinted page (ground-50) and tones that climb
+   * toward white without ever reaching it, so "higher = lighter" holds in
+   * both modes and every tone keeps a breath of the page's pink. The steps
+   * are a hair apart on purpose — a hairline edge on every in-flow tone
+   * carries the separation, never a shadow. The sunken well recesses a step
+   * below the page. */
   --surface-page: var(--surface-base);
   --surface-hover: var(--ink-200);
-  --surface-input: var(--ink-200);
   --surface-disabled: var(--ink-200);
-  /* Well — opaque recess one ink step below the near-white card; depth comes
-   * from --elevation-well (inset shadow + rim), matching the light philosophy
-   * where surfaces separate by rim, not by lightness. */
-  --surface-well: var(--ink-100);
-  /* Opaque flattened surface for seam-straddling controls. The palest ground
-   * stop — near-white like the card it notches into, still in the page's pink
-   * family; the card base itself is pure white — see --glass-fill. */
-  --surface-solid: var(--ground-50);
+  --surface-1: var(--surface-page);
+  --surface-2: color-mix(in oklab, var(--surface-1) 55%, white);
+  --surface-3: color-mix(in oklab, var(--surface-1) 20%, white);
+  --surface-4: color-mix(in oklab, var(--surface-1) 8%, white);
+  --surface-sunken: oklch(
+    from var(--surface-page) calc(l - 0.012) calc(c + 0.004) h
+  );
+  --surface-edge: var(--border-subtle);
+  --surface-floating: color-mix(in oklab, white 80%, transparent);
+  --surface-floating-blur: 24px;
 
-  --glass-blur: 0px;
-  --glass-blur-nested: 0px;
-  /* Card surface lifts to pure white off the ground-pink page floor
-   * (--surface-base = ground-200) — the website's `bg-white` card on paper.
-   * Card/Surface/menu/panel/overlay fills all derive from this, so every card
-   * reads as a crisp white card in light mode. */
-  --glass-fill: white;
-  --glass-fill-nested: color-mix(in oklab, var(--ink-100) 88%, transparent);
   --glass-fill-callout-info: color-mix(in srgb, var(--violet-600) 14%, transparent);
   --glass-fill-callout-warning: color-mix(in srgb, var(--gold-600) 16%, transparent);
   --glass-fill-callout-error: color-mix(in srgb, var(--coral-600) 16%, transparent);
   --glass-fill-callout-success: color-mix(in srgb, var(--mint-600) 14%, transparent);
   --glass-fill-callout-feature: color-mix(in srgb, var(--magenta-600) 14%, transparent);
-  --glass-shadow-callout-info:
-    var(--glass-rim-inset-nested),
-    inset 0 0 0 1px color-mix(in srgb, var(--violet-600) 26%, transparent);
-  --glass-shadow-callout-warning:
-    var(--glass-rim-inset-nested),
-    inset 0 0 0 1px color-mix(in srgb, var(--gold-600) 28%, transparent);
-  --glass-shadow-callout-error:
-    var(--glass-rim-inset-nested),
-    inset 0 0 0 1px color-mix(in srgb, var(--coral-600) 28%, transparent);
-  --glass-shadow-callout-success:
-    var(--glass-rim-inset-nested),
-    inset 0 0 0 1px color-mix(in srgb, var(--mint-600) 26%, transparent);
-  --glass-sheen: none;
-  /* No directional sheen in light mode — surfaces separate by rim, not highlight. */
-  --glass-sheen-strength: 0;
-  /* Cards lift off the ground page to pure white (--glass-fill) and keep a
-   * hairline rim for crisp edge definition — the rim still carries separation
-   * where the white-on-pale-pink lightness step alone would be too subtle. */
-  --glass-rim-inset: inset 0 0 0 1px var(--border-subtle);
-  --glass-rim-inset-nested: inset 0 0 0 1px var(--border-subtle);
-  --glass-ambient: transparent;
-  --glass-ambient-accent: transparent;
-  --glass-shadow: oklch(32% 0.042 300 / 0.13);
+  --glass-shadow-callout-info: inset 0 0 0 1px
+    color-mix(in srgb, var(--violet-600) 26%, transparent);
+  --glass-shadow-callout-warning: inset 0 0 0 1px
+    color-mix(in srgb, var(--gold-600) 28%, transparent);
+  --glass-shadow-callout-error: inset 0 0 0 1px
+    color-mix(in srgb, var(--coral-600) 28%, transparent);
+  --glass-shadow-callout-success: inset 0 0 0 1px
+    color-mix(in srgb, var(--mint-600) 26%, transparent);
 
   /* Chrome accents track the text ladder, mirroring dark: chrome is the
    * plum-900 scion, muted chrome the secondary tier. Iridescence lives only on
    * the opal fill / opal text. */
   --accent-chrome: var(--text-scion);
   --accent-chrome-muted: var(--text-secondary);
-  /* Chrome bars (table headers) must read as a distinct tier inside the white
-   * cards they sit in, so — unlike rim-separated cards — the fill is one ink
-   * step off white (matching the card left headers invisible). */
-  --glass-fill-chrome: var(--ink-100);
-  --glass-fill-banner: color-mix(in oklab, var(--ink-100) 90%, transparent);
+  /* The glass-banner wash on paper. */
   --glass-opal-wash-from: color-mix(in oklab, var(--opal-pink) 14%, transparent);
   --glass-opal-wash-via: color-mix(in oklab, var(--opal-lilac) 12%, transparent);
   --glass-opal-wash-to: color-mix(in oklab, var(--opal-cyan) 12%, transparent);
 
-  /* The website's paper: the `ground` pink (#fceaff) is the page floor. Cards
-   * lift above it to pure white (--glass-fill) plus a hairline rim. */
-  --surface-base: var(--ground-200);
-  --surface-card: var(--glass-fill);
-  --surface-inset: var(--glass-fill-nested);
-  /* Light mode keeps the standard card surface for overlays (unchanged). */
-  --surface-overlay: var(--glass-fill);
+  /* The website's paper, whispered: ground-50 is the page floor. */
+  --surface-base: var(--ground-50);
 
   /* --- Borders ------------------------------------------------------------- */
   --border-subtle: var(--ink-200);
@@ -626,14 +580,17 @@
   --ring: var(--purple-600);
   --ring-offset: var(--surface-page);
 
-  /* --- Elevation — soft, low-contrast drops; no glow on paper --------------- */
-  --elevation-card: 0 1px 2px rgb(38 29 56 / 0.06), 0 6px 18px -10px rgb(38 29 56 / 0.12);
-  --elevation-raised: 0 4px 10px rgb(38 29 56 / 0.08), 0 14px 32px -14px rgb(38 29 56 / 0.16);
-  --elevation-overlay: 0 8px 20px rgb(38 29 56 / 0.1), 0 24px 48px -18px rgb(38 29 56 / 0.2);
-
-  /* Well — recess on paper: a soft inner shadow + the hairline rim do the work
-   * (no catch-light edge; on white it reads as a faint depression). */
-  --elevation-well:
-    inset 0 1px 2px rgb(38 29 56 / 0.08),
-    inset 0 0 0 1px var(--border-subtle);
+  /* --- Elevation — floating layers only -------------------------------------
+   * Paper keeps the hairline (the same edge in-flow tones carry) so a near-
+   * white panel over a near-white page still has a boundary, then one ink at
+   * one opacity, stacked. */
+  --elevation-ink: oklch(15% 0.03 300);
+  --elevation-drop: color-mix(in oklab, var(--elevation-ink) 6%, transparent);
+  --elevation-popover:
+    0 0 0 1px var(--border-subtle), 0 1px 1px -0.5px var(--elevation-drop),
+    0 3px 3px -1.5px var(--elevation-drop);
+  --elevation-modal:
+    0 0 0 1px var(--border-subtle), 0 1px 1px -0.5px var(--elevation-drop),
+    0 3px 3px -1.5px var(--elevation-drop), 0 6px 6px -3px var(--elevation-drop),
+    0 12px 12px -6px var(--elevation-drop), 0 24px 24px -12px var(--elevation-drop);
 }

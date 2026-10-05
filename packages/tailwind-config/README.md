@@ -62,7 +62,7 @@ console.log(colors.chart[0]); // "#ac99fe" (lavender — series 1)
 3. **JS exports trimmed to `colors` + `fontFamily`**: the `animations`, `screens`, and `spacing` JS exports were removed. Keyframes, breakpoints, and spacing now live only in the CSS layer (`theme.css`) and are consumed as Tailwind utilities.
 4. **OKLCH semantic-token layer**: Components should reference the new mode-aware semantic tokens instead of raw color ramps. These include:
    - `action-*` — `action-{primary,secondary,success,error,warning,info,silent,highlight}` with `-hover`, `-active`, `-disabled`, `-muted` variants
-   - `surface-*` — `surface-{page,card,inset,input,hover}`
+   - `surface-*` — `surface-{page,1,2,3,4,sunken,floating,hover,disabled}`: flat in-flow tones (page → main → higher → highest, plus a sunken well) and the one translucent floating material; `shadow-surface-edge` is the in-flow edge (a hairline in light, nothing in dark), `shadow-popover` / `shadow-dialog` the floating drops
    - `text-*` — `text-{heading,body,muted,faint,on-accent,on-primary,link,link-hover}`
    - `border-*` — `border-{subtle,default,strong,hover,control}`
 
@@ -73,10 +73,10 @@ console.log(colors.chart[0]); // "#ac99fe" (lavender — series 1)
 The product wears the marketing site's plum system; ramp NAMES and stop
 numbers of the existing ramps are unchanged, so no callsite moves.
 
-- **Neutral spine** `ink` / `slate` sit at hue 300, the website `plum` scale's hue. The dark page floor is `purple-950` (`#110a1f`, website plum-950); overlays are `purple-900` (`#261d38`).
+- **Neutral spine** `ink` / `slate` sit at hue 300, the website `plum` scale's hue. The dark page floor is `purple-950` (`#110a1f`, website plum-950); the surface tones derive from it.
 - **`purple`** is a muted plum ramp (hue ~300, peak chroma 0.124): `300` `#cdb8fa` (lilac — dark links and focus ring), `600` `#6a4e97` (light-mode primary), `700`/`800` the plum gloss, `900`/`950` the website plum-900/950.
-- **`ground`** (hue ~321) is the website's pale pink: `200` `#fceaff` is the dark-mode primary pill and text color and the light-mode page; `50`–`300` are the gloss stops.
-- **Text ladder** (dark) is ground over plum: scion `#fceaff`, secondary `#c1b2c7` (ground/75), tertiary `#92859a` (ground/55), subtle `#6f6479` (ground/40, sub-AA by design). Light mode uses plum-900 text on the ground page.
+- **`ground`** (hue ~321) is the website's pale pink: `200` `#fceaff` is the dark-mode primary pill and text color; `50` is the whisper-tinted light-mode page; `50`–`300` are the gloss stops.
+- **Text ladder** (dark) is ground over plum: scion `#fceaff`, secondary `#c1b2c7` (ground/75), tertiary `#92859a` (ground/55), subtle `#6f6479` (ground/40, sub-AA by design). Light mode uses plum-900 text on the ground-50 page.
 - **`opal`** is the iridescent signature: `pink #f6a8dc`, `lilac #cdb8fa`, `azure #6e9cff`, `cyan #8fe7f2`, `pearl #f3f5ff`, `peach #fad3c8`. `--gradient-opal` is the website `.btn-holo` fill; `--gradient-opal-text` the full-strength glyph chord.
 - **Accents** `violet` (291) is the periwinkle-lavender pastel accent, `indigo` 272, `mint` 147, `coral` 17; `aqua` (172) and `citron` (112) fill the data-viz chord.
 - **Light mode** is a full peer of dark: its own surfaces, borders, text tiers, action stops, and a normalized chart chord (`oklch(from <hue>-500 60% min(c, 0.15) h)`).

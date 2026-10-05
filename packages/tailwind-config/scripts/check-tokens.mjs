@@ -81,7 +81,7 @@ const OPAL = {
 /** Page floors theme.css must resolve to, per mode. */
 const PAGE_ANCHORS = [
   { scope: "dark", role: "surface-page", hex: "#110a1f" }, // plum-950
-  { scope: "light", role: "surface-page", hex: "#fceaff" }, // ground
+  { scope: "light", role: "surface-page", hex: "#fffbff" }, // ground-50
 ];
 
 /** Intent of each shaped ramp: hue band, and (purple) the muted chroma cap. */
