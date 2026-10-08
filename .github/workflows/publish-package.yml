@@ -24,6 +24,10 @@ jobs:
       # Install Dependencies
       - run: bun install --frozen-lockfile
 
+      # Fail before anything is versioned if the preset's cjs output regresses
+      - name: Check babel-preset
+        run: bun run --filter '@sundaeswap/babel-preset' test
+
       - name: Git Identity
         run: |
           git config --global user.name 'CI-CD'
