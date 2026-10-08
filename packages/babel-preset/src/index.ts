@@ -20,7 +20,16 @@ const config: ConfigFunction = (api) => {
       cjs: {
         plugins: ["@babel/plugin-transform-react-jsx"],
         presets: [
-          ["@babel/env", { modules: "commonjs" }],
+          // The ES5 output would rewrite `a ** b` as `Math.pow(a, b)`, which
+          // throws on BigInt operands. Excluding the transform keeps `**`
+          // native whatever the targets are.
+          [
+            "@babel/env",
+            {
+              modules: "commonjs",
+              exclude: ["@babel/plugin-transform-exponentiation-operator"],
+            },
+          ],
           "@babel/preset-typescript",
         ],
       },
