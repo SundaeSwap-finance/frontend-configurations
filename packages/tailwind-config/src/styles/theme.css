@@ -540,16 +540,19 @@
   --action-highlight-disabled: color-mix(in oklab, var(--gold-200) 60%, transparent);
   --action-highlight-muted: var(--gold-300);
 
-  /* --- Named accents — deeper stops for legibility on paper -----------------
+  /* --- Named accents — the paper stops --------------------------------------
    * Accents paint identity glyphs, key dots and short labels, so each holds
    * WCAG 1.4.11's 3:1 on the ground page (gated in check-tokens). The opal
-   * stops cannot: lilac lands 1.6:1 and cyan 1.2:1 on paper, so violet and
-   * cyan take ramp stops here like their siblings; opal stays on the fills. */
-  --accent-pink: var(--pink-600);
-  --accent-magenta: var(--magenta-600);
-  --accent-violet: var(--violet-700);
-  --accent-indigo: var(--indigo-600);
-  --accent-cyan: var(--cyan-700);
+   * stops cannot: lilac lands 1.6:1 and cyan 1.2:1 on paper; opal stays on
+   * the fills. The deep ramp stops can, and read dull doing it, so the five
+   * hues with room take their `paper` stop (tokens.css): the same legibility
+   * at the chroma the hue has. Cyan's is azure, by design. Gold keeps its
+   * ramp stop: a yellow dark enough for paper is honey at any chroma. */
+  --accent-pink: var(--paper-pink);
+  --accent-magenta: var(--paper-magenta);
+  --accent-violet: var(--paper-violet);
+  --accent-indigo: var(--paper-indigo);
+  --accent-cyan: var(--paper-azure);
   --accent-gold: var(--gold-700);
 
   /* Data-viz — the same nine hues and slot order as dark, re-weighted for

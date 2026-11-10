@@ -79,14 +79,16 @@ numbers of the existing ramps are unchanged, so no callsite moves.
 - **Text ladder** (dark) is ground over plum: scion `#fceaff`, secondary `#c1b2c7` (ground/75), tertiary `#92859a` (ground/55), subtle `#6f6479` (ground/40, sub-AA by design). Light mode uses plum-900 text on the ground-50 page.
 - **`opal`** is the iridescent signature: `pink #f6a8dc`, `lilac #cdb8fa`, `azure #6e9cff`, `cyan #8fe7f2`, `pearl #f3f5ff`, `peach #fad3c8`. `--gradient-opal` is the website `.btn-holo` fill; `--gradient-opal-text` the full-strength glyph chord.
 - **Accents** `violet` (291) is the periwinkle-lavender pastel accent, `indigo` 272, `mint` 147, `coral` 17; `aqua` (172) and `citron` (112) fill the data-viz chord.
+- **`paper`** is the named accents as they print on the light page: `pink #d7066d`, `magenta #c108bf`, `violet #7b3bf6`, `indigo #4956fa`, `azure #0775b9`. Each is its hue at the most chroma sRGB has while a label in it clears 4.5:1; light mode's `--accent-*` resolve to them (`--accent-cyan` to `azure`, since a cyan dark enough for paper is teal).
 - **Light mode** is a full peer of dark: its own surfaces, borders, text tiers, action stops, and a normalized chart chord (`oklch(from <hue>-500 60% min(c, 0.15) h)`).
 
 `bun run check:tokens` gates the palette: every stop must be in sRGB gamut, the
 `colors.ts` hexes must match the CSS OKLCH to within 1 LSB, the WCAG pairs
 resolved from `theme.css` must clear their floors, the website-anchored stops
 (`purple`, `ground`, `opal`, both page floors) must render to their exact hex,
-and the ramps must keep their shape (plum spine hue, hue bands, tapered chroma,
-muted `purple`).
+the ramps must keep their shape (plum spine hue, hue bands, tapered chroma,
+muted `purple`), and the `paper` stops must stay in gamut, in lockstep with
+`colors.ts`, 4.5:1 on the light page and within a tenth of the chroma ceiling.
 
 ## Color Palette
 

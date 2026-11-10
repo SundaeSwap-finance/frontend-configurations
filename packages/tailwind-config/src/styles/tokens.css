@@ -299,6 +299,25 @@
   --ground-950: oklch(21% 0.040 321);
 
   /* ==========================================================================
+   * Paper — the named accents as they print on the light page. A ramp tapers
+   * its chroma toward the dark end, so the deep stop that is dark enough to
+   * read on paper is also a dull one: violet-700 spends 70% of the chroma
+   * sRGB has at its lightness, indigo-600 and pink-600 about 80%. A paper
+   * stop holds its hue at the most chroma sRGB has while a label in it still
+   * clears 4.5:1 on the page. Gate [f] holds all three: in gamut, legible,
+   * and at least nine tenths of the ceiling.
+   *
+   * Cyan has no such stop. A hue-230 colour dark enough for paper is teal at
+   * any chroma, so cyan's paper stand-in leans to the nearest hue with room,
+   * azure (245). Mirrors the `paper` hexes in colors.ts.
+   * ========================================================================== */
+  --paper-pink: oklch(57% 0.228 2);
+  --paper-magenta: oklch(57% 0.258 329);
+  --paper-violet: oklch(55% 0.255 291);
+  --paper-indigo: oklch(55% 0.24 272);
+  --paper-azure: oklch(54.5% 0.135 245);
+
+  /* ==========================================================================
    * Opal — the iridescent signature. The website's holo palette (the froyo's
    * pearl finish, `holoFinish.ts`): pink → lilac → azure → cyan → pearl →
    * peach. Defined as a primitive so a single edit re-tunes every brand

@@ -267,6 +267,19 @@ const opal = {
   peach: "#fad3c8",
 };
 
+/** Paper — the named accents as they print on the light page: each hue at
+ *  the most chroma sRGB has while a label in it clears 4.5:1 on the page.
+ *  Cyan's stand-in is azure. Mirrors the `--paper-*` stops in tokens.css
+ *  (`bun check:tokens` holds the two in lockstep); a canvas chart on paper
+ *  reads these where the DOM reads `--accent-*`. */
+const paper = {
+  pink: "#d7066d",
+  magenta: "#c108bf",
+  violet: "#7b3bf6",
+  indigo: "#4956fa",
+  azure: "#0775b9",
+};
+
 export const colors = {
   inherit: "inherit",
   current: "currentColor",
@@ -290,6 +303,7 @@ export const colors = {
   mint,
   coral,
   opal,
+  paper,
 
   /* Legacy role aliases — plum brand: purple → cyan, with mint/gold/coral as
    * status accents. Pink stays available as `pink` but no longer leads. */

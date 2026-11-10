@@ -20,6 +20,10 @@
  *                  plum spine, `purple`/`ground` leave their hue band, stop
  *                  tapering chroma toward both ends (one peak), or `purple`
  *                  climbs back toward a neon (peak chroma above the muted cap).
+ *   (f) PAPER    — a `--paper-*` accent stop leaves sRGB, drifts from its
+ *                  colors.ts hex, stops reading as a label on the light page
+ *                  (4.5:1), or goes dull (under nine tenths of the chroma
+ *                  sRGB has at its lightness and hue).
  *
  * The CSS/TS token files are stable, regex-parseable formats. This script only
  * reads them; it never mutates anything.
@@ -247,6 +251,44 @@ function parseOpalTs(src) {
   return out;
 }
 
+/** `--paper-<name>: oklch(L% C H);` declarations in tokens.css. */
+function parsePaperCss(src) {
+  const out = {};
+  const re =
+    /--paper-([a-z]+):\s*oklch\(\s*([\d.]+)%\s+([\d.]+)\s+([\d.]+)\s*\)/g;
+  let m;
+  while ((m = re.exec(src)) !== null)
+    out[m[1]] = { L: Number(m[2]), C: Number(m[3]), H: Number(m[4]) };
+  return out;
+}
+
+/** The `const paper = { name: "#rrggbb", ... }` literal in colors.ts. */
+function parsePaperTs(src) {
+  const out = {};
+  const block = /const paper = \{([\s\S]*?)\};/.exec(src);
+  if (!block) return out;
+  const re = /([a-z]+):\s*"(#[0-9a-fA-F]{6})"/g;
+  let m;
+  while ((m = re.exec(block[1])) !== null) out[m[1]] = m[2].toLowerCase();
+  return out;
+}
+
+/**
+ * The most chroma sRGB holds at a lightness and hue, by bisection on the
+ * gamut boundary. What a paper stop is measured against: a stop well under it
+ * is leaving colour unused.
+ */
+function maxChromaInSrgb(Lpct, Hdeg) {
+  let lo = 0;
+  let hi = 0.5;
+  for (let i = 0; i < 40; i++) {
+    const mid = (lo + hi) / 2;
+    if (isInGamut(oklchToSrgb(Lpct, mid, Hdeg).lin)) lo = mid;
+    else hi = mid;
+  }
+  return lo;
+}
+
 const toHex = ({ r, g, b }) =>
   "#" + [r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("");
 
@@ -282,7 +324,8 @@ function parseThemeScope(src, scope) {
  * Resolve a theme.css role variable to its on-screen RGB, following the same
  * var()/oklch() chain the browser would: a `var(--<ramp>-<stop>)` ref lands in
  * colors.ts (the hex consumers see), a `var(--opal-<name>)` ref lands on its
- * exact tokens.css hex, a bare `oklch()` is rendered directly, and a
+ * exact tokens.css hex, a `var(--paper-<name>)` ref is rendered from its
+ * tokens.css oklch, a bare `oklch()` is rendered directly, and a
  * `var(--<other-role>)` recurses within the same scope. This is what keeps the
  * contrast table honest — it reads the LIVE role->ramp mapping rather than a
  * hand-copied table that silently drifts from theme.css.
@@ -304,6 +347,11 @@ function resolveRole(scopeMap, name, seen = new Set()) {
     if (rs && tsRamps[rs[1]]) return ramp(rs[1], Number(rs[2]));
     const opal = /^opal-([a-z]+)$/.exec(ref);
     if (opal && opalCss[opal[1]]) return hexToRgb(opalCss[opal[1]]);
+    const paper = /^paper-([a-z]+)$/.exec(ref);
+    if (paper && paperCss[paper[1]]) {
+      const { L, C, H } = paperCss[paper[1]];
+      return oklchToSrgb(L, C, H);
+    }
     return resolveRole(scopeMap, ref, seen);
   }
   throw new Error(`theme.css: cannot resolve --${name}: "${raw}"`);
@@ -324,6 +372,8 @@ const LIGHT = parseThemeScope(themeSrc, "light");
 const SCOPES = { dark: DARK, light: LIGHT };
 const opalCss = parseOpalCss(tokensSrc);
 const opalTs = parseOpalTs(colorsSrc);
+const paperCss = parsePaperCss(tokensSrc);
+const paperTs = parsePaperTs(colorsSrc);
 
 let failures = 0;
 const log = (s = "") => process.stdout.write(s + "\n");
@@ -560,6 +610,59 @@ log(
   shapeFails === 0
     ? `  PASS — ${Object.keys(RAMP_SHAPES).length} ramps hold their shape`
     : `  ${shapeFails} shape violation(s)`,
+);
+
+/* ---- (f) PAPER ---------------------------------------------------------- */
+/** A paper stop is a label colour: AA on the page it prints on. */
+const PAPER_CONTRAST_FLOOR = 4.5;
+/** And the reason it exists: under this share of the sRGB ceiling it is a dull ramp stop again. */
+const PAPER_CHROMA_SHARE = 0.9;
+
+log("\n[f] PAPER — light accent stops: in gamut, in lockstep, legible, not dull");
+let paperFails = 0;
+const paperFail = (msg) => {
+  paperFails++;
+  failures++;
+  log(`  FAIL ${msg}`);
+};
+const paperPage = resolveRole(LIGHT, "surface-page");
+for (const [name, { L, C, H }] of Object.entries(paperCss)) {
+  const label = `--paper-${name}: oklch(${L}% ${C} ${H})`;
+  const rendered = oklchToSrgb(L, C, H);
+  if (!isInGamut(rendered.lin)) {
+    paperFail(`${label} out of gamut`);
+    continue;
+  }
+  const hex = paperTs[name];
+  if (!hex) {
+    paperFail(`${label} present in tokens.css but missing in colors.ts`);
+  } else {
+    const want = hexToRgb(hex);
+    const off = ["r", "g", "b"].some((c) => Math.abs(rendered[c] - want[c]) > 1);
+    if (off)
+      paperFail(`${label} renders ${toHex(rendered)} but colors.ts has ${hex}`);
+  }
+  const ratio = contrastRatio(rendered, paperPage);
+  if (ratio < PAPER_CONTRAST_FLOOR)
+    paperFail(
+      `${label} is ${ratio.toFixed(2)}:1 on the light page (floor ${PAPER_CONTRAST_FLOOR})`,
+    );
+  const share = C / maxChromaInSrgb(L, H);
+  if (share < PAPER_CHROMA_SHARE)
+    paperFail(
+      `${label} spends ${(share * 100).toFixed(0)}% of the chroma sRGB has there (floor ${PAPER_CHROMA_SHARE * 100}%)`,
+    );
+}
+for (const name of Object.keys(paperTs)) {
+  if (!(name in paperCss))
+    paperFail(`paper.${name}: present in colors.ts but missing in tokens.css`);
+}
+if (Object.keys(paperCss).length === 0)
+  paperFail("no --paper-* stops found in tokens.css");
+log(
+  paperFails === 0
+    ? `  PASS — ${Object.keys(paperCss).length} paper stops hold`
+    : `  ${paperFails} paper violation(s)`,
 );
 
 /* ---- Report ------------------------------------------------------------- */
