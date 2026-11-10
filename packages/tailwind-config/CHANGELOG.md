@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.4](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@6.0.3...@sundaeswap/tailwind-config@6.0.4) (2026-11-10)
+
+### Features
+
+- **tailwind-config:** give light-mode accents their paper stops ([#51](https://github.com/SundaeSwap-finance/frontend-configurations/issues/51)) ([78dfb47](https://github.com/SundaeSwap-finance/frontend-configurations/commit/78dfb475aa303ada774a3fefba862313cea3e7d0))
+
 ## [6.0.3](https://github.com/SundaeSwap-finance/frontend-configurations/compare/@sundaeswap/tailwind-config@6.0.2...@sundaeswap/tailwind-config@6.0.3) (2026-10-05)
 
 ### Features
